@@ -35,6 +35,10 @@ public class meshGeneration : MonoBehaviour {
         CreatePlane();
     }
 
+    private void LateUpdate() {
+        UpdateVertices();
+    }
+
     void InitializeComponents() {
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
@@ -66,6 +70,49 @@ public class meshGeneration : MonoBehaviour {
         }
 
         // generate triangles
+        GenerateTrianges();
+
+        // assign arrays
+        mesh.Clear();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uv;
+
+        // assign components
+        meshFilter.mesh = mesh;
+        meshRenderer.material = matieral;
+        mesh.RecalculateNormals(0);
+
+        // recalculate vertex prefabs
+        GenerateVertexPrefab();
+    }
+
+    public void UpdateMesh() {
+        // update vertices
+        UpdateVertices();
+
+        // generate triangles
+        GenerateTrianges();
+
+        mesh.Clear();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = uv;
+
+        // assign components
+        meshFilter.mesh = mesh;
+        meshRenderer.material = matieral;
+        mesh.RecalculateNormals(0);
+    }
+
+    private void UpdateVertices() {
+        for (int i = 0; i < vertices.Length; i++) {
+            vertices[i] = vertexPrefabs[i].transform.position;
+        }
+    }
+
+    private void GenerateTrianges() {
+        // generate triangles
         // clockwise triangle for camera-facing triangles
         int vert = 0;
         int tris = 0;
@@ -83,20 +130,6 @@ public class meshGeneration : MonoBehaviour {
             }
             vert++;
         }
-
-        // assign arrays
-        mesh.Clear();
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.uv = uv;
-
-        // assign components
-        meshFilter.mesh = mesh;
-        meshRenderer.material = matieral;
-        mesh.RecalculateNormals(0);
-
-        // recalculate vertex prefabs
-        GenerateVertexPrefab();
     }
 
     void GenerateVertexPrefab() {

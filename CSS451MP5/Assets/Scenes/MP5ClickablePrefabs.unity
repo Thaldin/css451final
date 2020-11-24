@@ -233,6 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87743dc05aebdd4f9e9f7482df52aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSelection: {fileID: 0}
+  currentHandleSelected: {fileID: 0}
+  delta: {x: 0, y: 0, z: 0}
+  mouseDownPos: {x: 0, y: 0, z: 0}
+  meshGen: {fileID: 106957848}
 --- !u!1 &164001519
 GameObject:
   m_ObjectHideFlags: 0

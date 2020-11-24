@@ -10,11 +10,13 @@ public class TheWorld : MonoBehaviour {
     [SerializeField]
     private GameObject currentHandleSelected = null;
 
-    private Vector3 delta = Vector3.zero;
-    private Vector3 mouseDownPos = Vector3.zero;
+    public Vector3 delta = Vector3.zero;
+    public Vector3 mouseDownPos = Vector3.zero;
+
+    public meshGeneration meshGen = null;
     // Start is called before the first frame update
     void Start() {
-
+        Debug.Assert(meshGen != null);
     }
 
     // Update is called once per frame
@@ -31,7 +33,13 @@ public class TheWorld : MonoBehaviour {
             click(1);
         }
 
-        
+        if (Input.GetMouseButton(0)) {
+            delta = mouseDownPos - Input.mousePosition;
+            mouseDownPos = Input.mousePosition;
+            currentSelection.GetComponent<VertexPrefab>().Translate(delta);
+            meshGen.UpdateMesh();
+        }
+
     }
 
     private void click(int _button) {
@@ -56,26 +64,29 @@ public class TheWorld : MonoBehaviour {
                             return;
                         }
 
-                        // vertex handle
-                        delta = mouseDownPos - Input.mousePosition;
-                        mouseDownPos = Input.mousePosition;
-                        currentSelection.GetComponent<VertexPrefab>().Translate(hit.transform.tag, delta);
-                        currentHandleSelected = currentSelection.GetComponent<VertexPrefab>().GetHandle();
-
+                        if (hit.transform.CompareTag("xHandle") ||
+                        hit.transform.CompareTag("yHandle") ||
+                        hit.transform.CompareTag("zHandle")) {
+                            // return handle
+                            Debug.Log(hit.transform.tag);
+                            currentHandleSelected = currentSelection.GetComponent<VertexPrefab>().GetHandle(hit.transform.tag);
+                        }
                     }
                 }
                 return;
             case 1:
-                if (currentSelection) { 
-                    currentSelection.GetComponent<VertexPrefab>().Unselect();
-                    currentSelection.GetComponent<VertexPrefab>().Selected(false);
-                    currentSelection = null;
-                    currentHandleSelected = null;
-                    
+                if (currentSelection) {
+                    Unselect();
                 }
                 return;
             default:
                 return;
         }
+    }
+
+    void Unselect() {
+        currentSelection.GetComponent<VertexPrefab>().Unselect();
+        currentSelection.GetComponent<VertexPrefab>().Selected(false);
+        currentSelection = null;
     }
 }
