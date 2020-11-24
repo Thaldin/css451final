@@ -103,6 +103,7 @@ public class meshGeneration : MonoBehaviour {
         ClearVertexPrefabList();
         for (int i = 0; i < vertices.Length; i++) {
             GameObject vertexSpawn = Instantiate(vertex);
+            vertexSpawn.name = "Vertex" + i;
             vertexPrefabs.Add(vertexSpawn);
             vertexSpawn.transform.position = vertices[i];
             // recalculate normal
