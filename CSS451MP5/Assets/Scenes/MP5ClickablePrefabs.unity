@@ -157,7 +157,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertex: {fileID: 6489546145309109422, guid: c20637939629ee949b1bab5bbdff105e, type: 3}
   matieral: {fileID: 2100000, guid: ccfe3ecfb7e924940a46e9ce7f2dd34e, type: 2}
-  vertexPrefabs: []
+  vertices: []
+  uv: []
+  triangles: 
+  triangleNormals: []
+  meshNormal: {fileID: 1434586599593078122, guid: 06ee3eda04452424cb6665c3eaa0b212,
+    type: 3}
 --- !u!23 &106957849
 MeshRenderer:
   m_ObjectHideFlags: 0
