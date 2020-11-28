@@ -1,12 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainController : MonoBehaviour
 {
     public MP5World theWorld = null;
     public CameraBehavior theCamera = null;
+   
+    public SliderWithEcho CylinderRes = null;
+    public SliderWithEcho CylinderRot = null;
+    public SliderWithEcho TextureRes = null;
+    public XfromControl TexturePanel = null;
 
     private Vector3 prevMousePos = Vector3.zero;
 
@@ -15,10 +19,20 @@ public class MainController : MonoBehaviour
     {
         Debug.Assert(theCamera != null, "Please set Camera Object.");
         Debug.Assert(theWorld != null, "Please set World Object.");
+        Debug.Assert(CylinderRes != null, "Please set Cylinder Resolution Slider.");
+        Debug.Assert(CylinderRot != null, "Please set Cylinder Rotation Slider.");
+        Debug.Assert(TextureRes != null, "Please set Texture Resolution Slider.");
 
         // Initialized Scene
         theWorld.SetLookAtPos(Vector3.zero);
         theCamera.SetLookAt(Vector3.zero);
+        CylinderRes.SetSliderLabel("Cylinder Res");
+        CylinderRot.SetSliderLabel("Cylinder Rot");
+        TextureRes.SetSliderLabel("Texture Res");
+
+        // Hide UI components
+        CylinderRes.gameObject.SetActive(false);
+        CylinderRot.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -74,6 +88,26 @@ public class MainController : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
+        }
+    }
+
+    public void RenderSelect(Dropdown ddRender)
+    {
+        if (ddRender.value == 0)
+        {
+            theWorld.RenderMesh = true;
+            TextureRes.gameObject.SetActive(true);
+            TexturePanel.gameObject.SetActive(true);
+            CylinderRes.gameObject.SetActive(false);
+            CylinderRot.gameObject.SetActive(false);
+        }
+        else
+        {
+            theWorld.RenderMesh = false;
+            TextureRes.gameObject.SetActive(false);
+            TexturePanel.gameObject.SetActive(false);
+            CylinderRes.gameObject.SetActive(true);
+            CylinderRot.gameObject.SetActive(true);
         }
     }
 }
