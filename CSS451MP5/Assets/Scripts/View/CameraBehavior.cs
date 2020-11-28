@@ -7,6 +7,8 @@ public class CameraBehavior : MonoBehaviour
 
     private float rotationDelta = 0;
     private Vector3 vLookAt = Vector3.zero;
+    private const float minYCameraAngle = 20.0f;
+    private const float maxYCameraAngle = 120.0f;
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class CameraBehavior : MonoBehaviour
         vLookAt = lookAtPos;
     }
 
+    // Make camera look at position
     private void LookAtPosition()
     {
         var v = vLookAt - transform.localPosition;
@@ -52,5 +55,43 @@ public class CameraBehavior : MonoBehaviour
         }
 
         transform.localPosition = vLookAt - (distance * v.normalized);
+    }
+
+    // Take mouse input and tumble the camera
+    public void Tumble(Vector3 tumble)
+    {
+        tumbleCam(tumble.y, transform.right);
+        tumbleCam(tumble.x, Vector3.up);
+    }
+
+    private void tumbleCam(float value, Vector3 direction)
+    {
+        // Set rotation point and position values
+        var quat = Quaternion.AngleAxis(value * rotationDelta, direction);
+        var r = Matrix4x4.Rotate(quat);
+        var invP = Matrix4x4.TRS(-vLookAt, Quaternion.identity, Vector3.one);
+        r = invP.inverse * r * invP;
+        var pos = r.MultiplyPoint(transform.localPosition);
+
+        // Store old position in case min/max angle exceeded
+        var oldPos = transform.localPosition;
+
+        // Transform to new position/rotation
+        transform.localPosition = pos;
+        transform.localRotation = quat * transform.localRotation;
+
+        // Check if camera has exceeded min/max angles on Y axis
+        var degrees = Mathf.Acos(Vector3.Dot(pos.normalized, Vector3.up)) * Mathf.Rad2Deg;
+        if (degrees <= minYCameraAngle || degrees >= maxYCameraAngle)
+        {
+            transform.localPosition = oldPos;
+        }
+    }
+
+    // Slide camera base on mouse input
+    public void Slide(Vector3 slide)
+    {
+        Camera.main.transform.localPosition += slide.x * Vector3.right;
+        Camera.main.transform.localPosition += slide.y * Vector3.up;
     }
 }
