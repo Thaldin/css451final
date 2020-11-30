@@ -10,13 +10,15 @@ public class MP5World : MonoBehaviour
     public int MeshResolution = 4;
     public int CylinderRotation = 180;
 
-    public Material firstMaterial;
-    public Material lastMaterial;
     public Material testMaterial;
 
     private Mesh cylinderMesh = null;
+    private MeshFilter cylinderFilter = null;
+    private MeshRenderer cylinderRenderer = null;
+
     private const int nCylinderHeight = 10;
     private List<GameObject> sphereList;
+    private GameObject renderObject;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,9 @@ public class MP5World : MonoBehaviour
         cylinderMesh = new Mesh();
 
         sphereList = new List<GameObject>();
+        renderObject = new GameObject();
+        cylinderFilter = renderObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
+        cylinderRenderer = renderObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
     }
 
     // Update is called once per frame
@@ -65,9 +70,9 @@ public class MP5World : MonoBehaviour
     {
         // Compute Triangle and Vertex count
         var vertexCount = CylinderResolution * nCylinderHeight;
-        var triangleCount = ((CylinderResolution - 1) * (CylinderResolution - 1)) * 2;
+        var triangleCount = ((CylinderResolution - 1) * (nCylinderHeight - 1)) * 2;
         var vertexArray = new Vector3[vertexCount];
-        var triangleArray = new int[triangleCount];
+        var triangleArray = new int[triangleCount * 3];
 
         // Store vertex count to load into array
         int arrayCounter = vertexCount;
@@ -87,12 +92,45 @@ public class MP5World : MonoBehaviour
         }
 
         // Compute Triangles
-
+        var triCount = 0;
+        for (int i = 0; i < (vertexCount - CylinderResolution); i++)
+        {
+            int mod = i % CylinderResolution;
+            //Debug.Log("Vertex: " + i + ", Mod:" + mod + ", Count: " + vertexCount + ", Res: " + CylinderResolution);
+            if (mod == 0)       // Left side of mesh
+            {
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + 1;
+                triangleArray[triCount++] = i + CylinderResolution;
+            }
+            else if (mod == (CylinderResolution - 1))  // Right side of mesh
+            {
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + CylinderResolution;
+                triangleArray[triCount++] = i + CylinderResolution - 1;
+            }
+            else                // Middle of mesh
+            {
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + 1;
+                triangleArray[triCount++] = i + CylinderResolution;
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + CylinderResolution;
+                triangleArray[triCount++] = i + CylinderResolution - 1;
+            }
+        }
 
         RenderSpheres(vertexArray, vertexCount);
 
         // Clear existing mesh
         cylinderMesh.Clear();
+        cylinderMesh.vertices = vertexArray;
+        cylinderMesh.triangles = triangleArray;
+
+        cylinderFilter.mesh = cylinderMesh;
+        cylinderRenderer.material = testMaterial;
+
+        // TODO: Fix shader
     }
 
     private void RenderSpheres(Vector3[] array, int count)
@@ -116,19 +154,6 @@ public class MP5World : MonoBehaviour
             pos.y = array[i].y;
             pos.z = array[i].z;
             s.transform.localPosition = pos;
-            if (i == (count - 1))
-            {
-                s.GetComponent<MeshRenderer>().material = lastMaterial;
-            }
-            else if (i == 0)
-            {
-                s.GetComponent<MeshRenderer>().material = firstMaterial;
-            }
-            else if ((i == (CylinderResolution - 1)) || (i == (count - CylinderResolution)))
-            {
-                s.GetComponent<MeshRenderer>().material = testMaterial;
-            }
-
             sphereList.Add(s);
         }
     }

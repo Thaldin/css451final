@@ -172,9 +172,7 @@ MonoBehaviour:
   CylinderResolution: 10
   MeshResolution: 4
   CylinderRotation: 180
-  firstMaterial: {fileID: 2100000, guid: 2eddd4913ac045e488462f1c2098f638, type: 2}
-  lastMaterial: {fileID: 2100000, guid: 983dcae674993cb43be5f7e38208a1a7, type: 2}
-  testMaterial: {fileID: 2100000, guid: 7c17c86124e88734886d7d75c6de4e1c, type: 2}
+  testMaterial: {fileID: 2100000, guid: 1e713489ecb82cd429404e800656937c, type: 2}
 --- !u!1 &39645220
 GameObject:
   m_ObjectHideFlags: 0
