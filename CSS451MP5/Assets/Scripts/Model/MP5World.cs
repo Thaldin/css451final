@@ -5,6 +5,10 @@ public class MP5World : MonoBehaviour
     public GameObject LookAt = null;
     public bool RenderMesh = true;
 
+    public int CylinderResolution = 10;
+    public int MeshResolution = 4;
+    public int CylinderRotation = 180;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +46,11 @@ public class MP5World : MonoBehaviour
 
     private void RenderTextureMesh()
     {
-        Debug.Log("Rendering Mesh...");
+        Debug.Log("Rendering Mesh at Res: " + MeshResolution);
     }
 
     private void RenderCylinderMesh()
     {
-        Debug.Log("Rendering cylinder...");
+        Debug.Log("Rendering Cylinder at Res: " + CylinderResolution + " & Rot: " + CylinderRotation);
     }
 }

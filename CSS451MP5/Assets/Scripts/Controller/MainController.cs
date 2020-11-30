@@ -26,9 +26,19 @@ public class MainController : MonoBehaviour
         // Initialized Scene
         theWorld.SetLookAtPos(Vector3.zero);
         theCamera.SetLookAt(Vector3.zero);
+
+        // Init UI Controls
+        CylinderRes.InitSliderRange(4f, 20f, theWorld.CylinderResolution);
         CylinderRes.SetSliderLabel("Cylinder Res");
+        CylinderRes.SetSliderListener(UpdateCylinderRes);
+
+        CylinderRot.InitSliderRange(10f, 360f, theWorld.CylinderRotation);
         CylinderRot.SetSliderLabel("Cylinder Rot");
+        CylinderRot.SetSliderListener(UpdateCylinderRot);
+
+        TextureRes.InitSliderRange(2, 20, theWorld.MeshResolution);
         TextureRes.SetSliderLabel("Texture Res");
+        TextureRes.SetSliderListener(UpdateMeshRes);
 
         // Hide UI components
         CylinderRes.gameObject.SetActive(false);
@@ -109,5 +119,20 @@ public class MainController : MonoBehaviour
             CylinderRes.gameObject.SetActive(true);
             CylinderRot.gameObject.SetActive(true);
         }
+    }
+
+    public void UpdateCylinderRes(float v)
+    {
+        theWorld.CylinderResolution = (int)v;
+    }
+
+    public void UpdateCylinderRot(float v)
+    {
+        theWorld.CylinderRotation = (int)v;
+    }
+
+    public void UpdateMeshRes(float v)
+    {
+        theWorld.MeshResolution = (int)v;
     }
 }

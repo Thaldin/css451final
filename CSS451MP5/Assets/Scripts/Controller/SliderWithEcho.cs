@@ -28,10 +28,8 @@ public class SliderWithEcho : MonoBehaviour {
     // GUI element changes the object
 	void SliderValueChange(float v)
     {
-        TheEcho.text = v.ToString("0.0000");
-        // Debug.Log("SliderValueChange: " + v);
-        if (mCallBack != null)
-            mCallBack(v);
+        TheEcho.text = v.ToString("0");
+        mCallBack?.Invoke(v);
     }
 
     public float GetSliderValue() { return TheSlider.value; }
