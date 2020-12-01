@@ -19,21 +19,17 @@ public class meshGeneration : MonoBehaviour {
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
 
-    public Vector3[] vertices = new Vector3[0];
-    public Vector2[] uv = new Vector2[0];
-    public int[] triangles = new int[0];
+    private Vector3[] vertices = new Vector3[0];
+    private Vector2[] uv = new Vector2[0];
+    private int[] triangles = new int[0];
+    [SerializeField]
     private List<GameObject> vertexPrefabs = new List<GameObject>();
-
-    public Vector3[] triangleNormals = new Vector3[0];
-    private List<GameObject> meshNormals = new List<GameObject>();
-    public GameObject meshNormal = null;
     //public GameObject[] vertexPrefabs = new GameObject[0];
 
     // Start is called before the first frame update
     void Start() {
         Debug.Assert(vertex != null);
         Debug.Assert(matieral != null);
-        Debug.Assert(meshNormal != null);
         InitializeComponents();
         mesh = new Mesh();
         CreatePlane();
@@ -62,7 +58,6 @@ public class meshGeneration : MonoBehaviour {
         vertices = new Vector3[(xSize + 1) * (zSize + 1)];
         triangles = new int[xSize * zSize * 6];
         uv = new Vector2[(xSize + 1) * (zSize + 1)];
-        triangleNormals = new Vector3[(xSize + 1) * (zSize + 1)];
 
         // generate verticies
         // generate uvs
@@ -86,8 +81,7 @@ public class meshGeneration : MonoBehaviour {
         // assign components
         meshFilter.mesh = mesh;
         meshRenderer.material = matieral;
-        //CalculateTriangleNormals();
-        //mesh.RecalculateNormals(0);
+        mesh.RecalculateNormals(0);
 
         // recalculate vertex prefabs
         GenerateVertexPrefab();
@@ -108,8 +102,7 @@ public class meshGeneration : MonoBehaviour {
         // assign components
         meshFilter.mesh = mesh;
         meshRenderer.material = matieral;
-        //CalculateTriangleNormals();
-        //mesh.RecalculateNormals(0);
+        mesh.RecalculateNormals(0);
     }
 
     private void UpdateVertices() {
@@ -156,34 +149,6 @@ public class meshGeneration : MonoBehaviour {
             Destroy(v);
         }
         vertexPrefabs.Clear();
-    }
-
-    void CalculateTriangleNormals() {
-        // Take vertex A, B and C from a triangle. Then create vectors AB and AC. 
-        // ABxAC will give you the normal of the triangle. 
-        // ACxAB will give the opposite normal (ABxAC = - ACxAB).
-        ClearTriangleNormals();
-        
-        for (int t = 0, i = 0; i < triangles.Length; i += 3) {
-            Vector3 AB = vertices[triangles[i]] - vertices[triangles[i + 1]];
-            Vector3 AC = vertices[triangles[i]] - vertices[triangles[i + 2]];
-
-            Vector3 triNormal = Vector3.Cross(AC, AB);
-            triangleNormals[t] = triNormal.normalized;
-            GameObject triNormalClone = (GameObject)Instantiate(meshNormal);
-            triNormalClone.transform.localPosition = triNormal;
-            meshNormals.Add(triNormalClone);
-            t++;
-        }
-        
-        // (normal + normal).normalized
-    }
-
-    void ClearTriangleNormals() {
-        foreach (var v in meshNormals) {
-            Destroy(v);
-        }
-        meshNormals.Clear();
     }
 
 
