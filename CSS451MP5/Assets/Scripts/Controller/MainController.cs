@@ -53,39 +53,6 @@ public class MainController : MonoBehaviour
 
     private void CheckInput()
     {
-        // Control = Vertex Key Controls
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
-        {
-            // TODO: Toggle showing vertex markers on
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
-        {
-            // TODO: Toggle showing vertex markers off
-        }
-
-        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
-        {
-            
-
-            // Set Previous Position for calculations on MouseDown
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-            {
-                prevMousePos = Input.mousePosition;
-            }
-
-            // Move Selected Vertex
-            if (Input.GetMouseButton(0))
-            {
-                var delta = prevMousePos - Input.mousePosition;
-                prevMousePos = Input.mousePosition;
-                // TODO: Move the selected vertex
-            }
-
-            // Return out of this because we want ignore other key presses
-            return;
-        }
-
         // Alt = Camera manipulation
         if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
         {
@@ -117,6 +84,37 @@ public class MainController : MonoBehaviour
                 theWorld.SlideLookAtPos(delta.x, delta.y);
                 theCamera.Slide(delta);
                 theCamera.SetLookAt(theWorld.GetLookAtPos());
+            }
+
+            // Return out of this because we want ignore other key presses
+            return;
+        }
+
+        // Control = Vertex Key Controls
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
+        {
+            theWorld.ShowSelectors(true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
+        {
+            theWorld.ShowSelectors(false);
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+        {
+            // Set Previous Position for calculations on MouseDown
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+            {
+                prevMousePos = Input.mousePosition;
+            }
+
+            // Move Selected Vertex
+            if (Input.GetMouseButton(0))
+            {
+                var delta = prevMousePos - Input.mousePosition;
+                prevMousePos = Input.mousePosition;
+                // TODO: Move the selected vertex
             }
         }
 
@@ -150,17 +148,20 @@ public class MainController : MonoBehaviour
             TexturePanel.gameObject.SetActive(false);
             CylinderRes.gameObject.SetActive(true);
             CylinderRot.gameObject.SetActive(true);
+            theWorld.CalculateCylinder();
         }
     }
 
     public void UpdateCylinderRes(float v)
     {
         theWorld.CylinderResolution = (int)v;
+        theWorld.CalculateCylinder();
     }
 
     public void UpdateCylinderRot(float v)
     {
         theWorld.CylinderRotation = (int)v;
+        theWorld.CalculateCylinder();
     }
 
     public void UpdateMeshRes(float v)
