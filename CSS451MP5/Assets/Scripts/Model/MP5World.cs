@@ -20,6 +20,15 @@ public class MP5World : MonoBehaviour
     private List<GameObject> sphereList;
     private GameObject renderObject;
 
+    private int vertexCount = 0;
+    private int triangleCount = 0;
+    private Vector3[] vertexArray = null;
+    private int[] triangleArray = null;
+    private Vector3[] triangleNormals = null;
+
+    private bool renderVertexSelectors = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,64 +77,14 @@ public class MP5World : MonoBehaviour
 
     private void RenderCylinderMesh()
     {
-        // Compute Triangle and Vertex count
-        var vertexCount = CylinderResolution * nCylinderHeight;
-        var triangleCount = ((CylinderResolution - 1) * (nCylinderHeight - 1)) * 2;
-        var vertexArray = new Vector3[vertexCount];
-        var triangleArray = new int[triangleCount * 3];
-
-        // Store vertex count to load into array
-        int arrayCounter = vertexCount;
-
-        // Build Vertex Array
-        float fTheta = (CylinderRotation / CylinderResolution) * Mathf.Deg2Rad;
-        for (int h = 0; h < nCylinderHeight; h++)
-        {
-            float yValue = (h * 3) - 10;
-
-            for (int i = 0; i < CylinderResolution; i++)
-            {
-                vertexArray[--arrayCounter] = new Vector3(10f * Mathf.Cos(i * fTheta),
-                                                          yValue,
-                                                          10f * Mathf.Sin(i * fTheta));
-            }
-        }
-
-        // Compute Triangles
-        var triCount = 0;
-        for (int i = 0; i < (vertexCount - CylinderResolution); i++)
-        {
-            int mod = i % CylinderResolution;
-            //Debug.Log("Vertex: " + i + ", Mod:" + mod + ", Count: " + vertexCount + ", Res: " + CylinderResolution);
-            if (mod == 0)       // Left side of mesh
-            {
-                triangleArray[triCount++] = i;
-                triangleArray[triCount++] = i + 1;
-                triangleArray[triCount++] = i + CylinderResolution;
-            }
-            else if (mod == (CylinderResolution - 1))  // Right side of mesh
-            {
-                triangleArray[triCount++] = i;
-                triangleArray[triCount++] = i + CylinderResolution;
-                triangleArray[triCount++] = i + CylinderResolution - 1;
-            }
-            else                // Middle of mesh
-            {
-                triangleArray[triCount++] = i;
-                triangleArray[triCount++] = i + 1;
-                triangleArray[triCount++] = i + CylinderResolution;
-                triangleArray[triCount++] = i;
-                triangleArray[triCount++] = i + CylinderResolution;
-                triangleArray[triCount++] = i + CylinderResolution - 1;
-            }
-        }
-
+        // TODO: Make this the selectors?
         RenderSpheres(vertexArray, vertexCount);
 
         // Clear existing mesh
         cylinderMesh.Clear();
         cylinderMesh.vertices = vertexArray;
         cylinderMesh.triangles = triangleArray;
+        cylinderMesh.normals = triangleNormals;
 
         cylinderFilter.mesh = cylinderMesh;
         cylinderRenderer.material = testMaterial;
@@ -154,7 +113,91 @@ public class MP5World : MonoBehaviour
             pos.y = array[i].y;
             pos.z = array[i].z;
             s.transform.localPosition = pos;
+            s.SetActive(renderVertexSelectors);
             sphereList.Add(s);
         }
+    }
+
+    public void ShowSelectors(bool enable)
+    {
+        renderVertexSelectors = enable;
+    }
+
+    public void CalculateCylinder()
+    {
+        // Compute Triangle and Vertex count
+        vertexCount = CylinderResolution * nCylinderHeight;
+        triangleCount = ((CylinderResolution - 1) * (nCylinderHeight - 1)) * 2;
+        vertexArray = new Vector3[vertexCount];
+        triangleArray = new int[triangleCount * 3];
+        triangleNormals = new Vector3[vertexCount];
+
+        // Store vertex count to load into array
+        int arrayCounter = vertexCount;
+
+        // Build Vertex Array
+        float fTheta = (CylinderRotation / (CylinderResolution - 1)) * Mathf.Deg2Rad;
+        for (int h = 0; h < nCylinderHeight; h++)
+        {
+            float yValue = (h * 3) - 10;
+
+            for (int i = 0; i < CylinderResolution; i++)
+            {
+                vertexArray[--arrayCounter] = new Vector3(10f * Mathf.Cos(i * fTheta),
+                                                          yValue,
+                                                          10f * Mathf.Sin(i * fTheta));
+            }
+        }
+
+        // Compute Triangles
+        var triCount = 0;
+        for (int i = 0; i < (vertexCount - CylinderResolution); i++)
+        {
+            int mod = i % CylinderResolution;
+            if (mod == 0)       // Left side of mesh
+            {
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + 1;
+                triangleArray[triCount++] = i + CylinderResolution;
+            }
+            else if (mod == (CylinderResolution - 1))  // Right side of mesh
+            {
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + CylinderResolution;
+                triangleArray[triCount++] = i + CylinderResolution - 1;
+            }
+            else                // Middle of mesh
+            {
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + 1;
+                triangleArray[triCount++] = i + CylinderResolution;
+                triangleArray[triCount++] = i;
+                triangleArray[triCount++] = i + CylinderResolution;
+                triangleArray[triCount++] = i + CylinderResolution - 1;
+            }
+        }
+
+        CalculateNormals();
+
+        RenderSpheres(vertexArray, vertexCount);
+    }
+
+    private void CalculateNormals()
+    {
+        // Take vertex A, B and C from a triangle. Then create vectors AB and AC. 
+        // ABxAC will give you the normal of the triangle. 
+        // ACxAB will give the opposite normal (ABxAC = - ACxAB).
+        int t = 0;
+        for (int i = 0; i < triangleArray.Length; i += 3)
+        {
+            //Vector3 AB = vertices[triangles[i]] - vertices[triangles[i + 1]];
+            //Vector3 AC = vertices[triangles[i]] - vertices[triangles[i + 2]];
+
+            //Vector3 triNormal = Vector3.Cross(AC, AB);
+            //triangleNormals[t] = triNormal.normalized;
+            t++;
+        }
+        Debug.Log(t);
+        // (normal + normal).normalized
     }
 }
