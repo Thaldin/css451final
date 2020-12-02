@@ -36,19 +36,26 @@ public class XfromControl : MonoBehaviour {
     //---------------------------------------------------------------------------------
     // Initialize slider bars to specific function
     void SetToTranslation(bool v) {
+        Slider x, z;
         Vector3 p = ReadObjectXfrom();
         mPreviousSliderValues = p;
-        X.InitSliderRange(-20, 20, p.x);
-        Y.InitSliderRange(-20, 20, p.y);
-        Z.InitSliderRange(-20, 20, p.z);
+        X.InitSliderRange(-10, 10, p.x);
+        /*
+        X.transform.GetChild(0).TryGetComponent<Slider>(out x);
+        if (x) {
+            x.wholeNumbers = true;
+        }
+        */
+        Y.InitSliderRange(-10, 10, p.y);
+        Z.InitSliderRange(-10, 10, p.z);
     }
 
     void SetToScaling(bool v) {
         Vector3 s = ReadObjectXfrom();
         mPreviousSliderValues = s;
-        X.InitSliderRange(0.1f, 20, s.x);
-        Y.InitSliderRange(0.1f, 20, s.y);
-        Z.InitSliderRange(0.1f, 20, s.z);
+        X.InitSliderRange(1f, 20, s.x);
+        Y.InitSliderRange(1f, 20, s.y);
+        Z.InitSliderRange(1f, 20, s.z);
     }
 
     void SetToRotation(bool v) {
@@ -74,9 +81,9 @@ public class XfromControl : MonoBehaviour {
 
         //MP5
         if (T.isOn) {
-            theWorld.SetTileOffsetX((int)v);
+            theWorld.SetTileOffsetX(v);
         } else if (S.isOn) {
-            theWorld.SetTileScaleX((int)v);
+            theWorld.SetTileScaleX(v);
         }
         theWorld.RenderPlane();
     }
@@ -89,6 +96,14 @@ public class XfromControl : MonoBehaviour {
         Quaternion q = Quaternion.AngleAxis(dy, Vector3.up);
         p.y = v;
         UISetObjectXform(ref p, ref q);
+
+        //MP5
+        if (T.isOn) {
+            theWorld.SetTileOffsetY(v);
+        } else if (S.isOn) {
+            theWorld.SetTileScaleY(v);
+        }
+        theWorld.RenderPlane();
     }
 
     void ZValueChanged(float v) {
@@ -100,13 +115,7 @@ public class XfromControl : MonoBehaviour {
         p.z = v;
         UISetObjectXform(ref p, ref q);
 
-        //MP5
-        if (T.isOn) {
-            theWorld.SetTileOffsetZ((int)v);
-        } else if (S.isOn) { 
-            theWorld.SetTileScaleZ((int)v);
-        }
-        theWorld.RenderPlane();
+        
     }
     //---------------------------------------------------------------------------------
 

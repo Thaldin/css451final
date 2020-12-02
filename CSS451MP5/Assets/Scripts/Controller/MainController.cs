@@ -163,7 +163,7 @@ public class MainController : MonoBehaviour {
     }
 
     public void UpdateTextureRes(float v) {
-        theWorld.SetPlaneTiling((int)v);
+        //theWorld.SetPlaneTiling((int)v);
         theWorld.RenderPlane();
     }
 }

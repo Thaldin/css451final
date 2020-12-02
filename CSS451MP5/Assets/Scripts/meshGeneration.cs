@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class meshGeneration : MonoBehaviour {
+    
 
     // vertex prefab
     [SerializeField] protected List<GameObject> vertexPrefabs = new List<GameObject>();
@@ -11,11 +12,11 @@ public class meshGeneration : MonoBehaviour {
 
     // components
     public Material matieral = null;
-    public Mesh mesh;
+    protected Mesh mesh;
 
     // mesh components
     protected Vector3[] vertices = new Vector3[0];
-    protected Vector2[] uv = new Vector2[0];
+    [SerializeField] protected Vector2[] uv = new Vector2[0];
     protected int[] triangles = new int[0];
     protected Vector3[] normals = new Vector3[0];
 

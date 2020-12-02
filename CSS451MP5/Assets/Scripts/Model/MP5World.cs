@@ -264,33 +264,20 @@ public class MP5World : MonoBehaviour
         planeGen.SetSize(newSize);
     }
 
-    // tile multiplier
-    public void SetPlaneTiling(int newTile) {
-        planeGen.SetTiling(newTile);
-    }
-
-    // tiling
-    public void SetPlaneTilingX(float newTile) {
-        planeGen.SetTilingX((int)newTile);
-    }
-    public void SetPlaneTilingZ(float newTile) {
-        planeGen.SetTilingZ((int)newTile);
-    }
-
     // set scales
     public void SetTileScaleX(float v) {
-        planeGen.SetTileScaleX((int)v);
+        planeGen.SetTileScaleX(v);
     }
-    public void SetTileScaleZ(float v) {
-        planeGen.SetTileScaleZ((int)v);
+    public void SetTileScaleY(float v) {
+        planeGen.SetTileScaleY(v);
     }
 
     // set offset
     public void SetTileOffsetX(float v) {
-        planeGen.SetTileOffsetX((int)v);
+        planeGen.SetTileOffsetX(v);
     }
-    public void SetTileOffsetZ(float v) {
-        planeGen.SetTileOffsetZ((int)v);
+    public void SetTileOffsetY(float v) {
+        planeGen.SetTileOffsetY(v);
     }
 
     public Transform GetCurrentSelection() {

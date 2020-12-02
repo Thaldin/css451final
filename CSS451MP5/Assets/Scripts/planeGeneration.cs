@@ -2,54 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class planeGeneration : meshGeneration
-{
-    private int zSize = 2;
-    private int xSize = 2;
-    private Vector2 planeSize = new Vector2(2f,2f);
-    [SerializeField] private int tileSizeX = 1;
-    [SerializeField] private Vector3 planeTile = Vector3.one;
+public class planeGeneration : meshGeneration {
+
+    [SerializeField] private Vector2 planeSize = new Vector2(2f, 2f);
     [SerializeField] private Vector3 planeTileScale = Vector3.one;
     [SerializeField] private Vector3 planeOffset = Vector3.zero;
 
 
+    // the overall size of the plane
     public void SetSize(int v) {
         planeSize.x = v;
         planeSize.y = v;
     }
 
-    // tile multiplier
-    public void SetTiling(int v) {
-        planeTile.x = v;
-        planeTile.z = v;
-}
-
-    // set tiling
-    public void SetTilingX(int v) {
-        planeTile.x = v;
-    }
-    public void SetTilingZ(int v) {
-        planeTile.z = v;
-    }
-
     // set scales
-    public void SetTileScaleX(int v) {
+    public void SetTileScaleX(float v) {
         planeTileScale.x = v;
     }
-    public void SetTileScaleZ(int v) {
-        planeTileScale.z = v;
+    public void SetTileScaleY(float v) {
+        planeTileScale.y = v;
     }
 
     // set offset
-    public void SetTileOffsetX(int v) {
+    public void SetTileOffsetX(float v) {
         planeOffset.x = v;
     }
-    public void SetTileOffsetZ(int v) {
-        planeOffset.z = v;
-    }
-
-    public Vector3 GetTile() {
-        return planeTile;
+    public void SetTileOffsetY(float v) {
+        planeOffset.y = v;
     }
 
     public Vector3 GetTileScale() {
@@ -61,7 +40,7 @@ public class planeGeneration : meshGeneration
     }
 
     public Mesh CreatePlane() {
-        
+
         // set arrays
         vertices = new Vector3[((int)planeSize.x + 1) * ((int)planeSize.y + 1)];
         normals = new Vector3[vertices.Length];
@@ -70,11 +49,15 @@ public class planeGeneration : meshGeneration
 
         // generate verticies
         // generate uvs
+        // (uv - 0.5) * scale + 0.5
         for (int i = 0, z = 0; z < (planeSize.y + 1); z++) {
             for (int x = 0; x < (planeSize.x + 1); x++) {
                 vertices[i] = new Vector3(x, 0, z);
-                uv[i] = new Vector2((x / planeSize.x * planeTile.x * planeTileScale.x) + planeOffset.x, 
-                                    (z / planeSize.y * planeTile.z * planeTileScale.z) + planeOffset.z);
+
+                float uvX = (x * planeTileScale.x) / planeSize.x;
+                float uvZ = (z * planeTileScale.y) / planeSize.y;
+                uv[i] = new Vector2(uvX, uvZ) + (Vector2)planeOffset;
+                                    
                 i++;
             }
         }
