@@ -14,9 +14,9 @@ public class TheWorld : MonoBehaviour {
     public Vector3 mouseDownPos = Vector3.zero;
 
     public meshGeneration meshGen = null;
+    public planeGeneration planeGen = null;
     // Start is called before the first frame update
     void Start() {
-        Debug.Assert(meshGen != null);
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class TheWorld : MonoBehaviour {
             delta = mouseDownPos - Input.mousePosition;
             mouseDownPos = Input.mousePosition;
             currentSelection.GetComponent<VertexPrefab>().Translate(delta);
-            meshGen.UpdateMesh();
+            planeGen.GetComponent<planeGeneration>().UpdateVertices();
         }
 
     }

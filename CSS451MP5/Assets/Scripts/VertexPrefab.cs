@@ -99,4 +99,9 @@ public class VertexPrefab : MonoBehaviour {
         }
         return null;
     }
+
+    public void Destroy() {
+        Destroy(gameObject);
+    }
+    
 }

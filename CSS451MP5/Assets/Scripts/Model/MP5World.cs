@@ -20,30 +20,57 @@ public class MP5World : MonoBehaviour
     private List<GameObject> sphereList;
     private GameObject renderObject;
 
+    
     private int vertexCount = 0;
     private int triangleCount = 0;
     private Vector3[] vertexArray = null;
     private int[] triangleArray = null;
     private Vector3[] triangleNormals = null;
-
+    
     private bool renderVertexSelectors = false;
 
+    // testing
+    [Header("Plane")]
+    public Mesh planeMesh = null;
+    public planeGeneration planeGen = null;
+    private GameObject planeObject = null;
+    private MeshFilter planeMeshFilter = null;
+    private MeshRenderer planeMeshRender = null;
+
+    [SerializeField] private Transform currentSelection = null;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Assert(LookAt != null, "Please set LookAt object.");
         cylinderMesh = new Mesh();
+        planeMesh = new Mesh();
 
         sphereList = new List<GameObject>();
         renderObject = new GameObject();
+        renderObject.name = "Cylinder";
+
         cylinderFilter = renderObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
         cylinderRenderer = renderObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
+
+        // plane
+        planeObject = new GameObject();
+        planeObject.name = "Plane";
+        planeMeshFilter = planeObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
+        planeMeshRender = planeObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
+        planeMeshRender.material = planeGen.matieral;
+
+        //create start primitives
+        CalculateCylinder();
+        RenderPlane();
+
+        SetActiveMesh(0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (RenderMesh)
         {
             RenderTextureMesh();
@@ -51,6 +78,25 @@ public class MP5World : MonoBehaviour
         else
         {
             RenderCylinderMesh();
+        }
+        */
+    }
+
+    public void SetActiveMesh(int value) {
+        planeMeshFilter.mesh.Clear();
+        switch (value) {
+            case 0:
+                currentSelection = planeObject.transform;
+                HideCylinder();
+                RenderPlane();
+                return;
+            case 1:
+                currentSelection = renderObject.transform;
+                HidePlane();
+                RenderCylinderMesh();
+                return;
+            default:
+                return;
         }
     }
 
@@ -70,13 +116,25 @@ public class MP5World : MonoBehaviour
         LookAt.transform.position += deltaY * LookAt.transform.up;
     }
 
-    private void RenderTextureMesh()
+    public void RenderPlane()
     {
-        Debug.Log("Rendering Mesh at Res: " + MeshResolution);
+        planeObject.SetActive(true);
+        planeMeshFilter.mesh.Clear();
+        planeMeshFilter.mesh = planeGen.CreatePlane();
     }
 
-    private void RenderCylinderMesh()
+    public void HidePlane() {
+        planeObject.SetActive(false);
+        planeGen.ClearVertexPrefabList();
+    }
+
+    public void HideCylinder() {
+        renderObject.SetActive(false);
+    }
+
+    public void RenderCylinderMesh()
     {
+        renderObject.SetActive(true);
         // TODO: Make this the selectors?
         RenderSpheres(vertexArray, vertexCount);
 
@@ -85,7 +143,8 @@ public class MP5World : MonoBehaviour
         cylinderMesh.vertices = vertexArray;
         cylinderMesh.triangles = triangleArray;
         cylinderMesh.normals = triangleNormals;
-
+        //temp
+        cylinderMesh.RecalculateNormals();
         cylinderFilter.mesh = cylinderMesh;
         cylinderRenderer.material = testMaterial;
 
@@ -197,7 +256,44 @@ public class MP5World : MonoBehaviour
             //triangleNormals[t] = triNormal.normalized;
             t++;
         }
-        Debug.Log(t);
         // (normal + normal).normalized
+    }
+
+    // tessellation
+    public void SetPlaneTessellation(int newSize) {
+        planeGen.SetSize(newSize);
+    }
+
+    // tile multiplier
+    public void SetPlaneTiling(int newTile) {
+        planeGen.SetTiling(newTile);
+    }
+
+    // tiling
+    public void SetPlaneTilingX(float newTile) {
+        planeGen.SetTilingX((int)newTile);
+    }
+    public void SetPlaneTilingZ(float newTile) {
+        planeGen.SetTilingZ((int)newTile);
+    }
+
+    // set scales
+    public void SetTileScaleX(float v) {
+        planeGen.SetTileScaleX((int)v);
+    }
+    public void SetTileScaleZ(float v) {
+        planeGen.SetTileScaleZ((int)v);
+    }
+
+    // set offset
+    public void SetTileOffsetX(float v) {
+        planeGen.SetTileOffsetX((int)v);
+    }
+    public void SetTileOffsetZ(float v) {
+        planeGen.SetTileOffsetZ((int)v);
+    }
+
+    public Transform GetCurrentSelection() {
+        return currentSelection;
     }
 }
