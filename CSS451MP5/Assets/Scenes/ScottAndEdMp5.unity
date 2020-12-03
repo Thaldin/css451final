@@ -173,6 +173,8 @@ MonoBehaviour:
   CylinderResolution: 10
   MeshResolution: 4
   CylinderRotation: 180
+  VertexPrefab: {fileID: 6489546145309109422, guid: c20637939629ee949b1bab5bbdff105e,
+    type: 3}
   testMaterial: {fileID: 2100000, guid: 1e713489ecb82cd429404e800656937c, type: 2}
   planeMesh: {fileID: 0}
   planeGen: {fileID: 23607281}
