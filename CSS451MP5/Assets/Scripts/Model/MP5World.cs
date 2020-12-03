@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class MP5World : MonoBehaviour
-{
+public class MP5World : MonoBehaviour {
     public GameObject LookAt = null;
     public bool RenderMesh = true;
 
@@ -40,6 +39,7 @@ public class MP5World : MonoBehaviour
 
     [SerializeField] private Transform currentSelection = null;
 
+    private bool vertexPrefabIsOn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,11 +48,13 @@ public class MP5World : MonoBehaviour
         planeMesh = new Mesh();
 
         sphereList = new List<GameObject>();
+
+        // cylinder
         renderObject = new GameObject();
         renderObject.name = "Cylinder";
-
         cylinderFilter = renderObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
         cylinderRenderer = renderObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
+        cylinderRenderer.material = testMaterial;
 
         // plane
         planeObject = new GameObject();
@@ -62,12 +64,14 @@ public class MP5World : MonoBehaviour
         planeMeshRender.material = planeGen.matieral;
 
         //create start primitives
-        CalculateCylinder();
+        //CalculateCylinder();
         RenderPlane();
+        RenderCylinder();
 
         SetActiveMesh(0);
     }
 
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -82,6 +86,7 @@ public class MP5World : MonoBehaviour
             RenderCylinderMesh();
         }
     }
+    */
 
     public void SetActiveMesh(int value) {
         planeMeshFilter.mesh.Clear();
@@ -89,16 +94,63 @@ public class MP5World : MonoBehaviour
             case 0:
                 currentSelection = planeObject.transform;
                 HideCylinder();
-                //RenderPlane();
+                RenderPlane();
                 return;
             case 1:
                 currentSelection = renderObject.transform;
                 HidePlane();
-                //RenderCylinderMesh();
+                RenderCylinder();
                 return;
             default:
                 return;
         }
+    }
+
+    public void ShowSelectors(bool enable) {
+        // check mesh
+        string str = currentSelection.name;
+        switch (str) {
+            // plane
+            case "Plane":
+                Debug.Log("Plane vertexPrefabs " + enable);
+                planeGen.ToggleVertexPrefabs(enable);
+                return;
+            // cylinder
+            case "Cylinder":
+                Debug.Log("Cylinder vertexPrefabs " + enable);
+                ToggleVertexPrefabs(enable);
+                return;
+            default:
+                return;
+        }
+    }
+
+    private void ToggleVertexPrefabs(bool isOn) {
+        foreach (var prefab in sphereList) {
+            prefab.GetComponent<VertexPrefab>().ToggleVertexPrefab(isOn);
+        }
+    }
+
+    public void RenderPlane() {
+        planeObject.SetActive(true);
+        planeMeshFilter.mesh.Clear();
+        planeMeshFilter.mesh = planeGen.CreatePlane();
+    }
+
+    public void HidePlane() {
+        planeObject.SetActive(false);
+        planeGen.ClearVertexPrefabList();
+    }
+
+    public void RenderCylinder() {
+        renderObject.SetActive(true);
+        cylinderFilter.mesh.Clear();
+        cylinderFilter.mesh = CalculateCylinder();
+    }
+
+    public void HideCylinder() {
+        renderObject.SetActive(false);
+        ClearVertexPrefabList();
     }
 
     public void SetLookAtPos(Vector3 pos)
@@ -117,25 +169,13 @@ public class MP5World : MonoBehaviour
         LookAt.transform.position += deltaY * LookAt.transform.up;
     }
 
-    public void RenderPlane() {
-        planeObject.SetActive(true);
-        planeMeshFilter.mesh.Clear();
-        planeMeshFilter.mesh = planeGen.CreatePlane();
-    }
+    
 
-    public void HidePlane() {
-        planeObject.SetActive(false);
-        planeGen.ClearVertexPrefabList();
-    }
-
-    public void HideCylinder() {
-        renderObject.SetActive(false);
-    }
-
-    public void RenderCylinderMesh()
+    //public void RenderCylinderMesh()
+    public Mesh RenderCylinderMesh()
     {
-        renderObject.SetActive(true);
-        RenderSpheres(vertexArray, vertexCount);
+        
+        //RenderSpheres(vertexArray, vertexCount);
 
         // Clear existing mesh
         cylinderMesh.Clear();
@@ -145,15 +185,21 @@ public class MP5World : MonoBehaviour
         cylinderFilter.mesh = cylinderMesh;
         cylinderRenderer.material = testMaterial;
         UpdateNormals(vertexArray, normals);
+
+        return cylinderMesh;
     }
 
     private void RenderSpheres(Vector3[] array, int count)
     {
         // Clear previous spheres
+        /*
         foreach (GameObject obj in sphereList)
         {
             Destroy(obj);
         }
+        */
+
+        ClearVertexPrefabList();
 
         sphereList.Clear();
 
@@ -169,18 +215,22 @@ public class MP5World : MonoBehaviour
             pos.y = array[i].y;
             pos.z = array[i].z;
             s.transform.localPosition = pos;
-            s.SetActive(renderVertexSelectors);
+            //s.SetActive(renderVertexSelectors);
             sphereList.Add(s);
         }
     }
 
-    public void ShowSelectors(bool enable)
-    {
-        renderVertexSelectors = enable;
+    private void ClearVertexPrefabList() {
+        foreach (var v in sphereList) {
+            v.GetComponent<VertexPrefab>().Destroy();
+        }
+        sphereList.Clear();
     }
 
-    public void CalculateCylinder()
-    {
+
+
+    //public void CalculateCylinder()
+    public Mesh CalculateCylinder() {
         // Compute Triangle and Vertex count
         vertexCount = CylinderResolution * nCylinderHeight;
         triangleCount = ((CylinderResolution - 1) * (nCylinderHeight - 1)) * 2;
@@ -235,8 +285,8 @@ public class MP5World : MonoBehaviour
 
         RenderSpheres(vertexArray, vertexCount);
         CalculateNormals(vertexArray, CylinderResolution);
-        RenderCylinderMesh();
-
+        //RenderCylinderMesh();
+        return RenderCylinderMesh();
     }
 
     private Vector3 FaceNormals(Vector3[] v, int v1, int v2, int v3)
@@ -376,24 +426,6 @@ public class MP5World : MonoBehaviour
             sphere.transform.localRotation = q;
             count++;
         }
-    }
-
-    private void CalculateNormalsOld()
-    {
-        // Take vertex A, B and C from a triangle. Then create vectors AB and AC. 
-        // ABxAC will give you the normal of the triangle. 
-        // ACxAB will give the opposite normal (ABxAC = - ACxAB).
-        int t = 0;
-        for (int i = 0; i < triangleArray.Length; i += 3)
-        {
-            //Vector3 AB = vertices[triangles[i]] - vertices[triangles[i + 1]];
-            //Vector3 AC = vertices[triangles[i]] - vertices[triangles[i + 2]];
-
-            //Vector3 triNormal = Vector3.Cross(AC, AB);
-            //triangleNormals[t] = triNormal.normalized;
-            t++;
-        }
-        // (normal + normal).normalized
     }
 
     // tessellation

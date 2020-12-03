@@ -15,6 +15,7 @@ public class VertexPrefab : MonoBehaviour {
     private MeshRenderer meshRenderer;
     private Vector3 ogPosition = Vector3.zero;
     private bool isSelected = false;
+    [SerializeField] private bool isOn = false;
 
     public  GameObject currentHandleSelected = null;
     public GameObject[] handles = new GameObject[3];
@@ -32,6 +33,12 @@ public class VertexPrefab : MonoBehaviour {
 
 
     private void Update() {
+        gameObject.SetActive(isOn);
+
+        // is the vertexprefab on?
+        
+
+        // select prefab
         if (isSelected) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -88,6 +95,12 @@ public class VertexPrefab : MonoBehaviour {
             h.transform.GetChild(0).GetComponent<vertexHandle>().Selected(false);
         }
         currentHandleSelected = null;
+    }
+
+    public void ToggleVertexPrefab(bool _isOn) {
+        //Debug.Log(_isOn + " " + name + " prefab Level");
+        isOn = _isOn;
+        gameObject.SetActive(isOn);
     }
 
     public GameObject GetHandle(string _tag) {

@@ -93,13 +93,20 @@ public class MainController : MonoBehaviour {
         }
 
         // Control = Vertex Key Controls
+        /*
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)) {
+            theWorld.ShowSelectors(true);
+        }
+        */
+        // Control = Vertex Key Controls
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
             theWorld.ShowSelectors(true);
         }
 
         if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl)) {
             theWorld.ShowSelectors(false);
         }
+
 
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
             // Set Previous Position for calculations on MouseDown

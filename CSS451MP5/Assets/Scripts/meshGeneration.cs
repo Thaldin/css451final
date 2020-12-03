@@ -38,16 +38,13 @@ public class meshGeneration : MonoBehaviour {
 
     public virtual void CalculateNormals() { }
 
-    protected void GenerateVertexPrefab() {
+    public void GenerateVertexPrefab() {
         ClearVertexPrefabList();
         for (int i = 0; i < vertices.Length; i++) {
             GameObject vertexSpawn = Instantiate(vertex);
             vertexSpawn.name = "Vertex" + i;
             vertexPrefabs.Add(vertexSpawn);
             vertexSpawn.transform.position = vertices[i];
-            //vertexSpawn.transform.rotation = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
-            // recalculate normal
-
         }
     }
 
@@ -56,6 +53,13 @@ public class meshGeneration : MonoBehaviour {
             v.GetComponent<VertexPrefab>().Destroy();
         }
         vertexPrefabs.Clear();
+    }
+
+    public void ToggleVertexPrefabs(bool isOn) {
+        //Debug.Log(isOn + " planeGen Level");
+        foreach (var v in vertexPrefabs) {
+            v.GetComponent<VertexPrefab>().ToggleVertexPrefab(isOn);
+        }
     }
 
 

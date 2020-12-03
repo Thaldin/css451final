@@ -68,8 +68,6 @@ public class planeGeneration : meshGeneration {
                 i++;
             }
         }
-
-        // generate triangles
         GenerateTrianges();
         return UpdateMesh();
     }
