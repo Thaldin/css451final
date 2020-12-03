@@ -15,10 +15,10 @@ public class meshGeneration : MonoBehaviour {
     protected Mesh mesh;
 
     // mesh components
-    protected Vector3[] vertices = new Vector3[0];
+    [SerializeField] protected Vector3[] vertices = new Vector3[0];
     [SerializeField] protected Vector2[] uv = new Vector2[0];
-    protected int[] triangles = new int[0];
-    protected Vector3[] normals = new Vector3[0];
+    [SerializeField] protected int[] triangles = new int[0];
+    [SerializeField] protected Vector3[] normals = new Vector3[0];
 
     // Start is called before the first frame update
     private void Start() {

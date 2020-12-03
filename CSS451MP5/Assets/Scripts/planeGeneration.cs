@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class planeGeneration : meshGeneration {
 
-    [SerializeField] private Vector2 planeSize = new Vector2(2f, 2f);
+    public int planeSize = 10;
+    [SerializeField] private Vector2 planeResolution = new Vector2(2f, 2f);
     [SerializeField] private Vector3 planeTileScale = Vector3.one;
     [SerializeField] private Vector3 planeOffset = Vector3.zero;
 
 
     // the overall size of the plane
-    public void SetSize(int v) {
-        planeSize.x = v;
-        planeSize.y = v;
+    public void SetResolution(int v) {
+        planeResolution.x = v;
+        planeResolution.y = v;
     }
 
     // set scales
@@ -22,6 +23,9 @@ public class planeGeneration : meshGeneration {
     public void SetTileScaleY(float v) {
         planeTileScale.y = v;
     }
+    public Vector3 GetTileScale() {
+        return planeTileScale;
+    }
 
     // set offset
     public void SetTileOffsetX(float v) {
@@ -30,33 +34,36 @@ public class planeGeneration : meshGeneration {
     public void SetTileOffsetY(float v) {
         planeOffset.y = v;
     }
-
-    public Vector3 GetTileScale() {
-        return planeTileScale;
-    }
-
     public Vector3 GetTileOffset() {
         return planeOffset;
     }
 
     public Mesh CreatePlane() {
-
         // set arrays
-        vertices = new Vector3[((int)planeSize.x + 1) * ((int)planeSize.y + 1)];
+        int vertexCount = (int)planeResolution.x * (int)planeResolution.y;
+        vertices = new Vector3[vertexCount];
         normals = new Vector3[vertices.Length];
-        triangles = new int[(int)planeSize.x * (int)planeSize.y * 6];
-        uv = new Vector2[((int)planeSize.x + 1) * ((int)planeSize.y + 1)];
+        
+        uv = new Vector2[vertexCount];
+
 
         // generate verticies
         // generate uvs
         // (uv - 0.5) * scale + 0.5
-        for (int i = 0, z = 0; z < (planeSize.y + 1); z++) {
-            for (int x = 0; x < (planeSize.x + 1); x++) {
-                vertices[i] = new Vector3(x, 0, z);
-
-                float uvX = (x * planeTileScale.x) / planeSize.x;
-                float uvZ = (z * planeTileScale.y) / planeSize.y;
+        int res = (int)planeResolution.x - 1;
+        int i = 0;
+        for (float x = 0; x < planeResolution.x; x++) {
+            for (float z = 0; z < planeResolution.y; z++) {
+                // vertex
+                float vertX = (x * planeSize) / res;
+                float vertZ = (z * planeSize) / res;
+                vertices[i] = new Vector3(vertX, 0, vertZ);
+                // uv
+                float uvX = (x * planeTileScale.x) / res;
+                float uvZ = (z * planeTileScale.y) / res;
                 uv[i] = new Vector2(uvX, uvZ) + (Vector2)planeOffset;
+                // normal
+                normals[i] = Vector3.up;
                                     
                 i++;
             }
@@ -71,7 +78,9 @@ public class planeGeneration : meshGeneration {
         mesh = new Mesh();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.normals = normals;
         mesh.uv = uv;
+
 
         GenerateVertexPrefab();
 
@@ -87,16 +96,20 @@ public class planeGeneration : meshGeneration {
     public override void GenerateTrianges() {
         // generate triangles
         // clockwise triangle for camera-facing triangles
+        int triangleCount = ((int)planeResolution.x - 1) * ((int)planeResolution.y - 1) * 2 * 3;
+        triangles = new int[triangleCount];
+
         int vert = 0;
         int tris = 0;
-        for (int z = 0; z < (int)planeSize.y; z++) {
-            for (int x = 0; x < (int)planeSize.x; x++) {
+        int res = (int)planeResolution.x - 1;
+        for (int z = 0; z < res; z++) {
+            for (int x = 0; x < res; x++) {
                 triangles[tris + 0] = vert + 0;
-                triangles[tris + 1] = vert + (int)planeSize.x + 1;
-                triangles[tris + 2] = vert + 1;
+                triangles[tris + 1] = vert + 1;
+                triangles[tris + 2] = vert + res + 1;
                 triangles[tris + 3] = vert + 1;
-                triangles[tris + 4] = vert + (int)planeSize.x + 1;
-                triangles[tris + 5] = vert + (int)planeSize.x + 2;
+                triangles[tris + 4] = vert + res + 2;
+                triangles[tris + 5] = vert + res + 1;
 
                 vert++;
                 tris += 6;

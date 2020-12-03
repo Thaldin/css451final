@@ -158,7 +158,7 @@ public class MainController : MonoBehaviour {
     }
 
     public void UpdateMeshRes(float v) {
-        theWorld.SetPlaneTessellation((int)v);
+        theWorld.SetPlaneResolution((int)v);
         theWorld.RenderPlane();
     }
 

@@ -36,16 +36,9 @@ public class XfromControl : MonoBehaviour {
     //---------------------------------------------------------------------------------
     // Initialize slider bars to specific function
     void SetToTranslation(bool v) {
-        Slider x, z;
         Vector3 p = ReadObjectXfrom();
         mPreviousSliderValues = p;
         X.InitSliderRange(-10, 10, p.x);
-        /*
-        X.transform.GetChild(0).TryGetComponent<Slider>(out x);
-        if (x) {
-            x.wholeNumbers = true;
-        }
-        */
         Y.InitSliderRange(-10, 10, p.y);
         Z.InitSliderRange(-10, 10, p.z);
     }

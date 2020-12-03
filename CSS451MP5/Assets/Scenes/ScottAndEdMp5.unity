@@ -192,8 +192,12 @@ MonoBehaviour:
   vertexPrefabs: []
   vertex: {fileID: 6489546145309109422, guid: c20637939629ee949b1bab5bbdff105e, type: 3}
   matieral: {fileID: 2100000, guid: ccfe3ecfb7e924940a46e9ce7f2dd34e, type: 2}
+  vertices: []
   uv: []
-  planeSize: {x: 2, y: 2}
+  triangles: 
+  normals: []
+  planeSize: 10
+  planeResolution: {x: 2, y: 2}
   planeTileScale: {x: 1, y: 1, z: 1}
   planeOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &398940122
@@ -773,7 +777,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901012530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.83, y: 0, z: -2.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 398940123}
@@ -1110,6 +1114,11 @@ PrefabInstance:
       propertyPath: theCamera
       value: 
       objectReference: {fileID: 662151428}
+    - target: {fileID: 4125034901026653337, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4189568445573826872, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1123,7 +1132,7 @@ PrefabInstance:
     - target: {fileID: 4189568446060584559, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4189568446060584559, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
@@ -1173,7 +1182,7 @@ PrefabInstance:
     - target: {fileID: 4190432632716819033, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4190432633206287630, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}

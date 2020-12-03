@@ -116,8 +116,7 @@ public class MP5World : MonoBehaviour
         LookAt.transform.position += deltaY * LookAt.transform.up;
     }
 
-    public void RenderPlane()
-    {
+    public void RenderPlane() {
         planeObject.SetActive(true);
         planeMeshFilter.mesh.Clear();
         planeMeshFilter.mesh = planeGen.CreatePlane();
@@ -239,6 +238,8 @@ public class MP5World : MonoBehaviour
         CalculateNormals();
 
         RenderSpheres(vertexArray, vertexCount);
+
+        RenderCylinderMesh();
     }
 
     private void CalculateNormals()
@@ -260,8 +261,8 @@ public class MP5World : MonoBehaviour
     }
 
     // tessellation
-    public void SetPlaneTessellation(int newSize) {
-        planeGen.SetSize(newSize);
+    public void SetPlaneResolution(int newSize) {
+        planeGen.SetResolution(newSize);
     }
 
     // set scales
