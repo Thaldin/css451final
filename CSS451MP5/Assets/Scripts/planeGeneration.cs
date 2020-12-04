@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class planeGeneration : meshGeneration {
 
+
     public int planeSize = 10;
     [SerializeField] private Vector2 planeResolution = new Vector2(2f, 2f);
     [SerializeField] private Vector3 planeTileScale = Vector3.one;
     [SerializeField] private Vector3 planeOffset = Vector3.zero;
-
 
     // the overall size of the plane
     public void SetResolution(int v) {
@@ -68,29 +68,12 @@ public class planeGeneration : meshGeneration {
                 i++;
             }
         }
-        GenerateTrianges();
-        return UpdateMesh();
-    }
-
-    public override Mesh UpdateMesh() {
-        mesh = new Mesh();
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.normals = normals;
-        mesh.uv = uv;
-
 
         GenerateVertexPrefab();
-
-        return mesh;
+        GenerateTrianges();
+        // calc normals
+        return UpdateMesh();
     }
-
-    public override void UpdateVertices() {
-        for (int i = 0; i < vertices.Length; i++) {
-            vertices[i] = vertexPrefabs[i].transform.position;
-        }
-    }
-
     public override void GenerateTrianges() {
         // generate triangles
         // clockwise triangle for camera-facing triangles

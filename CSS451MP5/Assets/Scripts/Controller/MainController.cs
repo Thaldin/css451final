@@ -132,22 +132,22 @@ public class MainController : MonoBehaviour {
                 click(1);
             }
 
-            /*
+            
             // Move Selected Vertex
-            if (Input.GetMouseButton(0)) {
-                //var delta = prevMousePos - Input.mousePosition;
-                prevMousePos = Input.mousePosition;
-                // TODO: Move the selected vertex
+            if (handle && Input.GetMouseButton(0)) {
+                Debug.Log("Moving on " + handle.tag);
+                // get delta
                 delta = mouseDownPos - Input.mousePosition;
                 mouseDownPos = Input.mousePosition;
 
-                Vector3 axisOfDir = handle.GetComponent<vertexHandle>().axisOfDirection;
-                Translate(axisOfDir, delta);
-                //currentSelection.GetComponent<VertexPrefab>().Translate(delta);
+                // move vertex
+                vertex.GetComponent<VertexPrefab>().Translate(delta);
+                // update vertices
                 planeGen.GetComponent<planeGeneration>().UpdateVertices();
-                theWorld.RenderPlane();
+                // redraw mesh
+                theWorld.UpdatePlane();
             }
-            */
+            
         }
 
         // Reset button
@@ -217,33 +217,29 @@ public class MainController : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit)) {
                     // clear UI
                     if (!EventSystem.current.IsPointerOverGameObject()) {
-                        Debug.Log(hit.transform.tag);
+                        //Debug.Log(hit.transform.tag);
                         // vertex
                         if (hit.transform.CompareTag("vertex")) {
                             // if selection, clear it
                             if (vertex) {
-                                Debug.Log("Unselecting old vertex: " + vertex.name);
+                                //Debug.Log("Unselecting old vertex: " + vertex.name);
                                 vertex.GetComponent<VertexPrefab>().Selected(false);
                             }
                             // reassign selection
                             vertex = hit.transform.gameObject;
-                            Debug.Log("New vertex: " + vertex.name);
                             vertex.GetComponent<VertexPrefab>().Selected(true);
                             return;
                         }
-
-                        
+                        // vertex handle
                         if (hit.transform.CompareTag("xHandle") ||
-                        hit.transform.CompareTag("yHandle") ||
-                        hit.transform.CompareTag("zHandle")) {
-                            // return handle
-                            Debug.Log("Ray hit handle");
-                            Debug.Log(vertex.name);
+                            hit.transform.CompareTag("yHandle") ||
+                            hit.transform.CompareTag("zHandle")) {
+                            // MC handle
                             handle = hit.transform.gameObject;
-
+                            // VP handle
+                            vertex.GetComponent<VertexPrefab>().SetHandle(handle);
                             return;
                         }
-                        
                     }
                 }
                 return;
@@ -263,18 +259,5 @@ public class MainController : MonoBehaviour {
         vertex.GetComponent<VertexPrefab>().Selected(false);
         vertex = null;
         handle = null;
-    }
-
-    private void Translate(Vector3 _axis, Vector3 _delta) {
-        //_delta = (_delta < 0) ? _delta : 0;
-        //_delta = (_delta > 1) ? _delta : 1;
-        Vector3 position = _axis;
-        position.x *= _delta.x / 100f;
-        position.y *= _delta.y / 100f;
-        position.z *= _delta.z / 100f;
-
-        Vector3 offset = position - vertex.GetComponent<VertexPrefab>().ogPosition;
-        vertex.transform.localPosition -= position;
-        //https://docs.unity3d.com/ScriptReference/Vector3.ClampMagnitude.html
     }
 }

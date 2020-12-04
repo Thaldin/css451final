@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
   axisOfDirection: {x: 1, y: 0, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1505228131548457806
@@ -349,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
   axisOfDirection: {x: 1, y: 0, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2745955366524378418
@@ -459,6 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
   axisOfDirection: {x: 0, y: 1, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &5294147907336915668
@@ -571,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 1
   axisOfDirection: {x: 0, y: 1, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &6489546145309109422
@@ -800,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
   axisOfDirection: {x: 0, y: 0, z: 1}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &8537430422148174798
@@ -912,5 +917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 2
   axisOfDirection: {x: 0, y: 0, z: 1}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

@@ -9,6 +9,8 @@ public class meshGeneration : MonoBehaviour {
     // vertex prefab
     [SerializeField] protected List<GameObject> vertexPrefabs = new List<GameObject>();
     [SerializeField] protected GameObject vertex = null;
+    [SerializeField] protected GameObject triangleNormal = null;
+
 
     // components
     public Material matieral = null;
@@ -31,8 +33,21 @@ public class meshGeneration : MonoBehaviour {
         mesh = new Mesh();
     }
 
-    public virtual Mesh UpdateMesh() { return null; }
-    public virtual void UpdateVertices() { }
+    public Mesh UpdateMesh() {
+        //mesh.Clear();
+        mesh = new Mesh();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.normals = normals;
+        mesh.uv = uv;
+        return mesh;
+    }
+
+    public void UpdateVertices() {
+        for (int i = 0; i < vertices.Length; i++) {
+            vertices[i] = vertexPrefabs[i].transform.position;
+        }
+    }
 
     public virtual void GenerateTrianges() { }
 

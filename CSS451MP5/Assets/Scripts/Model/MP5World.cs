@@ -20,13 +20,13 @@ public class MP5World : MonoBehaviour {
     private List<GameObject> sphereList;
     private GameObject renderObject;
 
-    
+
     private int vertexCount = 0;
     private int triangleCount = 0;
     private Vector3[] vertexArray = null;
     private int[] triangleArray = null;
     private Vector3[] normals = null;
-    
+
     //private bool renderVertexSelectors = false;
 
     // testing
@@ -41,8 +41,7 @@ public class MP5World : MonoBehaviour {
 
     //private bool vertexPrefabIsOn = false;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         Debug.Assert(LookAt != null, "Please set LookAt object.");
         cylinderMesh = new Mesh();
         planeMesh = new Mesh();
@@ -64,29 +63,11 @@ public class MP5World : MonoBehaviour {
         planeMeshRender.material = planeGen.matieral;
 
         //create start primitives
-        //CalculateCylinder();
         RenderPlane();
         RenderCylinder();
 
         SetActiveMesh(0);
     }
-
-    /*
-    // Update is called once per frame
-    void Update()
-    {
-        
-        if (RenderMesh)
-        {
-            //RenderTextureMesh();
-            RenderPlane();
-        }
-        else
-        {
-            RenderCylinderMesh();
-        }
-    }
-    */
 
     public void SetActiveMesh(int value) {
         planeMeshFilter.mesh.Clear();
@@ -112,12 +93,10 @@ public class MP5World : MonoBehaviour {
         switch (str) {
             // plane
             case "Plane":
-                //Debug.Log("Plane vertexPrefabs " + enable);
                 planeGen.ToggleVertexPrefabs(enable);
                 return;
             // cylinder
             case "Cylinder":
-                //Debug.Log("Cylinder vertexPrefabs " + enable);
                 ToggleVertexPrefabs(enable);
                 return;
             default:
@@ -142,6 +121,11 @@ public class MP5World : MonoBehaviour {
         planeGen.ClearVertexPrefabList();
     }
 
+    public void UpdatePlane() {
+        planeMeshFilter.mesh.Clear();
+        planeMeshFilter.mesh = planeGen.UpdateMesh();
+    }
+
     public void RenderCylinder() {
         renderObject.SetActive(true);
         cylinderFilter.mesh.Clear();
@@ -153,30 +137,23 @@ public class MP5World : MonoBehaviour {
         ClearVertexPrefabList();
     }
 
-    public void SetLookAtPos(Vector3 pos)
-    {
+    public void SetLookAtPos(Vector3 pos) {
         LookAt.transform.localPosition = pos;
     }
 
-    public Vector3 GetLookAtPos()
-    {
+    public Vector3 GetLookAtPos() {
         return LookAt.transform.localPosition;
     }
 
-    public void SlideLookAtPos(float deltaX, float deltaY)
-    {
+    public void SlideLookAtPos(float deltaX, float deltaY) {
         LookAt.transform.position += deltaX * LookAt.transform.right;
         LookAt.transform.position += deltaY * LookAt.transform.up;
     }
 
-    
+
 
     //public void RenderCylinderMesh()
-    public Mesh RenderCylinderMesh()
-    {
-        
-        //RenderSpheres(vertexArray, vertexCount);
-
+    public Mesh RenderCylinderMesh() {
         // Clear existing mesh
         cylinderMesh.Clear();
         cylinderMesh.vertices = vertexArray;
@@ -189,8 +166,7 @@ public class MP5World : MonoBehaviour {
         return cylinderMesh;
     }
 
-    private void RenderSpheres(Vector3[] array, int count)
-    {
+    private void RenderSpheres(Vector3[] array, int count) {
         // Clear previous spheres
         /*
         foreach (GameObject obj in sphereList)
@@ -206,8 +182,7 @@ public class MP5World : MonoBehaviour {
         // Render Test Spheres
         var scale = new Vector3(0.5f, 0.5f, 0.5f);
         Vector3 pos;
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             //var s = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             var s = Instantiate(VertexPrefab);
             s.transform.localScale = scale;
@@ -243,12 +218,10 @@ public class MP5World : MonoBehaviour {
 
         // Build Vertex Array
         float fTheta = (CylinderRotation / (CylinderResolution - 1)) * Mathf.Deg2Rad;
-        for (int h = 0; h < nCylinderHeight; h++)
-        {
+        for (int h = 0; h < nCylinderHeight; h++) {
             float yValue = (h * 3) - 10;
 
-            for (int i = 0; i < CylinderResolution; i++)
-            {
+            for (int i = 0; i < CylinderResolution; i++) {
                 vertexArray[--arrayCounter] = new Vector3(10f * Mathf.Cos(i * fTheta),
                                                           yValue,
                                                           10f * Mathf.Sin(i * fTheta));
@@ -257,23 +230,20 @@ public class MP5World : MonoBehaviour {
 
         // Compute Triangles
         var triCount = 0;
-        for (int i = 0; i < (vertexCount - CylinderResolution); i++)
-        {
+        for (int i = 0; i < (vertexCount - CylinderResolution); i++) {
             int mod = i % CylinderResolution;
             if (mod == 0)       // Left side of mesh
             {
                 triangleArray[triCount++] = i;
                 triangleArray[triCount++] = i + 1;
                 triangleArray[triCount++] = i + CylinderResolution;
-            }
-            else if (mod == (CylinderResolution - 1))  // Right side of mesh
-            {
+            } else if (mod == (CylinderResolution - 1))  // Right side of mesh
+              {
                 triangleArray[triCount++] = i;
                 triangleArray[triCount++] = i + CylinderResolution;
                 triangleArray[triCount++] = i + CylinderResolution - 1;
-            }
-            else                // Middle of mesh
-            {
+            } else                // Middle of mesh
+              {
                 triangleArray[triCount++] = i;
                 triangleArray[triCount++] = i + 1;
                 triangleArray[triCount++] = i + CylinderResolution;
@@ -289,33 +259,27 @@ public class MP5World : MonoBehaviour {
         return RenderCylinderMesh();
     }
 
-    private Vector3 FaceNormals(Vector3[] v, int v1, int v2, int v3)
-    {
+    private Vector3 FaceNormals(Vector3[] v, int v1, int v2, int v3) {
         Vector3 a = v[v2] - v[v1];
         Vector3 b = v[v3] - v[v1];
         return Vector3.Cross(a, b).normalized;
     }
 
-    private void CalculateNormals(Vector3[] vertices, int resolution)
-    {
+    private void CalculateNormals(Vector3[] vertices, int resolution) {
         Vector3[] triNormals = new Vector3[triangleCount];
         int triPerRow = (resolution - 1) * 2;
 
         //Debug.Log("Triangle Count: " + triangleCount);
 
         // Calculate the triangle normals
-        for (int i = 0; i < triangleCount; i++)
-        {
+        for (int i = 0; i < triangleCount; i++) {
             int oddTri = ((i % 2) == 0) ? 0 : 1;                    // Odd or even triangle
             int startVertex = (i / 2) + (i / triPerRow) + oddTri;   // Starting vertex for triangle
 
-            if (oddTri == 0)
-            {
+            if (oddTri == 0) {
                 // Even numbered triangles
                 triNormals[i] = FaceNormals(vertexArray, startVertex, startVertex + 1, startVertex + resolution);
-            }
-            else
-            {
+            } else {
                 // Odd numbered triangles
                 triNormals[i] = FaceNormals(vertexArray, startVertex, startVertex + resolution, startVertex + resolution - 1);
             }
@@ -323,70 +287,49 @@ public class MP5World : MonoBehaviour {
         }
 
         // Calculate the vertex normals
-        for (int i = 0; i < vertexArray.Length; i++)
-        {
+        for (int i = 0; i < vertexArray.Length; i++) {
             //Debug.Log("Vertex/Normal: " + i);
             // Used for determining left/right columns
             int mod = i % resolution;
 
-            if (i < resolution)
-            {
+            if (i < resolution) {
                 // Top row, special case
-                if (mod == 0)
-                {
+                if (mod == 0) {
                     // Upper left corner
                     normals[i] = triNormals[0].normalized;
-                }
-                else if (mod == (resolution - 1))
-                {
+                } else if (mod == (resolution - 1)) {
                     // Upper right corner
                     normals[i] = (triNormals[triPerRow - 1] + triNormals[triPerRow - 2]).normalized;
-                }
-                else
-                {
+                } else {
                     // Middle top row
                     int triId = GetVertexBottomTriangle(i, triPerRow, resolution);
                     normals[i] = (triNormals[triId - 2] + triNormals[triId - 1] + triNormals[triId]).normalized;
                 }
-            }
-            else if (i >= vertexArray.Length - resolution)
-            {
+            } else if (i >= vertexArray.Length - resolution) {
                 // Bottom row, special case
-                if (mod == 0)
-                {
+                if (mod == 0) {
                     // Bottom left corner
                     normals[i] = (triNormals[triangleCount - resolution] + triNormals[triangleCount - resolution + 1]).normalized;
-                }
-                else if (mod == (resolution - 1))
-                {
+                } else if (mod == (resolution - 1)) {
                     // Bottom right corner
                     normals[i] = triNormals[triangleCount - 1].normalized;
-                }
-                else
-                {
+                } else {
                     // Middle bottom row
                     int triId = GetVertexTopTriangle(i, triPerRow, resolution);
                     normals[i] = (triNormals[triId - 1] + triNormals[triId] + triNormals[triId + 1]).normalized;
                 }
-            }
-            else
-            {
+            } else {
                 // Rest of vertices
-                if (mod == 0)
-                {
+                if (mod == 0) {
                     // Left column of vertices
                     int triId = ((i / resolution) - 1) * triPerRow;
                     normals[i] = (triNormals[triId] + triNormals[triId + 1] + triNormals[triId + triPerRow]).normalized;
-                }
-                else if (mod == (resolution - 1))
-                {
+                } else if (mod == (resolution - 1)) {
                     // Right column of vertices
                     int triId = ((i / resolution) * triPerRow) - 1;
                     //Debug.Log("TriId: " + triId);
                     normals[i] = (triNormals[triId] + triNormals[triId + triPerRow - 1] + triNormals[triId + triPerRow]).normalized;
-                }
-                else
-                {
+                } else {
                     // Center of mesh
                     int topTriId = GetVertexTopTriangle(i, triPerRow, resolution);
                     int bottomTriId = GetVertexBottomTriangle(i, triPerRow, resolution);
@@ -399,8 +342,7 @@ public class MP5World : MonoBehaviour {
         UpdateNormals(vertexArray, normals);
     }
 
-    private int GetVertexTopTriangle(int vertexNumber, int trianglesPer, int res)
-    {
+    private int GetVertexTopTriangle(int vertexNumber, int trianglesPer, int res) {
         int row = vertexNumber / res;
         int col = vertexNumber % res;
 
@@ -408,8 +350,7 @@ public class MP5World : MonoBehaviour {
         return (row - 1) * trianglesPer + (col * 2);
     }
 
-    private int GetVertexBottomTriangle(int vertexNumber, int trianglesPer, int res)
-    {
+    private int GetVertexBottomTriangle(int vertexNumber, int trianglesPer, int res) {
         int row = vertexNumber / res;
         int col = vertexNumber % res;
 
@@ -417,11 +358,9 @@ public class MP5World : MonoBehaviour {
         return (row * trianglesPer) + (col * 2);
     }
 
-    private void UpdateNormals(Vector3[] v, Vector3[] n)
-    {
+    private void UpdateNormals(Vector3[] v, Vector3[] n) {
         int count = 0;
-        foreach (var sphere in sphereList)
-        {
+        foreach (var sphere in sphereList) {
             Quaternion q = Quaternion.FromToRotation(Vector3.up, n[count]);
             sphere.transform.localRotation = q;
             count++;

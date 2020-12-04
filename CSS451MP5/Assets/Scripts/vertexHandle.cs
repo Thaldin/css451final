@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class vertexHandle : MonoBehaviour
 {
-    public Vector3 axisOfDirection = Vector3.zero;
+    public enum axis : int{
+        xAxis,
+        yAxis,
+        zAxis
+    }
+
+    public axis direction;
     public Color selectionColor = Color.yellow;
     private Color color;
     private MeshRenderer meshRenderer;
