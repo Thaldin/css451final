@@ -60,8 +60,16 @@ public class CameraBehavior : MonoBehaviour
     // Take mouse input and tumble the camera
     public void Tumble(Vector3 tumble)
     {
-        tumbleCam(tumble.y, transform.right);
-        tumbleCam(tumble.x, Vector3.up);
+        // Checks to prevent large camera jumps that flip the camera
+        if ((tumble.y < 50) && (tumble.y > -50))
+        {
+            tumbleCam(tumble.y, transform.right);
+        }
+
+        if ((tumble.x < 50) && (tumble.x > -50))
+        {
+            tumbleCam(tumble.x, Vector3.up);
+        }
     }
 
     private void tumbleCam(float value, Vector3 direction)

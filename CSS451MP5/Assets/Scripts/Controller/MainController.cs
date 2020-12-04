@@ -222,26 +222,28 @@ public class MainController : MonoBehaviour {
                         if (hit.transform.CompareTag("vertex")) {
                             // if selection, clear it
                             if (vertex) {
-                                Debug.Log("Unselecting old vertex");
+                                Debug.Log("Unselecting old vertex: " + vertex.name);
                                 vertex.GetComponent<VertexPrefab>().Selected(false);
                             }
                             // reassign selection
                             vertex = hit.transform.gameObject;
+                            Debug.Log("New vertex: " + vertex.name);
                             vertex.GetComponent<VertexPrefab>().Selected(true);
                             return;
                         }
 
-                        /*
+                        
                         if (hit.transform.CompareTag("xHandle") ||
                         hit.transform.CompareTag("yHandle") ||
                         hit.transform.CompareTag("zHandle")) {
                             // return handle
-                            
+                            Debug.Log("Ray hit handle");
+                            Debug.Log(vertex.name);
                             handle = hit.transform.gameObject;
 
                             return;
                         }
-                        */
+                        
                     }
                 }
                 return;
