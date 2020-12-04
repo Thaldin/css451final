@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MainController : MonoBehaviour {
     [Header("World Objects")]
@@ -15,8 +16,15 @@ public class MainController : MonoBehaviour {
     public SliderWithEcho CylinderRot = null;
     [Header("Xform Controller")]
     public XfromControl TexturePanel = null;
-
     private Vector3 prevMousePos = Vector3.zero;
+
+    // vertex
+    [Header("Vertex Selection")]
+    [SerializeField] private GameObject vertex = null;
+    [SerializeField] private GameObject handle = null;
+    private Vector3 delta = Vector3.zero;
+    private Vector3 mouseDownPos = Vector3.zero;
+    public planeGeneration planeGen = null;
 
     // Start is called before the first frame update
     void Start() {
@@ -25,6 +33,8 @@ public class MainController : MonoBehaviour {
         Debug.Assert(CylinderRes != null, "Please set Cylinder Resolution Slider.");
         Debug.Assert(CylinderRot != null, "Please set Cylinder Rotation Slider.");
         Debug.Assert(TextureRes != null, "Please set Texture Resolution Slider.");
+        Debug.Assert(planeGen != null, "Please set planeGeration Object.");
+
 
         // Initialized Scene
         theWorld.SetLookAtPos(Vector3.zero);
@@ -93,12 +103,6 @@ public class MainController : MonoBehaviour {
         }
 
         // Control = Vertex Key Controls
-        /*
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)) {
-            theWorld.ShowSelectors(true);
-        }
-        */
-        // Control = Vertex Key Controls
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
             theWorld.ShowSelectors(true);
         }
@@ -110,16 +114,40 @@ public class MainController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
             // Set Previous Position for calculations on MouseDown
+            /* --testing--
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
                 prevMousePos = Input.mousePosition;
+                
+            }
+            */
+
+            // vertex selection
+            if (Input.GetMouseButtonDown(0)) {
+                mouseDownPos = Input.mousePosition;
+                delta = Vector3.zero;
+                click(0);
             }
 
+            if (Input.GetMouseButtonDown(1)) {
+                click(1);
+            }
+
+            /*
             // Move Selected Vertex
             if (Input.GetMouseButton(0)) {
-                var delta = prevMousePos - Input.mousePosition;
+                //var delta = prevMousePos - Input.mousePosition;
                 prevMousePos = Input.mousePosition;
                 // TODO: Move the selected vertex
+                delta = mouseDownPos - Input.mousePosition;
+                mouseDownPos = Input.mousePosition;
+
+                Vector3 axisOfDir = handle.GetComponent<vertexHandle>().axisOfDirection;
+                Translate(axisOfDir, delta);
+                //currentSelection.GetComponent<VertexPrefab>().Translate(delta);
+                planeGen.GetComponent<planeGeneration>().UpdateVertices();
+                theWorld.RenderPlane();
             }
+            */
         }
 
         // Reset button
@@ -148,12 +176,13 @@ public class MainController : MonoBehaviour {
             Tessellation.gameObject.SetActive(false);
             CylinderRes.gameObject.SetActive(true);
             CylinderRot.gameObject.SetActive(true);
-            //theWorld.CalculateCylinder();
         }
         TexturePanel.mSelected = theWorld.GetCurrentSelection();
-        //TexturePanel.SetSelectedObject(theWorld.GetCurrentSelection());
     }
 
+    // 
+    // Canvas Sliders
+    // 
     public void UpdateCylinderRes(float v) {
         theWorld.CylinderResolution = (int)v;
         theWorld.CalculateCylinder();
@@ -172,5 +201,78 @@ public class MainController : MonoBehaviour {
     public void UpdateTextureRes(float v) {
         //theWorld.SetPlaneTiling((int)v);
         theWorld.RenderPlane();
+    }
+
+
+    // 
+    // TODO: Vertex prefab Clicked
+    // 
+    private void click(int _button) {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        switch (_button) {
+            // left mouse
+            case 0:
+                if (Physics.Raycast(ray, out hit)) {
+                    // clear UI
+                    if (!EventSystem.current.IsPointerOverGameObject()) {
+                        Debug.Log(hit.transform.tag);
+                        // vertex
+                        if (hit.transform.CompareTag("vertex")) {
+                            // if selection, clear it
+                            if (vertex) {
+                                Debug.Log("Unselecting old vertex");
+                                vertex.GetComponent<VertexPrefab>().Selected(false);
+                            }
+                            // reassign selection
+                            vertex = hit.transform.gameObject;
+                            vertex.GetComponent<VertexPrefab>().Selected(true);
+                            return;
+                        }
+
+                        /*
+                        if (hit.transform.CompareTag("xHandle") ||
+                        hit.transform.CompareTag("yHandle") ||
+                        hit.transform.CompareTag("zHandle")) {
+                            // return handle
+                            
+                            handle = hit.transform.gameObject;
+
+                            return;
+                        }
+                        */
+                    }
+                }
+                return;
+            case 1:
+                if (vertex) {
+                    Unselect();
+                }
+                return;
+            default:
+                return;
+        }
+    }
+
+    // unselect vertex prefab
+    void Unselect() {
+        vertex.GetComponent<VertexPrefab>().Unselect();
+        vertex.GetComponent<VertexPrefab>().Selected(false);
+        vertex = null;
+        handle = null;
+    }
+
+    private void Translate(Vector3 _axis, Vector3 _delta) {
+        //_delta = (_delta < 0) ? _delta : 0;
+        //_delta = (_delta > 1) ? _delta : 1;
+        Vector3 position = _axis;
+        position.x *= _delta.x / 100f;
+        position.y *= _delta.y / 100f;
+        position.z *= _delta.z / 100f;
+
+        Vector3 offset = position - vertex.GetComponent<VertexPrefab>().ogPosition;
+        vertex.transform.localPosition -= position;
+        //https://docs.unity3d.com/ScriptReference/Vector3.ClampMagnitude.html
     }
 }

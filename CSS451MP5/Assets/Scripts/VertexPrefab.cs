@@ -4,17 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class VertexPrefab : MonoBehaviour {
-    public enum Handle {
-        xHandle,
-        yHandle,
-        zHandle
-    }
 
     public Color selectionColor = Color.yellow;
     private Color color;
     private MeshRenderer meshRenderer;
-    private Vector3 ogPosition = Vector3.zero;
-    private bool isSelected = false;
+    public Vector3 ogPosition = Vector3.zero;
+    [SerializeField] private bool isSelected = false;
+    private bool handleSelected = false;
     [SerializeField] private bool isOn = false;
 
     public  GameObject currentHandleSelected = null;
@@ -34,38 +30,12 @@ public class VertexPrefab : MonoBehaviour {
 
     private void Update() {
         gameObject.SetActive(isOn);
-
-        // is the vertexprefab on?
-        
-
-        // select prefab
-        if (isSelected) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                // clear UI
-                if (!EventSystem.current.IsPointerOverGameObject()) {
-                    if (hit.transform.CompareTag("xHandle") ||
-                        hit.transform.CompareTag("yHandle") ||
-                        hit.transform.CompareTag("zHandle")) {
-
-                        if (currentHandleSelected) {
-                            currentHandleSelected.transform.GetChild(0).GetComponent<vertexHandle>().Selected(false);
-                        }
-                        hit.transform.GetChild(0).GetComponent<vertexHandle>().Selected(true);
-                        currentHandleSelected = hit.transform.gameObject;
-                    }
-                }
-            } else {
-                if (!currentHandleSelected) {
-                    Unselect();
-                }
-            }
-        }
     }
     
 
     public void Selected(bool _selected) {
+        // 3
+        Debug.Log("3. "+ _selected);
         isSelected = _selected;
         meshRenderer.material.color = (isSelected) ? selectionColor : color;
         foreach (var h in handles) {
@@ -111,6 +81,10 @@ public class VertexPrefab : MonoBehaviour {
             }
         }
         return null;
+    }
+
+    public GameObject GetHandle() {
+        return currentHandleSelected;
     }
 
     public void Destroy() {

@@ -251,8 +251,9 @@ GameObject:
   - component: {fileID: 5387682698707984979}
   - component: {fileID: 103158169329443104}
   - component: {fileID: 1981664356464010082}
+  - component: {fileID: 5874044312698855958}
   m_Layer: 0
-  m_Name: XHandle
+  m_Name: xHandle
   m_TagString: xHandle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,8 +335,22 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
-  m_Direction: 0
+  m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &5874044312698855958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505228131548457806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisOfDirection: {x: 1, y: 0, z: 0}
+  selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2745955366524378418
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,8 +473,9 @@ GameObject:
   - component: {fileID: 8392059633946236662}
   - component: {fileID: 8737727842969033253}
   - component: {fileID: 12947025166019733}
+  - component: {fileID: 9038623920972093019}
   m_Layer: 0
-  m_Name: YHandle
+  m_Name: yHandle
   m_TagString: yHandle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,6 +559,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &9038623920972093019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5294147907336915668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisOfDirection: {x: 0, y: 1, z: 0}
+  selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &6489546145309109422
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +602,7 @@ Transform:
   m_GameObject: {fileID: 6489546145309109422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7715069733016428681}
   - {fileID: 2021331552386289509}
@@ -654,6 +684,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  ogPosition: {x: 0, y: 0, z: 0}
+  isSelected: 0
+  isOn: 0
   currentHandleSelected: {fileID: 0}
   handles:
   - {fileID: 1505228131548457806}
@@ -781,6 +814,7 @@ GameObject:
   - component: {fileID: 8444522934377351829}
   - component: {fileID: 6604876444193273460}
   - component: {fileID: 3708943599407895381}
+  - component: {fileID: 7930213239886219374}
   m_Layer: 0
   m_Name: ZHandle
   m_TagString: zHandle
@@ -864,5 +898,19 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
-  m_Direction: 2
+  m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &7930213239886219374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8537430422148174798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78757533bb0239a4ab0498bccf2fde1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisOfDirection: {x: 0, y: 0, z: 1}
+  selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

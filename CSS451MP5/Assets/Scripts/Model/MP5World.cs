@@ -27,7 +27,7 @@ public class MP5World : MonoBehaviour {
     private int[] triangleArray = null;
     private Vector3[] normals = null;
     
-    private bool renderVertexSelectors = false;
+    //private bool renderVertexSelectors = false;
 
     // testing
     [Header("Plane")]
@@ -39,7 +39,7 @@ public class MP5World : MonoBehaviour {
 
     [SerializeField] private Transform currentSelection = null;
 
-    private bool vertexPrefabIsOn = false;
+    //private bool vertexPrefabIsOn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -112,12 +112,12 @@ public class MP5World : MonoBehaviour {
         switch (str) {
             // plane
             case "Plane":
-                Debug.Log("Plane vertexPrefabs " + enable);
+                //Debug.Log("Plane vertexPrefabs " + enable);
                 planeGen.ToggleVertexPrefabs(enable);
                 return;
             // cylinder
             case "Cylinder":
-                Debug.Log("Cylinder vertexPrefabs " + enable);
+                //Debug.Log("Cylinder vertexPrefabs " + enable);
                 ToggleVertexPrefabs(enable);
                 return;
             default:
