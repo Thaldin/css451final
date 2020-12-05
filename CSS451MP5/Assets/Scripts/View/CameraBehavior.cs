@@ -61,12 +61,12 @@ public class CameraBehavior : MonoBehaviour
     public void Tumble(Vector3 tumble)
     {
         // Checks to prevent large camera jumps that flip the camera
-        if ((tumble.y < 50) && (tumble.y > -50))
+        if ((tumble.y < 30) && (tumble.y > -30))
         {
             tumbleCam(tumble.y, transform.right);
         }
 
-        if ((tumble.x < 50) && (tumble.x > -50))
+        if ((tumble.x < 30) && (tumble.x > -30))
         {
             tumbleCam(tumble.x, Vector3.up);
         }
