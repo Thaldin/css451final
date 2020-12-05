@@ -132,6 +132,11 @@ public abstract class meshGeneration : MonoBehaviour {
     }
     #endregion
 
+    public GameObject GetVertex(GameObject vertex)
+    {
+        return vertexPrefabs.Find(o => name.Equals(vertex.name));
+    }
+
     #region Merged code
 
     protected void UpdateNormals(Vector3[] v, Vector3[] n)

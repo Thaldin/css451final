@@ -107,6 +107,12 @@ public class MP5World : MonoBehaviour {
         cylinderFilter.mesh = cylGen.CreateCylinder();
     }
 
+    public void UpdateCylinder()
+    {
+        cylinderFilter.mesh.Clear();
+        cylinderFilter.mesh = cylGen.UpdateMesh();
+    }
+
     public void HideCylinder() {
         renderObject.SetActive(false);
         cylGen.ClearVertexPrefabList();
@@ -169,6 +175,27 @@ public class MP5World : MonoBehaviour {
 
     public Transform GetCurrentSelection() {
         return currentSelection;
+    }
+
+    public void MoveVertex(Vector3 mouseDelta, GameObject vertex)
+    {
+        vertex.GetComponent<VertexPrefab>().Translate(mouseDelta);
+
+        Debug.Log("Moving Vertex: " + vertex.name);
+
+        switch (currentSelection.name) {
+            case "Plane":
+                // update vertices
+                planeGen.GetComponent<planeGeneration>().UpdateVertices();
+                // redraw mesh
+                UpdatePlane();
+                return;
+            case "Cylinder":
+                cylGen.GetComponent<cylinderGeneration>().UpdateVertices();
+                UpdateCylinder();
+                return;
+        }
+        
     }
 
     public Texture[] GetMeshSelectableTextures() {

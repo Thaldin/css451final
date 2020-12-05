@@ -153,13 +153,7 @@ public class MainController : MonoBehaviour {
                 // get delta
                 delta = mouseDownPos - Input.mousePosition;
                 mouseDownPos = Input.mousePosition;
-
-                // move vertex
-                vertex.GetComponent<VertexPrefab>().Translate(delta);
-                // update vertices
-                planeGen.GetComponent<planeGeneration>().UpdateVertices();
-                // redraw mesh
-                theWorld.UpdatePlane();
+                theWorld.MoveVertex(delta, vertex);
             }
             
         }
