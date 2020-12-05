@@ -73,7 +73,9 @@ public abstract class meshGeneration : MonoBehaviour {
     protected virtual void GenerateTrianges() { }
 
     protected virtual void CalculateNormals() {}
-    
+
+    protected virtual void CalculateNormals(Vector3[] v, int resolution) { }
+
 
     // 
     //  Display mesh normals on triangles
@@ -142,4 +144,43 @@ public abstract class meshGeneration : MonoBehaviour {
     }
     #endregion
 
+    #region Merged code
+
+    protected void UpdateNormals(Vector3[] v, Vector3[] n)
+    {
+        int count = 0;
+        foreach (var prefab in vertexPrefabs)
+        {
+            Debug.Log("ncount: " + count);
+            Quaternion q = Quaternion.FromToRotation(Vector3.up, n[count]);
+            prefab.transform.localRotation = q;
+            count++;
+        }
+    }
+
+    protected Vector3 FaceNormals(Vector3[] v, int v1, int v2, int v3)
+    {
+        Vector3 a = v[v2] - v[v1];
+        Vector3 b = v[v3] - v[v1];
+        return Vector3.Cross(a, b).normalized;
+    }
+
+    protected int GetVertexTopTriangle(int vertexNumber, int trianglesPer, int res)
+    {
+        int row = vertexNumber / res;
+        int col = vertexNumber % res;
+
+        // Returns the middle triangle of 3 (need to get +1 and -1 to either side of this one)
+        return (row - 1) * trianglesPer + (col * 2);
+    }
+
+    protected int GetVertexBottomTriangle(int vertexNumber, int trianglesPer, int res)
+    {
+        int row = vertexNumber / res;
+        int col = vertexNumber % res;
+
+        // Returns right most bottom triangle, need to get -1 and -2 also)
+        return (row * trianglesPer) + (col * 2);
+    }
+    #endregion
 }

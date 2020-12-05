@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 23607279}
   - component: {fileID: 23607280}
   - component: {fileID: 23607281}
+  - component: {fileID: 23607282}
   m_Layer: 0
   m_Name: TheWorld
   m_TagString: Untagged
@@ -170,12 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LookAt: {fileID: 1901012530}
   RenderMesh: 1
-  CylinderResolution: 10
-  MeshResolution: 4
-  CylinderRotation: 180
-  VertexPrefab: {fileID: 6489546145309109422, guid: c20637939629ee949b1bab5bbdff105e,
-    type: 3}
-  testMaterial: {fileID: 2100000, guid: 1e713489ecb82cd429404e800656937c, type: 2}
+  cylGen: {fileID: 23607282}
   planeMesh: {fileID: 0}
   planeGen: {fileID: 23607281}
   currentSelection: {fileID: 0}
@@ -199,6 +195,27 @@ MonoBehaviour:
   normals: []
   planeTileScale: {x: 1, y: 1, z: 1}
   planeOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &23607282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23607278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b424897e5be5ff24eb852064d8ee7819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertex: {fileID: 6489546145309109422, guid: c20637939629ee949b1bab5bbdff105e, type: 3}
+  triangleNormal: {fileID: 1434586599593078122, guid: 06ee3eda04452424cb6665c3eaa0b212,
+    type: 3}
+  matieral: {fileID: 2100000, guid: 1e713489ecb82cd429404e800656937c, type: 2}
+  planeSize: 10
+  normals: []
+  cylinderRadius: 10
+  CylinderResolution: 10
+  CylinderRotation: 180
 --- !u!1 &479641337
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,11 +39,11 @@ public class MainController : MonoBehaviour {
         theCamera.SetLookAt(Vector3.zero);
 
         // Init UI Controls
-        CylinderRes.InitSliderRange(4f, 20f, theWorld.CylinderResolution);
+        CylinderRes.InitSliderRange(4f, 20f, theWorld.GetCylinderResolution());
         CylinderRes.SetSliderLabel("Cylinder Res");
         CylinderRes.SetSliderListener(UpdateCylinderRes);
 
-        CylinderRot.InitSliderRange(10f, 360f, theWorld.CylinderRotation);
+        CylinderRot.InitSliderRange(10f, 360f, theWorld.GetCylinderRotation());
         CylinderRot.SetSliderLabel("Cylinder Rot");
         CylinderRot.SetSliderListener(UpdateCylinderRot);
 
@@ -185,13 +185,13 @@ public class MainController : MonoBehaviour {
     // Canvas Sliders
     // 
     public void UpdateCylinderRes(float v) {
-        theWorld.CylinderResolution = (int)v;
-        theWorld.CalculateCylinder();
+        theWorld.SetCylinderResolution((int)v);
+        theWorld.RenderCylinder();
     }
 
     public void UpdateCylinderRot(float v) {
-        theWorld.CylinderRotation = (int)v;
-        theWorld.CalculateCylinder();
+        theWorld.SetCylinderRotation((int)v);
+        theWorld.RenderCylinder();
     }
 
     public void UpdateMeshRes(float v) {
