@@ -44,10 +44,33 @@ public class cylinderGeneration : meshGeneration
         }
 
         GenerateVertexPrefab();
+        UpdateVertices(); // cheese
         GenerateTrianges();
         CalculateNormals(vertices, CylinderResolution);
 
         return UpdateMesh();
+    }
+
+    public override void GenerateVertexPrefab() {
+        int row = 0;
+        ClearVertexPrefabList();
+        for (int i = 0; i < vertices.Length; i++) {
+            GameObject vertexSpawn = Instantiate(vertex);
+            vertexSpawn.name = "Vertex" + i;
+            vertexPrefabs.Add(vertexSpawn);
+            vertexSpawn.transform.position = vertices[i];
+            if (i % CylinderResolution != 0) {
+                //Debug.Log(i + " % " + CylinderResolution + ": " + (i % CylinderResolution));
+                vertexSpawn.tag = "badvertex";
+                vertexSpawn.GetComponent<VertexPrefab>().SetColor(Color.black);
+            } else {
+                vertexSpawn.tag = "vertex";
+                vertexSpawn.GetComponent<VertexPrefab>().SetColor(Color.white);
+                vertexSpawn.GetComponent<VertexPrefab>().row = row;
+                row++;
+            }
+
+        }
     }
 
     public override Mesh UpdateMesh()
@@ -65,6 +88,7 @@ public class cylinderGeneration : meshGeneration
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = vertexPrefabs[i].transform.position;
+            vertexPrefabs[i].transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 

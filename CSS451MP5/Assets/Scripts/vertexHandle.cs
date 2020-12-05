@@ -31,4 +31,8 @@ public class vertexHandle : MonoBehaviour
         isSelected = _selected;
         meshRenderer.material.color = (isSelected) ? selectionColor : color;
     }
+
+    public axis GetHandle() {
+        return direction;
+      }
 }

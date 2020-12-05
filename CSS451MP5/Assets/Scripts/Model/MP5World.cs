@@ -126,11 +126,14 @@ public class MP5World : MonoBehaviour {
         return LookAt.transform.localPosition;
     }
 
+    public GameObject GetVert(int i) {
+        return cylGen.GetVert(i);
+    }
+
     public void SlideLookAtPos(float deltaX, float deltaY) {
         LookAt.transform.position += deltaX * LookAt.transform.right;
         LookAt.transform.position += deltaY * LookAt.transform.up;
     }
-
     #region Cylinder Sliders
     public void SetCylinderResolution(int res)
     {
@@ -200,18 +203,28 @@ public class MP5World : MonoBehaviour {
 
     public void MoveVertex(Vector3 mouseDelta, GameObject vertex)
     {
-        vertex.GetComponent<VertexPrefab>().Translate(mouseDelta);
+        int row = vertex.GetComponent<VertexPrefab>().row;
+        Debug.Log("Row" + row);
+        
 
         Debug.Log("Moving Vertex: " + vertex.name);
 
         switch (currentSelection.name) {
             case "Plane":
                 // update vertices
+                vertex.GetComponent<VertexPrefab>().Translate(mouseDelta);
                 planeGen.GetComponent<planeGeneration>().UpdateVertices();
                 // redraw mesh
                 UpdatePlane();
                 return;
             case "Cylinder":
+
+                GameObject h = vertex.GetComponent<VertexPrefab>().GetHandle();
+                for (int i = row; i < cylGen.GetComponent<cylinderGeneration>().CylinderResolution; i++) {
+                    GameObject v = cylGen.GetComponent<cylinderGeneration>().GetVert(i);
+                    v.GetComponent<VertexPrefab>().SetHandle(h.tag);
+                    v.GetComponent<VertexPrefab>().Translate(mouseDelta);
+                }
                 cylGen.GetComponent<cylinderGeneration>().UpdateVertices();
                 UpdateCylinder();
                 return;

@@ -39,6 +39,10 @@ public abstract class meshGeneration : MonoBehaviour {
         InitializeComponents();
     }
 
+    public GameObject GetVert(int index) {
+            return vertexPrefabs[index];
+    }
+
     private void InitializeComponents() {
         mesh = new Mesh();
     }
@@ -107,7 +111,7 @@ public abstract class meshGeneration : MonoBehaviour {
     //  Vertex display prefab generation
     //
     #region Vertex Prefabs
-    public void GenerateVertexPrefab() {
+    public virtual void GenerateVertexPrefab() {
         ClearVertexPrefabList();
         for (int i = 0; i < vertices.Length; i++) {
             GameObject vertexSpawn = Instantiate(vertex);
