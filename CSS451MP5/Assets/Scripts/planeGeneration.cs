@@ -10,41 +10,83 @@ public class planeGeneration : meshGeneration {
     public Texture[] selectableTextures = new Texture[0];
 
     Matrix3x3 uvMatrix = new Matrix3x3();
+    Vector2 uvOffset = new Vector2(0f, 0f);
+    float uvRotation = 0f;
+    Vector2 uvTile = new Vector2(1f, 1f);
+
+
     // the overall size of the plane
     public void SetResolution(int v) {
         meshResolution.x = v;
         meshResolution.y = v;
     }
 
-   
-
-    // set scales
-    public void SetTileScaleX(float v) {
-        planeTileScale.x = v;
-    }
-    public void SetTileScaleY(float v) {
-        planeTileScale.y = v;
-    }
-    public Vector3 GetTileScale() {
-        return planeTileScale;
+    private void Awake() {
+        uvMatrix = Matrix3x3Helpers.CreateTRS(uvOffset, uvRotation, uvTile);
     }
 
-    // set offset
-    public void SetTileOffsetX(float v) {
-        planeOffset.x = v;
+    #region Sliders
+    // uv scale
+    public void SetUVTileX(float v) {
+        //planeTileScale.x = v;
+        uvTile.x = v;
+        uvMatrix *= Matrix3x3Helpers.CreateScale(uvTile);
     }
-    public void SetTileOffsetY(float v) {
-        planeOffset.y = v;
+    public void SetUVTileY(float v) {
+        //planeTileScale.y = v;
+        uvTile.y = v;
+        uvMatrix *= Matrix3x3Helpers.CreateScale(uvTile);
     }
-    public Vector3 GetTileOffset() {
-        return planeOffset;
+    public Vector3 GetUVTile() {
+        return uvTile;
     }
 
+    // uv offset
+    public void SetUVOffsetX(float v) {
+        //planeOffset.x = v;
+        uvOffset.x = v;
+        uvMatrix *= Matrix3x3Helpers.CreateTranslation(uvOffset);
+    }
+    public void SetUVOffsetY(float v) {
+        //planeOffset.y = v;
+        uvOffset.y = v;
+        uvMatrix *= Matrix3x3Helpers.CreateTranslation(uvOffset);
+    }
+    public Vector3 GetUVOffset() {
+        return uvOffset;
+    }
+
+    // uv rotation
+    public void SetUVRotation(float v) {
+        uvRotation = v;
+        uvMatrix *= Matrix3x3Helpers.CreateRotation(uvRotation);
+    }
+
+    public float GetUVRotation() {
+        return uvRotation;
+    }
+
+    // tecture selection
     public void SetMainTexture(int index) {
         matieral.mainTexture = selectableTextures[index];
     }
     public Texture[] GetSelectableTextures() {
         return selectableTextures;
+    }
+
+    #endregion
+
+    public void UpdateUVS() {
+        uv = new Vector2[(int)meshResolution.x * (int)meshResolution.y];
+        for (int i = 0, col = 0; col < meshResolution.x; col++) {
+            for (int row = 0; row < meshResolution.y; row++) {
+                float u0 = col / (meshResolution.x - 1);
+                float u1 = row / (meshResolution.y - 1);
+
+                uv[i] = uvMatrix * new Vector3(u0, u1, 1);
+                i++;
+            }
+        }
     }
 
     public Mesh CreatePlane() {
@@ -53,7 +95,8 @@ public class planeGeneration : meshGeneration {
         vertices = new Vector3[vertexCount];
         normals = new Vector3[vertices.Length];
         
-        uv = new Vector2[vertexCount];
+        // --testing--
+        //uv = new Vector3[vertexCount];
 
 
         // generate verticies
@@ -70,13 +113,17 @@ public class planeGeneration : meshGeneration {
                 // uv
                 float uvX = (x * planeTileScale.x) / res;
                 float uvZ = (z * planeTileScale.y) / res;
-                uv[i] = new Vector2(uvX, uvZ) + (Vector2)planeOffset;
+                
+                //uv[i] = new Vector2(uvX, uvZ) + (Vector2)planeOffset;
                 // normal
                 normals[i] = Vector3.up;
                                     
                 i++;
             }
         }
+
+        // --testing--
+        UpdateUVS();
 
         GenerateVertexPrefab();
 
@@ -201,20 +248,9 @@ public class planeGeneration : meshGeneration {
         UpdateNormals(v, normals);
     }
 
-    /* TODO: Delete?
-    private Vector3 FaceNormal(int index) {
-        Vector3 V0 = vertices[triangles[index]];
-        Vector3 V1 = vertices[triangles[index + 1]];
-        Vector3 V2 = vertices[triangles[index + 2]];
-
-        Vector3 a = V1 - V0;
-        Vector3 b = V2 - V0;
-        return Vector3.Cross(a, b).normalized;
-    }
-    */
     public void SetNormals() {
         for (int i = 0; i < normals.Length; i++) {
-            vertexPrefabs[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, normals[i]);
+            vertexPrefabs[i].transform.rotation = Quaternion.FromToRotation(transform.up, normals[i]);//normals[i]
             // this is cheese
             vertexPrefabs[i].transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, 0);
         }

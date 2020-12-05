@@ -217,7 +217,6 @@ public class MainController : MonoBehaviour {
 
     public void UpdateMeshRes(float v) {
         theWorld.SetPlaneResolution((int)v);
-        //theWorld.RenderPlane();
     }
 
     public void SetMeshMainTexture(float v) {

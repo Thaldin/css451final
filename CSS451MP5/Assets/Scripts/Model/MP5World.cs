@@ -131,6 +131,7 @@ public class MP5World : MonoBehaviour {
         LookAt.transform.position += deltaY * LookAt.transform.up;
     }
 
+    #region Cylinder Sliders
     public void SetCylinderResolution(int res)
     {
         cylGen.CylinderResolution = res;
@@ -151,6 +152,9 @@ public class MP5World : MonoBehaviour {
         return cylGen.CylinderRotation;
     }
 
+    #endregion
+
+    #region Plane Functions
     // tessellation
     public void SetPlaneResolution(int newSize) {
         planeGen.SetResolution(newSize);
@@ -159,20 +163,37 @@ public class MP5World : MonoBehaviour {
 
     // set scales
     public void SetTileScaleX(float v) {
-        planeGen.SetTileScaleX(v);
+        planeGen.SetUVTileX(v);
     }
     public void SetTileScaleY(float v) {
-        planeGen.SetTileScaleY(v);
+        planeGen.SetUVTileY(v);
+    }
+
+    public Vector3 GetUVTile() {
+        return planeGen.GetUVTile();
     }
 
     // set offset
     public void SetTileOffsetX(float v) {
-        planeGen.SetTileOffsetX(v);
+        planeGen.SetUVOffsetX(v);
     }
     public void SetTileOffsetY(float v) {
-        planeGen.SetTileOffsetY(v);
+        planeGen.SetUVOffsetY(v);
     }
 
+    public Vector3 GetUVOffset() {
+        return planeGen.GetUVOffset();
+    }
+
+    public void SetUVRotation(float v) {
+        planeGen.SetUVRotation(v);
+    }
+
+    public float GetUVRotation() {
+        return planeGen.GetUVRotation();
+    }
+
+    #endregion
     public Transform GetCurrentSelection() {
         return currentSelection;
     }
