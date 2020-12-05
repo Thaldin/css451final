@@ -49,7 +49,7 @@ public class VertexPrefab : MonoBehaviour {
 
     // delta is vector2
     private void Translate(vertexHandle.axis _axis, Vector3 _delta) {
-        Debug.Log(_axis + " " + _delta);
+        //Debug.Log(_axis + " " + _delta);
         switch (_axis) {
             // xAxis
             case vertexHandle.axis.xAxis:

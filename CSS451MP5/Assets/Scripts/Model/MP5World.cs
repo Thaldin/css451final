@@ -170,4 +170,27 @@ public class MP5World : MonoBehaviour {
     public Transform GetCurrentSelection() {
         return currentSelection;
     }
+
+    public void ShowDebugNormals(bool b) {
+        switch (currentSelection.name) {
+            case "Plane":
+                planeGen.ToggleTriNormalPreFabs(b);
+                return;
+            case "Cylinder":
+                cylGen.ToggleTriNormalPreFabs(b);
+                return;
+        }
+    }
+
+    public void DrawDebugTriangles() {
+        switch (currentSelection.name) {
+            case "Plane":
+                planeGen.DrawTriangles();
+                return;
+            case "Cylinder":
+                cylGen.DrawTriangles();
+                return;
+        }
+    }
 }
+ 

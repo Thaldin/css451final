@@ -37,6 +37,7 @@ public abstract class meshGeneration : MonoBehaviour {
         InitializeComponents();
     }
 
+    /*
     void Update() {
         
         if (Input.GetKey(KeyCode.F1)) { 
@@ -50,12 +51,13 @@ public abstract class meshGeneration : MonoBehaviour {
 
         ToggleTriNormalPreFabs(triNormalsOn);
     }
+    */
 
     private void InitializeComponents() {
         mesh = new Mesh();
     }
 
-    void DrawTriangles() {
+    public void DrawTriangles() {
         for (int i = 0; i < triangles.Length; i+=3) {
             Vector3 V0 = vertices[triangles[i]];
             Vector3 V1 = vertices[triangles[i + 1]];
@@ -108,7 +110,7 @@ public abstract class meshGeneration : MonoBehaviour {
         triNormalPrefabs.Clear();
     }
 
-    protected void ToggleTriNormalPreFabs(bool isOn) {
+    public void ToggleTriNormalPreFabs(bool isOn) {
         foreach (var p in triNormalPrefabs) {
             p.SetActive(isOn);
         }
@@ -151,7 +153,7 @@ public abstract class meshGeneration : MonoBehaviour {
         int count = 0;
         foreach (var prefab in vertexPrefabs)
         {
-            Debug.Log("ncount: " + count);
+            //Debug.Log("ncount: " + count);
             Quaternion q = Quaternion.FromToRotation(Vector3.up, n[count]);
             prefab.transform.localRotation = q;
             count++;

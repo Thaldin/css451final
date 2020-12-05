@@ -24,6 +24,7 @@ public class MainController : MonoBehaviour {
     private Vector3 delta = Vector3.zero;
     private Vector3 mouseDownPos = Vector3.zero;
     public planeGeneration planeGen = null;
+    private bool triNormalsOn = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -151,6 +152,19 @@ public class MainController : MonoBehaviour {
         }
 
         #endregion
+
+        // show triangles
+        if (Input.GetKey(KeyCode.F1)) {
+            theWorld.DrawDebugTriangles();
+            triNormalsOn = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.F1)) {
+            triNormalsOn = false;
+        }
+
+        theWorld.ShowDebugNormals(triNormalsOn);
+
         // Reset button
         if (Input.GetKey(KeyCode.R)) {
             SceneManager.LoadScene("ScottAndEdMP5");

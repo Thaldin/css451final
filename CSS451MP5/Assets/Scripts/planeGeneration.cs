@@ -109,127 +109,87 @@ public class planeGeneration : meshGeneration {
     // Calculate plane Normals
     //
     #region Normals Calculation
-    protected override void CalculateNormals() {
-        // set arrays
-        normals = new Vector3[vertices.Length];
-        triNormals = new Vector3[triangles.Length / 3];
-        triNormalPos = new Vector3[triNormals.Length];
 
-        // calculate triangle normals
-        for (int index = 0, i = 0; i < triNormals.Length; i++) {
 
-            triNormals[i] = FaceNormal(i);
-            //Debug.Log("Tri Normal Pos: " + i);
-            triNormalPos[i] = TriNormalPos(index);
-            index += 3;
-        }
+    protected override void CalculateNormals(Vector3[] v, int resolution) {
+        int triangleCount = triangles.Length / 3;
+        Vector3[] triNormals = new Vector3[triangleCount];
+        int triPerRow = (resolution - 1) * 2;
 
-        // for fun, calculate the positions of the normals
-        GenerateTriNormalsPrefab();
+        //Debug.Log("Triangle Count: " + triangleCount);
 
-        int triStripSize = ((int)meshResolution.x - 1) * 2;
-        int res = (int)meshResolution.x - 1;
-        // left
-        int triIndex = 0;
-        int norIndex = 0;
+        // Calculate the triangle normals
+        for (int i = 0; i < triangleCount; i++) {
+            int oddTri = ((i % 2) == 0) ? 0 : 1;                    // Odd or even triangle
+            int startVertex = (i / 2) + (i / triPerRow) + oddTri;   // Starting vertex for triangle
 
-        normals[norIndex] = triNormals[triIndex].normalized;
-        Debug.Log("normals[" + norIndex + "] " + (triIndex));
-        norIndex++;
-        for (int i = 1; i <= res; i++) {
-            // at the end? 2 tris
-            if (i == res) {
-                normals[norIndex] = (triNormals[triIndex] + triNormals[triIndex + 1]).normalized;
-                Debug.Log("normals[" + norIndex + "] " + (triIndex) + ", " + (triIndex + 1));
-                // end only goes up by one
+            if (oddTri == 0) {
+                // Even numbered triangles
+                triNormals[i] = FaceNormals(v, startVertex, startVertex + 1, startVertex + resolution);
             } else {
-                // mid 3 tris
-                normals[norIndex] = (triNormals[triIndex] + triNormals[triIndex + 1] + triNormals[triIndex + 2]).normalized;
-                Debug.Log("normals[" + norIndex + "] " + (triIndex) + ", " + (triIndex + 1) + ", " + (triIndex + 2));
-                // mid goes up by two
-                triIndex += 2;
+                // Odd numbered triangles
+                triNormals[i] = FaceNormals(v, startVertex, startVertex + resolution, startVertex + resolution - 1);
             }
-            norIndex++;
+            //Debug.Log("Tri: " + i + ", v1: " + startVertex + ", Odd: " + oddTri + ", Row: " + (int)(i / triPerRow));
         }
 
-        // mid
-        triIndex += 2;
-        for (int x = 1; x < res; x++) {
-            for (int y = 0; y <= res; y++) {
-                // at 0 3 tris
-                if (y == 0) {
-                    normals[norIndex] = (triNormals[triIndex - triStripSize] +
-                                        triNormals[triIndex - triStripSize + 1] +
-                                        triNormals[triIndex]).normalized;
+        // Calculate the vertex normals
+        for (int i = 0; i < v.Length; i++) {
+            //Debug.Log("Vertex/Normal: " + i);
+            // Used for determining left/right columns
+            int mod = i % resolution;
 
-                    Debug.Log("normals[" + norIndex + "] " + (triIndex - triStripSize) + ", " + (triIndex - triStripSize + 1) + ", " + (triIndex));
-                    // no triIndex inc
-                } else if (y == res) {
-                    // at end 3 tris
-                    normals[norIndex] = (triNormals[triIndex] +
-                                        triNormals[triIndex + 1] +
-                                        triNormals[triIndex - triStripSize + 1]).normalized;
-
-                    Debug.Log("normals[" + norIndex + "] " +
-                        (triIndex) + ", " +
-                        (triIndex + 1) + ", " +
-                        (triIndex - triStripSize + 1));
-
-                    // no triIndex inc
+            if (i < resolution) {
+                // Top row, special case
+                if (mod == 0) {
+                    // Upper left corner
+                    normals[i] = triNormals[0].normalized;
+                } else if (mod == (resolution - 1)) {
+                    // Upper right corner
+                    normals[i] = (triNormals[triPerRow - 1] + triNormals[triPerRow - 2]).normalized;
                 } else {
-                    // mid 6 tris
-                    normals[norIndex] = (triNormals[triIndex] +
-                                         triNormals[triIndex + 1] +
-                                         triNormals[triIndex + 2] +
-                                         triNormals[triIndex - triStripSize + 1] +
-                                         triNormals[triIndex - triStripSize + 2] +
-                                         triNormals[triIndex - triStripSize + 3]).normalized;
-
-                    Debug.Log("normals[" + norIndex + "] " +
-                                           (triIndex) + ", " +
-                                           (triIndex + 1) + ", " +
-                                           (triIndex + 2) + ", " +
-                                           (triIndex - triStripSize + 1) + ", " +
-                                           (triIndex - triStripSize + 2) + ", " +
-                                           (triIndex - triStripSize + 3));
-
-                    // triIndex inc 2
-                    triIndex += 2;
+                    // Middle top row
+                    int triId = GetVertexBottomTriangle(i, triPerRow, resolution);
+                    normals[i] = (triNormals[triId - 2] + triNormals[triId - 1] + triNormals[triId]).normalized;
                 }
-                norIndex++;
-            }
-            triIndex += 2;
-        }
-
-        // right
-        triIndex = triNormals.Length - triStripSize;
-        for (int i = 0; i < res; i++) {
-            // at 0 2 tris
-            if (i == 0) {
-                normals[norIndex] = (triNormals[triIndex] + triNormals[triIndex + 1]).normalized;
-                Debug.Log("normals[" + norIndex + "] " + (triIndex) + ", " + (triIndex + 1));
-
-                // end only goes up by one
-                triIndex++;
+            } else if (i >= v.Length - resolution) {
+                // Bottom row, special case
+                if (mod == 0) {
+                    // Bottom left corner
+                    normals[i] = (triNormals[triangleCount - resolution] + triNormals[triangleCount - resolution + 1]).normalized;
+                } else if (mod == (resolution - 1)) {
+                    // Bottom right corner
+                    normals[i] = triNormals[triangleCount - 1].normalized;
+                } else {
+                    // Middle bottom row
+                    int triId = GetVertexTopTriangle(i, triPerRow, resolution);
+                    normals[i] = (triNormals[triId - 1] + triNormals[triId] + triNormals[triId + 1]).normalized;
+                }
             } else {
-                // mid 3 tris
-                normals[norIndex] = (triNormals[triIndex] + triNormals[triIndex + 1] + triNormals[triIndex + 2]).normalized;
-                Debug.Log("normals[" + norIndex + "] " + (triIndex) + ", " + (triIndex + 1) + ", " + (triIndex + 2));
-
-
-                // mid goes up by two
-                triIndex += 2;
+                // Rest of vertices
+                if (mod == 0) {
+                    // Left column of vertices
+                    int triId = ((i / resolution) - 1) * triPerRow;
+                    normals[i] = (triNormals[triId] + triNormals[triId + 1] + triNormals[triId + triPerRow]).normalized;
+                } else if (mod == (resolution - 1)) {
+                    // Right column of vertices
+                    int triId = ((i / resolution) * triPerRow) - 1;
+                    //Debug.Log("TriId: " + triId);
+                    normals[i] = (triNormals[triId] + triNormals[triId + triPerRow - 1] + triNormals[triId + triPerRow]).normalized;
+                } else {
+                    // Center of mesh
+                    int topTriId = GetVertexTopTriangle(i, triPerRow, resolution);
+                    int bottomTriId = GetVertexBottomTriangle(i, triPerRow, resolution);
+                    //Debug.Log("Top Tri: " + topTriId + ", Bottom Tri: " + bottomTriId);
+                    normals[i] = (triNormals[topTriId - 1] + triNormals[topTriId] + triNormals[topTriId + 1] + triNormals[bottomTriId - 2] + triNormals[bottomTriId - 1] + triNormals[bottomTriId]).normalized;
+                }
             }
-            norIndex++;
         }
 
-        //last
-        normals[norIndex] = triNormals[triNormals.Length - 1];
-        Debug.Log("normals[" + norIndex + "] " + (triNormals.Length - 1));
-
-        // calculate vertex normal
+        UpdateNormals(v, normals);
     }
 
+    /* TODO: Delete?
     private Vector3 FaceNormal(int index) {
         Vector3 V0 = vertices[triangles[index]];
         Vector3 V1 = vertices[triangles[index + 1]];
@@ -239,7 +199,7 @@ public class planeGeneration : meshGeneration {
         Vector3 b = V2 - V0;
         return Vector3.Cross(a, b).normalized;
     }
-
+    */
     public void SetNormals() {
         for (int i = 0; i < normals.Length; i++) {
             vertexPrefabs[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, normals[i]);
@@ -250,13 +210,13 @@ public class planeGeneration : meshGeneration {
     #endregion normals
 
     public override Mesh UpdateMesh() {
-        Debug.Log("Updating Mesh");
+        //Debug.Log("Updating Mesh");
         //mesh.Clear();
         mesh = new Mesh();
         // calc tris
         GenerateTrianges();
         // calc normals
-        CalculateNormals();
+        CalculateNormals(vertices, (int)meshResolution.x);
         // set normals
         SetNormals();
 
