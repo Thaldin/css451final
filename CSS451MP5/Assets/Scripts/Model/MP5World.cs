@@ -168,12 +168,6 @@ public class MP5World : MonoBehaviour {
 
     private void RenderSpheres(Vector3[] array, int count) {
         // Clear previous spheres
-        /*
-        foreach (GameObject obj in sphereList)
-        {
-            Destroy(obj);
-        }
-        */
 
         ClearVertexPrefabList();
 
@@ -370,6 +364,7 @@ public class MP5World : MonoBehaviour {
     // tessellation
     public void SetPlaneResolution(int newSize) {
         planeGen.SetResolution(newSize);
+        RenderPlane();
     }
 
     // set scales

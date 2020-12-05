@@ -15,4 +15,8 @@ public class cylinderGeneration : meshGeneration
     public void CreateCylinder() { 
         
     }
+    public override Mesh UpdateMesh() {
+        return new Mesh();
+    }
+
 }

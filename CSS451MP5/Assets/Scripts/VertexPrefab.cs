@@ -26,6 +26,8 @@ public class VertexPrefab : MonoBehaviour {
 
     void InitializedComponents() {
         meshRenderer = GetComponent<MeshRenderer>();
+        gameObject.SetActive(isOn);
+
     }
 
     private void Update() {
@@ -51,15 +53,15 @@ public class VertexPrefab : MonoBehaviour {
         switch (_axis) {
             // xAxis
             case vertexHandle.axis.xAxis:
-                transform.position += _delta.x / 3f * transform.right;
+                transform.position += _delta.x / 3f * Vector3.right;
                 return;
             // yAxis
             case vertexHandle.axis.yAxis:
-                transform.position -= _delta.y / 3f * transform.up;
+                transform.position -= _delta.y / 3f * Vector3.up;
                 return;
             // zAxis 
             case vertexHandle.axis.zAxis:
-                transform.position += _delta.x / 3f * transform.forward;
+                transform.position += _delta.x / 3f * Vector3.forward;
                 break;
             default:
                 break;

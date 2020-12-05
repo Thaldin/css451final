@@ -9,7 +9,6 @@ public class MainController : MonoBehaviour {
     public CameraBehavior theCamera = null;
 
     [Header("Plane")]
-    public SliderWithEcho TextureRes = null;
     public SliderWithEcho Tessellation = null;
     [Header("Cylinder")]
     public SliderWithEcho CylinderRes = null;
@@ -32,7 +31,6 @@ public class MainController : MonoBehaviour {
         Debug.Assert(theWorld != null, "Please set World Object.");
         Debug.Assert(CylinderRes != null, "Please set Cylinder Resolution Slider.");
         Debug.Assert(CylinderRot != null, "Please set Cylinder Rotation Slider.");
-        Debug.Assert(TextureRes != null, "Please set Texture Resolution Slider.");
         Debug.Assert(planeGen != null, "Please set planeGeration Object.");
 
 
@@ -48,10 +46,6 @@ public class MainController : MonoBehaviour {
         CylinderRot.InitSliderRange(10f, 360f, theWorld.CylinderRotation);
         CylinderRot.SetSliderLabel("Cylinder Rot");
         CylinderRot.SetSliderListener(UpdateCylinderRot);
-
-        TextureRes.InitSliderRange(1, 20, 1);
-        TextureRes.SetSliderLabel("Texture Res");
-        TextureRes.SetSliderListener(UpdateTextureRes);
 
         Tessellation.InitSliderRange(2, 20, 2);
         Tessellation.SetSliderLabel("Tessellation");
@@ -69,8 +63,12 @@ public class MainController : MonoBehaviour {
         CheckInput();
     }
 
+    //
+    // User Input
+    //
     private void CheckInput() {
         // Alt = Camera manipulation
+        #region Camera Manipulation
         if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)) {
             // Mouse wheel zoom
             if (Input.mouseScrollDelta.y != 0) {
@@ -101,8 +99,10 @@ public class MainController : MonoBehaviour {
             // Return out of this because we want ignore other key presses
             return;
         }
+        #endregion
 
         // Control = Vertex Key Controls
+        #region Vertex Control
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
             theWorld.ShowSelectors(true);
         }
@@ -150,6 +150,7 @@ public class MainController : MonoBehaviour {
             
         }
 
+        #endregion
         // Reset button
         if (Input.GetKey(KeyCode.R)) {
             SceneManager.LoadScene("ScottAndEdMP5");
@@ -161,17 +162,17 @@ public class MainController : MonoBehaviour {
         }
     }
 
+
+    // UI elements
     public void RenderSelect(Dropdown ddRender) {
         if (ddRender.value == 0) {
             theWorld.RenderMesh = true;
-            TextureRes.gameObject.SetActive(true);
             TexturePanel.gameObject.SetActive(true);
             Tessellation.gameObject.SetActive(true);
             CylinderRes.gameObject.SetActive(false);
             CylinderRot.gameObject.SetActive(false);
         } else {
             theWorld.RenderMesh = false;
-            TextureRes.gameObject.SetActive(false);
             TexturePanel.gameObject.SetActive(false);
             Tessellation.gameObject.SetActive(false);
             CylinderRes.gameObject.SetActive(true);
@@ -195,12 +196,7 @@ public class MainController : MonoBehaviour {
 
     public void UpdateMeshRes(float v) {
         theWorld.SetPlaneResolution((int)v);
-        theWorld.RenderPlane();
-    }
-
-    public void UpdateTextureRes(float v) {
-        //theWorld.SetPlaneTiling((int)v);
-        theWorld.RenderPlane();
+        //theWorld.RenderPlane();
     }
 
 

@@ -191,17 +191,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7041b60abae792b40b33056e4ddad0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertexPrefabs: []
   vertex: {fileID: 6489546145309109422, guid: c20637939629ee949b1bab5bbdff105e, type: 3}
   triangleNormal: {fileID: 1434586599593078122, guid: 06ee3eda04452424cb6665c3eaa0b212,
     type: 3}
   matieral: {fileID: 2100000, guid: ccfe3ecfb7e924940a46e9ce7f2dd34e, type: 2}
-  vertices: []
-  uv: []
-  triangles: 
-  normals: []
   planeSize: 10
-  planeResolution: {x: 2, y: 2}
+  normals: []
   planeTileScale: {x: 1, y: 1, z: 1}
   planeOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &479641337
@@ -501,7 +496,7 @@ PrefabInstance:
     - target: {fileID: 4084573508147188640, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
       propertyPath: m_WholeNumbers
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4084613463617612621, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
@@ -702,6 +697,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: vertex
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
