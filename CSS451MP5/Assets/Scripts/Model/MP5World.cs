@@ -171,6 +171,39 @@ public class MP5World : MonoBehaviour {
         return currentSelection;
     }
 
+    public Texture[] GetMeshSelectableTextures() {
+        // check mesh
+        string str = currentSelection.name;
+        switch (str) {
+            // plane
+            case "Plane":
+                return planeGen.GetSelectableTextures();
+            // cylinder
+            case "Cylinder":
+                Debug.Log("Not using textures yet");
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    public void SetMeshMainTexture(int index) {
+        // check mesh
+        string str = currentSelection.name;
+        switch (str) {
+            // plane
+            case "Plane":
+                planeGen.SetMainTexture(index);
+                return;
+            // cylinder
+            case "Cylinder":
+                Debug.Log("Not using textures yet");
+                return;
+            default:
+                return;
+        }
+    }
+
     public void ShowDebugNormals(bool b) {
         switch (currentSelection.name) {
             case "Plane":

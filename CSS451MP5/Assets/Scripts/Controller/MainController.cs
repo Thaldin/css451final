@@ -9,6 +9,8 @@ public class MainController : MonoBehaviour {
     public CameraBehavior theCamera = null;
 
     [Header("Plane")]
+    public Dropdown textureSelect = null;
+    //public Texture[] selectableTextures = new Texture[0];
     public SliderWithEcho Tessellation = null;
     [Header("Cylinder")]
     public SliderWithEcho CylinderRes = null;
@@ -33,6 +35,7 @@ public class MainController : MonoBehaviour {
         Debug.Assert(CylinderRes != null, "Please set Cylinder Resolution Slider.");
         Debug.Assert(CylinderRot != null, "Please set Cylinder Rotation Slider.");
         Debug.Assert(planeGen != null, "Please set planeGeration Object.");
+        Debug.Assert(textureSelect != null, "Please set texture select dropdown Object.");
 
 
         // Initialized Scene
@@ -52,11 +55,21 @@ public class MainController : MonoBehaviour {
         Tessellation.SetSliderLabel("Tessellation");
         Tessellation.SetSliderListener(UpdateMeshRes);
 
+        // texture select
+        InitTextureSelection();
         // Hide UI components
         CylinderRes.gameObject.SetActive(false);
         CylinderRot.gameObject.SetActive(false);
 
         TexturePanel.mSelected = theWorld.GetCurrentSelection();
+    }
+
+    void InitTextureSelection() {
+        textureSelect.options.Clear();
+        Texture[] tex = theWorld.GetMeshSelectableTextures();
+        foreach (var m in tex) {
+            textureSelect.options.Add(new Dropdown.OptionData(m.name));
+        }
     }
 
     // Update is called once per frame
@@ -211,6 +224,11 @@ public class MainController : MonoBehaviour {
     public void UpdateMeshRes(float v) {
         theWorld.SetPlaneResolution((int)v);
         //theWorld.RenderPlane();
+    }
+
+    public void SetMeshMainTexture(float v) {
+        int index = (int)v;
+        theWorld.SetMeshMainTexture(index);
     }
 
 

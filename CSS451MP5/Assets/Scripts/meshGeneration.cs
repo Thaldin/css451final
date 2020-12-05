@@ -7,24 +7,26 @@ public abstract class meshGeneration : MonoBehaviour {
     // vertex prefab
     protected List<GameObject> vertexPrefabs = new List<GameObject>();
     // user defined in editor
+    [Header("Prefab Helpers")]
     [SerializeField] protected GameObject vertex = null;
     [SerializeField] protected GameObject triangleNormal = null;
 
 
-    // components
+    // mesh properties
+    [Header("Basic Primitive Properties")]
     public Material matieral = null;
-    protected Mesh mesh;
-    public int planeSize = 10;
+    public int meshSize = 10;
     protected Vector2 meshResolution = new Vector2(2f, 2f);
 
     // mesh components
+    protected Mesh mesh;
     protected Vector3[] vertices = new Vector3[0];
     protected Vector2[] uv = new Vector2[0];
     protected int[] triangles = new int[0];
-    [SerializeField] protected Vector3[] normals = new Vector3[0];
+    protected Vector3[] normals = new Vector3[0];
     protected Vector3[] triNormals = new Vector3[0];
 
-    // mesh normals
+    // mesh normals display
     protected Vector3[] triNormalPos = new Vector3[0];
     protected List<GameObject> triNormalPrefabs = new List<GameObject>();
     protected bool triNormalsOn = false;
@@ -33,25 +35,9 @@ public abstract class meshGeneration : MonoBehaviour {
     private void Start() {
         Debug.Assert(vertex != null, "Please set vertex prefab in editor.");
         Debug.Assert(triangleNormal != null, "Please set triangle normal prefab in editor.");
-        Debug.Assert(matieral != null);
+        Debug.Assert(matieral != null, "Please set matieral in editor.");
         InitializeComponents();
     }
-
-    /*
-    void Update() {
-        
-        if (Input.GetKey(KeyCode.F1)) { 
-            DrawTriangles();
-            triNormalsOn = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.F1)) {
-            triNormalsOn = false;
-        }
-
-        ToggleTriNormalPreFabs(triNormalsOn);
-    }
-    */
 
     private void InitializeComponents() {
         mesh = new Mesh();
@@ -120,7 +106,7 @@ public abstract class meshGeneration : MonoBehaviour {
     // 
     //  Vertex display prefab generation
     //
-    #region
+    #region Vertex Prefabs
     public void GenerateVertexPrefab() {
         ClearVertexPrefabList();
         for (int i = 0; i < vertices.Length; i++) {

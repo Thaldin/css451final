@@ -7,11 +7,16 @@ public class planeGeneration : meshGeneration {
     [SerializeField] private Vector3 planeTileScale = Vector3.one;
     [SerializeField] private Vector3 planeOffset = Vector3.zero;
 
+    public Texture[] selectableTextures = new Texture[0];
+
+    Matrix3x3 uvMatrix = new Matrix3x3();
     // the overall size of the plane
     public void SetResolution(int v) {
         meshResolution.x = v;
         meshResolution.y = v;
     }
+
+   
 
     // set scales
     public void SetTileScaleX(float v) {
@@ -35,6 +40,13 @@ public class planeGeneration : meshGeneration {
         return planeOffset;
     }
 
+    public void SetMainTexture(int index) {
+        matieral.mainTexture = selectableTextures[index];
+    }
+    public Texture[] GetSelectableTextures() {
+        return selectableTextures;
+    }
+
     public Mesh CreatePlane() {
         // set arrays
         int vertexCount = (int)meshResolution.x * (int)meshResolution.y;
@@ -52,8 +64,8 @@ public class planeGeneration : meshGeneration {
         for (float x = 0; x < meshResolution.x; x++) {
             for (float z = 0; z < meshResolution.y; z++) {
                 // vertex
-                float vertX = (x * planeSize) / res;
-                float vertZ = (z * planeSize) / res;
+                float vertX = (x * meshSize) / res;
+                float vertZ = (z * meshSize) / res;
                 vertices[i] = new Vector3(vertX, 0, vertZ);
                 // uv
                 float uvX = (x * planeTileScale.x) / res;

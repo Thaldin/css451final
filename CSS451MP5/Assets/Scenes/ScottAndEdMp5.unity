@@ -191,10 +191,18 @@ MonoBehaviour:
   triangleNormal: {fileID: 1434586599593078122, guid: 06ee3eda04452424cb6665c3eaa0b212,
     type: 3}
   matieral: {fileID: 2100000, guid: ccfe3ecfb7e924940a46e9ce7f2dd34e, type: 2}
-  planeSize: 10
-  normals: []
+  meshSize: 10
   planeTileScale: {x: 1, y: 1, z: 1}
   planeOffset: {x: 0, y: 0, z: 0}
+  selectableTextures:
+  - {fileID: 2800000, guid: 3b6ec5fb4147a5248b809307f172772b, type: 3}
+  - {fileID: 2800000, guid: 9566c45a1c8784b4fa6af084c03072c0, type: 3}
+  - {fileID: 2800000, guid: de645575b550f374d9caa4162ecb38bd, type: 3}
+  - {fileID: 2800000, guid: 31585fef86f337a4f861e2017225a961, type: 3}
+  - {fileID: 2800000, guid: 53595e8acc8a8714ea2246b595826a48, type: 3}
+  - {fileID: 2800000, guid: c1520d02d82ca5a46a38661afc72bc62, type: 3}
+  - {fileID: 2800000, guid: b3053429e330c2f4a9e85f1dd4c3ef75, type: 3}
+  - {fileID: 2800000, guid: 23e2259975c0a0948a12be4849bffa72, type: 3}
 --- !u!114 &23607282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +219,7 @@ MonoBehaviour:
   triangleNormal: {fileID: 1434586599593078122, guid: 06ee3eda04452424cb6665c3eaa0b212,
     type: 3}
   matieral: {fileID: 2100000, guid: 1e713489ecb82cd429404e800656937c, type: 2}
-  planeSize: 10
-  normals: []
+  meshSize: 10
   cylinderRadius: 10
   CylinderResolution: 10
   CylinderRotation: 180
@@ -398,6 +405,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6532027960977688122}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1986922632 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4123549227745529240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2309c6f6dfee0df4a8d7ac8437e2c0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4123549227745529240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -735,6 +754,51 @@ PrefabInstance:
       propertyPath: theCamera
       value: 
       objectReference: {fileID: 662151428}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[0]
+      value: 
+      objectReference: {fileID: 2800000, guid: 3b6ec5fb4147a5248b809307f172772b, type: 3}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[1]
+      value: 
+      objectReference: {fileID: 2800000, guid: 9566c45a1c8784b4fa6af084c03072c0, type: 3}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[2]
+      value: 
+      objectReference: {fileID: 2800000, guid: de645575b550f374d9caa4162ecb38bd, type: 3}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[3]
+      value: 
+      objectReference: {fileID: 2800000, guid: b3053429e330c2f4a9e85f1dd4c3ef75, type: 3}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[4]
+      value: 
+      objectReference: {fileID: 2800000, guid: 31585fef86f337a4f861e2017225a961, type: 3}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[5]
+      value: 
+      objectReference: {fileID: 2800000, guid: c1520d02d82ca5a46a38661afc72bc62, type: 3}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[6]
+      value: 
+      objectReference: {fileID: 2800000, guid: 53595e8acc8a8714ea2246b595826a48, type: 3}
+    - target: {fileID: 4123549228454922557, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: selectableTextures.Array.data[7]
+      value: 
+      objectReference: {fileID: 2800000, guid: 23e2259975c0a0948a12be4849bffa72, type: 3}
     - target: {fileID: 4125034901026653337, guid: 88b9b81625e061647b89573e144af90a,
         type: 3}
       propertyPath: m_IsActive
@@ -859,6 +923,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233241880819761857, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233241880819761857, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233241880819761857, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1986922632}
+    - target: {fileID: 7233241880819761857, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233241880819761857, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMeshMainTexture
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233241880819761857, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233241880819761857, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88b9b81625e061647b89573e144af90a, type: 3}
