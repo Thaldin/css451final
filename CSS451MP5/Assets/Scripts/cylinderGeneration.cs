@@ -44,7 +44,6 @@ public class cylinderGeneration : meshGeneration
         }
 
         GenerateVertexPrefab();
-        UpdateVertices(); // cheese
         GenerateTrianges();
         CalculateNormals(vertices, CylinderResolution);
 
@@ -52,22 +51,23 @@ public class cylinderGeneration : meshGeneration
     }
 
     public override void GenerateVertexPrefab() {
-        int row = 0;
+        //int row = 0;
         ClearVertexPrefabList();
         for (int i = 0; i < vertices.Length; i++) {
             GameObject vertexSpawn = Instantiate(vertex);
             vertexSpawn.name = "Vertex" + i;
+            vertexSpawn.GetComponent<VertexPrefab>().Id = i;
             vertexPrefabs.Add(vertexSpawn);
             vertexSpawn.transform.position = vertices[i];
-            if (i % CylinderResolution != 0) {
-                //Debug.Log(i + " % " + CylinderResolution + ": " + (i % CylinderResolution));
-                vertexSpawn.tag = "badvertex";
-                vertexSpawn.GetComponent<VertexPrefab>().SetColor(Color.black);
-            } else {
+
+            if (i % CylinderResolution == (CylinderResolution - 1)) {
                 vertexSpawn.tag = "vertex";
                 vertexSpawn.GetComponent<VertexPrefab>().SetColor(Color.white);
-                vertexSpawn.GetComponent<VertexPrefab>().row = row;
-                row++;
+            } else {
+                vertexSpawn.tag = "badvertex";
+                vertexSpawn.GetComponent<VertexPrefab>().SetColor(Color.black);
+                //vertexSpawn.GetComponent<VertexPrefab>().row = row;
+                //row++;
             }
 
         }
@@ -78,6 +78,7 @@ public class cylinderGeneration : meshGeneration
         mesh = new Mesh();
 
         UpdateVertices();
+        CalculateNormals(vertices, CylinderResolution);
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
@@ -91,43 +92,60 @@ public class cylinderGeneration : meshGeneration
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = vertexPrefabs[i].transform.position;
-            vertexPrefabs[i].transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+    }
+
+    public void UpdateRotation()
+    {
+        float fTheta = (CylinderRotation / (CylinderResolution - 1)) * Mathf.Deg2Rad;
+        int vertexCount = (CylinderResolution * nCylinderHeight) - 1;
+
+        // Center of circle
+        Vector3 center = Vector3.zero;
+
+        // Use magnitude of this to get new radius
+        Vector3 translate = Vector3.zero;
+
+        for (int h = 0; h < nCylinderHeight; h++)
+        {
+            Debug.Log("Setting center based on vertex: " + vertexCount);
+
+            center.y = vertexPrefabs[vertexCount].transform.localPosition.y;
+            translate = vertexPrefabs[vertexCount].transform.localPosition - center;
+
+            for (int i = 0; i < CylinderResolution; i++)
+            {
+                vertices[vertexCount--] = new Vector3(translate.magnitude * Mathf.Cos(i * fTheta),
+                                                    center.y,
+                                                    translate.magnitude * Mathf.Sin(i * fTheta));
+            }
+
+            if (CylinderRotation == 360)
+            {
+                vertices[vertexCount + 1] = vertices[(vertexCount + 1) + (CylinderResolution - 1)];
+            }
         }
     }
 
     public void UpdateVertexRow(int vertexId, vertexHandle.axis dir, Vector3 mouseDelta)
     {
         var prefab = vertexPrefabs[vertexId];
-        
+        float fTheta = (CylinderRotation / (CylinderResolution - 1)) * Mathf.Deg2Rad;
+
         // Center of circle
         Vector3 center = Vector3.zero;
         center.y = prefab.transform.localPosition.y;
+
+        // Use magnitude of this to get new radius
         Vector3 translate = prefab.transform.localPosition - center;
 
-        /*
-        vertices[--arrayCounter] = new Vector3(cylinderRadius * Mathf.Cos(i * fTheta),
-                                       yValue,
-                                       cylinderRadius * Mathf.Sin(i * fTheta));
-        */
+        int pos = 1;
         for (int i = (vertexId - 1); i > (vertexId - CylinderResolution); i--)
         {
-            switch (dir)
-            {
-                // xAxis
-                case vertexHandle.axis.xAxis:
-                    vertexPrefabs[i].transform.position += mouseDelta.x / 3f * transform.right;
-                    break;
-                // yAxis
-                case vertexHandle.axis.yAxis:
-                    vertexPrefabs[i].transform.position += mouseDelta.y / 3f * transform.up;
-                    break;
-                // zAxis 
-                case vertexHandle.axis.zAxis:
-                    vertexPrefabs[i].transform.position += mouseDelta.z / 3f * transform.forward;
-                    break;
-                default:
-                    break;
-            }
+            Debug.Log("VertexPrefab #:" + i + ", pos: " + pos);
+            vertexPrefabs[i].transform.localPosition = new Vector3(translate.magnitude * Mathf.Cos(pos * fTheta),
+                                                                   center.y,
+                                                                   translate.magnitude * Mathf.Sin(pos++ * fTheta));
         }
     }
 

@@ -114,11 +114,11 @@ public class VertexPrefab : MonoBehaviour {
         currentHandleSelected = handle;
     }
 
-<<<<<<< HEAD
     public GameObject GetSelectedHandle()
     {
         return currentHandleSelected;
-=======
+    }
+
     public void SetHandle(string tag) {
         switch (tag) {
             case "xHandle":
@@ -132,7 +132,6 @@ public class VertexPrefab : MonoBehaviour {
                 return;
         }
         //currentHandleSelected = handle;
->>>>>>> af43b406d4914e799febcc70f1854ecadea65ed6
     }
 
     public void Destroy() {
