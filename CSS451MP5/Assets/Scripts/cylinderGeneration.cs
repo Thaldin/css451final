@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class cylinderGeneration : meshGeneration
 {
@@ -51,7 +49,6 @@ public class cylinderGeneration : meshGeneration
     }
 
     public override void GenerateVertexPrefab() {
-        //int row = 0;
         ClearVertexPrefabList();
         for (int i = 0; i < vertices.Length; i++) {
             GameObject vertexSpawn = Instantiate(vertex);
@@ -66,8 +63,6 @@ public class cylinderGeneration : meshGeneration
             } else {
                 vertexSpawn.tag = "badvertex";
                 vertexSpawn.GetComponent<VertexPrefab>().SetColor(Color.black);
-                //vertexSpawn.GetComponent<VertexPrefab>().row = row;
-                //row++;
             }
 
         }
@@ -109,8 +104,6 @@ public class cylinderGeneration : meshGeneration
 
         for (int h = 0; h < nCylinderHeight; h++)
         {
-            Debug.Log("Setting center based on vertex: " + vertexCount);
-
             center.y = vertexPrefabs[vertexCount].transform.localPosition.y;
             translate = vertexPrefabs[vertexCount].transform.localPosition - center;
 
@@ -143,7 +136,6 @@ public class cylinderGeneration : meshGeneration
         int pos = 1;
         for (int i = (vertexId - 1); i > (vertexId - CylinderResolution); i--)
         {
-            Debug.Log("VertexPrefab #:" + i + ", pos: " + pos);
             vertexPrefabs[i].transform.localPosition = new Vector3(translate.magnitude * Mathf.Cos(pos * fTheta),
                                                                    center.y,
                                                                    translate.magnitude * Mathf.Sin(pos++ * fTheta));
@@ -187,8 +179,6 @@ public class cylinderGeneration : meshGeneration
         Vector3[] triNormals = new Vector3[triangleCount];
         int triPerRow = (resolution - 1) * 2;
 
-        //Debug.Log("Triangle Count: " + triangleCount);
-
         // Calculate the triangle normals
         for (int i = 0; i < triangleCount; i++)
         {
@@ -205,13 +195,11 @@ public class cylinderGeneration : meshGeneration
                 // Odd numbered triangles
                 triNormals[i] = FaceNormals(v, startVertex, startVertex + resolution, startVertex + resolution - 1);
             }
-            //Debug.Log("Tri: " + i + ", v1: " + startVertex + ", Odd: " + oddTri + ", Row: " + (int)(i / triPerRow));
         }
 
         // Calculate the vertex normals
         for (int i = 0; i < v.Length; i++)
         {
-            //Debug.Log("Vertex/Normal: " + i);
             // Used for determining left/right columns
             int mod = i % resolution;
 
@@ -268,7 +256,6 @@ public class cylinderGeneration : meshGeneration
                 {
                     // Right column of vertices
                     int triId = ((i / resolution) * triPerRow) - 1;
-                    //Debug.Log("TriId: " + triId);
                     normals[i] = (triNormals[triId] + triNormals[triId + triPerRow - 1] + triNormals[triId + triPerRow]).normalized * -1;
                 }
                 else
@@ -276,7 +263,6 @@ public class cylinderGeneration : meshGeneration
                     // Center of mesh
                     int topTriId = GetVertexTopTriangle(i, triPerRow, resolution);
                     int bottomTriId = GetVertexBottomTriangle(i, triPerRow, resolution);
-                    //Debug.Log("Top Tri: " + topTriId + ", Bottom Tri: " + bottomTriId);
                     normals[i] = (triNormals[topTriId - 1] + triNormals[topTriId] + triNormals[topTriId + 1] + triNormals[bottomTriId - 2] + triNormals[bottomTriId - 1] + triNormals[bottomTriId]).normalized * -1;
                 }
             }

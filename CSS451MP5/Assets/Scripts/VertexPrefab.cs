@@ -68,7 +68,7 @@ public class VertexPrefab : MonoBehaviour {
         switch (_axis) {
             // xAxis
             case vertexHandle.axis.xAxis:
-                transform.position += _delta.x / 3f * Vector3.right;
+                transform.position += (_delta.x / 3f * Vector3.right) * - 1;
                 return;
             // yAxis
             case vertexHandle.axis.yAxis:
