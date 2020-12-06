@@ -7,6 +7,7 @@ public class VertexPrefab : MonoBehaviour {
     public Color selectionColor = Color.yellow;
     public Vector3 ogPosition = Vector3.zero;
     public  GameObject currentHandleSelected = null;
+    public int Id;
 
     private Color color;
     private MeshRenderer meshRenderer;
@@ -45,6 +46,12 @@ public class VertexPrefab : MonoBehaviour {
     public void Translate(Vector3 _detla) {
 
         Translate(currentHandleSelected.GetComponent<vertexHandle>().direction, _detla);
+    }
+
+    public void Translate(Vector3 _detla, vertexHandle.axis dir)
+    {
+
+        Translate(dir, _detla);
     }
 
     // delta is vector2
@@ -93,6 +100,11 @@ public class VertexPrefab : MonoBehaviour {
 
     public void SetHandle(GameObject handle) {
         currentHandleSelected = handle;
+    }
+
+    public GameObject GetSelectedHandle()
+    {
+        return currentHandleSelected;
     }
 
     public void Destroy() {

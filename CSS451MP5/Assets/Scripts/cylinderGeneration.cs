@@ -53,6 +53,9 @@ public class cylinderGeneration : meshGeneration
     public override Mesh UpdateMesh()
     {
         mesh = new Mesh();
+
+        UpdateVertices();
+
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.normals = normals;
@@ -65,6 +68,42 @@ public class cylinderGeneration : meshGeneration
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = vertexPrefabs[i].transform.position;
+        }
+    }
+
+    public void UpdateVertexRow(int vertexId, vertexHandle.axis dir, Vector3 mouseDelta)
+    {
+        var prefab = vertexPrefabs[vertexId];
+        
+        // Center of circle
+        Vector3 center = Vector3.zero;
+        center.y = prefab.transform.localPosition.y;
+        Vector3 translate = prefab.transform.localPosition - center;
+
+        /*
+        vertices[--arrayCounter] = new Vector3(cylinderRadius * Mathf.Cos(i * fTheta),
+                                       yValue,
+                                       cylinderRadius * Mathf.Sin(i * fTheta));
+        */
+        for (int i = (vertexId - 1); i > (vertexId - CylinderResolution); i--)
+        {
+            switch (dir)
+            {
+                // xAxis
+                case vertexHandle.axis.xAxis:
+                    vertexPrefabs[i].transform.position += mouseDelta.x / 3f * transform.right;
+                    break;
+                // yAxis
+                case vertexHandle.axis.yAxis:
+                    vertexPrefabs[i].transform.position += mouseDelta.y / 3f * transform.up;
+                    break;
+                // zAxis 
+                case vertexHandle.axis.zAxis:
+                    vertexPrefabs[i].transform.position += mouseDelta.z / 3f * transform.forward;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -139,18 +178,18 @@ public class cylinderGeneration : meshGeneration
                 if (mod == 0)
                 {
                     // Upper left corner
-                    normals[i] = triNormals[0].normalized;
+                    normals[i] = triNormals[0].normalized * -1;
                 }
                 else if (mod == (resolution - 1))
                 {
                     // Upper right corner
-                    normals[i] = (triNormals[triPerRow - 1] + triNormals[triPerRow - 2]).normalized;
+                    normals[i] = (triNormals[triPerRow - 1] + triNormals[triPerRow - 2]).normalized * -1;
                 }
                 else
                 {
                     // Middle top row
                     int triId = GetVertexBottomTriangle(i, triPerRow, resolution);
-                    normals[i] = (triNormals[triId - 2] + triNormals[triId - 1] + triNormals[triId]).normalized;
+                    normals[i] = (triNormals[triId - 2] + triNormals[triId - 1] + triNormals[triId]).normalized * -1;
                 }
             }
             else if (i >= v.Length - resolution)
@@ -159,18 +198,18 @@ public class cylinderGeneration : meshGeneration
                 if (mod == 0)
                 {
                     // Bottom left corner
-                    normals[i] = (triNormals[triangleCount - resolution] + triNormals[triangleCount - resolution + 1]).normalized;
+                    normals[i] = (triNormals[triangleCount - triPerRow] + triNormals[triangleCount - triPerRow + 1]).normalized * -1;
                 }
                 else if (mod == (resolution - 1))
                 {
                     // Bottom right corner
-                    normals[i] = triNormals[triangleCount - 1].normalized;
+                    normals[i] = triNormals[triangleCount - 1].normalized * -1;
                 }
                 else
                 {
                     // Middle bottom row
                     int triId = GetVertexTopTriangle(i, triPerRow, resolution);
-                    normals[i] = (triNormals[triId - 1] + triNormals[triId] + triNormals[triId + 1]).normalized;
+                    normals[i] = (triNormals[triId - 1] + triNormals[triId] + triNormals[triId + 1]).normalized * -1;
                 }
             }
             else
@@ -180,14 +219,14 @@ public class cylinderGeneration : meshGeneration
                 {
                     // Left column of vertices
                     int triId = ((i / resolution) - 1) * triPerRow;
-                    normals[i] = (triNormals[triId] + triNormals[triId + 1] + triNormals[triId + triPerRow]).normalized;
+                    normals[i] = (triNormals[triId] + triNormals[triId + 1] + triNormals[triId + triPerRow]).normalized * -1;
                 }
                 else if (mod == (resolution - 1))
                 {
                     // Right column of vertices
                     int triId = ((i / resolution) * triPerRow) - 1;
                     //Debug.Log("TriId: " + triId);
-                    normals[i] = (triNormals[triId] + triNormals[triId + triPerRow - 1] + triNormals[triId + triPerRow]).normalized;
+                    normals[i] = (triNormals[triId] + triNormals[triId + triPerRow - 1] + triNormals[triId + triPerRow]).normalized * -1;
                 }
                 else
                 {
@@ -195,7 +234,7 @@ public class cylinderGeneration : meshGeneration
                     int topTriId = GetVertexTopTriangle(i, triPerRow, resolution);
                     int bottomTriId = GetVertexBottomTriangle(i, triPerRow, resolution);
                     //Debug.Log("Top Tri: " + topTriId + ", Bottom Tri: " + bottomTriId);
-                    normals[i] = (triNormals[topTriId - 1] + triNormals[topTriId] + triNormals[topTriId + 1] + triNormals[bottomTriId - 2] + triNormals[bottomTriId - 1] + triNormals[bottomTriId]).normalized;
+                    normals[i] = (triNormals[topTriId - 1] + triNormals[topTriId] + triNormals[topTriId + 1] + triNormals[bottomTriId - 2] + triNormals[bottomTriId - 1] + triNormals[bottomTriId]).normalized * -1;
                 }
             }
         }

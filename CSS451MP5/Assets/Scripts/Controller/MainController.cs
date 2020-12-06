@@ -127,14 +127,6 @@ public class MainController : MonoBehaviour {
 
 
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
-            // Set Previous Position for calculations on MouseDown
-            /* --testing--
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
-                prevMousePos = Input.mousePosition;
-                
-            }
-            */
-
             // vertex selection
             if (Input.GetMouseButtonDown(0)) {
                 mouseDownPos = Input.mousePosition;
@@ -212,7 +204,7 @@ public class MainController : MonoBehaviour {
 
     public void UpdateCylinderRot(float v) {
         theWorld.SetCylinderRotation((int)v);
-        theWorld.RenderCylinder();
+        theWorld.UpdateCylinder();
     }
 
     public void UpdateMeshRes(float v) {

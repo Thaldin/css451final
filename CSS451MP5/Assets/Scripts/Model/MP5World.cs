@@ -191,6 +191,9 @@ public class MP5World : MonoBehaviour {
                 UpdatePlane();
                 return;
             case "Cylinder":
+                int id = vertex.GetComponent<VertexPrefab>().Id;
+                vertexHandle.axis dir = vertex.GetComponent<VertexPrefab>().GetSelectedHandle().GetComponent<vertexHandle>().direction;
+                cylGen.GetComponent<cylinderGeneration>().UpdateVertexRow(id, dir, mouseDelta);
                 cylGen.GetComponent<cylinderGeneration>().UpdateVertices();
                 UpdateCylinder();
                 return;

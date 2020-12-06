@@ -112,6 +112,7 @@ public abstract class meshGeneration : MonoBehaviour {
         for (int i = 0; i < vertices.Length; i++) {
             GameObject vertexSpawn = Instantiate(vertex);
             vertexSpawn.name = "Vertex" + i;
+            vertexSpawn.GetComponent<VertexPrefab>().Id = i;
             vertexPrefabs.Add(vertexSpawn);
             vertexSpawn.transform.position = vertices[i];
         }
@@ -131,11 +132,6 @@ public abstract class meshGeneration : MonoBehaviour {
         }
     }
     #endregion
-
-    public GameObject GetVertex(GameObject vertex)
-    {
-        return vertexPrefabs.Find(o => name.Equals(vertex.name));
-    }
 
     #region Merged code
 
