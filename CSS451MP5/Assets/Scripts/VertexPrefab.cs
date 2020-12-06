@@ -116,7 +116,8 @@ public class VertexPrefab : MonoBehaviour {
     }
 
     public void SetHandle(string tag) {
-        switch (tag) {
+        switch (tag)
+        {
             case "xHandle":
                 currentHandleSelected = handles[0];
                 return;
