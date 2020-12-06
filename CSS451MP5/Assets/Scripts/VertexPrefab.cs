@@ -58,7 +58,7 @@ public class VertexPrefab : MonoBehaviour {
                 meshRenderer.material.color = unselectColor;
             }
         }
-        //meshRenderer.material.color = (isSelected) ? selectionColor : color;
+
         foreach (var h in handles) {
             h.SetActive(isSelected);
         }
@@ -66,6 +66,7 @@ public class VertexPrefab : MonoBehaviour {
 
     public void Translate(Vector3 _detla) {
 
+        if (!currentHandleSelected) return;
         Translate(currentHandleSelected.GetComponent<vertexHandle>().direction, _detla);
     }
 

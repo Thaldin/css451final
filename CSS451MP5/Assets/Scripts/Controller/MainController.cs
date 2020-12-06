@@ -181,6 +181,7 @@ public class MainController : MonoBehaviour {
         if (ddRender.value == 0) {
             theWorld.RenderMesh = true;
             TexturePanel.gameObject.SetActive(true);
+            textureSelect.gameObject.SetActive(true);
             Tessellation.gameObject.SetActive(true);
             CylinderRes.gameObject.SetActive(false);
             CylinderRot.gameObject.SetActive(false);
@@ -188,6 +189,7 @@ public class MainController : MonoBehaviour {
             theWorld.RenderMesh = false;
             TexturePanel.gameObject.SetActive(false);
             Tessellation.gameObject.SetActive(false);
+            textureSelect.gameObject.SetActive(false);
             CylinderRes.gameObject.SetActive(true);
             CylinderRot.gameObject.SetActive(true);
         }
