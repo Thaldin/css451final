@@ -91,7 +91,7 @@ public class XfromControl : MonoBehaviour {
             if (T.isOn) {
                 theWorld.SetUVOffset(p);
             } else if (S.isOn) {
-                theWorld.SetTileOffset(p);
+                theWorld.SetUVTile(p);
             }
             theWorld.RenderPlane();
         }
@@ -109,9 +109,9 @@ public class XfromControl : MonoBehaviour {
 
             //MP5
             if (T.isOn) {
-                theWorld.SetTileOffsetY(p);
+                theWorld.SetUVOffset(p);
             } else if (S.isOn) {
-                theWorld.SetTileOffset(p);
+                theWorld.SetUVTile(p);
             }
             theWorld.RenderPlane();
         }

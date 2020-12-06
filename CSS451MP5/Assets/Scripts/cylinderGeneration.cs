@@ -88,6 +88,8 @@ public class cylinderGeneration : meshGeneration
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = vertexPrefabs[i].transform.position;
+            // cheese
+            vertexPrefabs[i].transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 

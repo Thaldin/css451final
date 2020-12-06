@@ -29,8 +29,6 @@ public class planeGeneration : meshGeneration {
     // uv scale
 
     public void SetUVTile(Vector3 v) {
-        //planeTileScale.x = v;
-        //uvTile = new Vector2(v / uvTile.x, uvTile.y);
         uvTile = v;
         uvMatrix = Matrix3x3Helpers.CreateTRS(uvOffset, uvRotation, uvTile);
     }
@@ -41,17 +39,10 @@ public class planeGeneration : meshGeneration {
 
     // uv offset
     public void SetUVOffset(Vector3 v) {
-        //planeOffset.x = v;
-        //uvOffset.x = v;
         uvOffset = v;
         uvMatrix = Matrix3x3Helpers.CreateTRS(uvOffset, uvRotation, uvTile);
     }
-    public void SetUVOffsetY(Vector3 v) {
-        //planeOffset.y = v;
-        //uvOffset.y = v;
-        uvOffset = v;
-        uvMatrix = Matrix3x3Helpers.CreateTRS(uvOffset, uvRotation, uvTile);
-    }
+
     public Vector3 GetUVOffset() {
         return uvOffset;
     }

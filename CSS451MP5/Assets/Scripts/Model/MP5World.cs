@@ -170,15 +170,12 @@ public class MP5World : MonoBehaviour {
     }
 
     // set offset
-    public void SetUVOffset(Vector3 v) {
-        planeGen.SetUVOffset(v);
-    }
-    public void SetTileOffsetY(Vector3 v) {
-        planeGen.SetUVOffsetY(v);
+    public void SetUVTile(Vector3 v) {
+        planeGen.SetUVTile(v);
     }
 
-    public void SetTileOffset(Vector3 v) {
-        planeGen.SetUVTile(v);
+    public void SetUVOffset(Vector3 v) {
+        planeGen.SetUVOffset(v);
     }
 
     public Vector3 GetUVOffset() {
