@@ -232,7 +232,7 @@ public class MainController : MonoBehaviour {
                     if (!EventSystem.current.IsPointerOverGameObject()) {
                         //Debug.Log(hit.transform.tag);
                         // vertex
-                        if (hit.transform.CompareTag("vertex")) {
+                        if (hit.transform.CompareTag("vertex") || hit.transform.CompareTag("selectvertex")) {
                             // if selection, clear it
                             if (vertex) {
                                 //Debug.Log("Unselecting old vertex: " + vertex.name);

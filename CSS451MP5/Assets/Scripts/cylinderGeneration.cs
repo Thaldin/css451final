@@ -58,7 +58,7 @@ public class cylinderGeneration : meshGeneration
             vertexSpawn.transform.position = vertices[i];
 
             if (i % CylinderResolution == (CylinderResolution - 1)) {
-                vertexSpawn.tag = "vertex";
+                vertexSpawn.tag = "selectvertex";
                 vertexSpawn.GetComponent<VertexPrefab>().SetColor(Color.white);
             } else {
                 vertexSpawn.tag = "badvertex";

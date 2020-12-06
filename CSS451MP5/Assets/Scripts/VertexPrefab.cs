@@ -3,6 +3,7 @@
 public class VertexPrefab : MonoBehaviour {
     public Color selectionColor = Color.yellow;
     public Color unselectColor = Color.black;
+    public Color cylinderColor = Color.white;
 
     public Vector3 ogPosition = Vector3.zero;
     public  GameObject currentHandleSelected = null;
@@ -42,7 +43,22 @@ public class VertexPrefab : MonoBehaviour {
 
     public void Selected(bool _selected) {
         isSelected = _selected;
-        meshRenderer.material.color = (isSelected) ? selectionColor : color;
+        if (isSelected)
+        {
+            meshRenderer.material.color = selectionColor;
+        }
+        else
+        {
+            if (tag.Equals("selectvertex"))
+            {
+                meshRenderer.material.color = cylinderColor;
+            }
+            else
+            {
+                meshRenderer.material.color = unselectColor;
+            }
+        }
+        //meshRenderer.material.color = (isSelected) ? selectionColor : color;
         foreach (var h in handles) {
             h.SetActive(isSelected);
         }
@@ -55,7 +71,6 @@ public class VertexPrefab : MonoBehaviour {
 
     public void Translate(Vector3 _detla, vertexHandle.axis dir)
     {
-
         Translate(dir, _detla);
     }
 
