@@ -217,9 +217,6 @@ public class MainController : MonoBehaviour {
     }
 
 
-    // 
-    // TODO: Vertex prefab Clicked
-    // 
     private void click(int _button) {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -230,12 +227,10 @@ public class MainController : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit)) {
                     // clear UI
                     if (!EventSystem.current.IsPointerOverGameObject()) {
-                        //Debug.Log(hit.transform.tag);
                         // vertex
                         if (hit.transform.CompareTag("vertex") || hit.transform.CompareTag("selectvertex")) {
                             // if selection, clear it
                             if (vertex) {
-                                //Debug.Log("Unselecting old vertex: " + vertex.name);
                                 vertex.GetComponent<VertexPrefab>().Selected(false);
                             }
                             // reassign selection
@@ -255,9 +250,18 @@ public class MainController : MonoBehaviour {
                         }
                     }
                 }
+                else // Clear selection if nothing clicked
+                {
+                    if ((vertex) && !EventSystem.current.IsPointerOverGameObject())
+                    {
+                        Unselect();
+                    }
+                }
                 return;
+            // Right mouse
             case 1:
-                if (vertex) {
+                if (vertex)
+                { 
                     Unselect();
                 }
                 return;
