@@ -2,7 +2,7 @@
 
 public class CameraBehavior : MonoBehaviour
 {
-    public float MinZoomDistance = 1.0f;
+    public float MinZoomDistance = 3.0f;
     public float RotationDegrees = 10.0f;
 
     private float rotationDelta = 0;
@@ -44,49 +44,44 @@ public class CameraBehavior : MonoBehaviour
         var v = vLookAt - transform.localPosition;
         float distance;
 
+        distance = v.magnitude + -delta;
+        
         // Check Zoom distance
-        if (v.magnitude >= MinZoomDistance)
+        if (distance >= MinZoomDistance)
         {
-            distance = v.magnitude + -delta;
+            transform.localPosition = vLookAt - (distance * v.normalized);
         }
-        else
-        {
-            distance = MinZoomDistance;
-        }
-
-        transform.localPosition = vLookAt - (distance * v.normalized);
     }
 
     // Take mouse input and tumble the camera
     public void Tumble(Vector3 tumble)
     {
-        // Checks to prevent large camera jumps that flip the camera
-        if ((tumble.y < 30) && (tumble.y > -30))
-        {
-            tumbleCam(tumble.y, transform.right);
-        }
-
-        if ((tumble.x < 30) && (tumble.x > -30))
-        {
-            tumbleCam(tumble.x, Vector3.up);
-        }
+        tumbleCam(tumble.y, transform.right);
+        tumbleCam(-tumble.x, Vector3.up);
     }
 
     private void tumbleCam(float value, Vector3 direction)
     {
         // Set rotation point and position values
         var quat = Quaternion.AngleAxis(value * rotationDelta, direction);
-        var r = Matrix4x4.Rotate(quat);
+        Matrix4x4 r = Matrix4x4.TRS(Vector3.zero, quat, Vector3.one);
         var invP = Matrix4x4.TRS(-vLookAt, Quaternion.identity, Vector3.one);
-        r = invP.inverse * r * invP;
-        var pos = r.MultiplyPoint(transform.localPosition);
+        Matrix4x4 m = invP.inverse * r * invP;
+
+        var pos = m.MultiplyPoint(transform.localPosition);
 
         // Store old position in case min/max angle exceeded
         var oldPos = transform.localPosition;
 
         // Transform to new position/rotation
         transform.localPosition = pos;
-        transform.localRotation = quat * transform.localRotation;
+        Vector3 v = (vLookAt - transform.localPosition).normalized;
+        Vector3 w = Vector3.Cross(v, transform.up).normalized;
+        Vector3 u = Vector3.Cross(w, v).normalized;
+
+        transform.up = u;
+        transform.right = w;
+        transform.forward = v;
 
         // Check if camera has exceeded min/max angles on Y axis
         var degrees = Mathf.Acos(Vector3.Dot(pos.normalized, Vector3.up)) * Mathf.Rad2Deg;

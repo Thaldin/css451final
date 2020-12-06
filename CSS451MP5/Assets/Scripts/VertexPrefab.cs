@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 public class VertexPrefab : MonoBehaviour {
     public Color selectionColor = Color.yellow;
     public Color unselectColor = Color.black;
+    public Color cylinderColor = Color.white;
 
     public Vector3 ogPosition = Vector3.zero;
     public  GameObject currentHandleSelected = null;
+    public int Id;
+
     public int row = 0;
     public bool isSelectable = true;
     private Color color;
@@ -43,7 +43,22 @@ public class VertexPrefab : MonoBehaviour {
 
     public void Selected(bool _selected) {
         isSelected = _selected;
-        meshRenderer.material.color = (isSelected) ? selectionColor : color;
+        if (isSelected)
+        {
+            meshRenderer.material.color = selectionColor;
+        }
+        else
+        {
+            if (tag.Equals("selectvertex"))
+            {
+                meshRenderer.material.color = cylinderColor;
+            }
+            else
+            {
+                meshRenderer.material.color = unselectColor;
+            }
+        }
+
         foreach (var h in handles) {
             h.SetActive(isSelected);
         }
@@ -51,16 +66,21 @@ public class VertexPrefab : MonoBehaviour {
 
     public void Translate(Vector3 _detla) {
 
+        if (!currentHandleSelected) return;
         Translate(currentHandleSelected.GetComponent<vertexHandle>().direction, _detla);
+    }
+
+    public void Translate(Vector3 _detla, vertexHandle.axis dir)
+    {
+        Translate(dir, _detla);
     }
 
     // delta is vector2
     private void Translate(vertexHandle.axis _axis, Vector3 _delta) {
-        //Debug.Log(_axis + " " + _delta);
         switch (_axis) {
             // xAxis
             case vertexHandle.axis.xAxis:
-                transform.position += _delta.x / 3f * Vector3.right;
+                transform.position += (_delta.x / 3f * Vector3.right) * - 1;
                 return;
             // yAxis
             case vertexHandle.axis.yAxis:
@@ -106,8 +126,14 @@ public class VertexPrefab : MonoBehaviour {
         currentHandleSelected = handle;
     }
 
+    public GameObject GetSelectedHandle()
+    {
+        return currentHandleSelected;
+    }
+
     public void SetHandle(string tag) {
-        switch (tag) {
+        switch (tag)
+        {
             case "xHandle":
                 currentHandleSelected = handles[0];
                 return;

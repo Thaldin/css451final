@@ -136,11 +136,6 @@ public abstract class meshGeneration : MonoBehaviour {
     }
     #endregion
 
-    public GameObject GetVertex(GameObject vertex)
-    {
-        return vertexPrefabs.Find(o => name.Equals(vertex.name));
-    }
-
     #region Merged code
 
     protected void UpdateNormals(Vector3[] v, Vector3[] n)
@@ -148,7 +143,6 @@ public abstract class meshGeneration : MonoBehaviour {
         int count = 0;
         foreach (var prefab in vertexPrefabs)
         {
-            //Debug.Log("ncount: " + count);
             Quaternion q = Quaternion.FromToRotation(Vector3.up, n[count]);
             prefab.transform.localRotation = q;
             count++;

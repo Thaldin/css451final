@@ -127,14 +127,6 @@ public class MainController : MonoBehaviour {
 
 
         if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
-            // Set Previous Position for calculations on MouseDown
-            /* --testing--
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
-                prevMousePos = Input.mousePosition;
-                
-            }
-            */
-
             // vertex selection
             if (Input.GetMouseButtonDown(0)) {
                 mouseDownPos = Input.mousePosition;
@@ -189,6 +181,7 @@ public class MainController : MonoBehaviour {
         if (ddRender.value == 0) {
             theWorld.RenderMesh = true;
             TexturePanel.gameObject.SetActive(true);
+            textureSelect.gameObject.SetActive(true);
             Tessellation.gameObject.SetActive(true);
             CylinderRes.gameObject.SetActive(false);
             CylinderRot.gameObject.SetActive(false);
@@ -196,6 +189,7 @@ public class MainController : MonoBehaviour {
             theWorld.RenderMesh = false;
             TexturePanel.gameObject.SetActive(false);
             Tessellation.gameObject.SetActive(false);
+            textureSelect.gameObject.SetActive(false);
             CylinderRes.gameObject.SetActive(true);
             CylinderRot.gameObject.SetActive(true);
         }
@@ -212,7 +206,7 @@ public class MainController : MonoBehaviour {
 
     public void UpdateCylinderRot(float v) {
         theWorld.SetCylinderRotation((int)v);
-        theWorld.RenderCylinder();
+        theWorld.UpdateCylinder();
     }
 
     public void UpdateMeshRes(float v) {
@@ -225,9 +219,6 @@ public class MainController : MonoBehaviour {
     }
 
 
-    // 
-    // TODO: Vertex prefab Clicked
-    // 
     private void click(int _button) {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -238,12 +229,10 @@ public class MainController : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit)) {
                     // clear UI
                     if (!EventSystem.current.IsPointerOverGameObject()) {
-                        //Debug.Log(hit.transform.tag);
                         // vertex
-                        if (hit.transform.CompareTag("vertex")) {
+                        if (hit.transform.CompareTag("vertex") || hit.transform.CompareTag("selectvertex")) {
                             // if selection, clear it
                             if (vertex) {
-                                //Debug.Log("Unselecting old vertex: " + vertex.name);
                                 vertex.GetComponent<VertexPrefab>().Selected(false);
                             }
                             // reassign selection
@@ -263,9 +252,18 @@ public class MainController : MonoBehaviour {
                         }
                     }
                 }
+                else // Clear selection if nothing clicked
+                {
+                    if ((vertex) && !EventSystem.current.IsPointerOverGameObject())
+                    {
+                        Unselect();
+                    }
+                }
                 return;
+            // Right mouse
             case 1:
-                if (vertex) {
+                if (vertex)
+                { 
                     Unselect();
                 }
                 return;

@@ -143,6 +143,7 @@ public class MP5World : MonoBehaviour {
     public void SetCylinderRotation(int rot)
     {
         cylGen.CylinderRotation = rot;
+        cylGen.GetComponent<cylinderGeneration>().UpdateRotation();
     }
 
     public int GetCylinderResolution()
@@ -199,28 +200,19 @@ public class MP5World : MonoBehaviour {
 
     public void MoveVertex(Vector3 mouseDelta, GameObject vertex)
     {
-        int row = vertex.GetComponent<VertexPrefab>().row;
-        Debug.Log("Row" + row);
-        
-
-        Debug.Log("Moving Vertex: " + vertex.name);
+        vertex.GetComponent<VertexPrefab>().Translate(mouseDelta);
 
         switch (currentSelection.name) {
             case "Plane":
                 // update vertices
-                vertex.GetComponent<VertexPrefab>().Translate(mouseDelta);
                 planeGen.GetComponent<planeGeneration>().UpdateVertices();
                 // redraw mesh
                 UpdatePlane();
                 return;
             case "Cylinder":
-
-                GameObject h = vertex.GetComponent<VertexPrefab>().GetHandle();
-                for (int i = row; i < cylGen.GetComponent<cylinderGeneration>().CylinderResolution; i++) {
-                    GameObject v = cylGen.GetComponent<cylinderGeneration>().GetVert(i);
-                    v.GetComponent<VertexPrefab>().SetHandle(h.tag);
-                    v.GetComponent<VertexPrefab>().Translate(mouseDelta);
-                }
+                int id = vertex.GetComponent<VertexPrefab>().Id;
+                vertexHandle.axis dir = vertex.GetComponent<VertexPrefab>().GetSelectedHandle().GetComponent<vertexHandle>().direction;
+                cylGen.GetComponent<cylinderGeneration>().UpdateVertexRow(id, dir, mouseDelta);
                 cylGen.GetComponent<cylinderGeneration>().UpdateVertices();
                 UpdateCylinder();
                 return;
