@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  axisOfDirection: {x: 1, y: 0, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &1505228131548457806
 GameObject:
@@ -351,7 +350,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  axisOfDirection: {x: 1, y: 0, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2745955366524378418
 GameObject:
@@ -462,7 +460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  axisOfDirection: {x: 0, y: 1, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &5294147907336915668
 GameObject:
@@ -575,7 +572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  axisOfDirection: {x: 0, y: 1, z: 0}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &6489546145309109422
 GameObject:
@@ -688,10 +684,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  unselectColor: {r: 0, g: 0, b: 0, a: 1}
   ogPosition: {x: 0, y: 0, z: 0}
+  currentHandleSelected: {fileID: 0}
+  row: 0
+  isSelectable: 1
   isSelected: 0
   isOn: 0
-  currentHandleSelected: {fileID: 0}
   handles:
   - {fileID: 1505228131548457806}
   - {fileID: 5294147907336915668}
@@ -805,7 +804,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  axisOfDirection: {x: 0, y: 0, z: 1}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &8537430422148174798
 GameObject:
@@ -918,5 +916,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 2
-  axisOfDirection: {x: 0, y: 0, z: 1}
   selectionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

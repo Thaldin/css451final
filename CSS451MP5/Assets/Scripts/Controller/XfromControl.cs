@@ -13,6 +13,8 @@ public class XfromControl : MonoBehaviour {
     [SerializeField] public Transform mSelected;
     private Vector3 mPreviousSliderValues = Vector3.one;
 
+    private bool onToggle = false;
+
     planeGeneration plane;
 
     // Use this for initialization
@@ -33,82 +35,104 @@ public class XfromControl : MonoBehaviour {
 
     }
 
+    private void LateUpdate() {
+    }
+
     //---------------------------------------------------------------------------------
     // Initialize slider bars to specific function
     void SetToTranslation(bool v) {
+        onToggle = true;
         Vector3 p = ReadObjectXfrom();
         mPreviousSliderValues = p;
         X.InitSliderRange(-10, 10, p.x);
         Y.InitSliderRange(-10, 10, p.y);
         Z.InitSliderRange(-10, 10, p.z);
+        onToggle = false;
+
     }
 
     void SetToScaling(bool v) {
+        onToggle = true;
         Vector3 s = ReadObjectXfrom();
         mPreviousSliderValues = s;
         X.InitSliderRange(1f, 20, s.x);
         Y.InitSliderRange(1f, 20, s.y);
         Z.InitSliderRange(1f, 20, s.z);
+        onToggle = false;
+
     }
 
     void SetToRotation(bool v) {
+        onToggle = true;
         Vector3 r = ReadObjectXfrom();
         mPreviousSliderValues = r;
         X.InitSliderRange(-180, 180, r.x);
         Y.InitSliderRange(-180, 180, r.y);
         Z.InitSliderRange(-180, 180, r.z);
         mPreviousSliderValues = r;
+
+        onToggle = false;
     }
     //---------------------------------------------------------------------------------
 
     //---------------------------------------------------------------------------------
     // resopond to sldier bar value changes
     void XValueChanged(float v) {
-        Vector3 p = ReadObjectXfrom();
-        // if not in rotation, next two lines of work would be wasted
-        float dx = v - mPreviousSliderValues.x;
-        mPreviousSliderValues.x = v;
-        Quaternion q = Quaternion.AngleAxis(dx, Vector3.right);
-        p.x = v;
-        UISetObjectXform(ref p, ref q);
+        if (!onToggle) {
+            Vector3 p = ReadObjectXfrom();
+            // if not in rotation, next two lines of work would be wasted
+            float dx = v - mPreviousSliderValues.x;
+            mPreviousSliderValues.x = v;
+            Quaternion q = Quaternion.AngleAxis(dx, Vector3.right);
+            p.x = v;
+            UISetObjectXform(ref p, ref q);
 
-        //MP5
-        if (T.isOn) {
-            theWorld.SetTileOffsetX(v);
-        } else if (S.isOn) {
-            theWorld.SetTileScaleX(v);
+            //MP5
+            if (T.isOn) {
+                theWorld.SetTileOffsetX(v);
+            } else if (S.isOn) {
+                theWorld.SetTileScaleX(v);
+            }
+            theWorld.RenderPlane();
         }
-        theWorld.RenderPlane();
     }
 
     void YValueChanged(float v) {
-        Vector3 p = ReadObjectXfrom();
-        // if not in rotation, next two lines of work would be wasted
-        float dy = v - mPreviousSliderValues.y;
-        mPreviousSliderValues.y = v;
-        Quaternion q = Quaternion.AngleAxis(dy, Vector3.up);
-        p.y = v;
-        UISetObjectXform(ref p, ref q);
+        if (!onToggle) {
+            Vector3 p = ReadObjectXfrom();
+            // if not in rotation, next two lines of work would be wasted
+            float dy = v - mPreviousSliderValues.y;
+            mPreviousSliderValues.y = v;
+            Quaternion q = Quaternion.AngleAxis(dy, Vector3.up);
+            p.y = v;
+            UISetObjectXform(ref p, ref q);
 
-        //MP5
-        if (T.isOn) {
-            theWorld.SetTileOffsetY(v);
-        } else if (S.isOn) {
-            theWorld.SetTileScaleY(v);
+            //MP5
+            if (T.isOn) {
+                theWorld.SetTileOffsetY(v);
+            } else if (S.isOn) {
+                theWorld.SetTileScaleY(v);
+            }
+            theWorld.RenderPlane();
         }
-        theWorld.RenderPlane();
     }
 
     void ZValueChanged(float v) {
-        Vector3 p = ReadObjectXfrom();
-        // if not in rotation, next two lines of work would be wasterd
-        float dz = v - mPreviousSliderValues.z;
-        mPreviousSliderValues.z = v;
-        Quaternion q = Quaternion.AngleAxis(dz, Vector3.forward);
-        p.z = v;
-        UISetObjectXform(ref p, ref q);
+        if (!onToggle) {
+            Vector3 p = ReadObjectXfrom();
+            // if not in rotation, next two lines of work would be wasterd
+            float dz = v - mPreviousSliderValues.z;
+            mPreviousSliderValues.z = v;
+            Quaternion q = Quaternion.AngleAxis(dz, Vector3.forward);
+            p.z = v;
+            UISetObjectXform(ref p, ref q);
 
-        
+            //MP5
+            if (R.isOn) {
+                theWorld.SetUVRotation(v);
+            }
+            theWorld.RenderPlane();
+        }
     }
     //---------------------------------------------------------------------------------
 
@@ -132,28 +156,35 @@ public class XfromControl : MonoBehaviour {
 
     // modified for MP5, texture map modification
     private Vector3 ReadObjectXfrom() {
-
+        Vector3 p = Vector3.zero;
         if (T.isOn) {
             if (mSelected != null) {
-        
+
                 if (mSelected.name == "Plane") {
-                    return theWorld.planeGen.GetTileOffset();
+                    p = theWorld.GetUVOffset();
                 }
             } else {
-                return Vector3.zero;
+                p = Vector3.zero;
             }
         } else if (S.isOn) {
             if (mSelected != null) {
                 if (mSelected.name == "Plane") {
-                    return theWorld.planeGen.GetTileScale();
+                    p = theWorld.GetUVTile();
                 }
             } else {
-                return Vector3.one;
+                p = Vector3.one;
             }
         } else {
-            return Vector3.zero;
+            if (mSelected != null) {
+                if (mSelected.name == "Plane") {
+                    float uvRot = theWorld.GetUVRotation();
+                    p = new Vector3(0f, 0f, uvRot);
+                }
+            } else {
+                p = Vector3.one;
+            }
         }
-        return Vector3.zero;
+        return p;
     }
 
     private void UISetObjectXform(ref Vector3 p, ref Quaternion q) {

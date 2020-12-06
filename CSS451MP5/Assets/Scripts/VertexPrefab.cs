@@ -5,10 +5,14 @@ using UnityEngine.EventSystems;
 
 public class VertexPrefab : MonoBehaviour {
     public Color selectionColor = Color.yellow;
+    public Color unselectColor = Color.black;
+
     public Vector3 ogPosition = Vector3.zero;
     public  GameObject currentHandleSelected = null;
     public int Id;
 
+    public int row = 0;
+    public bool isSelectable = true;
     private Color color;
     private MeshRenderer meshRenderer;
     [SerializeField] private bool isSelected = false;
@@ -18,7 +22,7 @@ public class VertexPrefab : MonoBehaviour {
     public GameObject[] handles = new GameObject[3];
 
     // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         InitializedComponents();
         meshRenderer.material = (Material)Instantiate(meshRenderer.material);
         color = meshRenderer.material.color;
@@ -28,11 +32,15 @@ public class VertexPrefab : MonoBehaviour {
     void InitializedComponents() {
         meshRenderer = GetComponent<MeshRenderer>();
         gameObject.SetActive(isOn);
-
+        meshRenderer.material.color = color;
     }
 
     private void Update() {
         gameObject.SetActive(isOn);
+    }
+
+    public void SetColor(Color c) {
+        meshRenderer.material.color = c;
     }
 
     public void Selected(bool _selected) {
@@ -98,13 +106,33 @@ public class VertexPrefab : MonoBehaviour {
         return null;
     }
 
+    public GameObject GetHandle() {
+        return currentHandleSelected;
+    }
+
     public void SetHandle(GameObject handle) {
         currentHandleSelected = handle;
     }
 
+<<<<<<< HEAD
     public GameObject GetSelectedHandle()
     {
         return currentHandleSelected;
+=======
+    public void SetHandle(string tag) {
+        switch (tag) {
+            case "xHandle":
+                currentHandleSelected = handles[0];
+                return;
+            case "yHandle":
+                currentHandleSelected = handles[1];
+                return;
+            case "zHandle":
+                currentHandleSelected = handles[2];
+                return;
+        }
+        //currentHandleSelected = handle;
+>>>>>>> af43b406d4914e799febcc70f1854ecadea65ed6
     }
 
     public void Destroy() {

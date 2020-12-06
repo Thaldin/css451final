@@ -34,6 +34,10 @@
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
             float4x4 MyXformMat;
+			float xScale;
+			float yScale;
+			float xOffset;
+			float yOffset;
             fixed4   MyColor;
 			
 			v2f vert (appdata v)
