@@ -203,6 +203,9 @@ MonoBehaviour:
   - {fileID: 2800000, guid: c1520d02d82ca5a46a38661afc72bc62, type: 3}
   - {fileID: 2800000, guid: b3053429e330c2f4a9e85f1dd4c3ef75, type: 3}
   - {fileID: 2800000, guid: 23e2259975c0a0948a12be4849bffa72, type: 3}
+  uvOffset: {x: 0, y: 0}
+  uvRotation: 0
+  uvTile: {x: 1, y: 1}
 --- !u!114 &23607282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,6 +1250,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319648459397528849, guid: 88b9b81625e061647b89573e144af90a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88b9b81625e061647b89573e144af90a, type: 3}

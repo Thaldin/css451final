@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ScottAndEdMp5.unity
+    guid: 4da8adeda8d59ae409dbb4396a2e5ae6
   m_configObjects: {}
