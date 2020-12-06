@@ -259,6 +259,7 @@ public class cylinderGeneration : meshGeneration
                     // Right column of vertices
                     int triId = ((i / resolution) * triPerRow) - 1;
                     normals[i] = (triNormals[triId] + triNormals[triId + triPerRow - 1] + triNormals[triId + triPerRow]).normalized * -1;
+                    Debug.Log(triId + " " + (triId + triPerRow - 1) + " " + (triId + triPerRow));
                 }
                 else
                 {
