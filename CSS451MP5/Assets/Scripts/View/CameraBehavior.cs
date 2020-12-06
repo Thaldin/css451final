@@ -2,7 +2,7 @@
 
 public class CameraBehavior : MonoBehaviour
 {
-    public float MinZoomDistance = 1.0f;
+    public float MinZoomDistance = 3.0f;
     public float RotationDegrees = 10.0f;
 
     private float rotationDelta = 0;
@@ -44,17 +44,13 @@ public class CameraBehavior : MonoBehaviour
         var v = vLookAt - transform.localPosition;
         float distance;
 
+        distance = v.magnitude + -delta;
+        
         // Check Zoom distance
-        if (v.magnitude >= MinZoomDistance)
+        if (distance >= MinZoomDistance)
         {
-            distance = v.magnitude + -delta;
+            transform.localPosition = vLookAt - (distance * v.normalized);
         }
-        else
-        {
-            distance = MinZoomDistance;
-        }
-
-        transform.localPosition = vLookAt - (distance * v.normalized);
     }
 
     // Take mouse input and tumble the camera
