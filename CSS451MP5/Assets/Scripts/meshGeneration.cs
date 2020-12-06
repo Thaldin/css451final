@@ -143,7 +143,6 @@ public abstract class meshGeneration : MonoBehaviour {
         int count = 0;
         foreach (var prefab in vertexPrefabs)
         {
-            //Debug.Log("ncount: " + count);
             Quaternion q = Quaternion.FromToRotation(Vector3.up, n[count]);
             prefab.transform.localRotation = q;
             count++;

@@ -78,6 +78,7 @@ public class cylinderGeneration : meshGeneration
         mesh = new Mesh();
 
         UpdateVertices();
+        GenerateTrianges();
         CalculateNormals(vertices, CylinderResolution);
 
         mesh.vertices = vertices;
@@ -115,9 +116,9 @@ public class cylinderGeneration : meshGeneration
 
             for (int i = 0; i < CylinderResolution; i++)
             {
-                vertices[vertexCount--] = new Vector3(translate.magnitude * Mathf.Cos(i * fTheta),
-                                                    center.y,
-                                                    translate.magnitude * Mathf.Sin(i * fTheta));
+                vertexPrefabs[vertexCount--].transform.localPosition = new Vector3(translate.magnitude * Mathf.Cos(i * fTheta),
+                                                                                   center.y,
+                                                                                   translate.magnitude * Mathf.Sin(i * fTheta));
             }
 
             if (CylinderRotation == 360)
