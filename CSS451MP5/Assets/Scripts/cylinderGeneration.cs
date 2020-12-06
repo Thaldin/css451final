@@ -88,6 +88,7 @@ public class cylinderGeneration : meshGeneration
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = vertexPrefabs[i].transform.position;
+            vertexPrefabs[i].transform.GetChild(1).transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 
@@ -257,6 +258,7 @@ public class cylinderGeneration : meshGeneration
                     // Right column of vertices
                     int triId = ((i / resolution) * triPerRow) - 1;
                     normals[i] = (triNormals[triId] + triNormals[triId + triPerRow - 1] + triNormals[triId + triPerRow]).normalized * -1;
+                    Debug.Log(triId + " " + (triId + triPerRow - 1) + " " + (triId + triPerRow));
                 }
                 else
                 {
