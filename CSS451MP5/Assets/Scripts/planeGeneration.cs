@@ -10,9 +10,9 @@ public class planeGeneration : meshGeneration {
     public Texture[] selectableTextures = new Texture[0];
 
     Matrix3x3 uvMatrix = new Matrix3x3();
-    Vector2 uvOffset = new Vector2(0f, 0f);
-    float uvRotation = 0f;
-    Vector2 uvTile = new Vector2(1f, 1f);
+    [SerializeField] Vector2 uvOffset = new Vector2(0f, 0f);
+    [SerializeField] float uvRotation = 0f;
+    [SerializeField] Vector2 uvTile = new Vector2(1f, 1f);
 
 
     // the overall size of the plane
@@ -27,30 +27,30 @@ public class planeGeneration : meshGeneration {
 
     #region Sliders
     // uv scale
-    public void SetUVTileX(float v) {
+
+    public void SetUVTile(Vector3 v) {
         //planeTileScale.x = v;
-        uvTile.x = v;
-        uvMatrix *= Matrix3x3Helpers.CreateScale(uvTile);
+        //uvTile = new Vector2(v / uvTile.x, uvTile.y);
+        uvTile = v;
+        uvMatrix = Matrix3x3Helpers.CreateTRS(uvOffset, uvRotation, uvTile);
     }
-    public void SetUVTileY(float v) {
-        //planeTileScale.y = v;
-        uvTile.y = v;
-        uvMatrix *= Matrix3x3Helpers.CreateScale(uvTile);
-    }
+
     public Vector3 GetUVTile() {
         return uvTile;
     }
 
     // uv offset
-    public void SetUVOffsetX(float v) {
+    public void SetUVOffset(Vector3 v) {
         //planeOffset.x = v;
-        uvOffset.x = v;
-        uvMatrix *= Matrix3x3Helpers.CreateTranslation(uvOffset);
+        //uvOffset.x = v;
+        uvOffset = v;
+        uvMatrix = Matrix3x3Helpers.CreateTRS(uvOffset, uvRotation, uvTile);
     }
-    public void SetUVOffsetY(float v) {
+    public void SetUVOffsetY(Vector3 v) {
         //planeOffset.y = v;
-        uvOffset.y = v;
-        uvMatrix *= Matrix3x3Helpers.CreateTranslation(uvOffset);
+        //uvOffset.y = v;
+        uvOffset = v;
+        uvMatrix = Matrix3x3Helpers.CreateTRS(uvOffset, uvRotation, uvTile);
     }
     public Vector3 GetUVOffset() {
         return uvOffset;

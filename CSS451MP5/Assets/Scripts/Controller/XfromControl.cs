@@ -81,17 +81,17 @@ public class XfromControl : MonoBehaviour {
         if (!onToggle) {
             Vector3 p = ReadObjectXfrom();
             // if not in rotation, next two lines of work would be wasted
-            float dx = v - mPreviousSliderValues.x;
-            mPreviousSliderValues.x = v;
-            Quaternion q = Quaternion.AngleAxis(dx, Vector3.right);
+            //float dx = v - mPreviousSliderValues.x;
+            //mPreviousSliderValues.x = v;
+            //Quaternion q = Quaternion.AngleAxis(dx, Vector3.right);
             p.x = v;
-            UISetObjectXform(ref p, ref q);
+            //UISetObjectXform(ref p, ref q);
 
             //MP5
             if (T.isOn) {
-                theWorld.SetTileOffsetX(v);
+                theWorld.SetUVOffset(p);
             } else if (S.isOn) {
-                theWorld.SetTileScaleX(v);
+                theWorld.SetTileOffset(p);
             }
             theWorld.RenderPlane();
         }
@@ -101,17 +101,17 @@ public class XfromControl : MonoBehaviour {
         if (!onToggle) {
             Vector3 p = ReadObjectXfrom();
             // if not in rotation, next two lines of work would be wasted
-            float dy = v - mPreviousSliderValues.y;
-            mPreviousSliderValues.y = v;
-            Quaternion q = Quaternion.AngleAxis(dy, Vector3.up);
+            //float dy = v - mPreviousSliderValues.y;
+            //mPreviousSliderValues.y = v;
+            //Quaternion q = Quaternion.AngleAxis(dy, Vector3.up);
             p.y = v;
-            UISetObjectXform(ref p, ref q);
+            //UISetObjectXform(ref p, ref q);
 
             //MP5
             if (T.isOn) {
-                theWorld.SetTileOffsetY(v);
+                theWorld.SetTileOffsetY(p);
             } else if (S.isOn) {
-                theWorld.SetTileScaleY(v);
+                theWorld.SetTileOffset(p);
             }
             theWorld.RenderPlane();
         }

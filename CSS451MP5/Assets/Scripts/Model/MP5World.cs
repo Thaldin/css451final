@@ -164,24 +164,20 @@ public class MP5World : MonoBehaviour {
         RenderPlane();
     }
 
-    // set scales
-    public void SetTileScaleX(float v) {
-        planeGen.SetUVTileX(v);
-    }
-    public void SetTileScaleY(float v) {
-        planeGen.SetUVTileY(v);
-    }
-
     public Vector3 GetUVTile() {
         return planeGen.GetUVTile();
     }
 
     // set offset
-    public void SetTileOffsetX(float v) {
-        planeGen.SetUVOffsetX(v);
+    public void SetUVOffset(Vector3 v) {
+        planeGen.SetUVOffset(v);
     }
-    public void SetTileOffsetY(float v) {
+    public void SetTileOffsetY(Vector3 v) {
         planeGen.SetUVOffsetY(v);
+    }
+
+    public void SetTileOffset(Vector3 v) {
+        planeGen.SetUVTile(v);
     }
 
     public Vector3 GetUVOffset() {
