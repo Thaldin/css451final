@@ -8,8 +8,10 @@ public class NodePrimitive : MonoBehaviour {
     public Color MyColor = new Color(0.1f, 0.1f, 0.2f, 1.0f);
 
     // rotation center
-    [Header("Distance From Sun")]
-    public Vector3 rotationCenter;
+    [Header("Distance From Sun in Millions of Miles")]
+    public float distanceFromSun = 10;
+    [SerializeField] private Vector3 rotationCenter;
+    [SerializeField] float systemScale = 1f;
 
     // 1 = 1 Earth Day
     // how fast the object will rotate on local axis
@@ -29,6 +31,9 @@ public class NodePrimitive : MonoBehaviour {
         //Debug.Assert(collider != null, "Please set collider object in Editor");
     }
 
+    public void SetSystemScale(float v) {
+        systemScale = v;
+    }
 
     public float GetPlanetDiameter() {
         return planetDiameter / EMI;
@@ -43,7 +48,8 @@ public class NodePrimitive : MonoBehaviour {
         Matrix4x4 scale = Matrix4x4.Scale(new Vector3(planetDiameter / EMI, planetDiameter / EMI, planetDiameter / EMI));
         // apply pivot
         // object distance from center of system
-        Matrix4x4 orgT = Matrix4x4.Translate(rotationCenter);
+        Vector3 pos = new Vector3(distanceFromSun / systemScale, 0f, 0f);
+        Matrix4x4 orgT = Matrix4x4.Translate(pos);
 
         /* TODO: legacy vertify delete
         //Matrix4x4 p = Matrix4x4.TRS(rotationCenter, Quaternion.identity, Vector3.one);

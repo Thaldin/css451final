@@ -44,7 +44,7 @@ public class TheWorld : MonoBehaviour {
         //if childCount changes, update colliders
         SetSceneColliders();
         DrawTargets();
-
+        DrawStarLines();
         Click();
     }
 
@@ -88,12 +88,20 @@ public class TheWorld : MonoBehaviour {
         }
         sceneObjects.Clear();
     }
-
+    
     void DrawTargets() {
         for (int i = 0; i < m4x4s.Count; i++) {
             Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
-            ObjColliders[i].transform.position = pos;
             Debug.DrawLine(pos, asteroid.transform.position, Color.blue);
+        }
+    }
+
+    void DrawStarLines() {
+        for (int i = 0; i < m4x4s.Count; i++) {
+            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
+            ObjColliders[i].transform.position = pos;
+            // the star is the first trasform of the root
+            Debug.DrawLine(pos, TheRoot.transform.GetChild(0).transform.position, Color.white);
         }
     }
 
