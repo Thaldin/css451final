@@ -3,6 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		_EmissionColor("Emission Color", Color) = (0,0,0)
 	}
 	SubShader
 	{
@@ -43,8 +44,11 @@
                 o.vertex = mul(UNITY_MATRIX_VP, o.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				return o;
+
+
 			}
 			
+
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// sample the texture
