@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &33333994
+--- !u!21 &48486419
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -156,7 +156,9 @@ Material:
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance)
   m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -242,7 +244,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1979110959}
+      objectReference: {fileID: 433764196}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -329,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &402307560
+--- !u!21 &300420069
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -342,7 +344,39 @@ Material:
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
+--- !u!21 &433764196
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance)
   m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -428,7 +462,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1060901703}
+      objectReference: {fileID: 1885276291}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: planetDiameter
@@ -446,34 +480,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a22f3600f1216c849bb77db121e074c3, type: 3}
---- !u!21 &530543385
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!4 &538138397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
@@ -536,11 +542,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 10
-  orbitalPeriod: 10.585
-  yAngle: 75.86207
+  orbitalPeriod: 10748.337
+  yAngle: 1.8884704
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 538138398}
+--- !u!21 &568463864
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &608516912
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +626,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &613828057
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &648063720
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,12 +700,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 10
-  orbitalPeriod: 687
-  yAngle: 164.42078
+  orbitalPeriod: 686.49774
+  yAngle: 23.718813
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 694472754}
---- !u!21 &665824890
+--- !u!21 &652797498
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -652,7 +718,9 @@ Material:
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance)
   m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -697,166 +765,168 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroid: {fileID: 1454535064}
-  childCount: 1
-  colliders: []
-  collider: {fileID: 709537192}
+  childCount: 30
+  sceneObjects: []
+  ObjColliders: []
+  objCollider: {fileID: 2555842827803325136, guid: c1e64f388befbe14f8bb950c502816f8,
+    type: 3}
   TheRoot: {fileID: 608516913}
-  objs:
-  - e00: -0.34111658
+  m4x4s:
+  - e00: 0.04231392
     e01: 0
-    e02: 0.17401093
-    e03: 3.6307058
+    e02: 0.3805915
+    e03: 0.7664282
     e10: 0
     e11: 0.3829365
     e12: 0
     e13: 0
-    e20: -0.17401093
+    e20: -0.3805915
     e21: 0
-    e22: -0.34111658
-    e23: -2.2443736
+    e22: 0.04231392
+    e23: -4.199027
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: 0.6443387
+  - e00: -0.8980747
     e01: 0
-    e02: -0.6979467
-    e03: 4.170771
+    e02: 0.3094574
+    e03: -6.1259294
     e10: 0
     e11: 0.9498958
     e12: 0
     e13: 0
-    e20: 0.6979467
+    e20: -0.3094574
     e21: 0
-    e22: 0.6443387
-    e23: 5.2472405
+    e22: -0.8980747
+    e23: -2.7206345
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: -0.042413075
+  - e00: -0.25804138
     e01: 0
-    e02: -0.2693429
-    e03: 2.385342
+    e02: 0.088085815
+    e03: -7.701556
     e10: 0
     e11: 0.27266183
     e12: 0
     e13: 0
-    e20: 0.2693429
+    e20: -0.088085815
     e21: 0
-    e22: -0.042413075
-    e23: -8.351657
+    e22: -0.25804138
+    e23: 6.9940434
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: 0.29877588
+  - e00: -0.5771993
     e01: 0
-    e02: 0.9542571
-    e03: 3.634238
+    e02: -0.8165259
+    e03: -6.724366
     e10: 0
     e11: 0.9999368
     e12: 0
     e13: 0
-    e20: -0.9542571
+    e20: 0.8165259
     e21: 0
-    e22: 0.29877588
-    e23: -8.404173
+    e22: -0.5771993
+    e23: 6.2145567
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: 0.16104595
+  - e00: -0.33181757
     e01: 0
-    e02: -0.5070638
-    e03: 2.8386133
+    e02: -0.4158685
+    e03: -10.974676
     e10: 0
     e11: 0.53202397
     e12: 0
     e13: 0
-    e20: 0.5070638
+    e20: 0.4158685
     e21: 0
-    e22: 0.16104595
-    e23: 13.872558
+    e22: -0.33181757
+    e23: 8.94774
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: -8.23669
+  - e00: 9.63712
     e01: 0
-    e02: 7.250515
-    e03: -32.86626
+    e02: -5.2477546
+    e03: 38.455982
     e10: 0
     e11: 10.973287
     e12: 0
     e13: 0
-    e20: -7.250515
+    e20: 5.2477546
     e21: 0
-    e22: -8.23669
-    e23: -34.260464
+    e22: 9.63712
+    e23: 27.840757
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: -8.696609
+  - e00: -8.281956
     e01: 0
-    e02: -2.8126543
-    e03: -90.319145
+    e02: -3.8666837
+    e03: -88.4744
     e10: 0
     e11: 9.140133
     e12: 0
     e13: 0
-    e20: 2.8126543
+    e20: 3.8666837
     e21: 0
-    e22: -8.696609
-    e23: 20.861053
+    e22: -8.281956
+    e23: 27.658869
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: -1.7457722
+  - e00: 0.41182765
     e01: 0
-    e02: -3.577578
-    e03: -95.84325
+    e02: -3.9594421
+    e03: -11.95323
     e10: 0
     e11: 3.980802
     e12: 0
     e13: 0
-    e20: 3.577578
+    e20: 3.9594421
     e21: 0
-    e22: -1.7457722
-    e23: 156.84447
+    e22: 0.41182765
+    e23: 183.42091
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: 3.0110567
+  - e00: -3.8519785
     e01: 0
-    e02: -2.4227405
-    e03: 199.54993
+    e02: 0.31368938
+    e03: -269.88126
     e10: 0
     e11: 3.8647301
     e12: 0
     e13: 0
-    e20: 2.4227405
+    e20: -0.31368938
     e21: 0
-    e22: 3.0110567
-    e23: 193.74236
+    e22: -3.8519785
+    e23: -67.233894
     e30: 0
     e31: 0
     e32: 0
     e33: 1
-  - e00: -0.65478665
+  - e00: -1.1883174
     e01: 0
-    e02: 1.0800399
+    e02: -0.42794123
     e03: 0
     e10: 0
     e11: 1.2630249
     e12: 0
     e13: 0
-    e20: -1.0800399
+    e20: 0.42794123
     e21: 0
-    e22: -0.65478665
+    e22: -1.1883174
     e23: 0
     e30: 0
     e31: 0
@@ -894,63 +964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &709537192
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 709537195}
-  - component: {fileID: 709537194}
-  - component: {fileID: 709537193}
-  m_Layer: 0
-  m_Name: sphereCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &709537193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709537192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 444077376a74efc4d9f1cfbb4bb97b7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!135 &709537194
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709537192}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &709537195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709537192}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &736313646
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,8 +1008,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 10
-  orbitalPeriod: 30.66
-  yAngle: 121.42857
+  orbitalPeriod: 30666.148
+  yAngle: 70.79958
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 1752734654}
@@ -1071,7 +1084,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2069747114}
+      objectReference: {fileID: 568463864}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -1104,34 +1117,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a22f3600f1216c849bb77db121e074c3, type: 3}
---- !u!21 &771049007
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &784424210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1203,7 +1188,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 771049007}
+      objectReference: {fileID: 1956647635}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -1281,38 +1266,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 10
   orbitalPeriod: 29
-  yAngle: 115.7931
+  yAngle: 355.83508
   planetOrigin: {x: 9.1563, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 99829516}
---- !u!21 &1060901703
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &1092945902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,11 +1406,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 10
-  orbitalPeriod: 60.225
-  yAngle: 198.70251
+  orbitalPeriod: 60148.832
+  yAngle: 330.53918
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 1602892278}
+--- !u!21 &1127782391
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &1166671691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 10
   orbitalPeriod: 365
-  yAngle: 309.47128
+  yAngle: 27.271826
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 1539263943}
@@ -1575,7 +1562,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 402307560}
+      objectReference: {fileID: 652797498}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.r
@@ -1678,6 +1665,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1469038627
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1001 &1501122717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1749,7 +1766,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 530543385}
+      objectReference: {fileID: 48486419}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.g
@@ -1848,7 +1865,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2027426967}
+      objectReference: {fileID: 1127782391}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.g
@@ -2023,7 +2040,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1698112759}
+      objectReference: {fileID: 1469038627}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -2101,7 +2118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 10
   orbitalPeriod: 225
-  yAngle: 191.33597
+  yAngle: 320.58133
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 1897755906}
@@ -2158,38 +2175,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 10
   orbitalPeriod: 365
-  yAngle: 331.1435
+  yAngle: 49.471825
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 26089073}
---- !u!21 &1698112759
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!4 &1752734653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
@@ -2279,7 +2268,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 33333994}
+      objectReference: {fileID: 613828057}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -2395,6 +2384,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1885276291
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!4 &1897755905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
@@ -2413,7 +2432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &1979110959
+--- !u!21 &1956647635
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -2426,7 +2445,9 @@ Material:
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
     (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance)
   m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -2512,7 +2533,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 665824890}
+      objectReference: {fileID: 300420069}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -2545,34 +2566,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a22f3600f1216c849bb77db121e074c3, type: 3}
---- !u!21 &2027426967
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &2028815436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,39 +2610,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 10
-  orbitalPeriod: 4.38
-  yAngle: 16.666666
+  orbitalPeriod: 4329.8545
+  yAngle: 128.62498
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 115676636}
---- !u!21 &2069747114
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &2143568710
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,7 +2660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 10
   orbitalPeriod: 88
-  yAngle: 274.5794
+  yAngle: 244.18413
   planetOrigin: {x: 0, y: 0, z: 0}
   PrimitiveList:
   - {fileID: 57493427}

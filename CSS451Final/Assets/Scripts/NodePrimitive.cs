@@ -29,6 +29,10 @@ public class NodePrimitive : MonoBehaviour {
         //Debug.Assert(collider != null, "Please set collider object in Editor");
     }
 
+
+    public float GetPlanetDiameter() {
+        return planetDiameter / EMI;
+    }
     public Matrix4x4 LoadShaderMatrix(ref Matrix4x4 nodeMatrix) {
         // apply local roation
         // object rotaitons

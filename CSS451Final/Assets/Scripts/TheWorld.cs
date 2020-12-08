@@ -3,49 +3,109 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[ExecuteInEditMode]
-public class TheWorld : MonoBehaviour
-{
+
+public class TheWorld : MonoBehaviour {
     // test singleton
     public GameObject asteroid = null;
 
     // testing
     [SerializeField] int childCount = 0;
-    [SerializeField] List<GameObject> colliders = new List<GameObject>();
-    public GameObject collider = null;
+    [SerializeField] List<Transform> sceneObjects = new List<Transform>();
+
+    [SerializeField] List<GameObject> ObjColliders = new List<GameObject>();
+    public GameObject objCollider = null;
 
     // root of M4x4 shader
     public SceneNode TheRoot;
 
     // M4x4s  in scene
-    [SerializeField] List<Matrix4x4> objs = new List<Matrix4x4>();
+    [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
 
 
     void Start() {
-        Debug.Assert(!collider, "Please set Colliser prefab in the Editor.");
+        ResetColliders();
+        ResetSceneObjects();
+
+        Debug.Assert(objCollider != null, "Please set Collider prefab in the Editor.");
         // get number of child transforms of root
-        childCount = TheRoot.transform.childCount;
+        GetSceneObjects();
+        childCount = sceneObjects.Count;
+
+        CreateSceneColliders();
+
     }
 
+
     // Update is called once per frame
-    void Update()
-    {
-        objs.Clear();
+    void Update() {
+        m4x4s.Clear();
         Matrix4x4 i = Matrix4x4.identity;
-        TheRoot.CompositeXform(ref i, ref objs);
+        TheRoot.CompositeXform(ref i, ref m4x4s);
+        //if childCount changes, update colliders
+        SetSceneColliders();
         DrawTargets();
+
+        Click();
+    }
+
+    void GetSceneObjects() {
+        TheRoot.GetChildren(ref sceneObjects);
+    }
+
+    void CreateSceneColliders() {
+        ResetColliders();
+        for (int i = 0; i < childCount; i++) {
+            GameObject objColliderClone = Instantiate(objCollider);
+            ObjColliders.Add(objColliderClone);
+        }
     }
 
     void SetSceneColliders() {
         for (int i = 0; i < childCount; i++) {
+            // set the name of the collider obj
+            ObjColliders[i].name = sceneObjects[i].name + "Collider";
 
+            // set the radius of the collider obj
+            sphereColliderScript scs;
+            ObjColliders[i].TryGetComponent<sphereColliderScript>(out scs);
+            if (scs) {
+                float diameter = sceneObjects[i].GetComponent<SceneNode>().GetPlanetDiameter();
+                scs.Initialize(diameter);
+            }
         }
     }
 
+    void ResetColliders() {
+        foreach (var c in ObjColliders) {
+            Destroy(c);
+        }
+        ObjColliders.Clear();
+    }
+
+    void ResetSceneObjects() {
+        foreach (var c in sceneObjects) {
+            Destroy(c);
+        }
+        sceneObjects.Clear();
+    }
+
     void DrawTargets() {
-        foreach (var m in objs) {
-            Vector3 pos = new Vector3(m.m03, m.m13, m.m23);
+        for (int i = 0; i < m4x4s.Count; i++) {
+            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
+            ObjColliders[i].transform.position = pos;
             Debug.DrawLine(pos, asteroid.transform.position, Color.blue);
+        }
+    }
+
+    void Click() {
+        if (Input.GetMouseButtonDown(0)) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                if (hit.transform.CompareTag("planet")) {
+                    Debug.Log(hit.transform.name + " selected!");
+                }
+            }
         }
     }
 }

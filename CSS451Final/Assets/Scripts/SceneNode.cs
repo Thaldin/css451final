@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 
 public class SceneNode : MonoBehaviour {
-    bool selected = false;
     public float timeScale = 10f;
 
     // 1 = 365 days
@@ -17,7 +16,6 @@ public class SceneNode : MonoBehaviour {
 
     // this controls the object center rotation
     // a moon should match the pivot of the parent Node Primitve
-
     public Vector3 planetOrigin = Vector3.zero;
 
     // 
@@ -44,6 +42,20 @@ public class SceneNode : MonoBehaviour {
 
         mCombinedParentXform = Matrix4x4.identity;
         //OP_STD = 365f * timeScale;
+    }
+
+    public void GetChildren(ref List<Transform> sceneObjects) {
+        foreach (Transform child in transform) {
+            SceneNode cn = child.GetComponent<SceneNode>();
+            if (cn != null) {
+                cn.GetChildren(ref sceneObjects);
+                sceneObjects.Add(child);
+            }
+        }
+    }
+
+    public float GetPlanetDiameter() {
+        return PrimitiveList[0].GetComponent<NodePrimitive>().GetPlanetDiameter();
     }
 
     // This must be called _BEFORE_ each draw!! 
@@ -73,43 +85,3 @@ public class SceneNode : MonoBehaviour {
         }
     }
 }
-
-        /* TODO: legacy code. queue for delete
-        // Compute AxisFrame
-        if (AxisFrame != null) {
-            AxisFrame.localPosition = mCombinedParentXform.MultiplyPoint(kDefaultTreeTip);
-            
-            // 
-            // What is going on in the next two lines of code?
-            Vector3 up = mCombinedParentXform.GetColumn(1).normalized;
-            Vector3 forward = mCombinedParentXform.GetColumn(2).normalized;
-
-            if (UseUnity) {
-                AxisFrame.localRotation = Quaternion.LookRotation(forward, up);
-            } else {
-                // First align up direction, remember that the default AxisFrame.up is simply the y-axis
-                float angle = Mathf.Acos(Vector3.Dot(Vector3.up, up)) * Mathf.Rad2Deg;
-                Vector3 axis = Vector3.Cross(Vector3.up, up);
-                AxisFrame.localRotation = Quaternion.AngleAxis(angle, axis);
-
-                // Now, align the forward axis
-                angle = Mathf.Acos(Vector3.Dot(AxisFrame.transform.forward, forward)) * Mathf.Rad2Deg;
-                axis = Vector3.Cross(AxisFrame.transform.forward, forward);
-                AxisFrame.localRotation = Quaternion.AngleAxis(angle, axis) * AxisFrame.localRotation;
-            }
-        }
-    }
-    */
-
-        /* TODO: legacy code. queue for delete
-       public List<Transform> AddObj(ref List<Transform> sceneObjects) {
-            foreach (Transform child in transform) {
-                SceneNode cn = child.GetComponent<SceneNode>();
-                if (cn != null) {
-                    cn.AddObj(ref sceneObjects);
-                }
-            }
-            sceneObjects.Add(transform);
-            return sceneObjects;
-        }
-        */

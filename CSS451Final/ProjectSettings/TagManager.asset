@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - primitive
+  - planet
   layers:
   - Default
   - TransparentFX
