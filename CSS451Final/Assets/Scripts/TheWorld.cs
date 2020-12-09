@@ -21,17 +21,17 @@ public class TheWorld : MonoBehaviour {
     // M4x4s  in scene
     [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
 
-    
+
     void Start() {
         ResetColliders();
         ResetSceneObjects();
 
         Debug.Assert(objCollider != null, "Please set Collider prefab in the Editor.");
-        
+
         // get number of child transforms of root
         GetSceneObjects();
         childCount = sceneObjects.Count;
-        
+
         // initialize planets
         InitSceneObjects();
 
@@ -47,18 +47,23 @@ public class TheWorld : MonoBehaviour {
         Matrix4x4 i = Matrix4x4.identity;
         if (init) {
             TheRoot.CompositeXform(ref i, ref m4x4s);
+            //if childCount changes, update colliders
+            SetSceneColliders();
+            DrawTargets();
+            DrawStarLines();
+            Click();
         }
-        //if childCount changes, update colliders
-        SetSceneColliders();
-        DrawTargets();
-        DrawStarLines();
-        Click();
+
     }
 
+    // populates sceneObjects list
     void GetSceneObjects() {
         TheRoot.GetChildren(ref sceneObjects);
     }
 
+    // initialize scene objects
+    //<summary>
+    // Sets scene object parameters.
     void InitSceneObjects() {
         TheRoot.InitializeSceneNode();
         init = true;
@@ -102,7 +107,7 @@ public class TheWorld : MonoBehaviour {
         }
         sceneObjects.Clear();
     }
-    
+
     void DrawTargets() {
         for (int i = 0; i < m4x4s.Count; i++) {
             Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
@@ -130,4 +135,13 @@ public class TheWorld : MonoBehaviour {
             }
         }
     }
+
+    #region Runtime Set Functions
+    // set global time scale
+    public void SetTimeScale(float v) {
+        foreach (var sn in sceneObjects) {
+            sn.GetComponent<SceneNode>().SetTimeScale(v);
+        }
+    }
+    #endregion
 }

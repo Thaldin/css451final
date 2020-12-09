@@ -4,47 +4,48 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class NodePrimitive : MonoBehaviour {
-    //public GameObject collider = null;
-
 
     public Color MyColor = new Color(0.1f, 0.1f, 0.2f, 1.0f);
 
+    // properties
+    [SerializeField] float distanceFromSun = 10;
     // rotation center
-    [Header("Distance From Sun in Millions of Miles")]
-    public float distanceFromSun = 10;
-    [SerializeField] private Vector3 rotationCenter;
-    [SerializeField] float systemScale = 1f;
+    float planetOffset = 0f;
+    [SerializeField] Vector3 offsetFromPlanet;
+    float systemScale = 1f;
 
     // 1 = 1 Earth Day
     // how fast the object will rotate on local axis
     // 1 = 24hrs
     const float SIDEREAL_ROTATIONAL_PERIOD = 24f;
-    [Header("In Hours")]
-    public float planetRotation = 1f;
+    [SerializeField] float planetRotation = 1f;
+    float timeScale = 1f;
 
     // the earth = 1
     // the earth = 7,917.5 mi
     const float EMI = 7917.5f;
-    [Header("In Miles")]
-    public float planetDiameter = 10000f;
+    [SerializeField] float planetDiameter = 10000f;
+    [SerializeField] float pd; // debug
     float yAngle = 0f;
 
     // components
     MeshFilter mf;
     Renderer mr;
 
-    public Texture2D mainText;
+    [SerializeField] Texture2D mainText;
 
-    
+
+
     private void Awake() {
         mf = GetComponent<MeshFilter>();
         mr = GetComponent<Renderer>();
+        pd = planetDiameter / EMI;
         //mr.material = (Material)Instantiate(mr.material);
     }
 
 
     // initialize primitive
-    public void Initiallize(Texture2D mt, float d = 1000f, float dfs = 10f, float srp = 24f) {
+    public void Initiallize(Texture2D mt, float d = 1000f, float dfs = 10f, float srp = 24f, float ofp = 0f) {
 
         Debug.Log("Initalizing " + name);
         // set params
@@ -52,28 +53,24 @@ public class NodePrimitive : MonoBehaviour {
         planetDiameter = d;
         distanceFromSun = dfs;
         planetRotation = srp;
-
+        planetOffset = ofp;
+        offsetFromPlanet = new Vector3(planetOffset, planetOffset, planetOffset);
         // create mesh
         mf.mesh.Clear();
         // 20 for default slices and stacks
         Mesh mesh = Utils.Utils.CreateSphereMesh(planetDiameter / EMI);
         mf.mesh = mesh;
 
-        //mr.material.EnableKeyword("_MainTex");
-        //mr.material.SetTexture("_MainTex", mainTex);
-    }
-
-    public void SetSystemScale(float v) {
-        systemScale = v;
     }
 
     public float GetPlanetDiameter() {
-        return planetDiameter / EMI;
+        return pd;
     }
     public Matrix4x4 LoadShaderMatrix(ref Matrix4x4 nodeMatrix) {
+        
         // apply local roation
         // object rotaitons
-        yAngle = (yAngle <= 360f) ? yAngle + (planetRotation / SIDEREAL_ROTATIONAL_PERIOD) : 0f;
+        yAngle = (yAngle <= 360f) ? yAngle + (planetRotation / SIDEREAL_ROTATIONAL_PERIOD) * timeScale : 0f;
         Matrix4x4 rot = Matrix4x4.Rotate(Quaternion.Euler(0f, yAngle, 0f));
         // apply local scale
         // object diameter
@@ -82,6 +79,7 @@ public class NodePrimitive : MonoBehaviour {
         // object distance from center of system
         Vector3 pos = new Vector3(distanceFromSun / systemScale, 0f, 0f);
         Matrix4x4 orgT = Matrix4x4.Translate(pos);
+        Matrix4x4 offset = Matrix4x4.Translate(offsetFromPlanet);
 
         /* TODO: legacy vertify delete
         //Matrix4x4 p = Matrix4x4.TRS(rotationCenter, Quaternion.identity, Vector3.one);
@@ -91,7 +89,7 @@ public class NodePrimitive : MonoBehaviour {
         // apply trs of obj
         Matrix4x4 trs = Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
         // combine trs/ rotation/ sclae/ pivot to matrix
-        Matrix4x4 m = nodeMatrix * orgT * trs * rot * scale;
+        Matrix4x4 m = nodeMatrix * orgT * trs * rot * scale * offset; 
 
         // send to shader
         GetComponent<MeshRenderer>().material.SetMatrix("MyXformMat", m);
@@ -99,7 +97,21 @@ public class NodePrimitive : MonoBehaviour {
         GetComponent<MeshRenderer>().material.SetTexture("_MainTex", mainText);
         // return matrix to theWorld
 
+        Vector3 s = new Vector3(m.GetColumn(0).magnitude, m.GetColumn(2).magnitude, m.GetColumn(2).magnitude);
+        pd = s.x;
 
         return m;
+
     }
+
+    #region Runtime Set Functions
+    // set global time scale
+    public void SetTimeScale(float v) {
+        timeScale = v;
+    }
+
+    public void SetSystemScale(float v) {
+        systemScale = v;
+    }
+    #endregion
 }

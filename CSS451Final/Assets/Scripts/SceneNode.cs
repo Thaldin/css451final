@@ -24,6 +24,9 @@ public class SceneNode : MonoBehaviour {
     [Header("In Hours")]
     public float planetRotation = 1f;
 
+    [Header("Moon Only")]
+    public float offsetFromPlanet = 0f;
+
     // M4x4 for shader movement
     protected Matrix4x4 mCombinedParentXform;
 
@@ -39,9 +42,6 @@ public class SceneNode : MonoBehaviour {
         Debug.Assert(mainTex != null, "Please set main texture for " + name + " in Editor");
         Debug.Assert(np != null, "Please set the Node Primitive for " + name + " in the Editor.");
         mCombinedParentXform = Matrix4x4.identity;
-        // Debug.Log("PrimitiveList:" + PrimitiveList.Count);
-        //orbitalPeriod /= 3650f;
-
     }
 
     // init the node
@@ -50,14 +50,12 @@ public class SceneNode : MonoBehaviour {
         foreach (Transform child in transform) {
             SceneNode sn = child.GetComponent<SceneNode>();
             if (sn != null) {
-
+                // init child
                 sn.InitializeSceneNode();
-                
-
             }
         }
-
-        np.Initiallize(mainTex, planetDiameter, distanceFromSun, planetRotation);
+        // init this
+        np.Initiallize(mainTex, planetDiameter, distanceFromSun, planetRotation, offsetFromPlanet);
     }
 
 
@@ -72,13 +70,7 @@ public class SceneNode : MonoBehaviour {
         }
     }
 
-    // gets the node diamter
-    public float GetPlanetDiameter() {
-        if (np != null) {
-            return np.GetComponent<NodePrimitive>().GetPlanetDiameter();
-        }
-        return 0f;
-    }
+    
 
     // This must be called _BEFORE_ each draw!! 
     public void CompositeXform(ref Matrix4x4 parentXform, ref List<Matrix4x4> sceneObjs) {
@@ -102,11 +94,21 @@ public class SceneNode : MonoBehaviour {
 
             // disenminate to primitives
             sceneObjs.Add(np.LoadShaderMatrix(ref mCombinedParentXform));
-            /*
-            foreach (NodePrimitive p in PrimitiveList) {
-                sceneObjs.Add(p.LoadShaderMatrix(ref mCombinedParentXform));
-            }
-            */
         }
     }
+
+    #region Runtime Set Functions
+    // gets the node diamter
+    public float GetPlanetDiameter() {
+        if (np != null) {
+            return np.GetComponent<NodePrimitive>().GetPlanetDiameter();
+        }
+        return 0f;
+    }
+
+    // set global time scale
+    public void SetTimeScale(float v) {
+        np.SetTimeScale(v);
+    }
+    #endregion
 }
