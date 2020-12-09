@@ -21,6 +21,7 @@ public class TheWorld : MonoBehaviour {
     // M4x4s  in scene
     [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
 
+    List<GameObject> starLines = new List<GameObject>();
 
     void Start() {
         ResetColliders();
@@ -108,21 +109,42 @@ public class TheWorld : MonoBehaviour {
         sceneObjects.Clear();
     }
 
+
+    #region Draw Lines
     void DrawTargets() {
         for (int i = 0; i < m4x4s.Count; i++) {
+            
             Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
             Debug.DrawLine(pos, asteroid.transform.position, Color.blue);
+            
         }
     }
 
     void DrawStarLines() {
+        ClearStarLines();
+
         for (int i = 0; i < ObjColliders.Count; i++) {
+            // create new line obj
+            GameObject line = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            line.GetComponent<MeshRenderer>().material.color = Color.white;
+            starLines.Add(line);
+
             Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
             ObjColliders[i].transform.position = pos;
             // the star is the first trasform of the root
-            Debug.DrawLine(pos, TheRoot.transform.GetChild(0).transform.position, Color.white);
+            // Debug.DrawLine(pos, TheRoot.transform.GetChild(0).transform.position, Color.white);
+            Utils.Utils.AdjustLine(line, pos, TheRoot.transform.GetChild(0).transform.position);
         }
     }
+
+    void ClearStarLines() {
+        foreach (var l in starLines) {
+            Destroy(l);
+        }
+        starLines.Clear();
+    }
+
+    #endregion
 
     void Click() {
         if (Input.GetMouseButtonDown(0)) {
