@@ -12,25 +12,30 @@ public class TheWorld : MonoBehaviour {
     [SerializeField] int childCount = 0;
     [SerializeField] List<Transform> sceneObjects = new List<Transform>();
 
-    [SerializeField] List<GameObject> ObjColliders = new List<GameObject>();
+    List<GameObject> ObjColliders = new List<GameObject>();
     public GameObject objCollider = null;
 
     // root of M4x4 shader
     public SceneNode TheRoot;
-
+    public bool init = false;
     // M4x4s  in scene
     [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
 
-
+    
     void Start() {
         ResetColliders();
         ResetSceneObjects();
 
         Debug.Assert(objCollider != null, "Please set Collider prefab in the Editor.");
+        
         // get number of child transforms of root
         GetSceneObjects();
         childCount = sceneObjects.Count;
+        
+        // initialize planets
+        InitSceneObjects();
 
+        // creat planet colliders
         CreateSceneColliders();
 
     }
@@ -40,7 +45,9 @@ public class TheWorld : MonoBehaviour {
     void Update() {
         m4x4s.Clear();
         Matrix4x4 i = Matrix4x4.identity;
-        TheRoot.CompositeXform(ref i, ref m4x4s);
+        if (init) {
+            TheRoot.CompositeXform(ref i, ref m4x4s);
+        }
         //if childCount changes, update colliders
         SetSceneColliders();
         DrawTargets();
@@ -52,6 +59,12 @@ public class TheWorld : MonoBehaviour {
         TheRoot.GetChildren(ref sceneObjects);
     }
 
+    void InitSceneObjects() {
+        TheRoot.InitializeSceneNode();
+        init = true;
+    }
+
+    // create planet colliders
     void CreateSceneColliders() {
         ResetColliders();
         for (int i = 0; i < childCount; i++) {
@@ -60,6 +73,7 @@ public class TheWorld : MonoBehaviour {
         }
     }
 
+    // set planet colliders
     void SetSceneColliders() {
         for (int i = 0; i < childCount; i++) {
             // set the name of the collider obj
@@ -97,7 +111,7 @@ public class TheWorld : MonoBehaviour {
     }
 
     void DrawStarLines() {
-        for (int i = 0; i < m4x4s.Count; i++) {
+        for (int i = 0; i < ObjColliders.Count; i++) {
             Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
             ObjColliders[i].transform.position = pos;
             // the star is the first trasform of the root

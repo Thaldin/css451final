@@ -143,36 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &48486419
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &55383224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,7 +173,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -213,7 +183,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -244,7 +214,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 433764196}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -336,66 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &300420069
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
---- !u!21 &433764196
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &493139051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,7 +336,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -436,7 +346,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -467,7 +377,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1885276291}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: planetDiameter
@@ -551,121 +461,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: 486bd6b371593994ab30c424fa2354b8, type: 3}
+  distanceFromSun: 926.97
+  planetDiameter: 72367
   orbitalPeriod: 10748.337
-  yAngle: 1.8884704
+  planetRotation: 11
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 538138398}
---- !u!21 &568463864
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  np: {fileID: 538138398}
+--- !u!4 &632544372 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2072464996}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
---- !u!1 &608516912
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 608516914}
-  - component: {fileID: 608516913}
-  m_Layer: 0
-  m_Name: universe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &608516913
+--- !u!114 &632544373 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2072464996}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608516912}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
+  m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
-  orbitalPeriod: 0
-  yAngle: 146
-  planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList: []
---- !u!4 &608516914
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608516912}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1675446471}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &613828057
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &648063720
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,42 +529,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: 83a3d8b6f9ee0414693b580bc9565d41, type: 3}
+  distanceFromSun: 141.6
+  planetDiameter: 4212.3
   orbitalPeriod: 686.49774
-  yAngle: 23.718813
+  planetRotation: 24.67
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 694472754}
---- !u!21 &652797498
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
+  np: {fileID: 694472754}
 --- !u!1 &676302152
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,171 +568,11 @@ MonoBehaviour:
   asteroid: {fileID: 1953980977}
   childCount: 30
   sceneObjects: []
-  ObjColliders: []
   objCollider: {fileID: 2555842827803325136, guid: c1e64f388befbe14f8bb950c502816f8,
     type: 3}
-  TheRoot: {fileID: 608516913}
-  m4x4s:
-  - e00: 0.04231392
-    e01: 0
-    e02: 0.3805915
-    e03: 0.7664282
-    e10: 0
-    e11: 0.3829365
-    e12: 0
-    e13: 0
-    e20: -0.3805915
-    e21: 0
-    e22: 0.04231392
-    e23: -4.199027
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: -0.8980747
-    e01: 0
-    e02: 0.3094574
-    e03: -6.1259294
-    e10: 0
-    e11: 0.9498958
-    e12: 0
-    e13: 0
-    e20: -0.3094574
-    e21: 0
-    e22: -0.8980747
-    e23: -2.7206345
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: -0.25804138
-    e01: 0
-    e02: 0.088085815
-    e03: -7.701556
-    e10: 0
-    e11: 0.27266183
-    e12: 0
-    e13: 0
-    e20: -0.088085815
-    e21: 0
-    e22: -0.25804138
-    e23: 6.9940434
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: -0.5771993
-    e01: 0
-    e02: -0.8165259
-    e03: -6.724366
-    e10: 0
-    e11: 0.9999368
-    e12: 0
-    e13: 0
-    e20: 0.8165259
-    e21: 0
-    e22: -0.5771993
-    e23: 6.2145567
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: -0.33181757
-    e01: 0
-    e02: -0.4158685
-    e03: -10.974676
-    e10: 0
-    e11: 0.53202397
-    e12: 0
-    e13: 0
-    e20: 0.4158685
-    e21: 0
-    e22: -0.33181757
-    e23: 8.94774
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: 9.63712
-    e01: 0
-    e02: -5.2477546
-    e03: 38.455982
-    e10: 0
-    e11: 10.973287
-    e12: 0
-    e13: 0
-    e20: 5.2477546
-    e21: 0
-    e22: 9.63712
-    e23: 27.840757
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: -8.281956
-    e01: 0
-    e02: -3.8666837
-    e03: -88.4744
-    e10: 0
-    e11: 9.140133
-    e12: 0
-    e13: 0
-    e20: 3.8666837
-    e21: 0
-    e22: -8.281956
-    e23: 27.658869
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: 0.41182765
-    e01: 0
-    e02: -3.9594421
-    e03: -11.95323
-    e10: 0
-    e11: 3.980802
-    e12: 0
-    e13: 0
-    e20: 3.9594421
-    e21: 0
-    e22: 0.41182765
-    e23: 183.42091
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: -3.8519785
-    e01: 0
-    e02: 0.31368938
-    e03: -269.88126
-    e10: 0
-    e11: 3.8647301
-    e12: 0
-    e13: 0
-    e20: -0.31368938
-    e21: 0
-    e22: -3.8519785
-    e23: -67.233894
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  - e00: -1.1883174
-    e01: 0
-    e02: -0.42794123
-    e03: 0
-    e10: 0
-    e11: 1.2630249
-    e12: 0
-    e13: 0
-    e20: 0.42794123
-    e21: 0
-    e22: -1.1883174
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
+  TheRoot: {fileID: 1354551507}
+  init: 0
+  m4x4s: []
 --- !u!4 &676302154
 Transform:
   m_ObjectHideFlags: 0
@@ -954,7 +585,7 @@ Transform:
   m_LocalScale: {x: 20, y: 0.5, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &694472753 stripped
 Transform:
@@ -1017,12 +648,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: 55ccbc1405ce9e249b41b606cbc015e5, type: 3}
+  distanceFromSun: 1838.1
+  planetDiameter: 31518
   orbitalPeriod: 30666.148
-  yAngle: 70.79958
+  planetRotation: 17
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 1752734654}
+  np: {fileID: 1752734654}
 --- !u!1001 &761105151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,7 +685,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1063,7 +695,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1094,7 +726,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 568463864}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -1162,7 +794,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1172,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1203,7 +835,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1956647635}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -1284,12 +916,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: c0263e73b189e8041a07a86bbda4281c, type: 3}
+  distanceFromSun: 0
+  planetDiameter: 2158.8
   orbitalPeriod: 29
-  yAngle: 355.83508
+  planetRotation: 895.7198
   planetOrigin: {x: 91.563, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 99829516}
+  np: {fileID: 99829516}
 --- !u!1 &1092945902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,42 +1058,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: 7f3e7dc5786503a4dbebdbe0b4debbe5, type: 3}
+  distanceFromSun: 2781.3
+  planetDiameter: 30599
   orbitalPeriod: 60148.832
-  yAngle: 330.53918
+  planetRotation: 16
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 1602892278}
---- !u!21 &1127782391
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
+  np: {fileID: 1602892278}
 --- !u!1 &1166671691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,12 +1109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: c5b0c5c46a86d394d9272be0690e2757, type: 3}
+  distanceFromSun: 91.563
+  planetDiameter: 7917
   orbitalPeriod: 365
-  yAngle: 27.271826
+  planetRotation: 24
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 1539263943}
+  np: {fileID: 1539263943}
 --- !u!1001 &1231498082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1541,7 +1146,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1551,7 +1156,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1582,7 +1187,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 652797498}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.r
@@ -1600,36 +1205,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a22f3600f1216c849bb77db121e074c3, type: 3}
---- !u!21 &1469038627
-Material:
-  serializedVersion: 6
+--- !u!1 &1354551506
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354551508}
+  - component: {fileID: 1354551507}
+  m_Layer: 0
+  m_Name: universe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1354551507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354551506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTex: {fileID: 2800000, guid: 570e94b2ed8bdab4982faae4d6bd8e17, type: 3}
+  distanceFromSun: 0
+  planetDiameter: 0
+  orbitalPeriod: 0
+  planetRotation: 24
+  planetOrigin: {x: 0, y: 0, z: 0}
+  np: {fileID: 632544373}
+--- !u!4 &1354551508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354551506}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1675446471}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1501122717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1660,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1670,7 +1296,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1701,7 +1327,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 48486419}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.g
@@ -1764,7 +1390,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1774,7 +1400,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1805,7 +1431,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1127782391}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.g
@@ -1875,8 +1501,9 @@ Transform:
   - {fileID: 538138397}
   - {fileID: 1752734653}
   - {fileID: 1602892277}
+  - {fileID: 632544372}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1539263942 stripped
 Transform:
@@ -1944,7 +1571,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1954,7 +1581,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -1985,7 +1612,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1469038627}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -2066,12 +1693,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: eb4cfe28c0b1d8c4aa61db4d0e18e0e9, type: 3}
+  distanceFromSun: 67.029
+  planetDiameter: 7520.8
   orbitalPeriod: 225
-  yAngle: 320.58133
+  planetRotation: 2.802
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 1897755906}
+  np: {fileID: 1897755906}
 --- !u!1 &1675446470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,7 +1724,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675446470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2108,7 +1736,7 @@ Transform:
   - {fileID: 556515411}
   - {fileID: 736313647}
   - {fileID: 1104749051}
-  m_Father: {fileID: 608516914}
+  m_Father: {fileID: 1354551508}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1675446472
@@ -2123,12 +1751,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: e5cfcd5bad614c04c8cf573850ada32c, type: 3}
+  distanceFromSun: 0
+  planetDiameter: 8653.7
   orbitalPeriod: 365
-  yAngle: 49.471825
+  planetRotation: 24
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 26089073}
+  np: {fileID: 26089073}
 --- !u!4 &1752734653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
@@ -2177,7 +1806,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -2187,7 +1816,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -2218,7 +1847,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 613828057}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -2339,36 +1968,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1885276291
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!4 &1897755905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
@@ -2393,36 +1992,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2103104038}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1956647635
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 451material (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 4800000, guid: ef669d656f94dcb45936bb472eb6f0c7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &2006814471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2453,7 +2022,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -2463,7 +2032,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.034899496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -2494,7 +2063,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 300420069}
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: MyColor.b
@@ -2575,12 +2144,107 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: d2365e30166a5c44388dbb749a5a8da3, type: 3}
+  distanceFromSun: 474.76
+  planetDiameter: 86881
   orbitalPeriod: 4329.8545
-  yAngle: 128.62498
+  planetRotation: 10
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 115676636}
+  np: {fileID: 115676636}
+--- !u!1001 &2072464996
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1524380954}
+    m_Modifications:
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1366254896938600018, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_Name
+      value: u
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138394107934240458, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
+    - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: MyColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: planetDiameter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: planetRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: distanceFromSun
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a22f3600f1216c849bb77db121e074c3, type: 3}
 --- !u!1001 &2103104038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2591,7 +2255,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
         type: 3}
@@ -2693,9 +2357,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 10
+  mainTex: {fileID: 2800000, guid: 9b531558ec8556345861737f3be5284c, type: 3}
+  distanceFromSun: 42.684
+  planetDiameter: 3031.9
   orbitalPeriod: 88
-  yAngle: 244.18413
+  planetRotation: 1407
   planetOrigin: {x: 0, y: 0, z: 0}
-  PrimitiveList:
-  - {fileID: 57493427}
+  np: {fileID: 57493427}

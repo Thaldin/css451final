@@ -4,14 +4,27 @@ using System.Collections.Generic;
 
 
 public class SceneNode : MonoBehaviour {
-    public float timeScale = 10f;
+    //private float timeScale = 10f;
+
+    // https://www.solarsystemscope.com/textures/
+    public Texture2D mainTex = null;
+
+    [Header("In Millions of Miles")]
+    public float distanceFromSun = 10;
+
+    [Header("In Miles")]
+    public float planetDiameter = 10000f;
 
     // 1 = 365 days
-    float OP_STD = 3650f;
+    private float OP_STD = 3650f;
+    private float yAngle = 0f;
     [Header("In Days")]
     public float orbitalPeriod = 1f;
-    public float yAngle = 0f;
 
+    [Header("In Hours")]
+    public float planetRotation = 1f;
+
+    // M4x4 for shader movement
     protected Matrix4x4 mCombinedParentXform;
 
     // this controls the object center rotation
@@ -19,31 +32,36 @@ public class SceneNode : MonoBehaviour {
     public Vector3 planetOrigin = Vector3.zero;
 
     // 
-    public List<NodePrimitive> PrimitiveList;
-
-    // TODO: legacy code. queue for delete
-    // public Transform AxisFrame;
-    // public Vector3 kDefaultTreeTip = new Vector3(0.19f, 12.69f, 3.88f);
-    // public Vector3 kDefaultTreeTip = Vector3.zero;
-    // public bool UseUnity = false;
-
+    protected List<NodePrimitive> PrimitiveList;
+    public NodePrimitive np = null;
     // Use this for initialization
     protected void Start() {
-        InitializeSceneNode();
+        Debug.Assert(mainTex != null, "Please set main texture for " + name + " in Editor");
+        Debug.Assert(np != null, "Please set the Node Primitive for " + name + " in the Editor.");
+        mCombinedParentXform = Matrix4x4.identity;
         // Debug.Log("PrimitiveList:" + PrimitiveList.Count);
         //orbitalPeriod /= 3650f;
 
     }
 
-    private void InitializeSceneNode() {
-        // TODO: legacy code. queue for delete
-        // AxisFrame = new GameObject().transform;
-        // AxisFrame.name = transform.name + "AxisFrame";
+    // init the node
+    public void InitializeSceneNode() {
+        // propagate to all children
+        foreach (Transform child in transform) {
+            SceneNode sn = child.GetComponent<SceneNode>();
+            if (sn != null) {
 
-        mCombinedParentXform = Matrix4x4.identity;
-        //OP_STD = 365f * timeScale;
+                sn.InitializeSceneNode();
+                
+
+            }
+        }
+
+        np.Initiallize(mainTex, planetDiameter, distanceFromSun, planetRotation);
     }
 
+
+    // send child transform to world controller
     public void GetChildren(ref List<Transform> sceneObjects) {
         foreach (Transform child in transform) {
             SceneNode cn = child.GetComponent<SceneNode>();
@@ -54,34 +72,41 @@ public class SceneNode : MonoBehaviour {
         }
     }
 
+    // gets the node diamter
     public float GetPlanetDiameter() {
-        return PrimitiveList[0].GetComponent<NodePrimitive>().GetPlanetDiameter();
+        if (np != null) {
+            return np.GetComponent<NodePrimitive>().GetPlanetDiameter();
+        }
+        return 0f;
     }
 
     // This must be called _BEFORE_ each draw!! 
     public void CompositeXform(ref Matrix4x4 parentXform, ref List<Matrix4x4> sceneObjs) {
+        if (np != null) {
+            float v = (orbitalPeriod == 0f) ? 0f : (OP_STD / orbitalPeriod); // * timeScale
+            yAngle = (yAngle <= 360f) ? yAngle + v * Time.deltaTime : 0f;
+            Matrix4x4 rot = Matrix4x4.Rotate(Quaternion.Euler(0f, yAngle, 0f));
 
-        float v = (orbitalPeriod == 0f) ? 0f : (OP_STD / orbitalPeriod);
-        yAngle = (yAngle <= 360f) ? yAngle + v * Time.deltaTime: 0f;
-        Matrix4x4 rot = Matrix4x4.Rotate(Quaternion.Euler(0f, yAngle, 0f));
+            Matrix4x4 orgT = Matrix4x4.Translate(planetOrigin);
+            Matrix4x4 trs = Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
 
-        Matrix4x4 orgT = Matrix4x4.Translate(planetOrigin);
-        Matrix4x4 trs = Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
+            mCombinedParentXform = parentXform * orgT * trs * rot;
 
-        mCombinedParentXform = parentXform * orgT * trs * rot;
-
-        // propagate to all children
-        foreach (Transform child in transform) {
-            SceneNode cn = child.GetComponent<SceneNode>();
-            if (cn != null) {
-                cn.CompositeXform(ref mCombinedParentXform, ref sceneObjs);
+            // propagate to all children
+            foreach (Transform child in transform) {
+                SceneNode cn = child.GetComponent<SceneNode>();
+                if (cn != null) {
+                    cn.CompositeXform(ref mCombinedParentXform, ref sceneObjs);
+                }
             }
-        }
 
-        // disenminate to primitives
-        foreach (NodePrimitive p in PrimitiveList) {
-            sceneObjs.Add(p.LoadShaderMatrix(ref mCombinedParentXform));
-            //p.LoadShaderMatrix(ref mCombinedParentXform);
+            // disenminate to primitives
+            sceneObjs.Add(np.LoadShaderMatrix(ref mCombinedParentXform));
+            /*
+            foreach (NodePrimitive p in PrimitiveList) {
+                sceneObjs.Add(p.LoadShaderMatrix(ref mCombinedParentXform));
+            }
+            */
         }
     }
 }

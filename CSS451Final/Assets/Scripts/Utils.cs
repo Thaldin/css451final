@@ -58,7 +58,7 @@ namespace Utils {
         /// <param name="slices" Number of slices around the Y axis.</param>
         /// <param name="stacks" Number of stacks along the Y axis. Should be 2 or greater. (stack of 1 is just a cylinder)</param>
         /// <returns>Returns the mesh filled with vertices.</returns>
-        public static Mesh CreateSphereMesh(float radius, int slices, int stacks) {
+        public static Mesh CreateSphereMesh(float radius, int slices = 20, int stacks = 20) {
             Mesh mesh = new Mesh();
             mesh.name = "SphereMesh";
 

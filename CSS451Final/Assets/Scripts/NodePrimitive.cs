@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class NodePrimitive : MonoBehaviour {
     //public GameObject collider = null;
+
 
     public Color MyColor = new Color(0.1f, 0.1f, 0.2f, 1.0f);
 
@@ -27,8 +29,38 @@ public class NodePrimitive : MonoBehaviour {
     public float planetDiameter = 10000f;
     float yAngle = 0f;
 
-    private void Awake(){
-        //Debug.Assert(collider != null, "Please set collider object in Editor");
+    // components
+    MeshFilter mf;
+    Renderer mr;
+
+    public Texture2D mainText;
+
+    
+    private void Awake() {
+        mf = GetComponent<MeshFilter>();
+        mr = GetComponent<Renderer>();
+        //mr.material = (Material)Instantiate(mr.material);
+    }
+
+
+    // initialize primitive
+    public void Initiallize(Texture2D mt, float d = 1000f, float dfs = 10f, float srp = 24f) {
+
+        Debug.Log("Initalizing " + name);
+        // set params
+        mainText = mt;
+        planetDiameter = d;
+        distanceFromSun = dfs;
+        planetRotation = srp;
+
+        // create mesh
+        mf.mesh.Clear();
+        // 20 for default slices and stacks
+        Mesh mesh = Utils.Utils.CreateSphereMesh(planetDiameter / EMI);
+        mf.mesh = mesh;
+
+        //mr.material.EnableKeyword("_MainTex");
+        //mr.material.SetTexture("_MainTex", mainTex);
     }
 
     public void SetSystemScale(float v) {
@@ -63,9 +95,11 @@ public class NodePrimitive : MonoBehaviour {
 
         // send to shader
         GetComponent<MeshRenderer>().material.SetMatrix("MyXformMat", m);
-        GetComponent<MeshRenderer>().material.SetColor("MyColor", MyColor);
-
+        //GetComponent<MeshRenderer>().material.SetColor("MyColor", MyColor);
+        GetComponent<MeshRenderer>().material.SetTexture("_MainTex", mainText);
         // return matrix to theWorld
+
+
         return m;
     }
 }
