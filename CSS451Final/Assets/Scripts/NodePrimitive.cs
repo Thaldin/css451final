@@ -9,7 +9,7 @@ public class NodePrimitive : MonoBehaviour {
 
     float systemScale = 1f;
     // properties
-    [SerializeField] float distanceFromSun = 10;
+    [SerializeField] float distanceFromSun = 0f;
     // rotation center
     float planetOffset = 0f;
     [SerializeField] Vector3 offsetFromPlanet;
@@ -18,14 +18,14 @@ public class NodePrimitive : MonoBehaviour {
     // how fast the object will rotate on local axis
     // 1 = 24hrs
     const float SIDEREAL_ROTATIONAL_PERIOD = 24f;
-    [SerializeField] float planetRotation = 1f;
+    [SerializeField] float planetRotation = 24f;
     float timeScale = 1f;
 
     // the earth = 1
-    // the earth = 7,917.5 mi
-    const float EMI = 7917.5f;
-    [SerializeField] float planetDiameter = 10000f;
-    [SerializeField] float pd; // debug
+    // the earth = 12,756km
+    const float EMI = 12756f;
+    [SerializeField] float planetDiameter = 0;
+    private float pd = 0f;
     [SerializeField] float yAngle = 0f;
 
     // components
@@ -38,7 +38,6 @@ public class NodePrimitive : MonoBehaviour {
         mf = GetComponent<MeshFilter>();
         mr = GetComponent<Renderer>();
         pd = planetDiameter / EMI;
-        //mr.material = (Material)Instantiate(mr.material);
     }
 
 
@@ -64,10 +63,10 @@ public class NodePrimitive : MonoBehaviour {
         return pd;
     }
     public Matrix4x4 LoadShaderMatrix(ref Matrix4x4 nodeMatrix) {
-        
+
         // apply local roation
         // object rotaitons
-        yAngle = (yAngle <= 360f) ? yAngle + (planetRotation / SIDEREAL_ROTATIONAL_PERIOD) * timeScale : 0f;
+        yAngle = (yAngle <= 360f) ? yAngle + (SIDEREAL_ROTATIONAL_PERIOD / planetRotation) * timeScale : 0f;
         Matrix4x4 rot = Matrix4x4.Rotate(Quaternion.Euler(0f, yAngle, 0f));
         // apply local scale
         // object diameter

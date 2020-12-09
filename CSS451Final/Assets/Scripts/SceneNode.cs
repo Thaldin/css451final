@@ -8,12 +8,13 @@ public partial class SceneNode : MonoBehaviour {
 
     // https://www.solarsystemscope.com/textures/
     public Texture2D mainTex = null;
+    public GameObject colliderObj;
 
-    [Header("In Millions of Miles")]
-    public float distanceFromSun = 10;
+    [Header("km")]
+    public float planetDiameter = 0f;
 
-    [Header("In Miles")]
-    public float planetDiameter = 10000f;
+    [Header("10^6 km")]
+    public float distanceFromSun = 0f;
 
     // 1 = 365 days
     private float OP_STD = 3650f;
@@ -22,7 +23,7 @@ public partial class SceneNode : MonoBehaviour {
     public float orbitalPeriod = 1f;
 
     [Header("In Hours")]
-    public float planetRotation = 1f;
+    public float rotationPeriod = 1f;
 
     [Header("Axis Offset")]
     public Vector3 axisRotationOffset = Vector3.zero;
@@ -48,25 +49,28 @@ public partial class SceneNode : MonoBehaviour {
         Debug.Assert(orbitRing != null, "Please set the Orbit Ring prefab for " + name + " in the Editor.");
         mCombinedParentXform = Matrix4x4.identity;
 
+        //colliderObj = Instantiate<GameObject>(colliderObj) as GameObject;
+        colliderObj.name +=  "Collider";
 
         // SNProperties
         rmf = orbitRing.GetComponent<MeshFilter>();
     }
 
     // init the node
-    public void InitializeSceneNode(ref List<GameObject> rings) {
+    public void InitializeSceneNode(ref List<GameObject> rings, ref List<GameObject> colliders) {
         // propagate to all children
         foreach (Transform child in transform) {
             SceneNode sn = child.GetComponent<SceneNode>();
             if (sn != null) {
                 // init child
-                sn.InitializeSceneNode(ref rings);
+                sn.InitializeSceneNode(ref rings, ref colliders);
             }
         }
         // init this
-        np.Initiallize(mainTex, planetDiameter, distanceFromSun, planetRotation, offsetFromPlanet);
+        np.Initiallize(mainTex, planetDiameter, distanceFromSun, rotationPeriod, offsetFromPlanet);
         SetRing();
         rings.Add(orbitRing);
+        colliders.Add(colliderObj);
     }
 
 
@@ -86,7 +90,7 @@ public partial class SceneNode : MonoBehaviour {
     // If planets are all rotating together, check the orbital period of the universe and 
     // make sure it is set to 0
     // This must be called _BEFORE_ each draw!! 
-    public void CompositeXform(ref Matrix4x4 parentXform, ref List<Matrix4x4> sceneObjs) {
+    public void CompositeXform(ref Matrix4x4 parentXform, ref List<Matrix4x4> sceneM4x4) {
         if (np != null) {
             // check for 0
             float v = (orbitalPeriod == 0f) ? 0f : (OP_STD / orbitalPeriod); // * timeScale
@@ -110,12 +114,12 @@ public partial class SceneNode : MonoBehaviour {
             foreach (Transform child in transform) {
                 SceneNode cn = child.GetComponent<SceneNode>();
                 if (cn != null) {
-                    cn.CompositeXform(ref mCombinedParentXform, ref sceneObjs);
+                    cn.CompositeXform(ref mCombinedParentXform, ref sceneM4x4);
                 }
             }
 
             // disenminate to primitives
-            sceneObjs.Add(np.LoadShaderMatrix(ref mCombinedParentXform));
+            sceneM4x4.Add(np.LoadShaderMatrix(ref mCombinedParentXform));
         }
     }
 

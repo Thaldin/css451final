@@ -19,7 +19,7 @@ public partial class TheWorld : MonoBehaviour {
 
     [Header("Colliders")]
     public GameObject colliderParent = null;
-    List<GameObject> ObjColliders = new List<GameObject>();
+    [SerializeField] List<GameObject> colliderObjects = new List<GameObject>();
     public GameObject objCollider = null;
 
     [Header("Rings")]
@@ -51,7 +51,7 @@ public partial class TheWorld : MonoBehaviour {
         InitSceneObjects();
 
         // creat planet colliders
-        CreateSceneColliders();
+        //CreateSceneColliders();
 
         CreateStarLines(Color.white);
 
@@ -66,7 +66,7 @@ public partial class TheWorld : MonoBehaviour {
         if (init) {
             TheRoot.CompositeXform(ref i, ref m4x4s);
             //if childCount changes, update colliders
-            SetSceneColliders();
+            UpdateColliderObjects();
             DrawTargets(asteroid, Color.red);
 
             if (debugIsOn) { 
@@ -84,11 +84,17 @@ public partial class TheWorld : MonoBehaviour {
 
     // initialized scene objects
     private void InitSceneObjects() {
-        TheRoot.InitializeSceneNode(ref ringObjects);
+        TheRoot.InitializeSceneNode(ref ringObjects, ref colliderObjects);
+
+        for (int i = 0; i < colliderObjects.Count; i++) { 
+            ringObjects[i].transform.parent = ringParent.transform;
+            colliderObjects[i].transform.parent = colliderParent.transform;
+        }
+        /* TODO: delete after test
         foreach (var r in ringObjects) {
             r.transform.parent = ringParent.transform;
         }
-
+        */
         init = true;
     }
 
@@ -108,31 +114,23 @@ public partial class TheWorld : MonoBehaviour {
         for (int i = 0; i < childCount; i++) {
             GameObject objColliderClone = Instantiate(objCollider);
             objColliderClone.transform.parent = colliderParent.transform;
-            ObjColliders.Add(objColliderClone);
+            colliderObjects.Add(objColliderClone);
         }
     }
 
     // set planet colliders
-    private void SetSceneColliders() {
+    private void UpdateColliderObjects() {
         for (int i = 0; i < childCount; i++) {
-            // set the name of the collider obj
-            ObjColliders[i].name = sceneObjects[i].name + "Collider";
-
-            // set the radius of the collider obj
-            sphereColliderScript scs;
-            ObjColliders[i].TryGetComponent<sphereColliderScript>(out scs);
-            if (scs) {
-                float diameter = sceneObjects[i].GetComponent<SceneNode>().GetPlanetDiameter();
-                scs.Initialize(diameter);
-            }
+            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
+            colliderObjects[i].transform.position = pos;
         }
     }
 
     private void ResetColliders() {
-        foreach (var c in ObjColliders) {
+        foreach (var c in colliderObjects) {
             Destroy(c);
         }
-        ObjColliders.Clear();
+        colliderObjects.Clear();
     }
 
     #endregion
@@ -149,7 +147,7 @@ public partial class TheWorld : MonoBehaviour {
     // draws lines between star and planets
     private void CreateStarLines(Color color) {
         ClearStarLines();
-        for (int i = 0; i < ObjColliders.Count; i++) {
+        for (int i = 0; i < colliderObjects.Count; i++) {
             // create new line obj
             GameObject line = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             line.GetComponent<MeshRenderer>().material.color = color;
@@ -161,9 +159,9 @@ public partial class TheWorld : MonoBehaviour {
 
     private void DrawStarLines() {
 
-        for (int i = 0; i < ObjColliders.Count; i++) {
+        for (int i = 0; i < colliderObjects.Count; i++) {
             Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
-            ObjColliders[i].transform.position = pos;
+            colliderObjects[i].transform.position = pos;
             // the star is the first trasform of the root
             // Debug.DrawLine(pos, TheRoot.transform.GetChild(0).transform.position, Color.white);
             Utils.Utils.AdjustLine(starLines[i], pos, TheRoot.transform.GetChild(0).transform.position);

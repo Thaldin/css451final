@@ -22,7 +22,7 @@ public class TorusWire : MonoBehaviour {
         tubes = 6;
 
         tubeRadius = (tubeRadius < 0) ? 0 : tubeRadius;
-        tubeRadius = (segmentRadius <= 200f) ? tubeRadius : 1f;
+        tubeRadius = (segmentRadius <= 250f) ? tubeRadius : 1f;
         tubeRadius = (segmentRadius <= 100f) ? 0.05f : tubeRadius;
         segmentRadius = (segmentRadius < 0) ? 0 : segmentRadius;
 
