@@ -11,10 +11,6 @@ public class XfromControl : MonoBehaviour {
     private Transform mSelected;
     private Vector3 mPreviousSliderValues = Vector3.zero;
 
-    //[Header("Axis")]
-    //public Transform axisObj = null;
-
-
 	// Use this for initialization
 	void Start () {
         T.onValueChanged.AddListener(SetToTranslation);
@@ -29,19 +25,7 @@ public class XfromControl : MonoBehaviour {
         S.isOn = false;
         SetToTranslation(true);
 	}
-
-    private void Update() {
-        //AxisObj();
-    }
-
-    void AxisObj() {
-        //Transform pos = mSelected.GetComponent<SceneNode>().AxisFrame;
-        //axisObj.transform.position = pos.position;
-        //axisObj.rotation = Quaternion.FromToRotation(Vector3.up, pos.up);
-    }
-
-
-
+	
     //---------------------------------------------------------------------------------
     // Initialize slider bars to specific function
     void SetToTranslation(bool v)
