@@ -14,8 +14,6 @@ public class NodePrimitive : MonoBehaviour {
     float planetOffset = 0f;
     [SerializeField] Vector3 offsetFromPlanet;
 
-    float yPos = 0f;
-
     // 1 = 1 Earth Day
     // how fast the object will rotate on local axis
     // 1 = 24hrs

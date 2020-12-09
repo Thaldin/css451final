@@ -4,30 +4,41 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class TheWorld : MonoBehaviour {
+public partial class TheWorld : MonoBehaviour {
+    // root of M4x4 shader
+    [Header("The universe")]
+    public SceneNode TheRoot;
+    private bool init = false;
+
     // test singleton
     public GameObject asteroid = null;
 
-    // testing
-    [SerializeField] int childCount = 0;
+    [Header("Scene Objects")]
     [SerializeField] List<Transform> sceneObjects = new List<Transform>();
+    private int childCount = 0;
 
+    [Header("Colliders")]
+    public GameObject colliderParent = null;
     List<GameObject> ObjColliders = new List<GameObject>();
     public GameObject objCollider = null;
 
-    // root of M4x4 shader
-    public SceneNode TheRoot;
-    public bool init = false;
-    // M4x4s  in scene
+    [Header("Rings")]
+    public GameObject ringParent = null;
+    [SerializeField] List<GameObject> ringObjects = new List<GameObject>();
+
+    [Header("Drawn Lines")]
+    [SerializeField] List<GameObject> starLines = new List<GameObject>();
+
+    [Header("M4x4 transforms")]
     [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
-
-    List<GameObject> starLines = new List<GameObject>();
-
-    void Start() {
+    private void Start() {
         ResetColliders();
         ResetSceneObjects();
 
         Debug.Assert(objCollider != null, "Please set Collider prefab in the Editor.");
+        Debug.Assert(colliderParent != null, "Please set Collider parent in the Editor.");
+
+        Debug.Assert(ringParent != null, "Please set the Ring Parent in the Editor.");
 
         // get number of child transforms of root
         GetSceneObjects();
@@ -43,44 +54,58 @@ public class TheWorld : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         m4x4s.Clear();
         Matrix4x4 i = Matrix4x4.identity;
         if (init) {
             TheRoot.CompositeXform(ref i, ref m4x4s);
             //if childCount changes, update colliders
             SetSceneColliders();
-            DrawTargets();
-            DrawStarLines();
+            DrawTargets(asteroid, Color.red);
+            DrawStarLines(Color.white);
             Click();
         }
 
     }
 
+    #region Scene Objects
     // populates sceneObjects list
-    void GetSceneObjects() {
+    private void GetSceneObjects() {
         TheRoot.GetChildren(ref sceneObjects);
     }
 
-    // initialize scene objects
-    //<summary>
-    // Sets scene object parameters.
-    void InitSceneObjects() {
-        TheRoot.InitializeSceneNode();
+    // initialized scene objects
+    private void InitSceneObjects() {
+        TheRoot.InitializeSceneNode(ref ringObjects);
+        foreach (var r in ringObjects) {
+            r.transform.parent = ringParent.transform;
+        }
+
         init = true;
     }
 
+    // resets sceneObjects list
+    private void ResetSceneObjects() {
+        foreach (var c in sceneObjects) {
+            Destroy(c);
+        }
+        sceneObjects.Clear();
+    }
+    #endregion
+
+    #region Scene Colliders
     // create planet colliders
-    void CreateSceneColliders() {
+    private void CreateSceneColliders() {
         ResetColliders();
         for (int i = 0; i < childCount; i++) {
             GameObject objColliderClone = Instantiate(objCollider);
+            objColliderClone.transform.parent = colliderParent.transform;
             ObjColliders.Add(objColliderClone);
         }
     }
 
     // set planet colliders
-    void SetSceneColliders() {
+    private void SetSceneColliders() {
         for (int i = 0; i < childCount; i++) {
             // set the name of the collider obj
             ObjColliders[i].name = sceneObjects[i].name + "Collider";
@@ -95,53 +120,11 @@ public class TheWorld : MonoBehaviour {
         }
     }
 
-    void ResetColliders() {
+    private void ResetColliders() {
         foreach (var c in ObjColliders) {
             Destroy(c);
         }
         ObjColliders.Clear();
-    }
-
-    void ResetSceneObjects() {
-        foreach (var c in sceneObjects) {
-            Destroy(c);
-        }
-        sceneObjects.Clear();
-    }
-
-
-    #region Draw Lines
-    void DrawTargets() {
-        for (int i = 0; i < m4x4s.Count; i++) {
-            
-            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
-            Debug.DrawLine(pos, asteroid.transform.position, Color.blue);
-            
-        }
-    }
-
-    void DrawStarLines() {
-        ClearStarLines();
-
-        for (int i = 0; i < ObjColliders.Count; i++) {
-            // create new line obj
-            GameObject line = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            line.GetComponent<MeshRenderer>().material.color = Color.white;
-            starLines.Add(line);
-
-            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
-            ObjColliders[i].transform.position = pos;
-            // the star is the first trasform of the root
-            // Debug.DrawLine(pos, TheRoot.transform.GetChild(0).transform.position, Color.white);
-            Utils.Utils.AdjustLine(line, pos, TheRoot.transform.GetChild(0).transform.position);
-        }
-    }
-
-    void ClearStarLines() {
-        foreach (var l in starLines) {
-            Destroy(l);
-        }
-        starLines.Clear();
     }
 
     #endregion
@@ -151,8 +134,29 @@ public class TheWorld : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
+                string tag = hit.transform.tag;
+                /*
                 if (hit.transform.CompareTag("planet")) {
                     Debug.Log(hit.transform.name + " selected!");
+                }
+                */
+
+                // potential
+                switch (tag) {
+                    case "star":
+                        Debug.Log(hit.transform.name + " selected!");
+                        return;
+                    case "planet":
+                        Debug.Log(hit.transform.name + " selected!");
+                        return;
+                    case "moon":
+                        Debug.Log(hit.transform.name + " selected!");
+                        return;
+                    case "dwarf":
+                        Debug.Log(hit.transform.name + " selected!");
+                        return;
+                    default:
+                        return;
                 }
             }
         }

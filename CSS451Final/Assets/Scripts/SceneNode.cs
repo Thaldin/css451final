@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class SceneNode : MonoBehaviour {
+public partial class SceneNode : MonoBehaviour {
     //private float timeScale = 10f;
 
     // https://www.solarsystemscope.com/textures/
@@ -42,24 +42,31 @@ public class SceneNode : MonoBehaviour {
     protected List<NodePrimitive> PrimitiveList;
     public NodePrimitive np = null;
     // Use this for initialization
-    protected void Start() {
+    protected void Awake() {
         Debug.Assert(mainTex != null, "Please set main texture for " + name + " in Editor");
         Debug.Assert(np != null, "Please set the Node Primitive for " + name + " in the Editor.");
+        Debug.Assert(orbitRing != null, "Please set the Orbit Ring prefab for " + name + " in the Editor.");
         mCombinedParentXform = Matrix4x4.identity;
+
+
+        // SNProperties
+        rmf = orbitRing.GetComponent<MeshFilter>();
     }
 
     // init the node
-    public void InitializeSceneNode() {
+    public void InitializeSceneNode(ref List<GameObject> rings) {
         // propagate to all children
         foreach (Transform child in transform) {
             SceneNode sn = child.GetComponent<SceneNode>();
             if (sn != null) {
                 // init child
-                sn.InitializeSceneNode();
+                sn.InitializeSceneNode(ref rings);
             }
         }
         // init this
         np.Initiallize(mainTex, planetDiameter, distanceFromSun, planetRotation, offsetFromPlanet);
+        SetRing();
+        rings.Add(orbitRing);
     }
 
 
@@ -112,18 +119,5 @@ public class SceneNode : MonoBehaviour {
         }
     }
 
-    #region Runtime Set Functions
-    // gets the node diamter
-    public float GetPlanetDiameter() {
-        if (np != null) {
-            return np.GetComponent<NodePrimitive>().GetPlanetDiameter();
-        }
-        return 0f;
-    }
-
-    // set global time scale
-    public void SetTimeScale(float v) {
-        np.SetTimeScale(v);
-    }
-    #endregion
+    
 }

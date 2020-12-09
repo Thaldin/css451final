@@ -14,18 +14,18 @@ public class TorusWire : MonoBehaviour {
     [Range(3,12)]
     public int tubes = 12;
 
-    void Start() {
+    public void Torus(out Mesh mesh, float r, float ts = 0.1f, int s = 36, int t = 6) {
+        mesh = new Mesh();
+        segmentRadius = r;
+        tubeRadius = ts;
+        segments = s;
+        tubes = 6;
+
         tubeRadius = (tubeRadius < 0) ? 0 : tubeRadius;
+        tubeRadius = (segmentRadius <= 200f) ? tubeRadius : 1f;
+        tubeRadius = (segmentRadius <= 100f) ? 0.05f : tubeRadius;
         segmentRadius = (segmentRadius < 0) ? 0 : segmentRadius;
 
-        Torus();
-    }
-
-    private void Update() {
-        
-    }
-
-    public void Torus() {
         // Total vertices
         int totalVerts = segments * tubes;
 
@@ -109,8 +109,6 @@ public class TorusWire : MonoBehaviour {
             }
         }
 
-        Mesh mesh = new Mesh();
-
         Vector3[] vertices = new Vector3[totalVerts];
         verticesList.CopyTo(vertices);
         int[] triangles = new int[totalVertices];
@@ -121,7 +119,8 @@ public class TorusWire : MonoBehaviour {
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
         mesh.Optimize();
-        MeshFilter mFilter = GetComponent(typeof(MeshFilter)) as MeshFilter;
-        mFilter.mesh = mesh;
+        //MeshFilter mFilter = GetComponent(typeof(MeshFilter)) as MeshFilter;
+        //mFilter.mesh = mesh;
+
     }
 }
