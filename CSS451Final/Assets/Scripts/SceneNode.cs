@@ -17,12 +17,16 @@ public class SceneNode : MonoBehaviour {
 
     // 1 = 365 days
     private float OP_STD = 3650f;
-    private float yAngle = 0f;
+    [SerializeField] float yAngle = 0f;
     [Header("In Days")]
     public float orbitalPeriod = 1f;
 
     [Header("In Hours")]
     public float planetRotation = 1f;
+
+    [Header("Axis Offset")]
+    public Vector3 axisRotationOffset = Vector3.zero;
+    [SerializeField] float offsetFromAxis = 0f;
 
     [Header("Moon Only")]
     public float offsetFromPlanet = 0f;
@@ -72,11 +76,22 @@ public class SceneNode : MonoBehaviour {
 
     
 
+    // If planets are all rotating together, check the orbital period of the universe and 
+    // make sure it is set to 0
     // This must be called _BEFORE_ each draw!! 
     public void CompositeXform(ref Matrix4x4 parentXform, ref List<Matrix4x4> sceneObjs) {
         if (np != null) {
+            // check for 0
             float v = (orbitalPeriod == 0f) ? 0f : (OP_STD / orbitalPeriod); // * timeScale
-            yAngle = (yAngle <= 360f) ? yAngle + v * Time.deltaTime : 0f;
+            yAngle = (yAngle <= 360f) ? yAngle + v  * Time.deltaTime : 0f;
+
+            // does not work right
+            float inc = (yAngle / 180f) * Mathf.PI;
+            offsetFromAxis += Mathf.Cos(inc) * Time.deltaTime * axisRotationOffset.y;
+
+            transform.eulerAngles = axisRotationOffset;
+
+            //Matrix4x4 offsetT = Matrix4x4.Translate(new Vector3(0f, offsetFromAxis, 0f)); ;
             Matrix4x4 rot = Matrix4x4.Rotate(Quaternion.Euler(0f, yAngle, 0f));
 
             Matrix4x4 orgT = Matrix4x4.Translate(planetOrigin);
