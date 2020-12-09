@@ -25,9 +25,12 @@ public partial class TheWorld : MonoBehaviour {
     [Header("Rings")]
     public GameObject ringParent = null;
     [SerializeField] List<GameObject> ringObjects = new List<GameObject>();
+    bool ringIsOn = true;
 
     [Header("Drawn Lines")]
+    public GameObject starLineParent = null;
     [SerializeField] List<GameObject> starLines = new List<GameObject>();
+    bool debugIsOn = false;
 
     [Header("M4x4 transforms")]
     [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
@@ -35,10 +38,10 @@ public partial class TheWorld : MonoBehaviour {
         ResetColliders();
         ResetSceneObjects();
 
-        Debug.Assert(objCollider != null, "Please set Collider prefab in the Editor.");
-        Debug.Assert(colliderParent != null, "Please set Collider parent in the Editor.");
-
-        Debug.Assert(ringParent != null, "Please set the Ring Parent in the Editor.");
+        Debug.Assert(objCollider != null, "Please set Collider prefab for " + name + " in the Editor.");
+        Debug.Assert(colliderParent != null, "Please set Collider parent for " + name + " in the Editor.");
+        Debug.Assert(starLineParent != null, "Please set starLineParent parent for " + name + " in the Editor.");
+        Debug.Assert(ringParent != null, "Please set the Ring Parent for " + name + " in the Editor.");
 
         // get number of child transforms of root
         GetSceneObjects();
@@ -49,6 +52,9 @@ public partial class TheWorld : MonoBehaviour {
 
         // creat planet colliders
         CreateSceneColliders();
+
+        CreateStarLines(Color.white);
+
 
     }
 
@@ -62,8 +68,10 @@ public partial class TheWorld : MonoBehaviour {
             //if childCount changes, update colliders
             SetSceneColliders();
             DrawTargets(asteroid, Color.red);
-            DrawStarLines(Color.white);
-            Click();
+
+            if (debugIsOn) { 
+                DrawStarLines();
+            }
         }
 
     }
@@ -128,46 +136,53 @@ public partial class TheWorld : MonoBehaviour {
     }
 
     #endregion
-
-    void Click() {
-        if (Input.GetMouseButtonDown(0)) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                string tag = hit.transform.tag;
-                /*
-                if (hit.transform.CompareTag("planet")) {
-                    Debug.Log(hit.transform.name + " selected!");
-                }
-                */
-
-                // potential
-                switch (tag) {
-                    case "star":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
-                    case "planet":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
-                    case "moon":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
-                    case "dwarf":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
-                    default:
-                        return;
-                }
-            }
+    
+    #region Draw Lines
+    // draws lines between planets and object
+    private void DrawTargets(GameObject tar, Color color = default) {
+        for (int i = 0; i < m4x4s.Count; i++) {
+            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
+            Debug.DrawLine(pos, tar.transform.position, color);
         }
     }
 
-    #region Runtime Set Functions
-    // set global time scale
-    public void SetTimeScale(float v) {
-        foreach (var sn in sceneObjects) {
-            sn.GetComponent<SceneNode>().SetTimeScale(v);
+    // draws lines between star and planets
+    private void CreateStarLines(Color color) {
+        ClearStarLines();
+        for (int i = 0; i < ObjColliders.Count; i++) {
+            // create new line obj
+            GameObject line = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            line.GetComponent<MeshRenderer>().material.color = color;
+            line.SetActive(debugIsOn);
+            line.transform.parent = starLineParent.transform;
+            starLines.Add(line);
         }
     }
+
+    private void DrawStarLines() {
+
+        for (int i = 0; i < ObjColliders.Count; i++) {
+            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
+            ObjColliders[i].transform.position = pos;
+            // the star is the first trasform of the root
+            // Debug.DrawLine(pos, TheRoot.transform.GetChild(0).transform.position, Color.white);
+            Utils.Utils.AdjustLine(starLines[i], pos, TheRoot.transform.GetChild(0).transform.position);
+        }
+    }
+
+    private void ClearStarLines() {
+        foreach (var l in starLines) {
+            Destroy(l);
+        }
+        starLines.Clear();
+    }
+
+    private void ToggleStarLines(bool b) {
+        debugIsOn = b;
+        foreach (var l in starLines) {
+            l.SetActive(debugIsOn);
+        }
+    }
+
     #endregion
 }

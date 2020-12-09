@@ -4,42 +4,25 @@ using UnityEngine;
 
 public partial class TheWorld : MonoBehaviour
 {
-    #region Draw Lines
-    // draws lines between planets and object
-    public void DrawTargets(GameObject tar, Color color = default) {
-        for (int i = 0; i < m4x4s.Count; i++) {
+    
+    public void ToggleDebug(bool b) {
+        ToggleStarLines(b);
+    }
 
-            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
-            Debug.DrawLine(pos, tar.transform.position, color);
-
+    public void ToggleRings(bool b) {
+        ringIsOn = b;
+        foreach (var r in ringObjects) {
+            r.SetActive(ringIsOn);
         }
     }
 
-
-    // draws lines between star and planets
-    public void DrawStarLines(Color color) {
-        ClearStarLines();
-
-        for (int i = 0; i < ObjColliders.Count; i++) {
-            // create new line obj
-            GameObject line = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            line.GetComponent<MeshRenderer>().material.color = color;
-            starLines.Add(line);
-
-            Vector3 pos = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
-            ObjColliders[i].transform.position = pos;
-            // the star is the first trasform of the root
-            // Debug.DrawLine(pos, TheRoot.transform.GetChild(0).transform.position, Color.white);
-            Utils.Utils.AdjustLine(line, pos, TheRoot.transform.GetChild(0).transform.position);
+    #region Runtime Set Functions
+    // set global time scale
+    public void SetTimeScale(float v) {
+        foreach (var sn in sceneObjects) {
+            sn.GetComponent<SceneNode>().SetTimeScale(v);
         }
     }
-
-    private void ClearStarLines() {
-        foreach (var l in starLines) {
-            Destroy(l);
-        }
-        starLines.Clear();
-    }
-
     #endregion
+
 }

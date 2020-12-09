@@ -18,6 +18,8 @@ public partial class SceneNode : MonoBehaviour {
     void UpdateRing() {
         rmf.mesh.Clear();
         SetRing();
+
+        orbitRing.transform.rotation = transform.rotation;
     }
 
     #region Runtime Set Functions

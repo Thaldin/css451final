@@ -9,9 +9,8 @@ public partial class MainController : MonoBehaviour {
     public Camera MiniCamera = null;
     public TheWorld TheWorld = null;
     public SceneNodeControl NodeControl = null;
-    
-    void Awake()
-    {
+
+    void Awake() {
         //Debug.Assert(NodeControl != null);
         //NodeControl.TheRoot = TheWorld.TheRoot;
     }
@@ -19,11 +18,14 @@ public partial class MainController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         //Debug.Assert(MainCamera != null);
-        //Debug.Assert(TheWorld != null);
+        Debug.Assert(TheWorld != null, "Please set The Word for " + name + " in the Editor");
     }
 
     // Update is called once per frame
     void Update() {
         //ProcessMouseEvents();
+        Click();
+        CheckKeyboard();
     }
+
 }
