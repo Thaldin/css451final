@@ -50,17 +50,13 @@ public partial class TheWorld : MonoBehaviour {
         // initialize planets
         InitSceneObjects();
 
-        // creat planet colliders
-        //CreateSceneColliders();
 
         CreateStarLines(Color.white);
-
-
     }
 
 
     // Update is called once per frame
-    private void Update() {
+    private void FixedUpdate() {
         m4x4s.Clear();
         Matrix4x4 i = Matrix4x4.identity;
         if (init) {
@@ -108,15 +104,6 @@ public partial class TheWorld : MonoBehaviour {
     #endregion
 
     #region Scene Colliders
-    // create planet colliders
-    private void CreateSceneColliders() {
-        ResetColliders();
-        for (int i = 0; i < childCount; i++) {
-            GameObject objColliderClone = Instantiate(objCollider);
-            objColliderClone.transform.parent = colliderParent.transform;
-            colliderObjects.Add(objColliderClone);
-        }
-    }
 
     // set planet colliders
     private void UpdateColliderObjects() {

@@ -9,6 +9,9 @@ public class CameraFollow : MonoBehaviour {
     [SerializeField] bool targetFollowIsOn = false;
     [SerializeField] float followDistance = 0f;
 
+    public float yCamOffset = 3f;
+    public float yCenterOffset = -10f;
+
     private void Awake() {
         Debug.Assert(cameraDefaultPosition != null, "Please set " + cameraDefaultPosition + " for " + name + "in the Editor.");
     }
@@ -20,15 +23,19 @@ public class CameraFollow : MonoBehaviour {
     }
 
     private void UpdateCamera() {
+
         // target - transform
-        Vector3 v = cameraTarget.transform.position - transform.position;
+        Vector3 t = cameraTarget.transform.position;
+        Vector3 c = new Vector3(0f, yCenterOffset, 0f);
+        Vector3 v = c - t;
+        //Vector3 v = cameraTarget.transform.position - transform.position;
         v.Normalize();
         Quaternion r = Quaternion.LookRotation(v, Vector3.up);
-        // --testing--
-        //transform.LookAt(cameraTarget);
+        // look at center
         transform.rotation = r;
-        Vector3 p = cameraTarget.transform.position - -Vector3.forward * followDistance;
-        p.y += followDistance;
+
+        Vector3 p = t - v * followDistance;
+        p.y += yCamOffset;
         transform.position = p;
     }
 
@@ -37,6 +44,7 @@ public class CameraFollow : MonoBehaviour {
             targetFollowIsOn = true;
             cameraTarget = t;
             followDistance = distance * 10f;
+            followDistance = (followDistance <= 20f) ? 20f : followDistance;
         }
 
         // if null

@@ -3316,6 +3316,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1315669263 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114582510350720084, guid: 1bc3e81e805883f4eb627f6f11e25dbf,
+    type: 3}
+  m_PrefabInstance: {fileID: 913743015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606785797494fc945a872f1acf67011c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1317121297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3348,7 +3360,7 @@ MonoBehaviour:
   MainCamera: {fileID: 1825412254}
   MiniCamera: {fileID: 0}
   TheWorld: {fileID: 676302153}
-  NodeControl: {fileID: 0}
+  NodeControl: {fileID: 2006867482}
 --- !u!4 &1317121300
 Transform:
   m_ObjectHideFlags: 0
@@ -4391,6 +4403,8 @@ MonoBehaviour:
   cameraTarget: {fileID: 0}
   targetFollowIsOn: 0
   followDistance: 0
+  yCamOffset: 3
+  yCenterOffset: -10
 --- !u!81 &1825412253
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4744,12 +4758,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006867481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a24c3546b83de84cb12a747d3a735d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 32a3844a286858242917a395c5d43bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TheSlider: {fileID: 0}
-  TheEcho: {fileID: 0}
-  TheLabel: {fileID: 0}
+  TheMenu: {fileID: 473900158}
+  TheRoot: {fileID: 1354551507}
+  XformControl: {fileID: 1315669263}
 --- !u!114 &2006867483
 MonoBehaviour:
   m_ObjectHideFlags: 0
