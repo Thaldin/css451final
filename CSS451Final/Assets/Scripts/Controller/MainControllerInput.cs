@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public partial class MainController : MonoBehaviour {
 
@@ -35,26 +36,28 @@ public partial class MainController : MonoBehaviour {
             float cameraFollowDistance = 0f;
 
             if (Physics.Raycast(ray, out hit)) {
-                string tag = hit.transform.tag;
+                if (!EventSystem.current.IsPointerOverGameObject()) {
+                    string tag = hit.transform.tag;
 
-                // potential
-                switch (tag) {
-                    case "star":
-                        goto default;
-                    case "planet":
-                        goto default;
+                    // potential
+                    switch (tag) {
+                        case "star":
+                            goto default;
+                        case "planet":
+                            goto default;
 
-                    case "moon":
-                        goto default;
+                        case "moon":
+                            goto default;
 
-                    case "dwarf":
-                        goto default;
+                        case "dwarf":
+                            goto default;
 
-                    default:
-                        Debug.Log(hit.transform.name + " selected!");
-                        cameraLookAtTarget = hit.transform;
-                        cameraFollowDistance = hit.transform.GetComponent<SphereCollider>().radius;
-                        break;
+                        default:
+                            Debug.Log(hit.transform.name + " selected!");
+                            cameraLookAtTarget = hit.transform;
+                            cameraFollowDistance = hit.transform.GetComponent<SphereCollider>().radius;
+                            break;
+                    }
                 }
             }
             ToggleCameraFollowTarget(cameraLookAtTarget, cameraFollowDistance);
@@ -68,7 +71,7 @@ public partial class MainController : MonoBehaviour {
     }
 
     private void KeyF2() {
-        Camera.main.GetComponent<CameraFollow>().ResetPosition();
+        NodeControl.ResetMainCamera();
     }
 
     private void KeyR() {
@@ -78,8 +81,9 @@ public partial class MainController : MonoBehaviour {
     #endregion
 
     #region Mouse Clicks
-    private void ToggleCameraFollowTarget(Transform t = null, float d = 0f) {
-            Camera.main.GetComponent<CameraFollow>().ToggleFollowTarget(t, d);
+    private void ToggleCameraFollowTarget(Transform t, float d = 0f) {
+        NodeControl.ToggleFollowTarget(t, d);
+        
     }
     #endregion
 }

@@ -16,6 +16,18 @@ public partial class TheWorld : MonoBehaviour
         }
     }
 
+    public Transform GetSceneObjectFromIndex(int i) {
+        return sceneObjects[i].transform;
+    }
+
+    public List<string> GetSceneObjectsNames() {
+        List<string> s = new List<string>();
+        foreach (var o in sceneObjects) {
+            s.Add(o.name);
+        }
+        return s;
+    }
+
     #region Runtime Set Functions
     // set global time scale
     public void SetTimeScale(float v) {

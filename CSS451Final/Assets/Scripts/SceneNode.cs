@@ -88,6 +88,10 @@ public partial class SceneNode : MonoBehaviour {
         }
     }
 
+    public Transform GetCollider() {
+        return colliderObj.transform;
+    }
+
     
 
     // If planets are all rotating together, check the orbital period of the universe and 
