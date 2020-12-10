@@ -35,6 +35,12 @@ public partial class TheWorld : MonoBehaviour
             sn.GetComponent<SceneNode>().SetTimeScale(v);
         }
     }
+
+    // Set System Scale
+    public void SetSystemScale(float v)
+    {
+        Debug.Log("Setting System Scale: " + v);
+    }
     #endregion
 
 }

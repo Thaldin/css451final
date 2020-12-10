@@ -44,7 +44,6 @@ public class SceneNodeControl : MonoBehaviour {
     void SelectionChange(int index) {
         XformControl.SetSelectedObject(mSelectedTransform[index]);
 
-
         // edge case universe is default no follow
         Transform t = mSelectedTransform[index].GetComponent<SceneNode>().GetCollider();
         float d = t.GetComponent<SphereCollider>().radius;
