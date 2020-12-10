@@ -38,6 +38,7 @@ public class NodePrimitive : MonoBehaviour {
         mf = GetComponent<MeshFilter>();
         mr = GetComponent<Renderer>();
         pd = planetDiameter / EMI;
+        mr.allowOcclusionWhenDynamic = true;
     }
 
 

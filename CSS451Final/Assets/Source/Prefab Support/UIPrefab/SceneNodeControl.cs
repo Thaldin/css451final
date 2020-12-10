@@ -15,7 +15,7 @@ public class SceneNodeControl : MonoBehaviour {
 
     // current selection
     [SerializeField] Transform currentSelection = null;
-
+    public int selectIndex = 0;
     // Use this for initialization
     void Start() {
         Debug.Assert(TheMenu != null, "Please set " + TheMenu + " for " + name + " in the Editor");
@@ -31,19 +31,13 @@ public class SceneNodeControl : MonoBehaviour {
         XformControl.SetSelectedObject(TheRoot.transform);
         SelectionChange(0);
     }
+
+    private void Update() {
+        
+    }
+
     // void GetChildrenNames(string blanks, Transform node) {
     void GetChildrenNames() {
-        /*
-        for (int i = 0; i < node.childCount; i++) {
-            Transform child = node.GetChild(i);
-            SceneNode cn = child.GetComponent<SceneNode>();
-            if (cn != null) {
-                mSelectMenuOptions.Add(new Dropdown.OptionData(space + child.name));
-                mSelectedTransform.Add(child);
-                GetChildrenNames(blanks + kChildSpace, child);
-            }
-        }
-        */
         TheRoot.GetChildren(ref mSelectedTransform);
         foreach (var n in mSelectedTransform){
             mSelectMenuOptions.Add(new Dropdown.OptionData(n.name));
@@ -51,18 +45,19 @@ public class SceneNodeControl : MonoBehaviour {
     }
 
     public void SelectionChange(int index) {
+        selectIndex = index;
         XformControl.SetSelectedObject(mSelectedTransform[index]);
         currentSelection = mSelectedTransform[index];
         // edge case universe is default no follow
         Transform t = (index < 1) ? null : mSelectedTransform[index].GetComponent<SceneNode>().GetCollider();
         float d = (t) ? t.GetComponent<SphereCollider>().radius : 0f;
         Debug.Log("Change index to: " + index);
-        if (index < 0) {
-
-            UISelection.SetSelection(currentSelection);
-        }
-        
         // follow target
+        if (selectIndex > 0) {
+            UISelection.SetSelection(currentSelection);
+        } else { 
+            UISelection.SetSelection(null);
+        }
         ToggleFollowTarget(t, d);
     }
 
@@ -76,9 +71,5 @@ public class SceneNodeControl : MonoBehaviour {
 
     public void ResetMainCamera() {
         Camera.main.GetComponent<CameraFollow>().ResetPosition();
-    }
-
-    public void SetCurrentSelection(Transform s) {
-        currentSelection = s;
     }
 }

@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour {
         Debug.Assert(cameraDefaultPosition != null, "Please set " + cameraDefaultPosition + " for " + name + "in the Editor.");
     }
     // Update is called once per frame
-    private void Update() {
+    private void FixedUpdate() {
         if (targetFollowIsOn) {
             UpdateCamera();
         }
