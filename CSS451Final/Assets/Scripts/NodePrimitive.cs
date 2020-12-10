@@ -25,7 +25,7 @@ public class NodePrimitive : MonoBehaviour {
     // the earth = 12,756km
     const float EMI = 12756f;
     [SerializeField] float planetDiameter = 0;
-    private float pd = 0f;
+    [SerializeField] private float pd = 0f;
     [SerializeField] float yAngle = 0f;
 
     // components
@@ -60,7 +60,7 @@ public class NodePrimitive : MonoBehaviour {
     }
 
     public float GetPlanetDiameter() {
-        return pd;
+        return planetDiameter / EMI;
     }
     public Matrix4x4 LoadShaderMatrix(ref Matrix4x4 nodeMatrix) {
 
@@ -90,7 +90,7 @@ public class NodePrimitive : MonoBehaviour {
         // return matrix to theWorld
 
         Vector3 s = new Vector3(m.GetColumn(0).magnitude, m.GetColumn(2).magnitude, m.GetColumn(2).magnitude);
-        pd = s.x;
+        pd = planetDiameter / EMI;
 
         // return 4x4
         return m;

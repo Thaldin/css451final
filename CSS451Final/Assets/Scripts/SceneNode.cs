@@ -70,6 +70,9 @@ public partial class SceneNode : MonoBehaviour {
         np.Initiallize(mainTex, planetDiameter, distanceFromSun, rotationPeriod, offsetFromPlanet);
         SetRing();
         rings.Add(orbitRing);
+
+        float d = np.GetPlanetDiameter();
+        colliderObj.GetComponent<sphereColliderScript>().Initialize(d);
         colliders.Add(colliderObj);
     }
 

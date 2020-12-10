@@ -5,8 +5,9 @@ using UnityEngine;
 public class sphereColliderScript : MonoBehaviour
 {
     [SerializeField] float radius = 0.5f;
-    public void Initialize(float r) {
-        radius = r;
+    public void Initialize(float d) {
+        // this is cheese
+        radius = Mathf.Pow(d, 2f);
         GetComponent<SphereCollider>().radius = radius;
     }
 }

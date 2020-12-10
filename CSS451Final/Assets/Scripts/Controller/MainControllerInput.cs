@@ -6,11 +6,19 @@ public partial class MainController : MonoBehaviour {
 
     bool debugIsOn = false;
     bool ringIsOn = true;
+    bool targetFollowIsOn = false;
     void CheckKeyboard() {
+        // toggles debug lines
         if (Input.GetKeyDown(KeyCode.F1)) {
             KeyF1();
         }
 
+        // reset main camera to default position
+        if (Input.GetKeyDown(KeyCode.F1)) {
+            KeyF2();
+        }
+
+        // toggles rings
         if (Input.GetKeyDown(KeyCode.R)) {
             KeyR();
         }
@@ -18,29 +26,38 @@ public partial class MainController : MonoBehaviour {
 
     void Click() {
         if (Input.GetMouseButtonDown(0)) {
+            // ray
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+
+            //camera
+            Transform cameraLookAtTarget = null;
+            float cameraFollowDistance = 0f;
+
             if (Physics.Raycast(ray, out hit)) {
                 string tag = hit.transform.tag;
 
                 // potential
                 switch (tag) {
                     case "star":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
+                        goto default;
                     case "planet":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
+                        goto default;
+
                     case "moon":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
+                        goto default;
+
                     case "dwarf":
-                        Debug.Log(hit.transform.name + " selected!");
-                        return;
+                        goto default;
+
                     default:
-                        return;
+                        Debug.Log(hit.transform.name + " selected!");
+                        cameraLookAtTarget = hit.transform;
+                        cameraFollowDistance = hit.transform.GetComponent<SphereCollider>().radius;
+                        break;
                 }
             }
+            ToggleCameraFollowTarget(cameraLookAtTarget, cameraFollowDistance);
         }
     }
 
@@ -50,9 +67,19 @@ public partial class MainController : MonoBehaviour {
         TheWorld.ToggleDebug(debugIsOn);
     }
 
+    private void KeyF2() {
+        Camera.main.GetComponent<CameraFollow>().ResetPosition();
+    }
+
     private void KeyR() {
         ringIsOn = !ringIsOn;
         TheWorld.ToggleRings(ringIsOn);
+    }
+    #endregion
+
+    #region Mouse Clicks
+    private void ToggleCameraFollowTarget(Transform t = null, float d = 0f) {
+            Camera.main.GetComponent<CameraFollow>().ToggleFollowTarget(t, d);
     }
     #endregion
 }
