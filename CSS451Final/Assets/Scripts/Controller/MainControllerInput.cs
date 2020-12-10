@@ -33,8 +33,6 @@ public partial class MainController : MonoBehaviour {
 
             //camera
             Transform cameraLookAtTarget = null;
-            float cameraFollowDistance = 0f;
-
             if (Physics.Raycast(ray, out hit)) {
                 if (!EventSystem.current.IsPointerOverGameObject()) {
                     string tag = hit.transform.tag;
@@ -55,12 +53,13 @@ public partial class MainController : MonoBehaviour {
                         default:
                             Debug.Log(hit.transform.name + " selected!");
                             cameraLookAtTarget = hit.transform;
-                            cameraFollowDistance = hit.transform.GetComponent<SphereCollider>().radius;
                             break;
                     }
                 }
             }
-            ToggleCameraFollowTarget(cameraLookAtTarget, cameraFollowDistance);
+            Debug.Log("Click" + cameraLookAtTarget);
+            ToggleCameraFollowTarget(cameraLookAtTarget);
+
         }
     }
 
@@ -81,9 +80,22 @@ public partial class MainController : MonoBehaviour {
     #endregion
 
     #region Mouse Clicks
-    private void ToggleCameraFollowTarget(Transform t, float d = 0f) {
-        NodeControl.ToggleFollowTarget(t, d);
-        
+    private void ToggleCameraFollowTarget(Transform t) {
+        if (t != null) {
+
+            // get selection index
+            sphereColliderScript scs;
+            t.TryGetComponent<sphereColliderScript>(out scs);
+            int i = (scs) ? scs.GetIndex() : 0;
+            // get render obj from world by index
+            //Transform s = TheWorld.GetSceneObjectFromIndex(i);
+            // set NC current selection
+            //NodeControl.SetCurrentSelection(s);
+            // trigger NC selection Change
+            NodeControl.SetMenuIndex(i + 1);
+        } else {
+            NodeControl.SetMenuIndex(0);
+        }
     }
     #endregion
 }

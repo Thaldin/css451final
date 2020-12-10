@@ -45,6 +45,8 @@ public class CameraFollow : MonoBehaviour {
             cameraTarget = t;
             followDistance = distance * 10f;
             followDistance = (followDistance <= 20f) ? 20f : followDistance;
+            followDistance = (followDistance >= 400f) ? 400f : followDistance;
+
         }
 
         // if null

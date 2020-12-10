@@ -85,12 +85,9 @@ public partial class TheWorld : MonoBehaviour {
         for (int i = 0; i < colliderObjects.Count; i++) { 
             ringObjects[i].transform.parent = ringParent.transform;
             colliderObjects[i].transform.parent = colliderParent.transform;
+            colliderObjects[i].GetComponent<sphereColliderScript>().SetIndex(i);
         }
-        /* TODO: delete after test
-        foreach (var r in ringObjects) {
-            r.transform.parent = ringParent.transform;
-        }
-        */
+
         init = true;
     }
 

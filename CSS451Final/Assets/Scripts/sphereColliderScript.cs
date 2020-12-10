@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class sphereColliderScript : MonoBehaviour
 {
+    [SerializeField] int index = 0;
     [SerializeField] float radius = 0.5f;
     public void Initialize(float d) {
         // this is cheese
         radius = Mathf.Pow(d, 2f);
         GetComponent<SphereCollider>().radius = radius;
+    }
+
+    public void SetIndex(int i) {
+        index = i;
+    }
+    public int GetIndex() {
+        return index;
     }
 }

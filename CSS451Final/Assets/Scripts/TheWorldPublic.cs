@@ -20,12 +20,8 @@ public partial class TheWorld : MonoBehaviour
         return sceneObjects[i].transform;
     }
 
-    public List<string> GetSceneObjectsNames() {
-        List<string> s = new List<string>();
-        foreach (var o in sceneObjects) {
-            s.Add(o.name);
-        }
-        return s;
+    public List<Transform> GetSceneObjectsNames() {
+        return sceneObjects;
     }
 
     #region Runtime Set Functions
