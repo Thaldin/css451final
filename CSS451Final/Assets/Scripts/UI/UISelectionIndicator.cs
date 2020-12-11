@@ -43,6 +43,8 @@ public class UISelectionIndicator : MonoBehaviour {
 		}
 	}
 
+	// TODO Planet Indicators 
+
 	public void SetSelection(Transform t) {
 		selectedObject = t;
 		if (selectedObject != null) {

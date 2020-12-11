@@ -78,7 +78,9 @@ public class SceneNodeControl : MonoBehaviour {
     }
 
     public void ResetMainCamera() {
-        Camera.main.GetComponent<CameraFollow>().ResetPosition();
+        // set to star
+        int i = mSelectedTransform.Count - 1;
+        SetMenuIndex(i);
     }
 
     public void TimeChange(float v) {

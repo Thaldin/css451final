@@ -7,9 +7,15 @@ public partial class MainController : MonoBehaviour {
 
     bool debugIsOn = false;
     bool ringIsOn = true;
+    public bool pauseMenuIsOn = false;
     bool targetFollowIsOn = false;
     bool particleSystemIsOn = false;
     void CheckKeyboard() {
+        // toggles menu
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Escape();
+        }
+
         // toggles debug lines
         if (Input.GetKeyDown(KeyCode.F1)) {
             KeyF1();
@@ -34,6 +40,8 @@ public partial class MainController : MonoBehaviour {
         if (mouseScrollDelta.y != 0f) {
             MouseScroll(mouseScrollDelta.y);
         }
+
+        // TODO Camera Manipulation
     }
 
     void Click() {
@@ -77,6 +85,14 @@ public partial class MainController : MonoBehaviour {
     }
 
     #region Key Functions
+
+    private void Escape() {
+        // TODO: if you hit resume, it does not set pauseMenuIsOn in this scope
+        //  have to double tap esc to trigger
+        // pauseMenuIsOn = !pauseMenuIsOn;
+        // pauseMenu.Set(pauseMenuIsOn);
+        pauseMenu.Set(true);
+    }
     private void KeyF1() {
         debugIsOn = !debugIsOn;
         TheWorld.ToggleDebug(debugIsOn);
@@ -84,7 +100,6 @@ public partial class MainController : MonoBehaviour {
 
     private void KeyF2() {
         NodeControl.ResetMainCamera();
-        //NodeControl.SetMenuIndex(0);
     }
 
     private void KeyF3() {

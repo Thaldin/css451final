@@ -9,7 +9,8 @@ public partial class MainController : MonoBehaviour {
     public Camera MiniCamera = null;
     public TheWorld TheWorld = null;
     public SceneNodeControl NodeControl = null;
-    
+    public PauseMenu pauseMenu = null;
+
     [Header("Time Scale")]
     public SliderWithEcho timeScale = null;
     public float minTimeScale = 0f;
@@ -32,6 +33,11 @@ public partial class MainController : MonoBehaviour {
     void Start() {
         Debug.Assert(MainCamera != null);
         Debug.Assert(TheWorld != null, "Please set The World for " + name + " in the Editor");
+        Debug.Assert(NodeControl != null, "Please set The World for " + name + " in the Editor");
+        Debug.Assert(pauseMenu != null, "Please set The World for " + name + " in the Editor");
+
+
+
 
         timeScale.InitSliderRange(minTimeScale, maxTimeScale, 1.0f);
         timeScale.SetSliderListener(TimeScaleListener);
