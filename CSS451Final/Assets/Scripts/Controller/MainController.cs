@@ -20,6 +20,9 @@ public partial class MainController : MonoBehaviour {
     public float minSysScale = 0.5f;
     public float maxSysScale = 5.0f;
 
+    [Header("Special Effects")]
+    public GameObject ParticleSystems = null;
+
     void Awake() {
         Debug.Assert(NodeControl != null);
         NodeControl.TheRoot = TheWorld.TheRoot;

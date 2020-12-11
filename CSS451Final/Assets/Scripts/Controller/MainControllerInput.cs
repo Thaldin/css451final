@@ -8,6 +8,7 @@ public partial class MainController : MonoBehaviour {
     bool debugIsOn = false;
     bool ringIsOn = true;
     bool targetFollowIsOn = false;
+    bool particleSystemIsOn = false;
     void CheckKeyboard() {
         // toggles debug lines
         if (Input.GetKeyDown(KeyCode.F1)) {
@@ -15,8 +16,13 @@ public partial class MainController : MonoBehaviour {
         }
 
         // reset main camera to default position
-        if (Input.GetKeyDown(KeyCode.F1)) {
+        if (Input.GetKeyDown(KeyCode.F2)) {
             KeyF2();
+        }
+
+        // reset main camera to default position
+        if (Input.GetKeyDown(KeyCode.F3)) {
+            KeyF3();
         }
 
         // toggles rings
@@ -77,6 +83,11 @@ public partial class MainController : MonoBehaviour {
 
     private void KeyF2() {
         NodeControl.ResetMainCamera();
+    }
+
+    private void KeyF3() {
+        particleSystemIsOn = !particleSystemIsOn;
+        ParticleSystems.SetActive(particleSystemIsOn);
     }
 
     private void KeyR() {
