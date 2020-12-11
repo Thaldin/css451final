@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class test : MonoBehaviour
 {
     public Material material = null;
     public float radius = 1f;
-    public int slices = 5;
-    public int stacks = 5;
+    public float tr = 1f;
+
+    public int s = 5;
+    public int t = 5;
     GameObject testSphere;
     MeshFilter mf;
     MeshRenderer mr;
+    Mesh mesh;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +24,13 @@ public class test : MonoBehaviour
 
        
         mr.material = material;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        mf.mesh.Clear();
-        Mesh mesh;
-        mesh = Utils.Utils.CreateSphereMesh(radius, slices, stacks);
+        mesh = Utils.Utils.CreateTorus(radius, tr, s, t);
         mf.mesh = mesh;
     }
 }

@@ -6,20 +6,26 @@ using System.Collections;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class TorusWire : MonoBehaviour {
     private static float Pi = 3.14159f;
-
+    public Material m = null;
     public float segmentRadius = 1f;
     public float tubeRadius = 0.1f;
     [Range(3, 36)]
     public int segments = 32;
     [Range(3,12)]
     public int tubes = 12;
+    Mesh mesh;
+    private void Update() {
+        Torus(out mesh, segmentRadius, tubeRadius, segments, tubes);
+        GetComponent<MeshFilter>().mesh = mesh;
+        GetComponent<MeshRenderer>().material = m;
+    }
 
     public void Torus(out Mesh mesh, float r, float ts = 0.1f, int s = 36, int t = 6) {
         mesh = new Mesh();
         segmentRadius = r;
         tubeRadius = ts;
         segments = s;
-        tubes = 6;
+        tubes = t;
 
         tubeRadius = (tubeRadius < 0) ? 0 : tubeRadius;
         tubeRadius = (segmentRadius <= 250f) ? tubeRadius : 1f;

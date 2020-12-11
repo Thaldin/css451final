@@ -23,6 +23,11 @@ public partial class MainController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R)) {
             KeyR();
         }
+
+        Vector2 mouseScrollDelta = Input.mouseScrollDelta;
+        if (mouseScrollDelta.y != 0f) {
+            MouseScroll(mouseScrollDelta.y);
+        }
     }
 
     void Click() {
@@ -32,9 +37,9 @@ public partial class MainController : MonoBehaviour {
             RaycastHit hit;
 
             //camera
-            Transform cameraLookAtTarget = null;
             if (Physics.Raycast(ray, out hit)) {
                 if (!EventSystem.current.IsPointerOverGameObject()) {
+                    Transform cameraLookAtTarget = null;
                     string tag = hit.transform.tag;
 
                     // potential
@@ -55,10 +60,11 @@ public partial class MainController : MonoBehaviour {
                             cameraLookAtTarget = hit.transform;
                             break;
                     }
+                    Debug.Log("Click" + cameraLookAtTarget);
+                    ToggleCameraFollowTarget(cameraLookAtTarget);
                 }
+                Debug.Log("Clicked UI");
             }
-            Debug.Log("Click" + cameraLookAtTarget);
-            ToggleCameraFollowTarget(cameraLookAtTarget);
 
         }
     }
@@ -87,15 +93,16 @@ public partial class MainController : MonoBehaviour {
             sphereColliderScript scs;
             t.TryGetComponent<sphereColliderScript>(out scs);
             int i = (scs) ? scs.GetIndex() : 0;
-            // get render obj from world by index
-            //Transform s = TheWorld.GetSceneObjectFromIndex(i);
-            // set NC current selection
-            //NodeControl.SetCurrentSelection(s);
-            // trigger NC selection Change
+
             NodeControl.SetMenuIndex(i + 1);
         } else {
             NodeControl.SetMenuIndex(0);
         }
     }
+
+    private void MouseScroll(float v) { 
+        
+    }
+
     #endregion
 }

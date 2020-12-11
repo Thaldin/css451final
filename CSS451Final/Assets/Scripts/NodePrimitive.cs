@@ -5,9 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class NodePrimitive : MonoBehaviour {
 
-    //public Color MyColor = new Color(0.1f, 0.1f, 0.2f, 1.0f);
 
-    float systemScale = 1f;
+    [SerializeField] float systemScale = 1f;
+    [SerializeField] float timeScale = 1f;
+
     // properties
     [SerializeField] float distanceFromSun = 0f;
     // rotation center
@@ -19,7 +20,6 @@ public class NodePrimitive : MonoBehaviour {
     // 1 = 24hrs
     const float SIDEREAL_ROTATIONAL_PERIOD = 24f;
     [SerializeField] float planetRotation = 24f;
-    float timeScale = 1f;
 
     // the earth = 1
     // the earth = 12,756km
@@ -43,20 +43,35 @@ public class NodePrimitive : MonoBehaviour {
 
 
     // initialize primitive
-    public void Initiallize(Texture2D mt = default, float d = 1000f, float dfs = 10f, float srp = 24f, float ofp = 0f) {
+    public void Initiallize(Texture2D _mainTex = default, float _planetDiameter = 1000f, float _distanceFromSun = 10f, float _planetRotation = 24f, float _offsetFromPlanet = 0f, float _ringInnerRadius = 0f) {
 
         //Debug.Log("Initalizing " + name);
         // set params
-        mainText = mt;
-        planetDiameter = d;
-        distanceFromSun = dfs;
-        planetRotation = srp;
-        planetOffset = ofp;
-        offsetFromPlanet = new Vector3(planetOffset, 0f, 0f);
+        mainText = _mainTex;
+        planetDiameter = _planetDiameter;
+        distanceFromSun = _distanceFromSun;
+        planetRotation = _planetRotation;
+
+        offsetFromPlanet = new Vector3(_offsetFromPlanet, 0f, 0f);
         // create mesh
         mf.mesh.Clear();
         // 20 for default slices and stacks
-        Mesh mesh = Utils.Utils.CreateSphereMesh(planetDiameter / EMI);
+        Mesh mesh;
+        switch (transform.tag) {
+            case "star":
+                goto default;
+            case "planet":
+                goto default;
+            case "moon":
+                goto default;
+            case "ring":
+                mesh = Utils.Utils.CreateTorus(planetDiameter / EMI, _ringInnerRadius / EMI);
+                break;
+            default:
+                mesh = Utils.Utils.CreateSphereMesh(planetDiameter / EMI);
+                break;
+        }
+        
         mf.mesh = mesh;
     }
 
@@ -67,7 +82,8 @@ public class NodePrimitive : MonoBehaviour {
 
         // apply local roation
         // object rotaitons
-        yAngle = (yAngle <= 360f) ? yAngle + (SIDEREAL_ROTATIONAL_PERIOD / planetRotation) * timeScale : 0f;
+        yAngle = (yAngle <= 360f) ? yAngle + (SIDEREAL_ROTATIONAL_PERIOD / planetRotation) * timeScale: 0f;
+        //(0f, planet rotation, rotation axis)
         Matrix4x4 rot = Matrix4x4.Rotate(Quaternion.Euler(0f, yAngle, 0f));
         // apply local scale
         // object diameter

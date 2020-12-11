@@ -23,9 +23,24 @@ public class CameraFollow : MonoBehaviour {
     }
 
     private void UpdateCamera() {
-
+        Vector3 t;
         // target - transform
-        Vector3 t = cameraTarget.transform.position;
+        // not the star
+        switch (cameraTarget.tag) {
+            case "star":
+                t = new Vector3(followDistance, 0f, 0f);
+                break;
+            case "planet":
+                goto default;
+            case "moon":
+                goto default;
+            case "dwarf":
+                goto default;
+            default:
+                t = cameraTarget.transform.position;
+                break;
+        }
+
         Vector3 c = new Vector3(0f, yCenterOffset, 0f);
         Vector3 v = c - t;
         //Vector3 v = cameraTarget.transform.position - transform.position;
@@ -40,6 +55,9 @@ public class CameraFollow : MonoBehaviour {
     }
 
     public void ToggleFollowTarget(Transform t = null, float distance = 0f) {
+
+
+
         if (t) {
             targetFollowIsOn = true;
             cameraTarget = t;

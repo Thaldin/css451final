@@ -9,6 +9,9 @@ TagManager:
   - star
   - moon
   - dwarf
+  - sliderHandle
+  - UI
+  - ring
   layers:
   - Default
   - TransparentFX

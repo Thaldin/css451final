@@ -10,9 +10,14 @@ public partial class SceneNode : MonoBehaviour {
 
     void SetRing() {
         orbitRing = Instantiate(orbitRing);
-        Mesh mesh;
-        orbitRing.GetComponent<TorusWire>().Torus(out mesh, distanceFromSun);
-        rmf.mesh = mesh;
+        orbitRing.name = transform.name + "Ring";
+
+        distanceFromSun = (distanceFromSun < 0) ? 0 : distanceFromSun;
+        distanceFromSun = (distanceFromSun <= 250f) ? distanceFromSun : 1f;
+        distanceFromSun = (distanceFromSun <= 100f) ? 0.05f : distanceFromSun;
+        distanceFromSun = (distanceFromSun < 0) ? 0 : distanceFromSun;
+
+        rmf.mesh = Utils.Utils.CreateTorus(distanceFromSun);
     }
 
     void UpdateRing() {
@@ -46,7 +51,29 @@ public partial class SceneNode : MonoBehaviour {
 
     // set global time scale
     public void SetTimeScale(float v) {
-        np.SetTimeScale(v);
+        foreach (Transform child in transform) {
+            SceneNode sn = child.GetComponent<SceneNode>();
+            if (sn != null) {
+                // init child
+                sn.np.SetTimeScale(v);
+            }
+        }
+    }
+
+    // send child transform to world controller
+    public void GetChildren(ref List<Transform> sceneObjects) {
+        foreach (Transform child in transform) {
+            SceneNode cn = child.GetComponent<SceneNode>();
+            if (cn != null) {
+                cn.GetChildren(ref sceneObjects);
+                sceneObjects.Add(child);
+            }
+        }
+    }
+
+    // get collider object
+    public Transform GetCollider() {
+        return colliderObj.transform;
     }
     #endregion
 }
