@@ -1,6 +1,6 @@
 # css451final
-Scott Shirley @scottin3d  
-Ed Abshire @Thaldin  
+Scott Shirley [@scottin3d](https://github.com/scottin3d)  
+Ed Abshire [@Thaldin](https://github.com/Thaldin)  
 
 ## Purpose    
 A user interactable and defined solar system.  The project will consist of two scenes.  The first scene will be a user input screen, where the user will define the number of planets and moons in the solar system.  Once the user is done adding these details, they can click “Start” to begin the simulation.
