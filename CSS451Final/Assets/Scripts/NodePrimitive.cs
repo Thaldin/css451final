@@ -12,7 +12,7 @@ public class NodePrimitive : MonoBehaviour {
     // properties
     [SerializeField] float distanceFromSun = 0f;
     // rotation center
-    float planetOffset = 0f;
+    float moonOffset = 0f;
     [SerializeField] Vector3 offsetFromPlanet;
 
     // 1 = 1 Earth Day
@@ -27,6 +27,8 @@ public class NodePrimitive : MonoBehaviour {
     [SerializeField] float planetDiameter = 0;
     [SerializeField] private float pd = 0f;
     [SerializeField] float yAngle = 0f;
+
+    private float ringInnerRadius = 0f;
 
     // components
     MeshFilter mf;
@@ -43,16 +45,28 @@ public class NodePrimitive : MonoBehaviour {
 
 
     // initialize primitive
-    public void Initiallize(Texture2D _mainTex = default, float _planetDiameter = 1000f, float _distanceFromSun = 10f, float _planetRotation = 24f, float _offsetFromPlanet = 0f, float _ringInnerRadius = 0f) {
 
+    public void Initiallize(Texture2D _mainTex = default, float _planetDiameter = 1000f, float _distanceFromSun = 10f, float _planetRotation = 24f, float _offsetFromPlanet = 0f, float _ringInnerRadius = 0f) {
+    //public void Initiallize(PlanetInfo planetInfo,Texture2D _mainTex = default) {
         //Debug.Log("Initalizing " + name);
         // set params
+        /* planetInfo Class
+        mainText = _mainTex;
+        planetDiameter = planetInfo.planetDiameter;
+        distanceFromSun = planetInfo.distanceFromSun;
+        planetRotation = planetInfo.rotationPeriod;
+        offsetFromPlanet = new Vector3(planetInfo.offsetFromPlanet, 0f, 0f);
+        ringInnerRadius = planetInfo.ringInnerRadius;
+        */
+
         mainText = _mainTex;
         planetDiameter = _planetDiameter;
         distanceFromSun = _distanceFromSun;
         planetRotation = _planetRotation;
+        ringInnerRadius = _ringInnerRadius;
+        moonOffset = _offsetFromPlanet;
+        offsetFromPlanet = new Vector3(moonOffset, 0f, 0f);
 
-        offsetFromPlanet = new Vector3(_offsetFromPlanet, 0f, 0f);
         // create mesh
         mf.mesh.Clear();
         // 20 for default slices and stacks
@@ -65,7 +79,7 @@ public class NodePrimitive : MonoBehaviour {
             case "moon":
                 goto default;
             case "ring":
-                mesh = Utils.Utils.CreateTorus(planetDiameter / EMI, _ringInnerRadius / EMI);
+                mesh = Utils.Utils.CreateTorus(planetDiameter / EMI, ringInnerRadius / EMI);
                 break;
             default:
                 mesh = Utils.Utils.CreateSphereMesh(planetDiameter / EMI);

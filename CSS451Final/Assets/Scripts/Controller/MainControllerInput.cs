@@ -41,11 +41,11 @@ public partial class MainController : MonoBehaviour {
             // ray
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
+            
+            Transform cameraLookAtTarget = null;
             //camera
-            if (Physics.Raycast(ray, out hit)) {
-                if (!EventSystem.current.IsPointerOverGameObject()) {
-                    Transform cameraLookAtTarget = null;
+            if (!EventSystem.current.IsPointerOverGameObject()) {
+                if (Physics.Raycast(ray, out hit)) {
                     string tag = hit.transform.tag;
 
                     // potential
@@ -67,11 +67,12 @@ public partial class MainController : MonoBehaviour {
                             break;
                     }
                     Debug.Log("Click" + cameraLookAtTarget);
-                    ToggleCameraFollowTarget(cameraLookAtTarget);
+                    //ToggleCameraFollowTarget(cameraLookAtTarget);
                 }
-                Debug.Log("Clicked UI");
+                Debug.Log("Clicked Space");
             }
-
+            Debug.Log("Clicked UI");
+            ToggleCameraFollowTarget(cameraLookAtTarget);
         }
     }
 
@@ -83,6 +84,7 @@ public partial class MainController : MonoBehaviour {
 
     private void KeyF2() {
         NodeControl.ResetMainCamera();
+        //NodeControl.SetMenuIndex(0);
     }
 
     private void KeyF3() {
@@ -111,8 +113,8 @@ public partial class MainController : MonoBehaviour {
         }
     }
 
-    private void MouseScroll(float v) { 
-        
+    private void MouseScroll(float v) {
+
     }
 
     #endregion

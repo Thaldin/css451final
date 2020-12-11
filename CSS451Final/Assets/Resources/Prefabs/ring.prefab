@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4757309471869724823}
   - component: {fileID: 7242661331071563285}
   - component: {fileID: 1317841391256476365}
-  - component: {fileID: 2308517642281554010}
   m_Layer: 0
   m_Name: ring
   m_TagString: Untagged
@@ -82,20 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2308517642281554010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6010706510913195929}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b0c4d1c09477444c986f626ba14e4b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m: {fileID: 0}
-  segmentRadius: 0
-  tubeRadius: 0.1
-  segments: 36
-  tubes: 6

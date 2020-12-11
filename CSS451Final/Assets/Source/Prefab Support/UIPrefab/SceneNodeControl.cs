@@ -61,10 +61,10 @@ public class SceneNodeControl : MonoBehaviour {
 
         // follow target
         if (selectIndex > 0) {
-            UISelection.SetSelection(currentSelection);
+            //UISelection.SetSelection(currentSelection);
         } else { 
             // edge case universe is default no follow
-            UISelection.SetSelection(null);
+            //UISelection.SetSelection(null);
         }
         ToggleFollowTarget(t, d);
     }

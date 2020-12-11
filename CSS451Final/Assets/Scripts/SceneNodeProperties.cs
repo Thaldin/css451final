@@ -5,19 +5,30 @@ using System.Collections.Generic;
 
 public partial class SceneNode : MonoBehaviour {
 
+    [Header("Ring Prefab")]
     public GameObject orbitRing = null;
+
+    // components
     MeshFilter rmf;
 
     void SetRing() {
         orbitRing = Instantiate(orbitRing);
         orbitRing.name = transform.name + "Ring";
 
-        distanceFromSun = (distanceFromSun < 0) ? 0 : distanceFromSun;
-        distanceFromSun = (distanceFromSun <= 250f) ? distanceFromSun : 1f;
-        distanceFromSun = (distanceFromSun <= 100f) ? 0.05f : distanceFromSun;
-        distanceFromSun = (distanceFromSun < 0) ? 0 : distanceFromSun;
+        float rignDistance = distanceFromSun;
+        // some planets have a negative distance to help offset them.  pure render hacks
+        // normalize the distance
+        rignDistance = (distanceFromSun < 0) ? -distanceFromSun : rignDistance;
 
-        rmf.mesh = Utils.Utils.CreateTorus(distanceFromSun);
+        // check for negative
+        ringInnerRadius = (ringInnerRadius < 0) ? 0 : ringInnerRadius;
+        // clamp size to 2.5f
+        ringInnerRadius = (rignDistance >= 250f) ? ringInnerRadius : 2.5f;
+        ringInnerRadius = (rignDistance <= 250f) ? ringInnerRadius : 1f;
+        ringInnerRadius = (rignDistance <= 100f) ? 0.05f : ringInnerRadius;
+
+
+        rmf.mesh = Utils.Utils.CreateTorus(rignDistance);
     }
 
     void UpdateRing() {

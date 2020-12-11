@@ -531,7 +531,7 @@ PrefabInstance:
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
@@ -6666,6 +6666,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 120536
+    distanceFromSun: 1433.5
+    orbitalPeriod: 10747
+    rotationPeriod: 10.7
+    axisTilt: 26.73
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 486bd6b371593994ab30c424fa2354b8, type: 3}
   colliderObj: {fileID: 2030839222}
@@ -6834,6 +6843,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 6792
+    distanceFromSun: 227.9
+    orbitalPeriod: 687
+    rotationPeriod: 24.6
+    axisTilt: 25.19
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 83a3d8b6f9ee0414693b580bc9565d41, type: 3}
   colliderObj: {fileID: 467479758}
@@ -7402,6 +7420,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 51118
+    distanceFromSun: 2872.5
+    orbitalPeriod: 30589
+    rotationPeriod: -17.2
+    axisTilt: 97.77
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 55ccbc1405ce9e249b41b606cbc015e5, type: 3}
   colliderObj: {fileID: 1020269181}
@@ -7956,6 +7983,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 3475
+    distanceFromSun: 0
+    orbitalPeriod: 27.3
+    rotationPeriod: 655.7
+    axisTilt: 0
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 149.6, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: c0263e73b189e8041a07a86bbda4281c, type: 3}
   colliderObj: {fileID: 687744820}
@@ -9593,6 +9629,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 49528
+    distanceFromSun: 4495.1
+    orbitalPeriod: 59800
+    rotationPeriod: 16.1
+    axisTilt: 28.32
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 7f3e7dc5786503a4dbebdbe0b4debbe5, type: 3}
   colliderObj: {fileID: 2081908963}
@@ -9601,7 +9646,7 @@ MonoBehaviour:
   yAngle: 0
   orbitalPeriod: 59800
   rotationPeriod: 16.1
-  axisTilt: 0
+  axisTilt: 28.32
   offsetFromPlanet: 0
   ringInnerRadius: 0
   planetOrigin: {x: 0, y: 0, z: 0}
@@ -14734,6 +14779,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 12756
+    distanceFromSun: 149.6
+    orbitalPeriod: 365.2
+    rotationPeriod: 23.9
+    axisTilt: 23.26
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: c5b0c5c46a86d394d9272be0690e2757, type: 3}
   colliderObj: {fileID: 2108716245}
@@ -15059,6 +15113,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 0
+    distanceFromSun: 0
+    orbitalPeriod: 0
+    rotationPeriod: 0
+    axisTilt: 0
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 570e94b2ed8bdab4982faae4d6bd8e17, type: 3}
   colliderObj: {fileID: 233383148}
@@ -15793,6 +15856,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 12104
+    distanceFromSun: 108.2
+    orbitalPeriod: 224.7
+    rotationPeriod: -5832.5
+    axisTilt: 177.3
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: eb4cfe28c0b1d8c4aa61db4d0e18e0e9, type: 3}
   colliderObj: {fileID: 587467468}
@@ -15859,6 +15931,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 55708
+    distanceFromSun: 0
+    orbitalPeriod: 0
+    rotationPeriod: 648
+    axisTilt: 0
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: e5cfcd5bad614c04c8cf573850ada32c, type: 3}
   colliderObj: {fileID: 873061606}
@@ -16755,7 +16836,7 @@ MonoBehaviour:
   verts: []
   screenSpaceCorners: []
   worldPoints: []
-  name: {fileID: 2130665496}
+  planetName: {fileID: 0}
   distanceFromSun: {fileID: 1723242990}
   orbitalPeriod: {fileID: 1024767015}
   diameter: {fileID: 370535810}
@@ -16897,7 +16978,7 @@ GameObject:
   - component: {fileID: 2006867482}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17300,6 +17381,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 142984
+    distanceFromSun: -778.6
+    orbitalPeriod: 4331
+    rotationPeriod: 9.9
+    axisTilt: 3.13
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: d2365e30166a5c44388dbb749a5a8da3, type: 3}
   colliderObj: {fileID: 1703852774}
@@ -17579,6 +17669,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 120536
+    distanceFromSun: 1433.5
+    orbitalPeriod: 10747
+    rotationPeriod: 10.7
+    axisTilt: 26.73
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 442aede01d7cf644c87187964b6b1003, type: 3}
   colliderObj: {fileID: 1687241700}
@@ -18173,6 +18272,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c80b1529d710340b97027c774d7728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetInfo:
+    planetDiameter: 4879
+    distanceFromSun: 57.9
+    orbitalPeriod: 88
+    rotationPeriod: 1407.6
+    axisTilt: 0.01
+    offsetFromPlanet: 0
+    ringInnerRadius: 0
+    planetOrigin: {x: 0, y: 0, z: 0}
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 9b531558ec8556345861737f3be5284c, type: 3}
   colliderObj: {fileID: 507766496}

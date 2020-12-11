@@ -2,8 +2,30 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
+public class PlanetInfo {
+    [Header("km")]
+    public float planetDiameter = 0f;
+    [Header("10^6 km")]
+    public float distanceFromSun = 0f;
+    [Header("In Days")]
+    public float orbitalPeriod = 0f;
+    [Header("In Hours")]
+    public float rotationPeriod = 0f;
+    [Header("In Degrees")]
+    public float axisTilt = 0f;
+    [Header("Moon Only")]
+    public float offsetFromPlanet = 0f;
+    [Header("Ring Only")]
+    public float ringInnerRadius = 0f;
+    [Header("Object Center Rotation")]
+    public Vector3 planetOrigin = Vector3.zero;
+}
 
 public partial class SceneNode : MonoBehaviour {
+    [SerializeField] public PlanetInfo planetInfo;
+
+
     [SerializeField] float timeScale = 1f;
 
     // https://www.solarsystemscope.com/textures/
@@ -26,7 +48,7 @@ public partial class SceneNode : MonoBehaviour {
     public float rotationPeriod = 1f;
 
     [Header("In Degrees")]
-    [SerializeField] float axisTilt= 0f;
+    public float axisTilt = 0f;
 
     [Header("Moon Only")]
     public float offsetFromPlanet = 0f;
@@ -69,6 +91,7 @@ public partial class SceneNode : MonoBehaviour {
             }
         }
         // init this
+        //np.Initiallize(planetInfo, mainTex);
         np.Initiallize(mainTex, planetDiameter, distanceFromSun, rotationPeriod, offsetFromPlanet, ringInnerRadius);
         SetRing();
         displayRings.Add(orbitRing);
@@ -85,12 +108,17 @@ public partial class SceneNode : MonoBehaviour {
         if (np != null) {
             // check for 0
             float v = (orbitalPeriod == 0f) ? 0f : (OP_STD / orbitalPeriod); // * timeScale
+            yAngle = (yAngle <= 360f) ? yAngle + v * Time.deltaTime : 0f;
+
+            /*
+            float v = (orbitalPeriod == 0f) ? 0f : (OP_STD / orbitalPeriod); // * timeScale
             yAngle = (yAngle <= 360f) ? yAngle + v  * Time.deltaTime : 0f;
+            */
 
             //Matrix4x4 offsetT = Matrix4x4.Translate(new Vector3(0f, offsetFromAxis, 0f)); ;
             Matrix4x4 rotOffset = Matrix4x4.Rotate(Quaternion.Euler(axisTilt, yAngle, 0f));
             Matrix4x4 posOffset = Matrix4x4.Translate(planetOrigin);
-            Matrix4x4 trs = Matrix4x4.TRS(transform.localPosition, transform.localRotation, Vector3.one);
+            Matrix4x4 trs = Matrix4x4.TRS(transform.localPosition, transform.localRotation, transform.localScale);
 
             mCombinedParentXform = parentXform * posOffset * rotOffset * trs;
 

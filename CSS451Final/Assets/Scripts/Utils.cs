@@ -46,18 +46,18 @@ namespace Utils {
             line.transform.localRotation = Quaternion.FromToRotation(Vector3.up, V);
         }
 
-        /// <summary>
+        /// Summary
         /// https://github.com/GlitchEnzo/UnityProceduralPrimitives/blob/master/Assets/Procedural%20Primitives/Scripts/Primitive.cs
-        /// Creates a <see cref="Mesh"/> filled with vertices forming a sphere.
+        /// Creates a Mesh filled with vertices forming a sphere.
         /// The values are as follows:
         /// Vertex Count   = slices * (stacks - 1) + 2
         /// Triangle Count = slices * (stacks - 1) * 2
         /// 
         /// Default sphere mesh in Unity has a radius of 0.5 with 20 slices and 20 stacks.
-        /// <param name="radius" Radius of the sphere. This value should be greater than or equal to 0.0f.</param>
-        /// <param name="slices" Number of slices around the Y axis.</param>
-        /// <param name="stacks" Number of stacks along the Y axis. Should be 2 or greater. (stack of 1 is just a cylinder)</param>
-        /// <returns>Returns the mesh filled with vertices.</returns>
+        /// <param> radius. Radius of the sphere. This value should be greater than or equal to 0.0f.
+        /// <param> slices. Number of slices around the Y axis.
+        /// <param> stacks. Number of stacks along the Y axis. Should be 2 or greater. (stack of 1 is just a cylinder)
+        /// <returns> Returns the mesh filled with vertices.
         public static Mesh CreateSphereMesh(float radius, int slices = 20, int stacks = 20) {
             Mesh mesh = new Mesh();
             mesh.name = "SphereMesh";
@@ -109,12 +109,12 @@ namespace Utils {
             return mesh;
         }
 
-        /// <summary>
+        /// Summary
         /// Creates an index buffer for spherical shapes like Spheres, Cylinders, and Cones.
-        /// <param name="vertexCount">The total number of vertices making up the shape.</param>
-        /// <param name="indexCount">The total number of indices making up the shape.</param>
-        /// <param name="slices">The number of slices about the Y axis.</param>
-        /// <returns>The index buffer containing the index data for the shape.</returns>
+        /// <param> vertexCount. The total number of vertices making up the shape.
+        /// <param> indexCount. The total number of indices making up the shape.
+        /// <param> slices. The number of slices about the Y axis.
+        /// <returns> The index buffer containing the index data for the shape.
         private static int[] CreateIndexBuffer(int vertexCount, int indexCount, int slices) {
             int[] indices = new int[indexCount];
             int currentIndex = 0;
@@ -162,6 +162,13 @@ namespace Utils {
             return indices;
         }
 
+        /// Summary
+        /// Creates a Mesh filled with vertices forming a torus.
+        /// <param> radius. The radius of the torus.
+        /// <param> tubRadius.The radius of the torus tube.
+        /// <param> segments. The number of segments that make up the torus.
+        /// <param> tubs. The number of segments that make up the tube.
+        /// <returns> Returns a torus mesh.
         public static Mesh CreateTorus(float radius, float tubeRadius = 0.1f, int segments = 36, int tubes = 6) {
             Mesh mesh = new Mesh();
 
@@ -170,12 +177,7 @@ namespace Utils {
             int _segments = segments;
             int t = tubes;
 
-            /*
-            tr = (tr < 0) ? 0 : tr;
-            tr = (sr <= 250f) ? tr : 1f;
-            tr = (sr <= 100f) ? 0.05f : tr;
-            sr = (sr < 0) ? 0 : sr;
-            */
+            
             // Total vertices
             int totalVerts = _segments * t;
 

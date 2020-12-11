@@ -2,6 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+/// <summary>
+/// This class was intended to move a UI seletor to the current selection
+/// and have the info panel float with it, however due to how we render 
+/// objects with the 451shader and M4x4 the position matching was off 
+/// by a slight value and I did not have time to figure it out.  Keeping
+/// if there is time in the future because its a cool idea.
+/// </summary>
 public class UISelectionIndicator : MonoBehaviour {
 	//MouseManager mm;
 	public GameObject center = null;
@@ -13,7 +21,7 @@ public class UISelectionIndicator : MonoBehaviour {
 	[SerializeField] Vector3[] screenSpaceCorners;
 	public Vector3[] worldPoints;
 
-	public TMPro.TMP_Text name = null;
+	public TMPro.TMP_Text planetName = null;
 	public TMPro.TMP_Text distanceFromSun = null;
 	public TMPro.TMP_Text orbitalPeriod = null;
 	public TMPro.TMP_Text diameter = null;
@@ -40,7 +48,7 @@ public class UISelectionIndicator : MonoBehaviour {
 		if (selectedObject != null) {
 
 			List<string> l = selectedObject.GetComponent<SceneNode>().GetPlanetInfo();
-			name.text = l[0];
+			planetName.text = l[0];
 			distanceFromSun.text = l[1];
 			orbitalPeriod.text = l[2];
 			diameter.text = l[3];
