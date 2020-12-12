@@ -6,9 +6,15 @@ using UnityEngine.SceneManagement;
 
 public partial class TheWorld : MonoBehaviour {
     // root of M4x4 shader
+
+    // reference to all UI elements in the Canvas
+    [Header("Death Star")]
+    public DeathStar deathStar = null;
+    [SerializeField] List<float> targetDistances = new List<float>();
+
     [Header("The universe")]
     public SceneNode TheRoot;
-    private bool init = false;
+    public bool init = false;
 
     // test singleton
     public GameObject asteroid = null;
@@ -33,7 +39,8 @@ public partial class TheWorld : MonoBehaviour {
     bool debugIsOn = false;
 
     [Header("M4x4 transforms")]
-    [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
+    public List<Matrix4x4> m4x4s = new List<Matrix4x4>();
+
     private void Start() {
         ResetColliders();
         ResetSceneObjects();
@@ -68,8 +75,33 @@ public partial class TheWorld : MonoBehaviour {
             if (debugIsOn) { 
                 DrawStarLines();
             }
+
+            CheckSceneNodes();
         }
 
+    }
+
+    private void CheckSceneNodes() {
+        if (init) {
+            //Vector3 dsPosition = deathStar.GetPosition();
+            targetDistances.Clear();
+            Vector3 dsPosition = deathStar.GetPosition();
+
+            for (int i = 1; i < m4x4s.Count; i++) {
+                Vector3 target = m4x4s[i -1].GetColumn(3);
+
+                float tarDist = Vector3.Distance(dsPosition, target);
+                targetDistances.Add(tarDist);
+
+                Transform tar = sceneObjects[i - 1];
+                float tarRadius = tar.GetComponent<SceneNode>().colliderRadius;
+
+                // deathstar radius is 25f
+                if (tarDist <= tarRadius + 25f) {
+                    Debug.Log("Collision with " + tar.name);
+                }
+            }
+        }
     }
 
     #region Scene Objects

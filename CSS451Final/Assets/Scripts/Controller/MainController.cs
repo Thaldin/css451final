@@ -1,10 +1,12 @@
 ﻿using System; // for assert
 using UnityEngine;
 using UnityEngine.UI; // for GUI elements: Button, Toggle
+using System.Collections;
+using System.Collections.Generic;
 
 public partial class MainController : MonoBehaviour {
 
-    // reference to all UI elements in the Canvas
+
     public Camera MainCamera = null;
     public Camera MiniCamera = null;
     public TheWorld TheWorld = null;
@@ -57,5 +59,5 @@ public partial class MainController : MonoBehaviour {
     public void SysScaleListener(float v)
     {
         TheWorld.SetSystemScale(v);
-    }
+    } 
 }

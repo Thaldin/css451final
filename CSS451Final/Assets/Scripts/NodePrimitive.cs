@@ -28,7 +28,7 @@ public class NodePrimitive : MonoBehaviour {
     [SerializeField] private float pd = 0f;
     [SerializeField] float yAngle = 0f;
 
-    private float ringInnerRadius = 0f;
+    [SerializeField] float ringInnerRadius = 0f;
 
     // components
     MeshFilter mf;

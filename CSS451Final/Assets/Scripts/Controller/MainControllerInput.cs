@@ -48,6 +48,11 @@ public partial class MainController : MonoBehaviour {
             MouseScroll(mouseScrollDelta.y);
         }
 
+        // deathstar fire
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            KeySpace();
+        }
+
         // TODO Camera Manipulation
     }
 
@@ -124,6 +129,10 @@ public partial class MainController : MonoBehaviour {
     private void KeyH() {
         HUDIsOn = !HUDIsOn;
         NodeControl.ToggleHUD(HUDIsOn);
+    }
+
+    private void KeySpace() {
+        //deathStar.Fire(TheWorld.GetM4x4());
     }
     #endregion
 

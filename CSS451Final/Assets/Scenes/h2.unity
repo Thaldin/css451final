@@ -593,6 +593,21 @@ PrefabInstance:
       propertyPath: m_TagString
       value: ring
       objectReference: {fileID: 0}
+    - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: planetDiameter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: planetRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849121264713363117, guid: a22f3600f1216c849bb77db121e074c3,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a22f3600f1216c849bb77db121e074c3, type: 3}
 --- !u!1 &202765735
@@ -7062,6 +7077,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 486bd6b371593994ab30c424fa2354b8, type: 3}
   colliderObj: {fileID: 2030839222}
+  colliderRadius: 0
   planetDiameter: 120536
   distanceFromSun: 1433.5
   yAngle: 0
@@ -7070,9 +7086,25 @@ MonoBehaviour:
   axisTilt: 26.73
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 538138398}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -7233,6 +7265,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 83a3d8b6f9ee0414693b580bc9565d41, type: 3}
   colliderObj: {fileID: 467479758}
+  colliderRadius: 0
   planetDiameter: 6792
   distanceFromSun: 227.9
   yAngle: 0
@@ -7241,9 +7274,25 @@ MonoBehaviour:
   axisTilt: 25.19
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 694472754}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -7537,7 +7586,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849d57b3dbc59d548a0f454ec4ad4398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathStar: {fileID: 1953980981}
+  targetDistances: []
   TheRoot: {fileID: 1354551507}
+  init: 0
   asteroid: {fileID: 1953980977}
   sceneObjects: []
   colliderParent: {fileID: 1463848373}
@@ -7804,6 +7856,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 55ccbc1405ce9e249b41b606cbc015e5, type: 3}
   colliderObj: {fileID: 1020269181}
+  colliderRadius: 0
   planetDiameter: 51118
   distanceFromSun: 2872.5
   yAngle: 0
@@ -7812,9 +7865,25 @@ MonoBehaviour:
   axisTilt: 97.77
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 1752734654}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -8209,6 +8278,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a24c3546b83de84cb12a747d3a735d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &799988382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 165831704}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12205388687eb644844b9cf65c36074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &873061604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8361,6 +8442,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: c0263e73b189e8041a07a86bbda4281c, type: 3}
   colliderObj: {fileID: 687744820}
+  colliderRadius: 0
   planetDiameter: 3475
   distanceFromSun: 0
   yAngle: 0
@@ -8369,9 +8451,25 @@ MonoBehaviour:
   axisTilt: 1.5
   offsetFromPlanet: 10
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 149.6, y: 0, z: 0}
   np: {fileID: 99829516}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -10350,6 +10448,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 7f3e7dc5786503a4dbebdbe0b4debbe5, type: 3}
   colliderObj: {fileID: 2081908963}
+  colliderRadius: 0
   planetDiameter: 49528
   distanceFromSun: 4495.1
   yAngle: 0
@@ -10358,9 +10457,25 @@ MonoBehaviour:
   axisTilt: 28.32
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 1602892278}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -15494,6 +15609,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: c5b0c5c46a86d394d9272be0690e2757, type: 3}
   colliderObj: {fileID: 2108716245}
+  colliderRadius: 0
   planetDiameter: 12756
   distanceFromSun: 149.6
   yAngle: 0
@@ -15502,9 +15618,25 @@ MonoBehaviour:
   axisTilt: 23.26
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 1539263943}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -15965,6 +16097,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 570e94b2ed8bdab4982faae4d6bd8e17, type: 3}
   colliderObj: {fileID: 233383148}
+  colliderRadius: 0
   planetDiameter: 0
   distanceFromSun: 0
   yAngle: 0
@@ -15973,9 +16106,25 @@ MonoBehaviour:
   axisTilt: 0
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 632544373}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -16972,6 +17121,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: eb4cfe28c0b1d8c4aa61db4d0e18e0e9, type: 3}
   colliderObj: {fileID: 587467468}
+  colliderRadius: 0
   planetDiameter: 12104
   distanceFromSun: 108.2
   yAngle: 0
@@ -16980,9 +17130,25 @@ MonoBehaviour:
   axisTilt: 177.3
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 1897755906}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -17120,6 +17286,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: e5cfcd5bad614c04c8cf573850ada32c, type: 3}
   colliderObj: {fileID: 873061606}
+  colliderRadius: 0
   planetDiameter: 55708
   distanceFromSun: 0
   yAngle: 0
@@ -17128,9 +17295,25 @@ MonoBehaviour:
   axisTilt: 0
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 26089073}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -18406,6 +18589,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2103104038}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1953980981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953980977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5f24d3d5e42bc4cb8b1021586cd190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
 --- !u!1 &1979065535
 GameObject:
   m_ObjectHideFlags: 0
@@ -19157,6 +19353,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: d2365e30166a5c44388dbb749a5a8da3, type: 3}
   colliderObj: {fileID: 1703852774}
+  colliderRadius: 0
   planetDiameter: 142984
   distanceFromSun: -778.6
   yAngle: 0
@@ -19165,9 +19362,25 @@ MonoBehaviour:
   axisTilt: 3.13
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 115676636}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -19419,7 +19632,7 @@ Transform:
   m_GameObject: {fileID: 2045937160}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 556515411}
   m_RootOrder: 0
@@ -19439,17 +19652,34 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 442aede01d7cf644c87187964b6b1003, type: 3}
   colliderObj: {fileID: 1687241700}
-  planetDiameter: 120536
+  colliderRadius: 0
+  planetDiameter: 170000
   distanceFromSun: 1433.5
   yAngle: 0
-  orbitalPeriod: 10747
+  orbitalPeriod: 0
   rotationPeriod: 10.7
-  axisTilt: 0
+  axisTilt: 26.73
   offsetFromPlanet: 0
-  ringInnerRadius: 0
+  ringInnerRadius: 55000
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
-  np: {fileID: 538138398}
-  rignDistance: 0
+  np: {fileID: 799988382}
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}
@@ -19714,8 +19944,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.19
+      value: 105.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
         type: 3}
@@ -19725,7 +19970,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 79.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78ffb77ea50b6a440b30562a44f75908,
         type: 3}
@@ -20171,6 +20416,7 @@ MonoBehaviour:
   timeScale: 1
   mainTex: {fileID: 2800000, guid: 9b531558ec8556345861737f3be5284c, type: 3}
   colliderObj: {fileID: 507766496}
+  colliderRadius: 0
   planetDiameter: 4879
   distanceFromSun: 57.9
   yAngle: 0
@@ -20179,9 +20425,25 @@ MonoBehaviour:
   axisTilt: 0.01
   offsetFromPlanet: 0
   ringInnerRadius: 0
+  mCombinedParentXform:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
   planetOrigin: {x: 0, y: 0, z: 0}
   np: {fileID: 57493427}
-  rignDistance: 0
   orbitRing: {fileID: 6010706510913195929, guid: 03a2116ccfbfc33449c0ff2ef411e1cf,
     type: 3}
   forward: {x: 0, y: 0, z: 0}

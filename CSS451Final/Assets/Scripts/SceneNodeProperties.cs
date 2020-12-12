@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public partial class SceneNode : MonoBehaviour {
 
-public float rignDistance = 0f;
 
     [Header("Ring Prefab")]
     public GameObject orbitRing = null;
+    bool ringUpdate = false;
     MeshFilter rmf;
 
     //debug
@@ -22,7 +22,7 @@ public float rignDistance = 0f;
         rmf = orbitRing.GetComponent<MeshFilter>();
         //float rignDistance = distanceFromSun;
 
-        rignDistance = 0f;
+        float rignDistance = 0f;
 
         switch (transform.tag) {
             case "star":
@@ -43,22 +43,27 @@ public float rignDistance = 0f;
         // normalize the distance
         rignDistance = (distanceFromSun < 0) ? -distanceFromSun : rignDistance;
 
+        float disringInnerRadius = ringInnerRadius;
         // check for negative
         ringInnerRadius = (ringInnerRadius < 0) ? 0 : ringInnerRadius;
         // clamp size to 2.5f
-        ringInnerRadius = (rignDistance >= 250f) ? ringInnerRadius : 2.5f;
-        ringInnerRadius = (rignDistance <= 250f) ? ringInnerRadius : 1f;
-        ringInnerRadius = (rignDistance <= 100f) ? 0.02f : ringInnerRadius; 
+        disringInnerRadius = (rignDistance >= 250f) ? disringInnerRadius : 2.5f;
+        disringInnerRadius = (rignDistance <= 250f) ? disringInnerRadius : 1f;
+        disringInnerRadius = (rignDistance <= 100f) ? 0.02f : disringInnerRadius; 
         rmf.mesh = Utils.Utils.CreateTorus(rignDistance);
         // if moon adjust for tilt
     }
 
     void UpdateRing() {
+            float dist = Vector3.Distance(colliderObj.transform.position, transform.parent.GetComponent<SceneNode>().colliderObj.transform.position);
+            rmf.mesh.Clear();
+            rmf.mesh = Utils.Utils.CreateTorus(dist,0.02f);
         // Extract new local rotation
         forward = mCombinedParentXform.GetColumn(2);
         up = mCombinedParentXform.GetColumn(1);
         Quaternion rotation = Quaternion.LookRotation(forward,up);
         orbitRing.transform.rotation = rotation;
+
         orbitRing.transform.position = transform.parent.GetComponent<SceneNode>().colliderObj.transform.position;
     }
 

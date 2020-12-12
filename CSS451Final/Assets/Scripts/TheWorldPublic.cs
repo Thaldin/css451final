@@ -24,6 +24,10 @@ public partial class TheWorld : MonoBehaviour
         return sceneObjects;
     }
 
+    public List<Matrix4x4> GetM4x4() {
+        return m4x4s;
+    }
+
     #region Runtime Set Functions
     // set global time scale
     public void SetTimeScale(float v) {

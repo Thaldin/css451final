@@ -11,6 +11,7 @@ public partial class SceneNode : MonoBehaviour {
     // https://www.solarsystemscope.com/textures/
     public Texture2D mainTex = null;
     public GameObject colliderObj;
+    public float colliderRadius = 0f;
 
     [Header("km")]
     public float planetDiameter = 0f;
@@ -37,7 +38,7 @@ public partial class SceneNode : MonoBehaviour {
     public float ringInnerRadius = 0f;
 
     // M4x4 for shader movement
-    protected Matrix4x4 mCombinedParentXform;
+    public Matrix4x4 mCombinedParentXform;
 
     // this controls the object center rotation
     // a moon should match the pivot of the parent Node Primitve
@@ -77,7 +78,7 @@ public partial class SceneNode : MonoBehaviour {
         np.Initiallize(mainTex, planetDiameter, distanceFromSun, rotationPeriod, offsetFromPlanet, ringInnerRadius);
 
         float d = np.GetPlanetDiameter();
-        colliderObj.GetComponent<sphereColliderScript>().Initialize(d);
+        colliderObj.GetComponent<sphereColliderScript>().Initialize(d, out colliderRadius);
         colliders.Add(colliderObj);
 
         SetRing();
