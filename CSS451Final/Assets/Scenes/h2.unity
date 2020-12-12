@@ -6532,9 +6532,10 @@ GameObject:
   - component: {fileID: 533210383}
   - component: {fileID: 533210382}
   - component: {fileID: 533210381}
+  - component: {fileID: 533210384}
   m_Layer: 0
   m_Name: MiniCamera
-  m_TagString: Untagged
+  m_TagString: MiniCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6573,7 +6574,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 8500
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 650
   m_Depth: 0
   m_CullingMask:
@@ -6604,6 +6605,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &533210384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533210380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3141a253b97b6984e9de2302e87a3c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDefaultPosition: {fileID: 336243581}
+  cameraTarget: {fileID: 0}
+  targetFollowIsOn: 0
+  followDistance: 10
+  yCamOffset: 0
+  yCenterOffset: 0
 --- !u!4 &538138397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757141008380677343, guid: a22f3600f1216c849bb77db121e074c3,
@@ -7038,22 +7057,22 @@ PrefabInstance:
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
@@ -7103,12 +7122,12 @@ PrefabInstance:
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 333
+      value: -293
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -535
+      value: 253.3
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
@@ -14860,22 +14879,22 @@ PrefabInstance:
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
@@ -14925,12 +14944,12 @@ PrefabInstance:
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533
+      value: -93
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -535
+      value: 255.4
       objectReference: {fileID: 0}
     - target: {fileID: 224925585032533742, guid: 0063ea66f79c76c4190ea329cb8d79f0,
         type: 3}
@@ -15274,7 +15293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1825412254}
-  MiniCamera: {fileID: 0}
+  MiniCamera: {fileID: 533210382}
   TheWorld: {fileID: 676302153}
   NodeControl: {fileID: 2006867482}
   pauseMenu: {fileID: 1991953428}
@@ -16795,7 +16814,6 @@ GameObject:
   - component: {fileID: 1825412255}
   - component: {fileID: 1825412254}
   - component: {fileID: 1825412253}
-  - component: {fileID: 1825412252}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -16803,24 +16821,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1825412252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825412251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3141a253b97b6984e9de2302e87a3c1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraDefaultPosition: {fileID: 336243581}
-  cameraTarget: {fileID: 0}
-  targetFollowIsOn: 0
-  followDistance: 0
-  yCamOffset: 3
-  yCenterOffset: -10
 --- !u!81 &1825412253
 AudioListener:
   m_ObjectHideFlags: 0
@@ -16828,7 +16828,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825412251}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1825412254
 Camera:
   m_ObjectHideFlags: 0

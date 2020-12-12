@@ -36,9 +36,6 @@ public partial class MainController : MonoBehaviour {
         Debug.Assert(NodeControl != null, "Please set The World for " + name + " in the Editor");
         Debug.Assert(pauseMenu != null, "Please set The World for " + name + " in the Editor");
 
-
-
-
         timeScale.InitSliderRange(minTimeScale, maxTimeScale, 1.0f);
         timeScale.SetSliderListener(TimeScaleListener);
 

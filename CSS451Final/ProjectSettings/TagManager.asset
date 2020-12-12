@@ -12,6 +12,7 @@ TagManager:
   - sliderHandle
   - UI
   - ring
+  - MiniCam
   layers:
   - Default
   - TransparentFX

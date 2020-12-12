@@ -8,13 +8,16 @@ public class CameraFollow : MonoBehaviour {
     [SerializeField] Transform cameraTarget = null;
     [SerializeField] bool targetFollowIsOn = false;
     [SerializeField] float followDistance = 0f;
+    Camera cam;
 
     public float yCamOffset = 3f;
     public float yCenterOffset = -10f;
 
     private void Awake() {
         Debug.Assert(cameraDefaultPosition != null, "Please set " + cameraDefaultPosition + " for " + name + "in the Editor.");
+        cam = GameObject.FindGameObjectWithTag("MiniCam").GetComponent<Camera>();
     }
+
     // Update is called once per frame
     private void FixedUpdate() {
         if (targetFollowIsOn) {
@@ -43,7 +46,6 @@ public class CameraFollow : MonoBehaviour {
 
         Vector3 c = new Vector3(0f, yCenterOffset, 0f);
         Vector3 v = c - t;
-        //Vector3 v = cameraTarget.transform.position - transform.position;
         v.Normalize();
         Quaternion r = Quaternion.LookRotation(v, Vector3.up);
         // look at center
@@ -59,11 +61,16 @@ public class CameraFollow : MonoBehaviour {
 
 
         if (t) {
+            cam.enabled = true;
             targetFollowIsOn = true;
             cameraTarget = t;
-            followDistance = distance * 10f;
-            followDistance = (followDistance <= 20f) ? 20f : followDistance;
-            followDistance = (followDistance >= 400f) ? 400f : followDistance;
+            var radius = GameObject.Find(t.name).GetComponent<SphereCollider>().radius;
+            followDistance = radius * 2.5f;
+            followDistance = (followDistance < 1.0f) ? 1.0f : followDistance;
+
+            //followDistance = distance * 10f;
+            //followDistance = (followDistance <= 20f) ? 20f : followDistance;
+            //followDistance = (followDistance >= 400f) ? 400f : followDistance;
 
         }
 
@@ -72,11 +79,19 @@ public class CameraFollow : MonoBehaviour {
             targetFollowIsOn = false;
             cameraTarget = null;
             followDistance = 0f;
+            cam.enabled = false;
         }
     }
 
     public void ResetPosition(){
         transform.position = cameraDefaultPosition.position;
         transform.position = cameraDefaultPosition.rotation.eulerAngles;
+    }
+
+    private void OnPreCull()
+    {
+        cam.cullingMatrix = Matrix4x4.Ortho(-99999, 99999, -99999, 99999, 0.001f, 99999) *
+                            Matrix4x4.Translate(Vector3.forward * -99999 / 2f) *
+                            cam.worldToCameraMatrix;
     }
 }
