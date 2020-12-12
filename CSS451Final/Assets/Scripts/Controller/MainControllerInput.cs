@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public partial class MainController : MonoBehaviour {
 
+    public DeathStar deathStar = null;
     public CameraBehavior theCamera;
     bool debugIsOn = false;
     bool ringIsOn = true;
@@ -45,16 +46,16 @@ public partial class MainController : MonoBehaviour {
         // toggle HUD
         if (Input.GetKeyDown(KeyCode.H)) {
             KeyH();
-        }
 
-
-        Vector2 mouseScrollDelta = Input.mouseScrollDelta;
-        if (mouseScrollDelta.y != 0f) {
-            MouseScroll(mouseScrollDelta.y);
         }
         // deathstar fire
         if (Input.GetKeyDown(KeyCode.Space)) {
             KeySpace();
+        }
+
+        Vector2 mouseScrollDelta = Input.mouseScrollDelta;
+        if (mouseScrollDelta.y != 0f) {
+            MouseScroll(mouseScrollDelta.y);
         }
         if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
         {
@@ -188,7 +189,8 @@ public partial class MainController : MonoBehaviour {
     }
 
     private void KeySpace() {
-        //deathStar.Fire(TheWorld.GetM4x4());
+        Debug.Log("You may fire ");
+        deathStar.Fire(TheWorld.closestTarget);
     }
     #endregion
 

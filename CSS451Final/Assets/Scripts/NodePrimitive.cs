@@ -47,18 +47,6 @@ public class NodePrimitive : MonoBehaviour {
     // initialize primitive
 
     public void Initiallize(Texture2D _mainTex = default, float _planetDiameter = 1000f, float _distanceFromSun = 10f, float _planetRotation = 24f, float _offsetFromPlanet = 0f, float _ringInnerRadius = 0f) {
-    //public void Initiallize(PlanetInfo planetInfo,Texture2D _mainTex = default) {
-        //Debug.Log("Initalizing " + name);
-        // set params
-        /* planetInfo Class
-        mainText = _mainTex;
-        planetDiameter = planetInfo.planetDiameter;
-        distanceFromSun = planetInfo.distanceFromSun;
-        planetRotation = planetInfo.rotationPeriod;
-        offsetFromPlanet = new Vector3(planetInfo.offsetFromPlanet, 0f, 0f);
-        ringInnerRadius = planetInfo.ringInnerRadius;
-        */
-
         mainText = _mainTex;
         planetDiameter = _planetDiameter;
         distanceFromSun = _distanceFromSun;

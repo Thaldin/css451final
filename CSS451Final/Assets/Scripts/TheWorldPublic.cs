@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class TheWorld : MonoBehaviour
-{
-    
+public partial class TheWorld : MonoBehaviour {
+
     public void ToggleDebug(bool b) {
         ToggleStarLines(b);
     }
@@ -27,19 +26,23 @@ public partial class TheWorld : MonoBehaviour
     public List<Matrix4x4> GetM4x4() {
         return m4x4s;
     }
-    public void SetLookAtPos(Vector3 pos)
-    {
+
+
+    public void SetLookAtPos(Vector3 pos) {
         LookAt.transform.localPosition = pos;
     }
 
-    public Vector3 GetLookAtPos()
-    {
+    public Vector3 GetLookAtPos() {
         return LookAt.transform.localPosition;
     }
 
-    public void SlideLookAtPos(float deltaX, float deltaY)
-    {
-        LookAt.transform.position += deltaX * LookAt.transform.right;
+    public Vector3 GetTargetPosition(int i) {
+        Vector3 position = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
+        return position;
+    }
+
+    public void SlideLookAtPos(float deltaX, float deltaY) {
+
         LookAt.transform.position += deltaY * LookAt.transform.up;
     }
 
@@ -52,8 +55,7 @@ public partial class TheWorld : MonoBehaviour
     }
 
     // Set System Scale
-    public void SetSystemScale(float v)
-    {
+    public void SetSystemScale(float v) {
         Debug.Log("Setting System Scale: " + v);
     }
     #endregion

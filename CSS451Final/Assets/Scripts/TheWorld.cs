@@ -11,6 +11,7 @@ public partial class TheWorld : MonoBehaviour {
     [Header("Death Star")]
     public DeathStar deathStar = null;
     [SerializeField] List<float> targetDistances = new List<float>();
+    public int closestTarget = 0;
 
     [Header("The universe")]
     public SceneNode TheRoot;
@@ -89,18 +90,30 @@ public partial class TheWorld : MonoBehaviour {
             targetDistances.Clear();
             Vector3 dsPosition = deathStar.GetPosition();
 
-            for (int i = 1; i < m4x4s.Count; i++) {
-                Vector3 target = m4x4s[i -1].GetColumn(3);
 
-                float tarDist = Vector3.Distance(dsPosition, target);
+            // sun default
+            int startIndex = sceneObjects.Count - 1;
+            closestTarget = startIndex;
+            Vector3 target = m4x4s[startIndex].GetColumn(3);
+            float tarDist = Vector3.Distance(dsPosition, target);
+            float lastDistance = tarDist;
+
+            for (int i = 0; i < m4x4s.Count -1; i++) {
+                target = m4x4s[i].GetColumn(3);
+                tarDist = Vector3.Distance(dsPosition, target);
                 targetDistances.Add(tarDist);
 
-                Transform tar = sceneObjects[i - 1];
+                Transform tar = sceneObjects[i];
                 float tarRadius = tar.GetComponent<SceneNode>().colliderRadius;
 
                 // deathstar radius is 25f
                 if (tarDist <= tarRadius + 25f) {
                     Debug.Log("Collision with " + tar.name);
+                }
+
+                // check closest target
+                if (tarDist < lastDistance) {
+                    closestTarget = i;
                 }
             }
         }
