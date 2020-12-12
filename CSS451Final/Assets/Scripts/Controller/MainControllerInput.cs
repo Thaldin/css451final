@@ -10,6 +10,7 @@ public partial class MainController : MonoBehaviour {
     public bool pauseMenuIsOn = false;
     bool targetFollowIsOn = false;
     bool particleSystemIsOn = false;
+    bool HUDIsOn = true;
     void CheckKeyboard() {
         // toggles menu
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -35,6 +36,12 @@ public partial class MainController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R)) {
             KeyR();
         }
+
+        // toggle HUD
+        if (Input.GetKeyDown(KeyCode.H)) {
+            KeyH();
+        }
+
 
         Vector2 mouseScrollDelta = Input.mouseScrollDelta;
         if (mouseScrollDelta.y != 0f) {
@@ -110,6 +117,11 @@ public partial class MainController : MonoBehaviour {
     private void KeyR() {
         ringIsOn = !ringIsOn;
         TheWorld.ToggleRings(ringIsOn);
+    }
+
+    private void KeyH() {
+        HUDIsOn = !HUDIsOn;
+        NodeControl.ToggleHUD(HUDIsOn);
     }
     #endregion
 

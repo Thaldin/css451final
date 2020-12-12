@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public Transform cameraDefaultPosition = null;
     [SerializeField] Transform cameraTarget = null;
     [SerializeField] bool targetFollowIsOn = false;
     [SerializeField] float followDistance = 0f;
@@ -13,7 +12,6 @@ public class CameraFollow : MonoBehaviour {
     public float yCenterOffset = -10f;
 
     private void Awake() {
-        Debug.Assert(cameraDefaultPosition != null, "Please set " + cameraDefaultPosition + " for " + name + "in the Editor.");
     }
     // Update is called once per frame
     private void FixedUpdate() {
@@ -55,14 +53,11 @@ public class CameraFollow : MonoBehaviour {
     }
 
     public void ToggleFollowTarget(Transform t = null, float distance = 0f) {
-
-
-
         if (t) {
             targetFollowIsOn = true;
             cameraTarget = t;
             followDistance = distance * 10f;
-            followDistance = (followDistance <= 20f) ? 20f : followDistance;
+            followDistance = (followDistance <= 20f) ? 10f : followDistance;
             followDistance = (followDistance >= 400f) ? 400f : followDistance;
 
         }
@@ -73,10 +68,5 @@ public class CameraFollow : MonoBehaviour {
             cameraTarget = null;
             followDistance = 0f;
         }
-    }
-
-    public void ResetPosition(){
-        transform.position = cameraDefaultPosition.position;
-        transform.position = cameraDefaultPosition.rotation.eulerAngles;
     }
 }

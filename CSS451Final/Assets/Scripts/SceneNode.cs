@@ -2,30 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class PlanetInfo {
-    [Header("km")]
-    public float planetDiameter = 0f;
-    [Header("10^6 km")]
-    public float distanceFromSun = 0f;
-    [Header("In Days")]
-    public float orbitalPeriod = 0f;
-    [Header("In Hours")]
-    public float rotationPeriod = 0f;
-    [Header("In Degrees")]
-    public float axisTilt = 0f;
-    [Header("Moon Only")]
-    public float offsetFromPlanet = 0f;
-    [Header("Ring Only")]
-    public float ringInnerRadius = 0f;
-    [Header("Object Center Rotation")]
-    public Vector3 planetOrigin = Vector3.zero;
-}
+
 
 public partial class SceneNode : MonoBehaviour {
     [SerializeField] public PlanetInfo planetInfo;
-
-
     [SerializeField] float timeScale = 1f;
 
     // https://www.solarsystemscope.com/textures/
@@ -77,7 +57,9 @@ public partial class SceneNode : MonoBehaviour {
         colliderObj.name +=  "Collider";
 
         // SNProperties
-        rmf = orbitRing.GetComponent<MeshFilter>();
+        
+        
+        GeneratePlanetInfo();
     }
 
     // init the node
@@ -93,12 +75,27 @@ public partial class SceneNode : MonoBehaviour {
         // init this
         //np.Initiallize(planetInfo, mainTex);
         np.Initiallize(mainTex, planetDiameter, distanceFromSun, rotationPeriod, offsetFromPlanet, ringInnerRadius);
-        SetRing();
-        displayRings.Add(orbitRing);
 
         float d = np.GetPlanetDiameter();
         colliderObj.GetComponent<sphereColliderScript>().Initialize(d);
         colliders.Add(colliderObj);
+
+        SetRing();
+        displayRings.Add(orbitRing);
+    }
+
+    // creat planetInfo for node
+    private void GeneratePlanetInfo() {
+        int mCount = 0;
+        int rCount = 0;
+        foreach (Transform child in transform) {
+            mCount = (child.CompareTag("moon")) ? mCount++ : mCount;
+            rCount = (child.CompareTag("ring")) ? rCount++ : rCount;
+        }
+
+
+        planetInfo = new PlanetInfo(mainTex, planetDiameter, distanceFromSun, orbitalPeriod, 
+                                    rotationPeriod, axisTilt, offsetFromPlanet, ringInnerRadius, mCount, rCount);
     }
 
     // If planets are all rotating together, check the orbital period of the universe and 
@@ -122,6 +119,8 @@ public partial class SceneNode : MonoBehaviour {
 
             mCombinedParentXform = parentXform * posOffset * rotOffset * trs;
 
+            
+
             // propagate to all children
             foreach (Transform child in transform) {
                 SceneNode cn = child.GetComponent<SceneNode>();
@@ -132,6 +131,10 @@ public partial class SceneNode : MonoBehaviour {
 
             // disenminate to primitives
             sceneM4x4.Add(np.LoadShaderMatrix(ref mCombinedParentXform));
+
+            if (transform.CompareTag("moon")) {
+                UpdateRing();
+            }
         }
     }
 

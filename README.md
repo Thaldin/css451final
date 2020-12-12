@@ -18,29 +18,31 @@ The solar system view will be the mini-viewport camera.  This is the overall vie
 ## Program Flow  
 The program will launch with an input scene for the user to input data for the simulation.  Once the user has entered the data, this will be stored in a static object to pass to the simulation scene.  See Figure 2 in the developer notes section.
 When the user selects “Start” the simulation scene will load and all the objects will be created at runtime.
-##Stretch Goals  
+## Stretch Goals  
 If we have time, we would also like to add the ability for the user to add and/or remove new objects in the solar system at runtime.  In addition, we would like to be able to support multiple solar systems if able.
 
-##Tasks  
+## Tasks  
 - Normal	TODO: if you hit resume, it does not set pauseMenuIsOn in this scope	MainControllerInput.cs	88  
 - Normal	TODO Camera Manipulation												MainControllerInput.cs	44  
+- Normal	TODO: Fix Saturns Ring renderer
+- Normal	TODO: spane Luna's orbit rings
 
-- List of tasks to get started:
-- Definite planet types
-	- Associate textures to planet types
+- ~~List of tasks to get started:~~
+- ~~Definite planet types~~
+	- ~~Associate textures to planet types~~
 - Create static object to hold data for the simulation
 	- Test data storage between scene
 - Create user input scene
-- Create simulation scene
+- ~~Create simulation scene~~
 	- Prototype creating and inserting objects dynamically
-- Camera Follow
+- ~~Camera Follow~~
 - Camera manipulation
-- Object selection
-- Globally keep track of selection
-- Object interaction 
+- ~~Object selection~~
+- ~~Globally keep track of selection~~
+- ~~Object interaction~~
 	- gravity or asteroid collision?
 
 ## Bug List
 - ~~clicking into space does not unselect~~
 	- ~~check raycast in maincontrollerinput~~
-- rings not generating correctly
+- ~~rings not generating correctly~~

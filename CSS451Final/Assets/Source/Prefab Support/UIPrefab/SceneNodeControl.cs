@@ -17,6 +17,7 @@ public class SceneNodeControl : MonoBehaviour {
 
     // current selection
     [SerializeField] Transform currentSelection = null;
+    [SerializeField] PlanetInfo currentSelectionPlanetInfo = null;
     public int selectIndex = 0;
     // Use this for initialization
     void Start() {
@@ -52,25 +53,35 @@ public class SceneNodeControl : MonoBehaviour {
 
     public void SelectionChange(int index) {
         selectIndex = index;
+        // set the current planet selection
         XformControl.SetSelectedObject(mSelectedTransform[index]);
         currentSelection = mSelectedTransform[index];
+        // get current planet information for UI
+        SetCurrentPlanetInfo();
+        // get the collider of the current planet
         Transform t = (index < 1) ? null : mSelectedTransform[index].GetComponent<SceneNode>().GetCollider();
         float d = (t) ? t.GetComponent<SphereCollider>().radius : 0f;
 
-        Debug.Log("Change index to: " + index);
+        //Debug.Log("Change index to: " + index);
 
         // follow target
         if (selectIndex > 0) {
-            //UISelection.SetSelection(currentSelection);
-        } else { 
+            UISelection.SetSelection(currentSelection, currentSelectionPlanetInfo);
+        } else {
             // edge case universe is default no follow
-            //UISelection.SetSelection(null);
+            UISelection.SetSelection(null, currentSelectionPlanetInfo);
         }
         ToggleFollowTarget(t, d);
+
+        
     }
 
     public void SetMenuIndex(int i) {
         TheMenu.value = i;
+    }
+
+    public void SetCurrentPlanetInfo() {
+        currentSelection.GetComponent<SceneNode>().GetPlanetInfo(ref currentSelectionPlanetInfo);
     }
 
     public void ToggleFollowTarget(Transform t = null, float d = 0f) {
@@ -85,5 +96,13 @@ public class SceneNodeControl : MonoBehaviour {
 
     public void TimeChange(float v) {
         TheRoot.SetTimeScale(v);
+    }
+
+    public void ToggleHUD(bool b) {
+        // hard coded only toggle first x menus in canvas hierarchy
+
+        for (int i = 0; i < 4; i++) {
+            transform.GetChild(i).gameObject.SetActive(b);
+        }
     }
 }

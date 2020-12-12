@@ -21,15 +21,19 @@ public class UISelectionIndicator : MonoBehaviour {
 	[SerializeField] Vector3[] screenSpaceCorners;
 	public Vector3[] worldPoints;
 
-	public TMPro.TMP_Text planetName = null;
-	public TMPro.TMP_Text distanceFromSun = null;
-	public TMPro.TMP_Text orbitalPeriod = null;
-	public TMPro.TMP_Text diameter = null;
-	public TMPro.TMP_Text rotationalPeriod = null;
-	public TMPro.TMP_Text moons = null;
 
+	PlanetInfo planetInfo;
+	public TMPro.TextMeshProUGUI planetName = null;
+	public TMPro.TextMeshProUGUI distanceFromSun = null;
+	public TMPro.TextMeshProUGUI orbitalPeriod = null;
+	public TMPro.TextMeshProUGUI diameter = null;
+	public TMPro.TextMeshProUGUI rotationalPeriod = null;
+	public TMPro.TextMeshProUGUI axisTilt = null;
+	public TMPro.TextMeshProUGUI moons = null;
+	public TMPro.TextMeshProUGUI rings = null;
 
-	[SerializeField] Transform selectedObject = null;
+	// current selection showing info
+	Transform selectedObject = null;
 	// Use this for initialization
 	void Awake () {
 		//mm = GameObject.FindObjectOfType<MouseManager>();
@@ -45,20 +49,20 @@ public class UISelectionIndicator : MonoBehaviour {
 
 	// TODO Planet Indicators 
 
-	public void SetSelection(Transform t) {
+	public void SetSelection(Transform t, PlanetInfo pInfo) {
 		selectedObject = t;
 		if (selectedObject != null) {
 
-			List<string> l = selectedObject.GetComponent<SceneNode>().GetPlanetInfo();
-			planetName.text = l[0];
-			distanceFromSun.text = l[1];
-			orbitalPeriod.text = l[2];
-			diameter.text = l[3];
-			rotationalPeriod.text = l[4];
 
-			if (selectedObject.tag != "moon") {
-				moons.text = l[5];
-			}
+			planetName.text = t.name;
+			distanceFromSun.text = pInfo.distanceFromSun.ToString() + "000000 km";
+			orbitalPeriod.text = pInfo.orbitalPeriod.ToString() + " days";
+			diameter.text = pInfo.planetDiameter.ToString() + " km";
+			rotationalPeriod.text = pInfo.rotationPeriod.ToString() + " hours";
+			axisTilt.text = pInfo.axisTilt.ToString() + " degrees";
+			moons.text = pInfo.moonCount.ToString();
+			rings.text = pInfo.ringCount.ToString();
+
 
 			transform.gameObject.SetActive(true);
 			for (int i = 0; i < this.transform.childCount; i++) {

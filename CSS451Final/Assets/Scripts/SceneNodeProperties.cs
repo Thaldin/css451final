@@ -7,15 +7,36 @@ public partial class SceneNode : MonoBehaviour {
 
     [Header("Ring Prefab")]
     public GameObject orbitRing = null;
-
-    // components
     MeshFilter rmf;
 
-    void SetRing() {
-        orbitRing = Instantiate(orbitRing);
-        orbitRing.name = transform.name + "Ring";
+    //debug
+    public Vector3 forward = Vector3.zero;
+    public Vector3 up = Vector3.zero;
+    // components
 
-        float rignDistance = distanceFromSun;
+    void SetRing() {
+        orbitRing = Instantiate<GameObject>(orbitRing);
+        orbitRing.name = transform.name + "Ring";
+        rmf = orbitRing.GetComponent<MeshFilter>();
+        //float rignDistance = distanceFromSun;
+
+        float rignDistance = 0f;
+
+        switch (transform.tag) {
+            case "star":
+                goto default;
+            case "planet":
+                goto default;
+            case "moon":
+                rignDistance = offsetFromPlanet;
+                break;
+            case "ring":
+                rignDistance = offsetFromPlanet;
+                break;
+            default:
+                rignDistance = distanceFromSun;
+                break;
+        }
         // some planets have a negative distance to help offset them.  pure render hacks
         // normalize the distance
         rignDistance = (distanceFromSun < 0) ? -distanceFromSun : rignDistance;
@@ -25,17 +46,18 @@ public partial class SceneNode : MonoBehaviour {
         // clamp size to 2.5f
         ringInnerRadius = (rignDistance >= 250f) ? ringInnerRadius : 2.5f;
         ringInnerRadius = (rignDistance <= 250f) ? ringInnerRadius : 1f;
-        ringInnerRadius = (rignDistance <= 100f) ? 0.05f : ringInnerRadius;
-
-
+        ringInnerRadius = (rignDistance <= 100f) ? 0.05f : ringInnerRadius; 
         rmf.mesh = Utils.Utils.CreateTorus(rignDistance);
+        // if moon adjust for tilt
     }
 
     void UpdateRing() {
-        rmf.mesh.Clear();
-        SetRing();
-
-        orbitRing.transform.rotation = transform.rotation;
+        // Extract new local rotation
+        forward = mCombinedParentXform.GetColumn(2);
+        up = mCombinedParentXform.GetColumn(1);
+        Quaternion rotation = Quaternion.LookRotation(forward,up);
+        orbitRing.transform.rotation = rotation;
+        orbitRing.transform.position = colliderObj.transform.position;
     }
 
     public List<string> GetPlanetInfo() {
@@ -80,6 +102,11 @@ public partial class SceneNode : MonoBehaviour {
                 sceneObjects.Add(child);
             }
         }
+    }
+
+    public void GetPlanetInfo(ref PlanetInfo _planetInfo) {
+        _planetInfo = planetInfo;
+        return;
     }
 
     // get collider object
