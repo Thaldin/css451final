@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public partial class MainController : MonoBehaviour {
 
     public DeathStar deathStar = null;
-    public CameraBehavior theCamera;
     bool debugIsOn = false;
     bool ringIsOn = true;
     public bool pauseMenuIsOn = false;
@@ -128,7 +127,7 @@ public partial class MainController : MonoBehaviour {
             {
                 var delta = vPrevMouseDownPos - Input.mousePosition;
                 vPrevMouseDownPos = Input.mousePosition;
-                theCamera.Tumble(delta);
+                MainCamera.gameObject.GetComponent<CameraBehavior>().Tumble(delta);
             }
         }
         
@@ -149,8 +148,8 @@ public partial class MainController : MonoBehaviour {
                 var delta = vPrevMouseDownPos - Input.mousePosition;
                 vPrevMouseDownPos = Input.mousePosition;
                 TheWorld.SlideLookAtPos(delta.x, delta.y);
-                theCamera.Slide(delta);
-                theCamera.SetLookAt(TheWorld.GetLookAtPos());
+                MainCamera.gameObject.GetComponent<CameraBehavior>().Slide(delta);
+                MainCamera.gameObject.GetComponent<CameraBehavior>().SetLookAt(TheWorld.GetLookAtPos());
             }
         }
     }
@@ -219,7 +218,7 @@ public partial class MainController : MonoBehaviour {
         {
             if (Input.mouseScrollDelta.y != 0)
             {
-                theCamera.SetZoom(Input.mouseScrollDelta.y);
+                MainCamera.gameObject.GetComponent<CameraBehavior>().SetZoom(Input.mouseScrollDelta.y);
             }
         }
     }

@@ -34,6 +34,7 @@ public partial class MainController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         Debug.Assert(MainCamera != null);
+        Debug.Assert(MiniCamera != null);
         Debug.Assert(TheWorld != null, "Please set The World for " + name + " in the Editor");
         Debug.Assert(NodeControl != null, "Please set The World for " + name + " in the Editor");
         Debug.Assert(pauseMenu != null, "Please set The World for " + name + " in the Editor");
@@ -60,6 +61,7 @@ public partial class MainController : MonoBehaviour {
 
     public void SysScaleListener(float v)
     {
-        TheWorld.SetSystemScale(v);
+        Debug.Log("Call miniCam: " + v);
+        MiniCamera.gameObject.GetComponent<CameraFollow>().SetZoom(v);
     } 
 }

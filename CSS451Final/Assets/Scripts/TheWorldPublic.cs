@@ -44,6 +44,7 @@ public partial class TheWorld : MonoBehaviour {
     public void SlideLookAtPos(float deltaX, float deltaY) {
 
         LookAt.transform.position += deltaY * LookAt.transform.up;
+        LookAt.transform.position += deltaX * LookAt.transform.right;
     }
 
     #region Runtime Set Functions

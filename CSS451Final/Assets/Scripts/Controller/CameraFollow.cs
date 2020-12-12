@@ -8,7 +8,9 @@ public class CameraFollow : MonoBehaviour {
     [SerializeField] bool targetFollowIsOn = false;
     [SerializeField] float followDistance = 0f;
     Camera cam;
+
     public RectTransform miniCamBorder;
+    public SliderWithEcho zoomSlider;
 
     public float yCamOffset = 3f;
     public float yCenterOffset = -10f;
@@ -65,6 +67,7 @@ public class CameraFollow : MonoBehaviour {
             var radius = GameObject.Find(t.name).GetComponent<SphereCollider>().radius;
             followDistance = radius * 2.5f;
             followDistance = (followDistance < 1.0f) ? 1.0f : followDistance;
+            zoomSlider.InitSliderRange(followDistance, 100f, followDistance);
         }
 
         // if null
@@ -82,5 +85,24 @@ public class CameraFollow : MonoBehaviour {
         cam.cullingMatrix = Matrix4x4.Ortho(-99999, 99999, -99999, 99999, 0.001f, 99999) *
                             Matrix4x4.Translate(Vector3.forward * -99999 / 2f) *
                             cam.worldToCameraMatrix;
+    }
+
+    public void SetZoom(float delta)
+    {
+        Debug.Log("Set follow: " + delta);
+        followDistance = delta;
+        ////delta *= ZoomModifier;
+        //var v = cameraTarget.localPosition - transform.localPosition;
+        //float distance;
+
+        //distance = v.magnitude + -delta;
+
+        //transform.localPosition = cameraTarget.localPosition - (distance * v.normalized);
+
+        //// Check Zoom distance
+        ////if (distance >= MinZoomDistance)
+        ////{
+        ////    transform.localPosition = vLookAt - (distance * v.normalized);
+        ////}
     }
 }

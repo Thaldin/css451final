@@ -7011,6 +7011,7 @@ MonoBehaviour:
   targetFollowIsOn: 0
   followDistance: 10
   miniCamBorder: {fileID: 769286579}
+  miniZoom: {fileID: 791679802}
   yCamOffset: 0
   yCenterOffset: 0
 --- !u!4 &538138397 stripped
