@@ -15,7 +15,6 @@ public class CameraFollow : MonoBehaviour {
 
     private void Awake() {
         cam = GameObject.FindGameObjectWithTag("MiniCam").GetComponent<Camera>();
-
     }
 
     // Update is called once per frame
@@ -66,11 +65,6 @@ public class CameraFollow : MonoBehaviour {
             var radius = GameObject.Find(t.name).GetComponent<SphereCollider>().radius;
             followDistance = radius * 2.5f;
             followDistance = (followDistance < 1.0f) ? 1.0f : followDistance;
-
-            //followDistance = distance * 10f;
-            //followDistance = (followDistance <= 20f) ? 20f : followDistance;
-            //followDistance = (followDistance >= 400f) ? 400f : followDistance;
-
         }
 
         // if null

@@ -99,4 +99,12 @@ public class CameraBehavior : MonoBehaviour
         Camera.main.transform.localPosition += slide.x * Vector3.right;
         Camera.main.transform.localPosition += slide.y * Vector3.up;
     }
+
+    // Try to limit the (0,0,0) camera object culling issue
+    private void OnPreCull()
+    {
+        Camera.main.cullingMatrix = Matrix4x4.Ortho(-99999, 99999, -99999, 99999, 0.001f, 99999) *
+                                    Matrix4x4.Translate(Vector3.forward * -99999 / 2f) *
+                                    Camera.main.worldToCameraMatrix;
+    }
 }

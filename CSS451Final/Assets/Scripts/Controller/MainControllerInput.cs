@@ -52,10 +52,12 @@ public partial class MainController : MonoBehaviour {
         if (mouseScrollDelta.y != 0f) {
             MouseScroll(mouseScrollDelta.y);
         }
+
         // deathstar fire
         if (Input.GetKeyDown(KeyCode.Space)) {
             KeySpace();
         }
+
         if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
         {
             moveCam = true;
@@ -202,26 +204,12 @@ public partial class MainController : MonoBehaviour {
             int i = (scs) ? scs.GetIndex() : 0;
 
             NodeControl.SetMenuIndex(i + 1);
+            timeScale.gameObject.SetActive(true);
+            systemScale.gameObject.SetActive(true);
         } else {
             NodeControl.SetMenuIndex(0);
-        }
-    }
-
-    private void ToggleCameraFollowTarget(Transform t, float radius)
-    {
-        if (t != null)
-        {
-
-            // get selection index
-            sphereColliderScript scs;
-            t.TryGetComponent<sphereColliderScript>(out scs);
-            int i = (scs) ? scs.GetIndex() : 0;
-
-            NodeControl.SetMenuIndex(i + 1);
-        }
-        else
-        {
-            NodeControl.SetMenuIndex(0);
+            timeScale.gameObject.SetActive(false);
+            systemScale.gameObject.SetActive(false);
         }
     }
 

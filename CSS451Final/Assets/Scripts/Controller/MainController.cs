@@ -40,9 +40,11 @@ public partial class MainController : MonoBehaviour {
 
         timeScale.InitSliderRange(minTimeScale, maxTimeScale, 1.0f);
         timeScale.SetSliderListener(TimeScaleListener);
+        timeScale.gameObject.SetActive(false);
 
         systemScale.InitSliderRange(minSysScale, maxSysScale, 1.0f);
         systemScale.SetSliderListener(SysScaleListener);
+        systemScale.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
