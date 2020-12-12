@@ -85,7 +85,10 @@ public class SceneNodeControl : MonoBehaviour {
     }
 
     public void ToggleFollowTarget(Transform t = null, float d = 0f) {
-        Camera.main.GetComponent<CameraFollow>().ToggleFollowTarget(t, d);
+        //Camera.main.GetComponent<CameraFollow>().ToggleFollowTarget(t, d);
+        CameraFollow miniCam = Camera.FindObjectOfType<CameraFollow>();
+        miniCam.ToggleFollowTarget(t, d);
+        
     }
 
     public void ResetMainCamera() {

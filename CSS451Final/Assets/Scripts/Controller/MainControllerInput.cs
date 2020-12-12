@@ -59,7 +59,9 @@ public partial class MainController : MonoBehaviour {
             
             Transform cameraLookAtTarget = null;
             //camera
-            if (!EventSystem.current.IsPointerOverGameObject()) {
+            if (EventSystem.current.IsPointerOverGameObject()) { return; }
+
+//            if (!EventSystem.current.IsPointerOverGameObject()) {
                 if (Physics.Raycast(ray, out hit)) {
                     string tag = hit.transform.tag;
 
@@ -85,7 +87,7 @@ public partial class MainController : MonoBehaviour {
                     //ToggleCameraFollowTarget(cameraLookAtTarget);
                 }
                 Debug.Log("Clicked Space");
-            }
+//            }
             Debug.Log("Clicked UI");
             ToggleCameraFollowTarget(cameraLookAtTarget);
         }
@@ -136,6 +138,24 @@ public partial class MainController : MonoBehaviour {
 
             NodeControl.SetMenuIndex(i + 1);
         } else {
+            NodeControl.SetMenuIndex(0);
+        }
+    }
+
+    private void ToggleCameraFollowTarget(Transform t, float radius)
+    {
+        if (t != null)
+        {
+
+            // get selection index
+            sphereColliderScript scs;
+            t.TryGetComponent<sphereColliderScript>(out scs);
+            int i = (scs) ? scs.GetIndex() : 0;
+
+            NodeControl.SetMenuIndex(i + 1);
+        }
+        else
+        {
             NodeControl.SetMenuIndex(0);
         }
     }

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public partial class SceneNode : MonoBehaviour {
 
+public float rignDistance = 0f;
+
     [Header("Ring Prefab")]
     public GameObject orbitRing = null;
     MeshFilter rmf;
@@ -20,7 +22,7 @@ public partial class SceneNode : MonoBehaviour {
         rmf = orbitRing.GetComponent<MeshFilter>();
         //float rignDistance = distanceFromSun;
 
-        float rignDistance = 0f;
+        rignDistance = 0f;
 
         switch (transform.tag) {
             case "star":
@@ -46,7 +48,7 @@ public partial class SceneNode : MonoBehaviour {
         // clamp size to 2.5f
         ringInnerRadius = (rignDistance >= 250f) ? ringInnerRadius : 2.5f;
         ringInnerRadius = (rignDistance <= 250f) ? ringInnerRadius : 1f;
-        ringInnerRadius = (rignDistance <= 100f) ? 0.05f : ringInnerRadius; 
+        ringInnerRadius = (rignDistance <= 100f) ? 0.02f : ringInnerRadius; 
         rmf.mesh = Utils.Utils.CreateTorus(rignDistance);
         // if moon adjust for tilt
     }
@@ -57,7 +59,7 @@ public partial class SceneNode : MonoBehaviour {
         up = mCombinedParentXform.GetColumn(1);
         Quaternion rotation = Quaternion.LookRotation(forward,up);
         orbitRing.transform.rotation = rotation;
-        orbitRing.transform.position = colliderObj.transform.position;
+        orbitRing.transform.position = transform.parent.GetComponent<SceneNode>().colliderObj.transform.position;
     }
 
     public List<string> GetPlanetInfo() {
