@@ -4,6 +4,7 @@ public class CameraBehavior : MonoBehaviour
 {
     public float MinZoomDistance = 3.0f;
     public float RotationDegrees = 10.0f;
+    public float ZoomModifier = 2.0f;
 
     private float rotationDelta = 0;
     private Vector3 vLookAt = Vector3.zero;
@@ -41,6 +42,7 @@ public class CameraBehavior : MonoBehaviour
 
     public void SetZoom(float delta)
     {
+        delta *= ZoomModifier;
         var v = vLookAt - transform.localPosition;
         float distance;
 

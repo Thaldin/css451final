@@ -24,6 +24,22 @@ public partial class TheWorld : MonoBehaviour
         return sceneObjects;
     }
 
+    public void SetLookAtPos(Vector3 pos)
+    {
+        LookAt.transform.localPosition = pos;
+    }
+
+    public Vector3 GetLookAtPos()
+    {
+        return LookAt.transform.localPosition;
+    }
+
+    public void SlideLookAtPos(float deltaX, float deltaY)
+    {
+        LookAt.transform.position += deltaX * LookAt.transform.right;
+        LookAt.transform.position += deltaY * LookAt.transform.up;
+    }
+
     #region Runtime Set Functions
     // set global time scale
     public void SetTimeScale(float v) {

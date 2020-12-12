@@ -34,6 +34,9 @@ public partial class TheWorld : MonoBehaviour {
 
     [Header("M4x4 transforms")]
     [SerializeField] List<Matrix4x4> m4x4s = new List<Matrix4x4>();
+
+    public GameObject LookAt;
+
     private void Start() {
         ResetColliders();
         ResetSceneObjects();

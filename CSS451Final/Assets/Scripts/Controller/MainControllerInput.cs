@@ -5,12 +5,17 @@ using UnityEngine.EventSystems;
 
 public partial class MainController : MonoBehaviour {
 
+    public CameraBehavior theCamera;
     bool debugIsOn = false;
     bool ringIsOn = true;
     public bool pauseMenuIsOn = false;
     bool targetFollowIsOn = false;
     bool particleSystemIsOn = false;
     bool HUDIsOn = true;
+
+    bool moveCam = false;
+    Vector3 vPrevMouseDownPos = Vector3.zero;
+
     void CheckKeyboard() {
         // toggles menu
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -48,25 +53,44 @@ public partial class MainController : MonoBehaviour {
             MouseScroll(mouseScrollDelta.y);
         }
 
-        // TODO Camera Manipulation
+        if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
+        {
+            moveCam = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.RightAlt))
+        {
+            moveCam = false;
+        }
     }
 
-    void Click() {
+    void Click()
+    {
+        // Left mouse click
         if (Input.GetMouseButtonDown(0)) {
-            // ray
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            
-            Transform cameraLookAtTarget = null;
-            //camera
-            if (EventSystem.current.IsPointerOverGameObject()) { return; }
 
-//            if (!EventSystem.current.IsPointerOverGameObject()) {
-                if (Physics.Raycast(ray, out hit)) {
+            if (moveCam)
+            {
+                vPrevMouseDownPos = Input.mousePosition;
+            }
+            else
+            {
+                // ray
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                Transform cameraLookAtTarget = null;
+                //camera
+                if (EventSystem.current.IsPointerOverGameObject()) { return; }
+
+                //            if (!EventSystem.current.IsPointerOverGameObject()) {
+                if (Physics.Raycast(ray, out hit))
+                {
                     string tag = hit.transform.tag;
 
                     // potential
-                    switch (tag) {
+                    switch (tag)
+                    {
                         case "star":
                             goto default;
                         case "planet":
@@ -87,9 +111,43 @@ public partial class MainController : MonoBehaviour {
                     //ToggleCameraFollowTarget(cameraLookAtTarget);
                 }
                 Debug.Log("Clicked Space");
-//            }
-            Debug.Log("Clicked UI");
-            ToggleCameraFollowTarget(cameraLookAtTarget);
+                //            }
+                Debug.Log("Clicked UI");
+                ToggleCameraFollowTarget(cameraLookAtTarget);
+            }
+        }
+
+        // Left mouse down
+        if (Input.GetMouseButton(0))
+        {
+            if (moveCam)
+            {
+                var delta = vPrevMouseDownPos - Input.mousePosition;
+                vPrevMouseDownPos = Input.mousePosition;
+                theCamera.Tumble(delta);
+            }
+        }
+        
+        // Right mouse click
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (moveCam)
+            {
+                vPrevMouseDownPos = Input.mousePosition;
+            }
+        }
+
+        // Right mouse down
+        if (Input.GetMouseButton(1))
+        {
+            if (moveCam)
+            {
+                var delta = vPrevMouseDownPos - Input.mousePosition;
+                vPrevMouseDownPos = Input.mousePosition;
+                TheWorld.SlideLookAtPos(delta.x, delta.y);
+                theCamera.Slide(delta);
+                theCamera.SetLookAt(TheWorld.GetLookAtPos());
+            }
         }
     }
 
@@ -162,6 +220,13 @@ public partial class MainController : MonoBehaviour {
 
     private void MouseScroll(float v) {
 
+        if (moveCam)
+        {
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                theCamera.SetZoom(Input.mouseScrollDelta.y);
+            }
+        }
     }
 
     #endregion
