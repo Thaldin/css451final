@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour {
     [SerializeField] bool targetFollowIsOn = false;
     [SerializeField] float followDistance = 0f;
     Camera cam;
+    public RectTransform miniCamBorder;
 
     public float yCamOffset = 3f;
     public float yCenterOffset = -10f;
@@ -58,6 +59,7 @@ public class CameraFollow : MonoBehaviour {
     public void ToggleFollowTarget(Transform t = null, float distance = 0f) {
         if (t) {
             cam.enabled = true;
+            miniCamBorder.gameObject.SetActive(true);
             targetFollowIsOn = true;
             cameraTarget = t;
 
@@ -77,6 +79,7 @@ public class CameraFollow : MonoBehaviour {
             cameraTarget = null;
             followDistance = 0f;
             cam.enabled = false;
+            miniCamBorder.gameObject.SetActive(false);
         }
     }
 
