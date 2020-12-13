@@ -7011,7 +7011,7 @@ MonoBehaviour:
   targetFollowIsOn: 0
   followDistance: 10
   miniCamBorder: {fileID: 769286579}
-  miniZoom: {fileID: 791679802}
+  zoomSlider: {fileID: 0}
   yCamOffset: 0
   yCenterOffset: 0
 --- !u!4 &538138397 stripped
@@ -16054,7 +16054,6 @@ MonoBehaviour:
   maxSysScale: 5
   ParticleSystems: {fileID: 907136685}
   deathStar: {fileID: 1953980981}
-  theCamera: {fileID: 1825412252}
   pauseMenuIsOn: 0
 --- !u!4 &1317121300
 Transform:
@@ -19810,7 +19809,7 @@ MonoBehaviour:
   yAngle: 0
   orbitalPeriod: 0
   rotationPeriod: 10.7
-  axisTilt: 26.73
+  axisTilt: 0
   offsetFromPlanet: 0
   ringInnerRadius: 55000
   mCombinedParentXform:
