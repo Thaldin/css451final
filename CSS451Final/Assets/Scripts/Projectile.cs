@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     public TheWorld theWorld;
-
+    public float tumbleSpeed = 5;
     public float speed = 100f;
-    public float distanceToTarget = 0f;
-    public float targetRadius = 0f;
-    public Vector3 targetPos = Vector3.zero;
 
-    public int pTarget = 0;
-    public SceneNode target;
+    [SerializeField] float distanceToTarget = 0f;
+
+    [SerializeField] int pTarget = 0;
+    [SerializeField] SceneNode target;
+    [SerializeField] Vector3 targetPos = Vector3.zero;
+    private float targetRadius = 0f;
+
     public ParticleSystem explosion = null;
-    public bool hit = false;
-    public float time = 0f;
-    float impact = 0f;
+    private bool hit = false;
+    private float time = 0f;
+    private float impact = 0f;
 
     private void Awake() {
         theWorld = GameObject.Find("god").GetComponent<TheWorld>();
@@ -66,5 +68,20 @@ public class Projectile : MonoBehaviour {
 
     private void GetTargetPosition() {
         targetPos = theWorld.GetTargetPosition(pTarget);
+    }
+
+    private void Rotate() {
+        Vector3 rotation = transform.eulerAngles;
+
+        rotation.x += tumbleSpeed * speed * Time.deltaTime;
+        rotation.x = (rotation.x <= 360f) ? rotation.x : 0f;
+
+        rotation.y += tumbleSpeed * speed * Time.deltaTime / 2f;
+        rotation.y = (rotation.y <= 360f) ? rotation.y : 0f;
+
+        rotation.z += tumbleSpeed * speed * Time.deltaTime;
+        rotation.z = (rotation.z <= 360f) ? rotation.z : 0f;
+
+        transform.localEulerAngles = rotation;
     }
 }
