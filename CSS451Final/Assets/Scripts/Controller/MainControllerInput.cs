@@ -22,6 +22,16 @@ public partial class MainController : MonoBehaviour {
             Escape();
         }
 
+        // set asteroid type to heatseeking (targeted)
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            Key1();
+        }
+
+        // set asteroid type to homing (closest target)
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            Key2();
+        }
+
         // toggles debug lines
         if (Input.GetKeyDown(KeyCode.F1)) {
             KeyF1();
@@ -166,6 +176,7 @@ public partial class MainController : MonoBehaviour {
     private void KeyF1() {
         debugIsOn = !debugIsOn;
         TheWorld.ToggleDebug(debugIsOn);
+        asteroidSpawner.ToggleDebug(debugIsOn);
     }
 
     private void KeyF2() {
@@ -190,6 +201,15 @@ public partial class MainController : MonoBehaviour {
     private void KeySpace() {
         Debug.Log("You may fire ");
         deathStar.Fire(TheWorld.closestTarget);
+    }
+
+    // set asteroid projectile type to heatseeking (single target)
+    private void Key1() {
+        asteroidSpawner.SetProjectileType(0);
+    }
+    // set asteroid projectile type to homing (closet target)
+    private void Key2() {
+        asteroidSpawner.SetProjectileType(1);
     }
     #endregion
 

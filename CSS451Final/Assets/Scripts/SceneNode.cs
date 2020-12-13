@@ -3,11 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-
+/// <summary>
+/// 
+/// Decompose <see cref = "Matrix4x4"> 
+/// Extract world position
+/// Vector 3 worldPostion = new Vector3(m4x4.m03, m4x4.m13, m4x4.m23);
+/// Extract new local position
+/// Vector3 localPosition = m4x4.GetColumn(3);
+/// Extract new local rotation
+/// Quaternion rotation = Quaternion.LookRotation(m4x4.GetColumn(2), m4x4.GetColumn(1));
+/// Extract new local scale
+/// Vector3 scale = new Vector3(m4x4.GetColumn(0).magnitude, m4x4.GetColumn(1).magnitude, m4x4.GetColumn(2).magnitude);
+/// </summary>
 public partial class SceneNode : MonoBehaviour {
     [SerializeField] public PlanetInfo planetInfo;
     [SerializeField] float timeScale = 1f;
-
     // https://www.solarsystemscope.com/textures/
     public Texture2D mainTex = null;
     public GameObject colliderObj;

@@ -24,8 +24,8 @@ If we have time, we would also like to add the ability for the user to add and/o
 ## Tasks  
 - Normal	TODO: if you hit resume, it does not set pauseMenuIsOn in this scope	MainControllerInput.cs	88  
 - Normal	TODO Camera Manipulation												MainControllerInput.cs	44  
-- Normal	TODO: Fix Saturns Ring renderer
-- Normal	TODO: spane Luna's orbit rings
+- ~~Normal	TODO: Fix Saturns Ring renderer~~
+- ~~Normal	TODO: spane Luna's orbit rings~~
 
 - ~~List of tasks to get started:~~
 - ~~Definite planet types~~
@@ -43,6 +43,7 @@ If we have time, we would also like to add the ability for the user to add and/o
 	- gravity or asteroid collision?
 
 ## Bug List
+- Camera does not pane screen left of right correctly
 - ~~clicking into space does not unselect~~
 	- ~~check raycast in maincontrollerinput~~
 - ~~rings not generating correctly~~

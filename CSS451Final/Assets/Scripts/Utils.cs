@@ -273,6 +273,11 @@ namespace Utils {
             mesh.Optimize();
             return mesh;
         }
+
+        public static Vector3 Matrix4x4ToWorldPostion(ref Matrix4x4 m) {
+            Vector3 pos = new Vector3(m.m03, m.m13, m.m23);
+            return pos;
+        }
     }
 
 }

@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
+    private AsteroidSpawner asteroidSpawner = null;
     public TheWorld theWorld;
     public float tumbleSpeed = 5;
     public float speed = 100f;
 
+    public enum ProjectileType {
+        homing,      // by target
+        heatSeekings // closest target
+    }
+
     [SerializeField] float distanceToTarget = 0f;
 
     [SerializeField] int pTarget = 0;
+    [SerializeField] ProjectileType pType;
     [SerializeField] SceneNode target;
     [SerializeField] Vector3 targetPos = Vector3.zero;
     private float targetRadius = 0f;
@@ -19,8 +26,12 @@ public class Projectile : MonoBehaviour {
     private float time = 0f;
     private float impact = 0f;
 
+    bool debugIsOn = false;
+    GameObject debugLine;
     private void Awake() {
         theWorld = GameObject.Find("god").GetComponent<TheWorld>();
+        debugLine = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        debugLine.SetActive(debugIsOn);
     }
 
     // Update is called once per frame
@@ -47,27 +58,51 @@ public class Projectile : MonoBehaviour {
 
         time = impact - Time.deltaTime;
         if (time > 3f) {
-            Destroy(explosion);
-            Destroy(gameObject);
+            if (CompareTag("asteroid")) {
+                Destroy(debugLine);
+                asteroidSpawner.DestroyAsteroid(transform);
+            }
+        }
+
+        // update debug line
+        debugLine.SetActive(debugIsOn);
+        if (debugIsOn) {
+            Utils.Utils.AdjustLine(debugLine, transform.position, targetPos);      
         }
     }
 
-    public void Initialize(int targetIndex) {
+    public void Initialize(Transform mother, int targetIndex, ProjectileType projectileType = default, bool debug = false) {
+        if (CompareTag("asteroid")) { 
+            asteroidSpawner = mother.GetComponent<AsteroidSpawner>();
+        
+        }
+        debugIsOn = debug;
         pTarget = targetIndex;
+        pType = projectileType;
         target = theWorld.GetSceneObjectFromIndex(pTarget).GetComponent<SceneNode>();
         targetRadius = target.colliderRadius;
     }
 
     private void Hit() {
         Debug.Log("BOOM!");
-        explosion = Instantiate(explosion);
+        //explosion = Instantiate(explosion);
         explosion.Play();
         hit = true;
 
     }
 
+    // Get the target position from the world by projectile type
     private void GetTargetPosition() {
-        targetPos = theWorld.GetTargetPosition(pTarget);
+        switch (pType) {
+            case ProjectileType.heatSeekings:
+                targetPos = theWorld.GetClosestTargetByPosition(transform.position, out target);
+                break;
+            case ProjectileType.homing:
+                targetPos = theWorld.GetTargetPositionByIndex(pTarget);
+                break;
+            default:
+                break;
+        }
     }
 
     private void Rotate() {
@@ -83,5 +118,9 @@ public class Projectile : MonoBehaviour {
         rotation.z = (rotation.z <= 360f) ? rotation.z : 0f;
 
         transform.localEulerAngles = rotation;
+    }
+
+    public void ToggleDebug(bool b) {
+        debugIsOn = b;
     }
 }

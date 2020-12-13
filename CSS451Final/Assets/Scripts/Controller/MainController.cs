@@ -26,6 +26,13 @@ public partial class MainController : MonoBehaviour {
     [Header("Special Effects")]
     public GameObject ParticleSystems = null;
 
+    [Header("Asteroids")]
+    public SliderWithEcho asteroidSpawnRate = null;
+    public float minSpawnRate = 0f;
+    public float maxSpawnRate = 100f;
+    public AsteroidSpawner asteroidSpawner = null;
+    public Text asteroidCountText = null;
+    public Text pTypeText = null;
     void Awake() {
         Debug.Assert(NodeControl != null);
         NodeControl.TheRoot = TheWorld.TheRoot;
@@ -46,12 +53,17 @@ public partial class MainController : MonoBehaviour {
         systemScale.InitSliderRange(minSysScale, maxSysScale, 1.0f);
         systemScale.SetSliderListener(SysScaleListener);
         systemScale.gameObject.SetActive(false);
+
+        asteroidSpawnRate.InitSliderRange(minSpawnRate, maxSpawnRate, 10f);
+        asteroidSpawnRate.SetSliderListener(AsteroidSpawnRateListener);
+        asteroidSpawnRate.gameObject.SetActive(HUDIsOn);
     }
 
     // Update is called once per frame
     void Update() {        
         Click();
         CheckKeyboard();
+        UpdateUI();
     }
 
     public void TimeScaleListener(float v)
@@ -62,5 +74,26 @@ public partial class MainController : MonoBehaviour {
     public void SysScaleListener(float v)
     {
         MiniCamera.gameObject.GetComponent<CameraFollow>().SetZoom(v);
-    } 
+    }
+
+    public void AsteroidSpawnRateListener(float v) {
+        asteroidSpawner.SetSpawnRate(v);
+    }
+
+    private void UpdateUI() {
+        UpdateAsteroidCount();
+        UpdateProjectileType();
+    }
+
+    private void UpdateAsteroidCount() { 
+        int asC = asteroidSpawner.GetAsteroidCOunt();
+        asteroidCountText.text = asC.ToString();
+    }
+
+    private void UpdateProjectileType() {
+        Projectile.ProjectileType pt = asteroidSpawner.GetProjectileType();
+        pTypeText.text = pt.ToString();
+    }
+
+
 }

@@ -7,14 +7,15 @@ public class AsteroidSpawner : MonoBehaviour {
     public GameObject asteroidPrefab = null;
     [SerializeField] List<GameObject> asteroidsInScene = new List<GameObject>();
 
-    public float spawnRate = 6;
+    [SerializeField] float spawnRate = 6;
     public float max = 0.05f;
     const float GROW_CONST = 3000f;
     private Vector3 scale = Vector3.zero;
     private float size = 0f;
-
+    private int pTypeIndex = 0;
     public GameObject scaler;
 
+    bool debugIsOn = false;
     private void Awake() {
         //theWorld = GameObject.Find("god").GetComponent<TheWorld>();
         //asdasd
@@ -37,16 +38,40 @@ public class AsteroidSpawner : MonoBehaviour {
 
     }
     private void FireAsteroid(int index) {
-        GameObject asteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity);
+        GameObject asteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity, transform);
         Projectile a = asteroid.GetComponent<Projectile>();
         a.transform.localScale = new Vector3(max, max, max);
 
-        a.Initialize(index);
+        a.Initialize(transform, index, (Projectile.ProjectileType)pTypeIndex, debugIsOn);
+        asteroidsInScene.Add(asteroid);
     }
 
-    public void TestFire() {
-        GameObject asteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity);
-        asteroidsInScene.Add(asteroid);
-        asteroid.transform.localScale = new Vector3(max,max,max);
+    public void SetProjectileType(int tIndex) {
+        pTypeIndex = tIndex;
+    }
+
+    public void SetSpawnRate(float v) {
+        spawnRate = v;
+    }
+
+    public int GetAsteroidCOunt() {
+        return asteroidsInScene.Count;
+    }
+
+    public Projectile.ProjectileType GetProjectileType() {
+        return (Projectile.ProjectileType)pTypeIndex;
+    }
+
+    public void DestroyAsteroid(Transform asteroid) {
+
+        asteroidsInScene.Remove(asteroid.gameObject);
+        Destroy(asteroid.gameObject);
+    }
+
+    public void ToggleDebug(bool b) {
+        debugIsOn = b;
+        foreach (var a in asteroidsInScene) {
+            a.GetComponent<Projectile>().ToggleDebug(debugIsOn);
+        }
     }
 }

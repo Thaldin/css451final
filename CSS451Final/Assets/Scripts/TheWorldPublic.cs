@@ -36,10 +36,35 @@ public partial class TheWorld : MonoBehaviour {
         return LookAt.transform.localPosition;
     }
 
-    public Vector3 GetTargetPosition(int i) {
-        Vector3 position = new Vector3(m4x4s[i].m03, m4x4s[i].m13, m4x4s[i].m23);
+    // Get the target Matrix4x4 by index 
+    public Vector3 GetTargetPositionByIndex(int i) {
+        Vector3 position = new Vector3(m4x4s[closestTarget].m03, m4x4s[closestTarget].m13, m4x4s[closestTarget].m23);
         return position;
     }
+    // Get the closest Matrix4x4 by postion
+    public Vector3 GetClosestTargetByPosition(Vector3 pPositon, out SceneNode snTarget) {
+        int startIndex = sceneObjects.Count - 1;
+        snTarget = sceneObjects[startIndex].GetComponent<SceneNode>();
+        Vector3 target = m4x4s[startIndex].GetColumn(3);
+        float tarDist = Vector3.Distance(pPositon, target);
+        float lastDistance = tarDist;
+
+        for (int i = 0; i < m4x4s.Count - 1; i++) {
+            //target = m4x4s[i].GetColumn(3);
+
+            Matrix4x4 m = m4x4s[i];
+            Vector3 t = Utils.Utils.Matrix4x4ToWorldPostion(ref m);
+
+            tarDist = Vector3.Distance(pPositon, t);
+            // check closest target
+            if (tarDist < lastDistance) {
+                target = t;
+                snTarget = sceneObjects[i].GetComponent<SceneNode>();
+            }
+        }
+        return target;
+    }
+
 
     public void SlideLookAtPos(float deltaX, float deltaY) {
 

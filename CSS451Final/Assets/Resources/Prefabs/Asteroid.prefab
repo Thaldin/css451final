@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5100124708436942249}
   m_Layer: 0
   m_Name: Asteroid
-  m_TagString: Untagged
+  m_TagString: asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   speed: 100
   distanceToTarget: 0
   pTarget: 0
+  pType: 1
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
   explosion: {fileID: 4376275633477493391, guid: 100755fb1257f2a49953c5e6774c2edc,

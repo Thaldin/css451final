@@ -43,7 +43,7 @@ public class DeathStar : MonoBehaviour {
     private void FireProjectile(int index) {
         GameObject pc = Instantiate(projectile, transform.position, Quaternion.identity);
         Projectile p = pc.GetComponent<Projectile>();
-        p.Initialize(index);
+        p.Initialize(transform, index);
     }
 
 }
