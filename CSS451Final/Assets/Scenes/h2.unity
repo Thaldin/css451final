@@ -6727,7 +6727,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 80e654d2e8441144bbd49f3396ca80d4, type: 2}
+      objectReference: {fileID: 2100000, guid: 74a8922ba03229c4290f92807fca3e32, type: 2}
     - target: {fileID: 3532223863797103464, guid: a22f3600f1216c849bb77db121e074c3,
         type: 3}
       propertyPath: planetDiameter
@@ -18064,6 +18064,7 @@ GameObject:
   - component: {fileID: 1825412254}
   - component: {fileID: 1825412253}
   - component: {fileID: 1825412252}
+  - component: {fileID: 1825412256}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -18151,6 +18152,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+--- !u!114 &1825412256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825412251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db8193e65416234b98ce7d8ed04b8fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LightPosition: {fileID: 1096108698}
 --- !u!1 &1865180817
 GameObject:
   m_ObjectHideFlags: 0

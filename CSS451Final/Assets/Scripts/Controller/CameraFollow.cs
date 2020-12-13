@@ -89,20 +89,6 @@ public class CameraFollow : MonoBehaviour {
 
     public void SetZoom(float delta)
     {
-        Debug.Log("Set follow: " + delta);
         followDistance = delta;
-        ////delta *= ZoomModifier;
-        //var v = cameraTarget.localPosition - transform.localPosition;
-        //float distance;
-
-        //distance = v.magnitude + -delta;
-
-        //transform.localPosition = cameraTarget.localPosition - (distance * v.normalized);
-
-        //// Check Zoom distance
-        ////if (distance >= MinZoomDistance)
-        ////{
-        ////    transform.localPosition = vLookAt - (distance * v.normalized);
-        ////}
     }
 }
