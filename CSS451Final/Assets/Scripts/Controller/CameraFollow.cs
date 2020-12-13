@@ -67,7 +67,7 @@ public class CameraFollow : MonoBehaviour {
             var radius = GameObject.Find(t.name).GetComponent<SphereCollider>().radius;
             followDistance = radius * 2.5f;
             followDistance = (followDistance < 1.0f) ? 1.0f : followDistance;
-            zoomSlider.InitSliderRange(followDistance, 100f, followDistance);
+            zoomSlider.InitSliderRange(followDistance, followDistance + 100f, followDistance);
         }
 
         // if null
@@ -89,20 +89,6 @@ public class CameraFollow : MonoBehaviour {
 
     public void SetZoom(float delta)
     {
-        Debug.Log("Set follow: " + delta);
         followDistance = delta;
-        ////delta *= ZoomModifier;
-        //var v = cameraTarget.localPosition - transform.localPosition;
-        //float distance;
-
-        //distance = v.magnitude + -delta;
-
-        //transform.localPosition = cameraTarget.localPosition - (distance * v.normalized);
-
-        //// Check Zoom distance
-        ////if (distance >= MinZoomDistance)
-        ////{
-        ////    transform.localPosition = vLookAt - (distance * v.normalized);
-        ////}
     }
 }
