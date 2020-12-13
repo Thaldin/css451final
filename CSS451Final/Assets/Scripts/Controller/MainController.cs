@@ -61,7 +61,6 @@ public partial class MainController : MonoBehaviour {
 
     public void SysScaleListener(float v)
     {
-        Debug.Log("Call miniCam: " + v);
         MiniCamera.gameObject.GetComponent<CameraFollow>().SetZoom(v);
     } 
 }

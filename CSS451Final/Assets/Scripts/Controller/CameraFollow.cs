@@ -67,7 +67,7 @@ public class CameraFollow : MonoBehaviour {
             var radius = GameObject.Find(t.name).GetComponent<SphereCollider>().radius;
             followDistance = radius * 2.5f;
             followDistance = (followDistance < 1.0f) ? 1.0f : followDistance;
-            zoomSlider.InitSliderRange(followDistance, 100f, followDistance);
+            zoomSlider.InitSliderRange(followDistance, followDistance + 100f, followDistance);
         }
 
         // if null
