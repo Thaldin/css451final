@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -73,6 +73,7 @@ public class CameraFollow : MonoBehaviour {
                 followDistance = (followDistance < 1.0f) ? 1.0f : followDistance;
             }
             zoomSlider.InitSliderRange(followDistance, followDistance + 100f, followDistance);
+
         }
 
         // if null
@@ -95,5 +96,9 @@ public class CameraFollow : MonoBehaviour {
     public void SetZoom(float delta)
     {
         followDistance = delta;
+    }
+
+    public void HandleOnCamYChange(float v) {
+        yCamOffset = v;
     }
 }

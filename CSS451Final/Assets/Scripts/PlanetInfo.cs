@@ -15,7 +15,7 @@ public class PlanetInfo {
                       float _offsetFromPlanet = 0f, float _ringInnerRadius = 0f, int _moonCount = 0, int _ringCount = 0) {
         mTex = _mainTex;
         pDiameter = _distanceFromSun;
-        dFromSun = _distanceFromSun;
+        dFromSun = Mathf.Abs(_distanceFromSun);
         oPeriod = _orbitalPeriod;
         rPeriod = _rotationPeriod;
         aTilt = _axisTilt;

@@ -15,10 +15,10 @@ public partial class MainController : MonoBehaviour {
     public PauseMenu pauseMenu = null;
 
     
-    [Header("Time Scale")]
-    public SliderWithEcho timeScale = null;
-    public float minTimeScale = 0f;
-    public float maxTimeScale = 10f;
+    [Header("Mini Cam y Offset")]
+    public SliderWithEcho miniCamYOffset = null;
+    public float minYOffset = -10f;
+    public float maxYOffset = 10f;
 
     [Header("System Scale")]
     public SliderWithEcho systemScale = null;
@@ -36,6 +36,8 @@ public partial class MainController : MonoBehaviour {
     public AsteroidSpawner asteroidSpawner = null;
     public Text asteroidCountText = null;
     public Text pTypeText = null;
+
+
     void Awake() {
         Debug.Assert(NodeControl != null);
         NodeControl.TheRoot = TheWorld.TheRoot;
@@ -43,6 +45,9 @@ public partial class MainController : MonoBehaviour {
         OnFire += deathStar.HandleOnFire;
         OnToggleHud += NodeControl.HandleOnToggleHud;
         OnToggleHud += HandleOnTogglehud;
+        OnCamYChange += MiniCamera.gameObject.GetComponent<CameraFollow>().HandleOnCamYChange;
+        NodeControl.OnSelect += HandleOnSelect;
+        OnPause += HandleOnPause;
     }
 
     // Use this for initialization
@@ -54,12 +59,12 @@ public partial class MainController : MonoBehaviour {
         Debug.Assert(pauseMenu != null, "Please set The World for " + name + " in the Editor");
 
         
-        timeScale.InitSliderRange(minTimeScale, maxTimeScale, 1.0f);
-        timeScale.SetSliderListener(TimeScaleListener);
-        timeScale.gameObject.SetActive(false);
+        miniCamYOffset.InitSliderRange(minYOffset, maxYOffset, 0f);
+        miniCamYOffset.SetSliderListener(SetMiniCamYOffset);
+        miniCamYOffset.gameObject.SetActive(false);
 
         systemScale.InitSliderRange(minSysScale, maxSysScale, 1.0f);
-        systemScale.SetSliderListener(SysScaleListener);
+        systemScale.SetSliderListener(SetMiniCamZoom);
         systemScale.gameObject.SetActive(false);
         
         asteroidSpawnRate.InitSliderRange(minSpawnRate, maxSpawnRate, 10f);
@@ -78,12 +83,12 @@ public partial class MainController : MonoBehaviour {
         UpdateUI();
     }
 
-    public void TimeScaleListener(float v)
+    public void SetMiniCamYOffset(float v)
     {
-        TheWorld.SetTimeScale(v);
+        OnCamYChange?.Invoke(v);
     }
 
-    public void SysScaleListener(float v)
+    public void SetMiniCamZoom(float v)
     {
         MiniCamera.gameObject.GetComponent<CameraFollow>().SetZoom(v);
     }
@@ -110,6 +115,14 @@ public partial class MainController : MonoBehaviour {
     private void HandleOnTogglehud() {
         hudIsOn = !hudIsOn;
         asteroidUIPanel.SetActive(hudIsOn);
+        systemScale.gameObject.SetActive(hudIsOn);
+        miniCamYOffset.gameObject.SetActive(hudIsOn);
+    }
+
+    public void HandleOnSelect() {
+        miniCamYOffset.gameObject.SetActive(true);
+        systemScale.gameObject.SetActive(true);
+
     }
 
 

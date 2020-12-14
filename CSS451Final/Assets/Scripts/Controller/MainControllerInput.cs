@@ -17,7 +17,8 @@ public partial class MainController : MonoBehaviour {
 
     public event Action OnFire;
     public event Action OnToggleHud;
-
+    public event Action<float> OnCamYChange;
+    public event Action OnPause;
 
     void CheckKeyboard() {
         // toggles menu
@@ -69,28 +70,22 @@ public partial class MainController : MonoBehaviour {
         if (mouseScrollDelta.y != 0f) {
             MouseScroll(mouseScrollDelta.y);
         }
-        if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
-        {
+        if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)) {
             moveCam = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.RightAlt))
-        {
+        if (Input.GetKeyUp(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.RightAlt)) {
             moveCam = false;
         }
     }
 
-    void Click()
-    {
+    void Click() {
         // Left mouse click
         if (Input.GetMouseButtonDown(0)) {
 
-            if (moveCam)
-            {
+            if (moveCam) {
                 vPrevMouseDownPos = Input.mousePosition;
-            }
-            else
-            {
+            } else {
                 // ray
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -100,13 +95,9 @@ public partial class MainController : MonoBehaviour {
                 if (EventSystem.current.IsPointerOverGameObject()) { return; }
 
                 //            if (!EventSystem.current.IsPointerOverGameObject()) {
-                if (Physics.Raycast(ray, out hit))
-                {
+                if (Physics.Raycast(ray, out hit)) {
                     string tag = hit.transform.tag;
-
-                    // potential
-                    switch (tag)
-                    {
+                    switch (tag) {
                         case "star":
                             goto default;
                         case "planet":
@@ -126,41 +117,34 @@ public partial class MainController : MonoBehaviour {
                             cameraLookAtTarget = hit.transform;
                             break;
                     }
-                    Debug.Log("Click" + cameraLookAtTarget);
+                    //Debug.Log("Click" + cameraLookAtTarget);
                     //ToggleCameraFollowTarget(cameraLookAtTarget);
                 }
-                Debug.Log("Clicked Space");
-                //            }
-                Debug.Log("Clicked UI");
+                //Debug.Log("Clicked Space");
+                //Debug.Log("Clicked UI");
                 ToggleCameraFollowTarget(cameraLookAtTarget);
             }
         }
 
         // Left mouse down
-        if (Input.GetMouseButton(0))
-        {
-            if (moveCam)
-            {
+        if (Input.GetMouseButton(0)) {
+            if (moveCam) {
                 var delta = vPrevMouseDownPos - Input.mousePosition;
                 vPrevMouseDownPos = Input.mousePosition;
                 MainCamera.gameObject.GetComponent<CameraBehavior>().Tumble(delta);
             }
         }
-        
+
         // Right mouse click
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (moveCam)
-            {
+        if (Input.GetMouseButtonDown(1)) {
+            if (moveCam) {
                 vPrevMouseDownPos = Input.mousePosition;
             }
         }
 
         // Right mouse down
-        if (Input.GetMouseButton(1))
-        {
-            if (moveCam)
-            {
+        if (Input.GetMouseButton(1)) {
+            if (moveCam) {
                 var delta = vPrevMouseDownPos - Input.mousePosition;
                 vPrevMouseDownPos = Input.mousePosition;
                 TheWorld.SlideLookAtPos(delta.x, delta.y);
@@ -172,12 +156,19 @@ public partial class MainController : MonoBehaviour {
 
     #region Key Functions
 
-    private void Escape() {
+    public void Escape() {
         // TODO: if you hit resume, it does not set pauseMenuIsOn in this scope
         //  have to double tap esc to trigger
         // pauseMenuIsOn = !pauseMenuIsOn;
         // pauseMenu.Set(pauseMenuIsOn);
-        pauseMenu.Set(true);
+       // pauseMenu.Set(true);
+
+        OnPause?.Invoke();
+    }
+
+    private void HandleOnPause() {
+        pauseMenuIsOn = !pauseMenuIsOn;
+        pauseMenu.gameObject.SetActive(pauseMenuIsOn);
     }
     private void KeyF1() {
         debugIsOn = !debugIsOn;
@@ -222,6 +213,8 @@ public partial class MainController : MonoBehaviour {
     #region Mouse Clicks
     private void ToggleCameraFollowTarget(Transform t) {
         if (t != null) {
+            miniCamYOffset.gameObject.SetActive(true);
+            systemScale.gameObject.SetActive(true);
 
             // get selection index
             sphereColliderScript scs;
@@ -240,22 +233,18 @@ public partial class MainController : MonoBehaviour {
                 }
                 NodeControl.SetMenuIndex(i);
             }
-            
-            timeScale.gameObject.SetActive(true);
-            systemScale.gameObject.SetActive(true);
+
         } else {
             NodeControl.SetMenuIndex(2);
-            timeScale.gameObject.SetActive(false);
+            miniCamYOffset.gameObject.SetActive(false);
             systemScale.gameObject.SetActive(false);
         }
     }
 
     private void MouseScroll(float v) {
 
-        if (moveCam)
-        {
-            if (Input.mouseScrollDelta.y != 0)
-            {
+        if (moveCam) {
+            if (Input.mouseScrollDelta.y != 0) {
                 MainCamera.gameObject.GetComponent<CameraBehavior>().SetZoom(Input.mouseScrollDelta.y);
             }
         }

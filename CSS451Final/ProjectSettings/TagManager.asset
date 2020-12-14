@@ -14,6 +14,7 @@ TagManager:
   - ring
   - MiniCam
   - asteroid
+  - deathstar
   layers:
   - Default
   - TransparentFX

@@ -55,7 +55,7 @@ public class UISelectionIndicator : MonoBehaviour {
 
 
 			planetName.text = t.name;
-			distanceFromSun.text = pInfo.distanceFromSun.ToString() + "000000 km";
+			distanceFromSun.text = (pInfo.distanceFromSun * 1000000).ToString() + " km";
 			orbitalPeriod.text = pInfo.orbitalPeriod.ToString() + " days";
 			diameter.text = pInfo.planetDiameter.ToString() + " km";
 			rotationalPeriod.text = pInfo.rotationPeriod.ToString() + " hours";

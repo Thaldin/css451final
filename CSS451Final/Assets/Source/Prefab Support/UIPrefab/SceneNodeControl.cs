@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +19,8 @@ public class SceneNodeControl : MonoBehaviour {
     [SerializeField] Transform currentSelection = null;
     [SerializeField] PlanetInfo currentSelectionPlanetInfo = null;
     public int selectIndex = 0;
+
+    public event Action OnSelect;
 
     bool hudIsOn = true;
     // Use this for initialization
@@ -56,7 +58,9 @@ public class SceneNodeControl : MonoBehaviour {
     }
 
     public void SelectionChange(int index) {
-
+        if (index != 2) {
+            OnSelect?.Invoke();
+        }
         Transform t = null;
         float d = 0f;
         selectIndex = index;
@@ -96,7 +100,10 @@ public class SceneNodeControl : MonoBehaviour {
     }
 
     public void SetMenuIndex(int i) {
-        TheMenu.value = i;
+        if (hudIsOn) { 
+            TheMenu.value = i;
+        
+        }
     }
 
     public void SetCurrentPlanetInfo() {

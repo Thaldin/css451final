@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     {
         gameObject.SetActive(IsOn);
         quitButton.onClick.AddListener(Quit);
-        resumeButton.onClick.AddListener(Resume);
+        //resumeButton.onClick.AddListener(Resume);
     }
     public void Set(bool b) {
         IsOn = b;

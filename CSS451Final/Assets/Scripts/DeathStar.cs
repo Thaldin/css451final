@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DeathStar : MonoBehaviour {
     public Transform pivot = null;
-    public GameObject projectile = null;
+    public Camera dsCam = null;
+    //public GameObject projectile = null;
     public AudioClip tarkin = null;
     public AudioClip laserFire = null;
-    public Transform tar;
+    //public Transform tar;
     [SerializeField] Vector3 targetPosition = Vector3.zero;
     AudioSource audioSource;
 
@@ -18,13 +19,14 @@ public class DeathStar : MonoBehaviour {
     public float time = 0f;
     // Start is called before the first frame update
     void Awake() {
-        //Debug.Assert(projectile != null, "Please set projectile prefab for " + name + " in the Editor.");
+        Debug.Assert(pivot != null, "Please set pivot for " + name + " in the Editor.");
         audioSource = GetComponent<AudioSource>();
         CreateLasers();
     }
 
     // Update is called once per frame
     void Update() {
+        dsCam.gameObject.SetActive(isFiring);
         for (int i = 0; i < 4; i++) {
             Utils.Utils.AdjustLine(lasers[i], laserPoints[0].transform.position, laserPoints[i + 1].transform.position, 0.15f);
         }
@@ -58,8 +60,11 @@ public class DeathStar : MonoBehaviour {
     }
 
     public void HandleOnFire() {
-        isFiring = true;
-        StartCoroutine(FireLaser());
+        if (!isFiring) {
+            isFiring = true;
+            StartCoroutine(FireLaser());
+
+        }
     }
 
     IEnumerator FireLaser() {
@@ -74,7 +79,7 @@ public class DeathStar : MonoBehaviour {
             lasers[i].SetActive(true);
             yield return new WaitForSeconds(1f);
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         foreach (var l in lasers) {
             l.SetActive(false);
@@ -86,6 +91,7 @@ public class DeathStar : MonoBehaviour {
         return transform.position;
     }
 
+    /* TODO delete
     IEnumerator playFireRoutine(int index) {
         audioSource.clip = tarkin;
         audioSource.Play();
@@ -101,5 +107,5 @@ public class DeathStar : MonoBehaviour {
         Projectile p = pc.GetComponent<Projectile>();
         p.Initialize(transform, index);
     }
-
+    */
 }
