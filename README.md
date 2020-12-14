@@ -22,8 +22,14 @@ When the user selects “Start” the simulation scene will load and all the obj
 If we have time, we would also like to add the ability for the user to add and/or remove new objects in the solar system at runtime.  In addition, we would like to be able to support multiple solar systems if able.
 
 ## Tasks  
+- Normal Uodate menu controls
+- Required	TODO Demo
+- Normal	TODO Update rings when objects are moved with xForm Controller
+- Required	TODO Camera behavious axis												CameraBehavious.cs 99
+- Normal 	TODO Illumination shader
 - Normal	TODO: if you hit resume, it does not set pauseMenuIsOn in this scope	MainControllerInput.cs	88  
-- Normal	TODO Camera Manipulation												MainControllerInput.cs	44  
+- Normal	TODO Camera Manipulation		
+- Mini cam click										MainControllerInput.cs	44  
 - ~~Normal	TODO: Fix Saturns Ring renderer~~
 - ~~Normal	TODO: spane Luna's orbit rings~~
 
@@ -43,6 +49,9 @@ If we have time, we would also like to add the ability for the user to add and/o
 	- gravity or asteroid collision?
 
 ## Bug List
+- projectile target changes
+- death star projectiles not destroying
+- Normal Auido lister
 - Camera does not pane screen left of right correctly
 - ~~clicking into space does not unselect~~
 	- ~~check raycast in maincontrollerinput~~
