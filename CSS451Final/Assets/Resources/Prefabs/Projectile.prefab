@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a443efc9b36df4640ba74f48d5ac9067, type: 2}
+  - {fileID: 2100000, guid: 517e0ec3796dd4a4f86201a77c9209ed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,11 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2194455bf5d2da640be20d4ede3a71b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theWorld: {fileID: 0}
+  tumbleSpeed: 5
   speed: 200
   distanceToTarget: 0
-  targetRadius: 0
-  pTarget: {fileID: 0}
+  pTarget: 0
+  pType: 0
+  target: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
   explosion: {fileID: 4376275633477493391, guid: 100755fb1257f2a49953c5e6774c2edc,
     type: 3}
-  hit: 0
-  time: 0
