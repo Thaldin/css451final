@@ -10770,7 +10770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096108697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 138.4, y: -0.0000047683716, z: 535.8}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16386,8 +16386,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 152.41, y: -30.2}
-  m_SizeDelta: {x: 60.91095, y: 18.354614}
+  m_AnchoredPosition: {x: 159.28, y: -30.2}
+  m_SizeDelta: {x: 47.179993, y: 18.354614}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241275755
 MonoBehaviour:
@@ -19403,6 +19403,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LightPosition: {fileID: 1096108698}
+  LightNear: 250
+  LightFar: 2500
+  LightColor: {r: 0.87409097, g: 0.8773585, b: 0.33521718, a: 0}
 --- !u!1 &1865180817
 GameObject:
   m_ObjectHideFlags: 0
@@ -19924,7 +19927,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
