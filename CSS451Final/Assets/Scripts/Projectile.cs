@@ -1,9 +1,8 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-    private AsteroidSpawner asteroidSpawner = null;
     public TheWorld theWorld;
     public float tumbleSpeed = 5;
     public float speed = 100f;
@@ -28,6 +27,9 @@ public class Projectile : MonoBehaviour {
 
     bool debugIsOn = false;
     GameObject debugLine;
+
+    public event Action<Projectile> OnCollision;
+
     private void Awake() {
         theWorld = GameObject.Find("god").GetComponent<TheWorld>();
         debugLine = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
@@ -60,7 +62,8 @@ public class Projectile : MonoBehaviour {
         if (time > 3f) {
             if (CompareTag("asteroid")) {
                 Destroy(debugLine);
-                asteroidSpawner.DestroyAsteroid(transform);
+                // invoke the event
+                OnCollision?.Invoke(this);
             }
         }
 
@@ -72,10 +75,6 @@ public class Projectile : MonoBehaviour {
     }
 
     public void Initialize(Transform mother, int targetIndex, ProjectileType projectileType = default, bool debug = false) {
-        if (CompareTag("asteroid")) { 
-            asteroidSpawner = mother.GetComponent<AsteroidSpawner>();
-        
-        }
         debugIsOn = debug;
         pTarget = targetIndex;
         pType = projectileType;

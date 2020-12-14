@@ -59,9 +59,9 @@ public partial class TheWorld : MonoBehaviour {
 
         // initialize planets
         InitSceneObjects();
-
-
         CreateStarLines(Color.white);
+
+        OnTarget += deathStar.HandleOnTarget;
     }
 
 
@@ -75,7 +75,7 @@ public partial class TheWorld : MonoBehaviour {
             UpdateColliderObjects();
             DrawTargets(asteroid, Color.red);
 
-            if (debugIsOn) { 
+            if (debugIsOn) {
                 DrawStarLines();
             }
 
@@ -98,7 +98,7 @@ public partial class TheWorld : MonoBehaviour {
             float tarDist = Vector3.Distance(dsPosition, target);
             float lastDistance = tarDist;
 
-            for (int i = 0; i < m4x4s.Count -1; i++) {
+            for (int i = 0; i < m4x4s.Count - 1; i++) {
                 target = m4x4s[i].GetColumn(3);
                 tarDist = Vector3.Distance(dsPosition, target);
                 targetDistances.Add(tarDist);
@@ -116,6 +116,9 @@ public partial class TheWorld : MonoBehaviour {
                     closestTarget = i;
                 }
             }
+           
+            OnTarget?.Invoke(m4x4s[closestTarget].GetColumn(3));
+
         }
     }
 
@@ -129,10 +132,10 @@ public partial class TheWorld : MonoBehaviour {
     private void InitSceneObjects() {
         TheRoot.InitializeSceneNode(ref ringObjects, ref colliderObjects);
 
-        for (int i = 0; i < colliderObjects.Count; i++) { 
+        for (int i = 0; i < colliderObjects.Count; i++) {
             ringObjects[i].transform.parent = ringParent.transform;
             colliderObjects[i].transform.parent = colliderParent.transform;
-            colliderObjects[i].GetComponent<sphereColliderScript>().SetIndex(i);
+            colliderObjects[i].GetComponent<sphereColliderScript>().SetIndex(i + 2);
         }
 
         init = true;
@@ -165,7 +168,7 @@ public partial class TheWorld : MonoBehaviour {
     }
 
     #endregion
-    
+
     #region Draw Lines
     // draws lines between planets and object
     private void DrawTargets(GameObject tar, Color color = default) {

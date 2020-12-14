@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public partial class MainController : MonoBehaviour {
+    bool hudIsOn = true;
 
 
     public Camera MainCamera = null;
@@ -13,6 +14,7 @@ public partial class MainController : MonoBehaviour {
     public SceneNodeControl NodeControl = null;
     public PauseMenu pauseMenu = null;
 
+    
     [Header("Time Scale")]
     public SliderWithEcho timeScale = null;
     public float minTimeScale = 0f;
@@ -22,11 +24,12 @@ public partial class MainController : MonoBehaviour {
     public SliderWithEcho systemScale = null;
     public float minSysScale = 0.5f;
     public float maxSysScale = 5.0f;
-
+    
     [Header("Special Effects")]
     public GameObject ParticleSystems = null;
 
     [Header("Asteroids")]
+    public GameObject asteroidUIPanel = null;
     public SliderWithEcho asteroidSpawnRate = null;
     public float minSpawnRate = 0f;
     public float maxSpawnRate = 100f;
@@ -36,6 +39,10 @@ public partial class MainController : MonoBehaviour {
     void Awake() {
         Debug.Assert(NodeControl != null);
         NodeControl.TheRoot = TheWorld.TheRoot;
+
+        OnFire += deathStar.HandleOnFire;
+        OnToggleHud += NodeControl.HandleOnToggleHud;
+        OnToggleHud += HandleOnTogglehud;
     }
 
     // Use this for initialization
@@ -46,6 +53,7 @@ public partial class MainController : MonoBehaviour {
         Debug.Assert(NodeControl != null, "Please set The World for " + name + " in the Editor");
         Debug.Assert(pauseMenu != null, "Please set The World for " + name + " in the Editor");
 
+        
         timeScale.InitSliderRange(minTimeScale, maxTimeScale, 1.0f);
         timeScale.SetSliderListener(TimeScaleListener);
         timeScale.gameObject.SetActive(false);
@@ -53,10 +61,14 @@ public partial class MainController : MonoBehaviour {
         systemScale.InitSliderRange(minSysScale, maxSysScale, 1.0f);
         systemScale.SetSliderListener(SysScaleListener);
         systemScale.gameObject.SetActive(false);
-
+        
         asteroidSpawnRate.InitSliderRange(minSpawnRate, maxSpawnRate, 10f);
         asteroidSpawnRate.SetSliderListener(AsteroidSpawnRateListener);
-        asteroidSpawnRate.gameObject.SetActive(HUDIsOn);
+        asteroidSpawnRate.gameObject.SetActive(hudIsOn);
+
+        NodeControl.AddToDropdownMenu(deathStar.transform.parent);
+        NodeControl.AddToDropdownMenu(asteroidSpawner.transform);
+
     }
 
     // Update is called once per frame
@@ -93,6 +105,11 @@ public partial class MainController : MonoBehaviour {
     private void UpdateProjectileType() {
         Projectile.ProjectileType pt = asteroidSpawner.GetProjectileType();
         pTypeText.text = pt.ToString();
+    }
+
+    private void HandleOnTogglehud() {
+        hudIsOn = !hudIsOn;
+        asteroidUIPanel.SetActive(hudIsOn);
     }
 
 

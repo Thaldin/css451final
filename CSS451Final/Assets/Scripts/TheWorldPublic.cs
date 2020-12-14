@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public partial class TheWorld : MonoBehaviour {
+    public event Action<Vector3> OnTarget;
 
     public void ToggleDebug(bool b) {
         ToggleStarLines(b);
@@ -67,8 +68,8 @@ public partial class TheWorld : MonoBehaviour {
 
 
     public void SlideLookAtPos(float deltaX, float deltaY) {
-
         LookAt.transform.position += deltaY * LookAt.transform.up;
+        //LookAt.transform.position += deltaY * LookAt.transform.forward;
         LookAt.transform.position += deltaX * LookAt.transform.right;
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,10 +11,13 @@ public partial class MainController : MonoBehaviour {
     public bool pauseMenuIsOn = false;
     bool targetFollowIsOn = false;
     bool particleSystemIsOn = false;
-    bool HUDIsOn = true;
 
     bool moveCam = false;
     Vector3 vPrevMouseDownPos = Vector3.zero;
+
+    public event Action OnFire;
+    public event Action OnToggleHud;
+
 
     void CheckKeyboard() {
         // toggles menu
@@ -114,7 +117,10 @@ public partial class MainController : MonoBehaviour {
 
                         case "dwarf":
                             goto default;
-
+                        case "asteroid":
+                            goto default;
+                        case "deathstar":
+                            goto default;
                         default:
                             Debug.Log(hit.transform.name + " selected!");
                             cameraLookAtTarget = hit.transform;
@@ -194,13 +200,13 @@ public partial class MainController : MonoBehaviour {
     }
 
     private void KeyH() {
-        HUDIsOn = !HUDIsOn;
-        NodeControl.ToggleHUD(HUDIsOn);
+        OnToggleHud?.Invoke();
     }
 
     private void KeySpace() {
         Debug.Log("You may fire ");
-        deathStar.Fire(TheWorld.closestTarget);
+        OnFire?.Invoke();
+        //deathStar.Fire(TheWorld.closestTarget);
     }
 
     // set asteroid projectile type to heatseeking (single target)
@@ -220,13 +226,25 @@ public partial class MainController : MonoBehaviour {
             // get selection index
             sphereColliderScript scs;
             t.TryGetComponent<sphereColliderScript>(out scs);
-            int i = (scs) ? scs.GetIndex() : 0;
-
-            NodeControl.SetMenuIndex(i + 1);
+            int i = 0;
+            if (scs) {
+                i = scs.GetIndex();
+                NodeControl.SetMenuIndex(i + 1);
+            } else {
+                if (t.CompareTag("deathstar")) {
+                    i = 0;
+                } else if (t.CompareTag("asteroid")) {
+                    i = 1;
+                } else {
+                    i = 2;
+                }
+                NodeControl.SetMenuIndex(i);
+            }
+            
             timeScale.gameObject.SetActive(true);
             systemScale.gameObject.SetActive(true);
         } else {
-            NodeControl.SetMenuIndex(0);
+            NodeControl.SetMenuIndex(2);
             timeScale.gameObject.SetActive(false);
             systemScale.gameObject.SetActive(false);
         }

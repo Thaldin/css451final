@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 742320667483311972}
   - component: {fileID: 993036896093038733}
+  - component: {fileID: 8262448852539411140}
   m_Layer: 0
   m_Name: AsteroidSpawner
-  m_TagString: Untagged
+  m_TagString: asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,8 +50,24 @@ MonoBehaviour:
   theWorld: {fileID: 0}
   asteroidPrefab: {fileID: 8555126588525000681, guid: 88f0dfb82e5637744a8bddd6a716a0d4,
     type: 3}
+  asteroidsInScene: []
   spawnRate: 6
   max: 0.05
+  scaler: {fileID: 0}
+--- !u!136 &8262448852539411140
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73904886658782686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.61
+  m_Height: 3.29
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6027448816374520747
 GameObject:
   m_ObjectHideFlags: 0

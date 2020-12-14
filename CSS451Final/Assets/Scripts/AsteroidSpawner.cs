@@ -5,7 +5,7 @@ using UnityEngine;
 public class AsteroidSpawner : MonoBehaviour {
     public TheWorld theWorld = null;
     public GameObject asteroidPrefab = null;
-    [SerializeField] List<GameObject> asteroidsInScene = new List<GameObject>();
+    [SerializeField] List<Projectile> asteroidsInScene = new List<Projectile>();
 
     [SerializeField] float spawnRate = 6;
     public float max = 0.05f;
@@ -40,10 +40,11 @@ public class AsteroidSpawner : MonoBehaviour {
     private void FireAsteroid(int index) {
         GameObject asteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity, transform);
         Projectile a = asteroid.GetComponent<Projectile>();
+        a.OnCollision += HandleAteroidCOllision;
         a.transform.localScale = new Vector3(max, max, max);
 
         a.Initialize(transform, index, (Projectile.ProjectileType)pTypeIndex, debugIsOn);
-        asteroidsInScene.Add(asteroid);
+        asteroidsInScene.Add(a);
     }
 
     public void SetProjectileType(int tIndex) {
@@ -62,10 +63,13 @@ public class AsteroidSpawner : MonoBehaviour {
         return (Projectile.ProjectileType)pTypeIndex;
     }
 
+    void HandleAteroidCOllision(Projectile p) { 
+        asteroidsInScene.Remove(p);
+        Destroy(p.transform.gameObject);
+    }
+
     public void DestroyAsteroid(Transform asteroid) {
 
-        asteroidsInScene.Remove(asteroid.gameObject);
-        Destroy(asteroid.gameObject);
     }
 
     public void ToggleDebug(bool b) {

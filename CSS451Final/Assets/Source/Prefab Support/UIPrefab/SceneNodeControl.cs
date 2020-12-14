@@ -9,7 +9,7 @@ public class SceneNodeControl : MonoBehaviour {
     public XfromControl XformControl = null;
     public UISelectionIndicator UISelection = null;
 
-    public SliderWithEcho timeScale, SystemScale;
+    //public SliderWithEcho timeScale, SystemScale;
 
     const string kChildSpace = "  ";
     List<Dropdown.OptionData> mSelectMenuOptions = new List<Dropdown.OptionData>();
@@ -19,6 +19,8 @@ public class SceneNodeControl : MonoBehaviour {
     [SerializeField] Transform currentSelection = null;
     [SerializeField] PlanetInfo currentSelectionPlanetInfo = null;
     public int selectIndex = 0;
+
+    bool hudIsOn = true;
     // Use this for initialization
     void Start() {
         Debug.Assert(TheMenu != null, "Please set " + TheMenu + " for " + name + " in the Editor");
@@ -32,15 +34,17 @@ public class SceneNodeControl : MonoBehaviour {
         TheMenu.AddOptions(mSelectMenuOptions);
         TheMenu.onValueChanged.AddListener(SelectionChange);
 
+        // add asteroid spawner and death star to drop down
+
         // set sliders
-        timeScale.SetSliderListener(TimeChange);
-        
+        //timeScale.SetSliderListener(TimeChange);
+
 
         // xform
         XformControl.SetSelectedObject(TheRoot.transform);
 
         // set first target
-        SelectionChange(0);
+        SetMenuIndex(2);
     }
 
     // void GetChildrenNames(string blanks, Transform node) {
@@ -52,30 +56,41 @@ public class SceneNodeControl : MonoBehaviour {
     }
 
     public void SelectionChange(int index) {
+
+        Transform t = null;
+        float d = 0f;
         selectIndex = index;
         // set the current planet selection
         XformControl.SetSelectedObject(mSelectedTransform[index]);
         currentSelection = mSelectedTransform[index];
         // get current planet information for UI
-        SetCurrentPlanetInfo();
-        // get the collider of the current planet
-        Transform t = (index < 1) ? null : mSelectedTransform[index].GetComponent<SceneNode>().GetCollider();
-        float d = (t) ? t.GetComponent<SphereCollider>().radius : 0f;
+        if (index <= 1) {
+            t = mSelectedTransform[index];
+            d = 25f;
+        } else { 
+            // get the collider of the current planet
+            t = (index == 2) ? null : mSelectedTransform[index].GetComponent<SceneNode>().GetCollider();
+            d = (t) ? t.GetComponent<SphereCollider>().radius : 0f;
+            SetCurrentPlanetInfo();
+            currentSelection = (index == 2) ? null : currentSelection;
+            UISelection.SetSelection(currentSelection, currentSelectionPlanetInfo);
+        }
+        ToggleFollowTarget(t, d);
 
         //Debug.Log("Change index to: " + index);
-
+        /*
         // follow target
-        if (selectIndex > 0) {
+        if (selectIndex > 2) {
             UISelection.SetSelection(currentSelection, currentSelectionPlanetInfo);
-            timeScale.gameObject.SetActive(true);
-            SystemScale.gameObject.SetActive(true);
+            //timeScale.gameObject.SetActive(true);
+           // SystemScale.gameObject.SetActive(true);
         } else {
             // edge case universe is default no follow
             UISelection.SetSelection(null, currentSelectionPlanetInfo);
-            timeScale.gameObject.SetActive(false);
-            SystemScale.gameObject.SetActive(false);
-        }
-        ToggleFollowTarget(t, d);
+            //timeScale.gameObject.SetActive(false);
+            //SystemScale.gameObject.SetActive(false);
+        }*/
+        //ToggleFollowTarget(t, d);
 
         
     }
@@ -105,11 +120,16 @@ public class SceneNodeControl : MonoBehaviour {
         TheRoot.SetTimeScale(v);
     }
 
-    public void ToggleHUD(bool b) {
-        // hard coded only toggle first x menus in canvas hierarchy
+    public void HandleOnToggleHud() {
+        hudIsOn = !hudIsOn;
+        TheMenu.gameObject.SetActive(hudIsOn);
+        XformControl.gameObject.SetActive(hudIsOn);
+        UISelection.gameObject.SetActive(hudIsOn);
+        //timeScale.gameObject.SetActive(hudIsOn);
+        //SystemScale.gameObject.SetActive(hudIsOn);
+    }
 
-        for (int i = 0; i < 4; i++) {
-            transform.GetChild(i).gameObject.SetActive(b);
-        }
+    public void AddToDropdownMenu(Transform t) {
+        mSelectedTransform.Add(t);
     }
 }
