@@ -52,7 +52,7 @@ If we have time, we would also like to add the ability for the user to add and/o
 - projectile target changes
 - death star projectiles not destroying
 - Normal Auido lister
-- Camera does not pane screen left of right correctly
+- ~~Camera does not pane screen left of right correctly~~
 - ~~clicking into space does not unselect~~
 	- ~~check raycast in maincontrollerinput~~
 - ~~rings not generating correctly~~
