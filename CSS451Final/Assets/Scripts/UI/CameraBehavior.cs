@@ -97,7 +97,7 @@ public class CameraBehavior : MonoBehaviour
     public void Slide(Vector3 slide)
     {
         Camera.main.transform.localPosition += slide.x * Camera.main.transform.right;
-        Camera.main.transform.localPosition += slide.y * Camera.main.transform.forward;
+        Camera.main.transform.localPosition += slide.y * Camera.main.transform.up;
     }
 
     // Try to limit the (0,0,0) camera object culling issue

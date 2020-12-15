@@ -131,6 +131,7 @@ public partial class MainController : MonoBehaviour {
             if (moveCam) {
                 var delta = vPrevMouseDownPos - Input.mousePosition;
                 vPrevMouseDownPos = Input.mousePosition;
+                //TheWorld.RotateLookAtPos(delta.x);
                 MainCamera.gameObject.GetComponent<CameraBehavior>().Tumble(delta);
             }
         }

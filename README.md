@@ -2,6 +2,8 @@
 Scott Shirley [@scottin3d](https://github.com/scottin3d)  
 Ed Abshire [@Thaldin](https://github.com/Thaldin)  
 
+Project Repository: https://github.com/Thaldin/css451final  
+
 # About 
 This project is a culmanation of the topics covered in CSS451:
 - Graphical User Interfaces
@@ -115,29 +117,30 @@ public Matrix4x4 LoadShaderMatrix(ref Matrix4x4 nodeMatrix) {
 ```
 
 ## Interaction  
-A master list, `List<Matrix4x4> m4x4s`, of all scene nodes was kept in the core logic of the scene.  This list was updated every frame after the Matrix4x4 was calculated for the shader.
+A master list, `List<Matrix4x4> m4x4s`, of all scene nodes was kept in the core logic of the scene.  This list was updated every frame when the Matrix4x4 was returned after calculated for the shader.  With a master list of object positions in the world, we could either pass the `List` to another class that wanted to interact with the objects, or retieve a position by index.  These interactions were delt with using `Event`s so that a script or an object did not have to reference the core logic itself.  
+
+An example of this is the `AsteroidSpawner` in the scene.  When it "fires" an `Asteroid` object, it invokes the `OnFire` event in which the the `Projectile` and core logic subscript to where it sends the ID of the `Projectile` and the current target.  This triggers the `Projectile` to invoke another event to that gets the position of its target every frame from the core logic. They psotions are all calculated using the functions described [in the hierarchy](#the-hierarchy).  
 
 ## The Cameras and Views    
-The simulation will consist of two views. The two views will be the main screen view and a solar system view.
+The simulation has three camera views.  
 
-The main view will be the one the user can control to look around the solar system.  This view will leverage the camera abilities learned in MP4 (pan/tilt/tumble).  The user will be able to free cam around the system to look at all the planets.  In addition, the user will be able to select a single object by either clicking or selecting from a UI and focus the camera on it and either let the camera follow the planet or pan around it.
+The main view the user can control to look around the solar system.  This view will leverage the camera abilities learned in MP4 (pan/tilt/tumble).  The user can free cam around the system to look at all the planets.  In addition, the user can select a single object by either clicking or selecting from a UI and focus the secondary camera on it.  
 
-The solar system view will be the mini-viewport camera.  This is the overall view of the entire solar system for the user to show them the entire solar system.  See Figure 1 in the developer notes section.
+The second view is a  mini-viewport camera.  This camera appears when a `SceneNode` is selected by either the user clicking on it in the scene or selecting it from the UI drop menu.  
 
-## Program Flow  
-The program will launch with an input scene for the user to input data for the simulation.  Once the user has entered the data, this will be stored in a static object to pass to the simulation scene.  See Figure 2 in the developer notes section.
-When the user selects “Start” the simulation scene will load and all the objects will be created at runtime.
+The third view is another mini-viewport camera.  This camera appears after the user presses the fire key for the Star Killer in the scene.  This camera gives the user a secondard look at the animation playing in the scene.  
+
 ## Stretch Goals  
 If we have time, we would also like to add the ability for the user to add and/or remove new objects in the solar system at runtime.  In addition, we would like to be able to support multiple solar systems if able.
 
 ## Tasks  
-- Normal Uodate menu controls
+- ~~Normal Uodate menu controls~~
 - Required	TODO Demo
 - Normal	TODO Update rings when objects are moved with xForm Controller
-- Required	TODO Camera behavious axis												CameraBehavious.cs 99
-- Normal 	TODO Illumination shader
-- Normal	TODO: if you hit resume, it does not set pauseMenuIsOn in this scope	MainControllerInput.cs	88  
-- Normal	TODO Camera Manipulation		
+- ~~Required	TODO Camera behavious axis												CameraBehavious.cs 99~~
+- ~~Normal 	TODO Illumination shader~~
+- ~~Normal	TODO: if you hit resume, it does not set pauseMenuIsOn in this scope	MainControllerInput.cs	88~~
+- ~~Normal	TODO Camera Manipulation~~		
 - Mini cam click										MainControllerInput.cs	44  
 - ~~Normal	TODO: Fix Saturns Ring renderer~~
 - ~~Normal	TODO: spane Luna's orbit rings~~
@@ -158,9 +161,9 @@ If we have time, we would also like to add the ability for the user to add and/o
 	- gravity or asteroid collision?
 
 ## Bug List
-- projectile target changes
-- death star projectiles not destroying
-- Normal Auido lister
+- ~~projectile target changes~~
+- ~~death star projectiles not destroying~~
+- ~~Normal Auido lister~~
 - ~~Camera does not pane screen left of right correctly~~
 - ~~clicking into space does not unselect~~
 	- ~~check raycast in maincontrollerinput~~
