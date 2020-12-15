@@ -96,8 +96,8 @@ public class CameraBehavior : MonoBehaviour
     // Slide camera base on mouse input
     public void Slide(Vector3 slide)
     {
-        Camera.main.transform.localPosition += slide.x * Vector3.right;
-        Camera.main.transform.localPosition += slide.y * Vector3.up;
+        Camera.main.transform.localPosition += slide.x * Camera.main.transform.right;
+        Camera.main.transform.localPosition += slide.y * Camera.main.transform.up;
     }
 
     // Try to limit the (0,0,0) camera object culling issue
