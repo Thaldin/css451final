@@ -15,7 +15,7 @@ public partial class MainController : MonoBehaviour {
     bool moveCam = false;
     Vector3 vPrevMouseDownPos = Vector3.zero;
 
-    public event Action OnFire;
+    public event Action<int> OnFire;
     public event Action OnToggleHud;
     public event Action<float> OnCamYChange;
     public event Action OnPause;
@@ -196,7 +196,7 @@ public partial class MainController : MonoBehaviour {
 
     private void KeySpace() {
         Debug.Log("You may fire ");
-        OnFire?.Invoke();
+        OnFire?.Invoke(TheWorld.closestTarget);
         //deathStar.Fire(TheWorld.closestTarget);
     }
 

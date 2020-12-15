@@ -72,7 +72,7 @@ public class CameraFollow : MonoBehaviour {
                 followDistance = radius * 2.5f;
                 followDistance = (followDistance < 1.0f) ? 1.0f : followDistance;
             }
-            zoomSlider.InitSliderRange(followDistance, followDistance + 100f, followDistance);
+            zoomSlider.InitSliderRange(followDistance, followDistance + 100f, followDistance + 5f);
 
         }
 

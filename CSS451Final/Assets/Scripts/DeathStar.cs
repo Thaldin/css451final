@@ -8,7 +8,9 @@ public class DeathStar : MonoBehaviour {
     //public GameObject projectile = null;
     public AudioClip tarkin = null;
     public AudioClip laserFire = null;
+    public ParticleSystem particles = null;
     //public Transform tar;
+    int tarIndex = 0;
     [SerializeField] Vector3 targetPosition = Vector3.zero;
     AudioSource audioSource;
 
@@ -38,9 +40,12 @@ public class DeathStar : MonoBehaviour {
     }
 
     public void HandleOnTarget(Vector3 tar) {
+        /*
         if (!isFiring) {
             targetPosition = tar;
         }
+        */
+        targetPosition = tar;
     }
 
     private void CreateLasers() {
@@ -59,8 +64,9 @@ public class DeathStar : MonoBehaviour {
         }
     }
 
-    public void HandleOnFire() {
+    public void HandleOnFire(int i) {
         if (!isFiring) {
+            tarIndex = i;
             isFiring = true;
             StartCoroutine(FireLaser());
 
@@ -75,37 +81,25 @@ public class DeathStar : MonoBehaviour {
         audioSource.Play();
         yield return new WaitForSeconds(laserFire.length / 2f);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             lasers[i].SetActive(true);
             yield return new WaitForSeconds(1f);
         }
+        lasers[4].SetActive(true);
+        var exp = Instantiate(particles) as ParticleSystem;
+        exp.transform.position = targetPosition;
+        exp.Play();
+
         yield return new WaitForSeconds(2f);
 
         foreach (var l in lasers) {
             l.SetActive(false);
         }
         isFiring = false;
+        Destroy(exp);
     }
 
     public Vector3 GetPosition() {
         return transform.position;
     }
-
-    /* TODO delete
-    IEnumerator playFireRoutine(int index) {
-        audioSource.clip = tarkin;
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length * 1.1f);
-        audioSource.clip = laserFire;
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length * 0.9f);
-        FireProjectile(index);
-    }
-
-    private void FireProjectile(int index) {
-        GameObject pc = Instantiate(projectile, transform.position, Quaternion.identity);
-        Projectile p = pc.GetComponent<Projectile>();
-        p.Initialize(transform, index);
-    }
-    */
 }

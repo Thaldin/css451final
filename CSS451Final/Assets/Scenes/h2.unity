@@ -535,6 +535,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 993036896093038733, guid: e629c98c7777f9947842f6a130568123,
         type: 3}
+      propertyPath: max
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 993036896093038733, guid: e629c98c7777f9947842f6a130568123,
+        type: 3}
       propertyPath: scaler
       value: 
       objectReference: {fileID: 1166476050}
@@ -7406,7 +7411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 533210383}
   - component: {fileID: 533210382}
-  - component: {fileID: 533210381}
   - component: {fileID: 533210384}
   m_Layer: 0
   m_Name: MiniCamera
@@ -7415,14 +7419,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &533210381
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533210380}
-  m_Enabled: 0
 --- !u!20 &533210382
 Camera:
   m_ObjectHideFlags: 0
@@ -19898,9 +19894,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1b780e8b91e294b832ef7157b1684f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinZoomDistance: 25
+  MinZoomDistance: 15
   RotationDegrees: 10
-  ZoomModifier: 2
+  ZoomModifier: 20
 --- !u!81 &1825412253
 AudioListener:
   m_ObjectHideFlags: 0
@@ -22361,5 +22357,12 @@ PrefabInstance:
       propertyPath: laserFire
       value: 
       objectReference: {fileID: 8300000, guid: 4794a2f76d2afac4fb8f21d3094fb848, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 9128901976882913915, guid: 8a779fdaa2f64a2438d91842a13d8892,
+        type: 3}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 4376275633477493391, guid: 100755fb1257f2a49953c5e6774c2edc,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 273639663646132671, guid: 8a779fdaa2f64a2438d91842a13d8892, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8a779fdaa2f64a2438d91842a13d8892, type: 3}

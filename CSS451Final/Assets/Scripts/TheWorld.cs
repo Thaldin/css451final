@@ -10,6 +10,7 @@ public partial class TheWorld : MonoBehaviour {
     // reference to all UI elements in the Canvas
     [Header("Death Star")]
     public DeathStar deathStar = null;
+    int fireIndex = 0;
     [SerializeField] List<float> targetDistances = new List<float>();
     public int closestTarget = 0;
 
@@ -82,6 +83,7 @@ public partial class TheWorld : MonoBehaviour {
             CheckSceneNodes();
         }
 
+        OnTarget?.Invoke(m4x4s[fireIndex].GetColumn(3));
     }
 
     private void CheckSceneNodes() {
@@ -116,8 +118,8 @@ public partial class TheWorld : MonoBehaviour {
                     closestTarget = i;
                 }
             }
-           
-            OnTarget?.Invoke(m4x4s[closestTarget].GetColumn(3));
+
+            
 
         }
     }

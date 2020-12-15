@@ -80,23 +80,6 @@ public class SceneNodeControl : MonoBehaviour {
             UISelection.SetSelection(currentSelection, currentSelectionPlanetInfo);
         }
         ToggleFollowTarget(t, d);
-
-        //Debug.Log("Change index to: " + index);
-        /*
-        // follow target
-        if (selectIndex > 2) {
-            UISelection.SetSelection(currentSelection, currentSelectionPlanetInfo);
-            //timeScale.gameObject.SetActive(true);
-           // SystemScale.gameObject.SetActive(true);
-        } else {
-            // edge case universe is default no follow
-            UISelection.SetSelection(null, currentSelectionPlanetInfo);
-            //timeScale.gameObject.SetActive(false);
-            //SystemScale.gameObject.SetActive(false);
-        }*/
-        //ToggleFollowTarget(t, d);
-
-        
     }
 
     public void SetMenuIndex(int i) {

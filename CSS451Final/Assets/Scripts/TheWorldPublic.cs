@@ -5,6 +5,10 @@ using UnityEngine;
 public partial class TheWorld : MonoBehaviour {
     public event Action<Vector3> OnTarget;
 
+
+    public void HandleOnFire(int i) {
+        fireIndex = i;
+    }
     public void ToggleDebug(bool b) {
         ToggleStarLines(b);
     }
@@ -19,7 +23,7 @@ public partial class TheWorld : MonoBehaviour {
     public Transform GetSceneObjectFromIndex(int i) {
         return sceneObjects[i].transform;
     }
-
+    /*
     public List<Transform> GetSceneObjectsNames() {
         return sceneObjects;
     }
@@ -32,6 +36,7 @@ public partial class TheWorld : MonoBehaviour {
     public void SetLookAtPos(Vector3 pos) {
         LookAt.transform.localPosition = pos;
     }
+    */
 
     public Vector3 GetLookAtPos() {
         return LookAt.transform.localPosition;
@@ -68,8 +73,8 @@ public partial class TheWorld : MonoBehaviour {
 
 
     public void SlideLookAtPos(float deltaX, float deltaY) {
-        LookAt.transform.position += deltaY * LookAt.transform.up;
-        //LookAt.transform.position += deltaY * LookAt.transform.forward;
+        //LookAt.transform.position += deltaY * LookAt.transform.up;
+        LookAt.transform.position += deltaY * LookAt.transform.forward;
         LookAt.transform.position += deltaX * LookAt.transform.right;
     }
 

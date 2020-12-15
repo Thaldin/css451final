@@ -38,7 +38,7 @@ public class AsteroidSpawner : MonoBehaviour {
 
     }
     private void FireAsteroid(int index) {
-        GameObject asteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity, transform);
+        GameObject asteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity);
         Projectile a = asteroid.GetComponent<Projectile>();
         a.OnCollision += HandleAteroidCOllision;
         a.transform.localScale = new Vector3(max, max, max);
