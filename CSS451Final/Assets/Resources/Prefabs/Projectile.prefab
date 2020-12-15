@@ -104,3 +104,5 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   explosion: {fileID: 4376275633477493391, guid: 100755fb1257f2a49953c5e6774c2edc,
     type: 3}
+  particles: {fileID: 1371986626631329013, guid: 8d5df9152f68b9a45b03386bfd8a7c7a,
+    type: 3}

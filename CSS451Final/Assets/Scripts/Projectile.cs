@@ -21,6 +21,7 @@ public class Projectile : MonoBehaviour {
     private float targetRadius = 0f;
 
     public ParticleSystem explosion = null;
+    public ParticleSystem particles;
     private bool hit = false;
     private float time = 0f;
     private float impact = 0f;
@@ -34,6 +35,7 @@ public class Projectile : MonoBehaviour {
         theWorld = GameObject.Find("god").GetComponent<TheWorld>();
         debugLine = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         debugLine.SetActive(debugIsOn);
+        particles = Resources.Load<ParticleSystem>("Prefabs\\PlaneExp");
     }
 
     // Update is called once per frame
@@ -85,9 +87,12 @@ public class Projectile : MonoBehaviour {
     private void Hit() {
         Debug.Log("BOOM!");
         //explosion = Instantiate(explosion);
-        explosion.Play();
+        //explosion.Play();
         hit = true;
 
+        var exp = Instantiate(particles) as ParticleSystem;
+        exp.transform.position = transform.position;
+        exp.Play();
     }
 
     // Get the target position from the world by projectile type
