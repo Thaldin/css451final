@@ -23,20 +23,6 @@ public partial class TheWorld : MonoBehaviour {
     public Transform GetSceneObjectFromIndex(int i) {
         return sceneObjects[i].transform;
     }
-    /*
-    public List<Transform> GetSceneObjectsNames() {
-        return sceneObjects;
-    }
-
-    public List<Matrix4x4> GetM4x4() {
-        return m4x4s;
-    }
-
-
-    public void SetLookAtPos(Vector3 pos) {
-        LookAt.transform.localPosition = pos;
-    }
-    */
 
     public Vector3 GetLookAtPos() {
         return LookAt.transform.localPosition;

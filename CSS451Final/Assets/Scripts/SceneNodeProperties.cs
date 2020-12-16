@@ -30,7 +30,8 @@ public partial class SceneNode : MonoBehaviour {
             case "planet":
                 goto default;
             case "moon":
-                rignDistance = offsetFromPlanet;
+                rignDistance = Mathf.Sqrt(offsetFromPlanet);
+                
                 break;
             case "ring":
                 rignDistance = offsetFromPlanet;
@@ -55,16 +56,20 @@ public partial class SceneNode : MonoBehaviour {
     }
 
     void UpdateRing() {
-            float dist = Vector3.Distance(colliderObj.transform.position, transform.parent.GetComponent<SceneNode>().colliderObj.transform.position);
-            rmf.mesh.Clear();
-            rmf.mesh = Utils.Utils.CreateTorus(dist,0.02f);
+        //float dist = Vector3.Distance(colliderObj.transform.position, transform.parent.GetComponent<SceneNode>().colliderObj.transform.position);
+        float dist = planetInfo.distanceFromSun;
+        //rmf.mesh.Clear();
+        //rmf.mesh = Utils.Utils.CreateTorus(dist,0.02f);
         // Extract new local rotation
-        forward = mCombinedParentXform.GetColumn(2);
-        up = mCombinedParentXform.GetColumn(1);
-        Quaternion rotation = Quaternion.LookRotation(forward,up);
-        orbitRing.transform.rotation = rotation;
+        if (transform.CompareTag("ring")) { 
+            forward = mCombinedParentXform.GetColumn(2);
+            up = mCombinedParentXform.GetColumn(1);
+            Quaternion rotation = Quaternion.LookRotation(forward,up);
+            orbitRing.transform.rotation = rotation;
+        }
+        //orbitRing.transform.position = transform.parent.GetComponent<SceneNode>().colliderObj.transform.position;
+        orbitRing.transform.position = Utils.Utils.Matrix4x4ToWorldPostion(ref transform.GetComponent<SceneNode>().mCombinedParentXform);
 
-        orbitRing.transform.position = transform.parent.GetComponent<SceneNode>().colliderObj.transform.position;
     }
 
     public List<string> GetPlanetInfo() {

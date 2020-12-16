@@ -40,11 +40,6 @@ public class DeathStar : MonoBehaviour {
     }
 
     public void HandleOnTarget(Vector3 tar) {
-        /*
-        if (!isFiring) {
-            targetPosition = tar;
-        }
-        */
         targetPosition = tar;
     }
 

@@ -143,6 +143,8 @@ public partial class SceneNode : MonoBehaviour {
             // disenminate to primitives
             sceneM4x4.Add(np.LoadShaderMatrix(ref mCombinedParentXform));
 
+            UpdateRing();
+
             if (transform.CompareTag("moon")) {
                 UpdateRing();
             }
