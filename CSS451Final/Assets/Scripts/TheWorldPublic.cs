@@ -74,10 +74,8 @@ public partial class TheWorld : MonoBehaviour {
 
     public void SlideLookAtPos(float deltaX, float deltaY) {
         LookAt.transform.position += deltaY * LookAt.transform.up;
-        //LookAt.transform.position += deltaY * LookAt.transform.forward;
-        LookAt.transform.position += deltaX * LookAt.transform.right;
-        //LookAt.transform.position += deltaX * Camera.main.transform.right;
-
+        //LookAt.transform.position += deltaX * LookAt.transform.right;
+        LookAt.transform.position += deltaX * Camera.main.transform.right;
     }
 
     public void RotateLookAtPos(float deltaX) {
